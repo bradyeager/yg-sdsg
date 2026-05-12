@@ -1,3 +1,18 @@
+
+
+const SESSION_CONFIG = {
+  A:   { events:['prowler','kbsquat','dynamax','bench','hang'] },
+  B:   { events:['slams','jumprope','broadjump','row','shuttle'] },
+  all: { events:EVENT_ORDER }
+};
+let currentSession='all';
+function switchSession(s){
+  currentSession=s;
+  document.getElementById('btnSessionA').className='session-btn'+(s==='A'?' active-a':'');
+  document.getElementById('btnSessionB').className='session-btn'+(s==='B'?' active-b':'');
+  document.getElementById('btnSessionAll').className='session-btn'+(s==='all'?' active-all':'');
+  renderLog();
+}
 <!DOCTYPE html>
 <!-- ============================================================== -->
 <!-- CANONICAL · DO NOT REMOVE · SUPABASE SYNC BLOCK                  -->
@@ -42,19 +57,12 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--charcoal);color:var(--text-primary);font-family:'DM Sans',-apple-system,sans-serif;font-size:14px;line-height:1.5;min-height:100vh;overflow-x:hidden}
 body{max-width:480px;margin:0 auto;position:relative;padding-bottom:60px}
-@media (min-width:481px){
-  html{background:#080f18}
-  body{box-shadow:0 0 0 1px rgba(72,196,204,.15),0 0 80px rgba(0,0,0,.75);min-height:100vh}
-}
-@media (min-width:768px){
-  html{display:flex;align-items:flex-start;justify-content:center}
-  body{margin:20px auto;border-radius:16px;overflow:hidden;min-height:calc(100vh - 40px)}
-}
+@media (min-width:481px){html{background:#080f18}body{box-shadow:0 0 0 1px rgba(72,196,204,.15),0 0 80px rgba(0,0,0,.75);min-height:100vh}}
+@media (min-width:768px){html{display:flex;align-items:flex-start;justify-content:center}body{margin:20px auto;border-radius:16px;overflow:hidden;min-height:calc(100vh - 40px)}}
 button{font-family:inherit;cursor:pointer;border:none;outline:none;background:transparent;color:inherit}
 input,select{font-family:inherit;outline:none;border:none;background:transparent;color:inherit;-webkit-appearance:none}
 .serif{font-family:'DM Serif Display',serif;font-weight:400}
 
-/* HEADER */
 .app-header{position:relative;background:linear-gradient(160deg,var(--charcoal) 0%,var(--charcoal-2) 60%,#0a1018 100%);padding:18px 18px 0;overflow:hidden;border-bottom:1px solid var(--border)}
 .app-header::before{content:"";position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,var(--teal-glow) 0%,transparent 70%);pointer-events:none}
 .app-header::after{content:"";position:absolute;bottom:-80px;left:-60px;width:220px;height:220px;background:radial-gradient(circle,var(--pink-glow) 0%,transparent 70%);pointer-events:none}
@@ -69,7 +77,6 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .countdown .num{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1}
 .countdown .lbl{font-size:9px;font-weight:700;color:var(--pink);letter-spacing:1.2px;margin-top:3px;text-transform:uppercase}
 
-/* COMP STRIP */
 .comp-strip{position:relative;z-index:2;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .comp-strip .ttl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);font-weight:700}
 .comp-strip .nm{font-size:13px;color:var(--text-primary);font-weight:600;margin-top:2px}
@@ -77,15 +84,20 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .comp-strip .fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--pink));border-radius:3px;transition:width .8s ease}
 .comp-strip .pct{font-size:11px;color:var(--teal);font-weight:700}
 
-/* ATHLETE SWITCHER */
 .switcher{display:flex;gap:8px;background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:14px;padding:5px;position:relative;z-index:2;margin-bottom:18px}
 .switcher button{flex:1;border:0;background:transparent;color:var(--text-muted);font-family:inherit;font-weight:700;font-size:14px;padding:12px 8px;border-radius:10px;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.1;letter-spacing:.5px}
 .switcher button .div{font-size:10px;font-weight:500;letter-spacing:.5px;opacity:.8;text-transform:none}
 .switcher button.active{background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;box-shadow:0 4px 16px rgba(72,196,204,.35);transform:translateY(-1px)}
 .switcher button.active.david{background:linear-gradient(135deg,var(--pink),var(--pink-deep));box-shadow:0 4px 16px rgba(239,50,149,.35)}
 
-/* PROFILE CARD */
-.profile-card{margin:16px;background:linear-gradient(135deg,rgba(72,196,204,.08),rgba(239,50,149,.05));border:1px solid var(--border-strong);border-radius:16px;padding:0;overflow:hidden;position:relative}
+.sync-indicator{position:absolute;top:18px;right:18px;z-index:3;display:flex;align-items:center;gap:5px;font-size:9px;font-weight:700;letter-spacing:1px;color:var(--text-muted);text-transform:uppercase;opacity:0;transition:opacity .3s}
+.sync-indicator.show{opacity:1}
+.sync-indicator .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+.sync-indicator.offline .dot{background:var(--red);box-shadow:0 0 8px var(--red)}
+.sync-indicator.syncing .dot{background:var(--yellow);box-shadow:0 0 8px var(--yellow);animation:pulse 1.2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.profile-card{margin:16px;background:linear-gradient(135deg,rgba(72,196,204,.08),rgba(239,50,149,.05));border:1px solid var(--border-strong);border-radius:16px;overflow:hidden}
 .profile-head{padding:14px 16px 12px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.2)}
 .profile-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);font-weight:700}
 .profile-title{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;line-height:1.1;margin-top:4px}
@@ -105,14 +117,12 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .pillar.s .ph{color:var(--teal)}
 .pillar.w .ph{color:var(--pink)}
 .pillar .pb{font-size:11px;color:var(--text-secondary);line-height:1.4}
-
 .block-arc{background:linear-gradient(135deg,rgba(239,50,149,.12),rgba(72,196,204,.06));border:1px solid var(--border-pink);border-radius:12px;padding:12px 14px;margin-top:4px}
 .block-arc .ah{font-family:'DM Serif Display',serif;font-size:14px;color:#fff;margin-bottom:6px}
 .block-arc .ai{font-size:11.5px;color:var(--text-secondary);line-height:1.55}
 .block-arc .ai strong{color:var(--teal);font-weight:600}
 .block-arc .ai em{color:var(--pink);font-style:normal;font-weight:600}
 
-/* STAT STRIP */
 .stat-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 16px 4px}
 .stat{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:11px 8px;text-align:center}
 .stat .val{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1}
@@ -120,34 +130,18 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .stat.teal .val{color:var(--teal)}
 .stat.pink .val{color:var(--pink)}
 
-/* VIEW TABS */
 .view-tabs{display:flex;gap:6px;padding:14px 16px 0;overflow-x:auto;scrollbar-width:none}
 .view-tabs::-webkit-scrollbar{display:none}
 .view-tab{flex-shrink:0;background:var(--card-bg);border:1px solid var(--border);color:var(--text-muted);font-family:inherit;font-weight:600;font-size:12px;padding:10px 16px;border-radius:20px;cursor:pointer;white-space:nowrap;letter-spacing:.3px;transition:all .2s}
 .view-tab.active{background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;border-color:transparent;box-shadow:0 3px 12px rgba(72,196,204,.3)}
 
-/* CONTENT */
 .content{padding:14px 16px 0}
-
-/* EVENT CARD */
 .event-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;transition:border-color .2s}
 .event-card:hover{border-color:var(--border-strong)}
 .event-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
 .event-head .name{font-family:'DM Serif Display',serif;font-size:17px;color:#fff;line-height:1.15}
 .event-head .meta{font-size:10px;color:var(--text-muted);margin-top:4px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
 .badge{padding:6px 10px;border-radius:8px;font-size:11px;font-weight:800;white-space:nowrap;letter-spacing:.3px}
-.sync-indicator{position:absolute;top:18px;right:18px;z-index:3;display:flex;align-items:center;gap:5px;font-size:9px;font-weight:700;letter-spacing:1px;color:var(--text-muted);text-transform:uppercase;opacity:0;transition:opacity .3s}
-.sync-indicator.show{opacity:1}
-.sync-indicator .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
-.sync-indicator.offline .dot{background:var(--red);box-shadow:0 0 8px var(--red)}
-.sync-indicator.syncing .dot{background:var(--yellow);box-shadow:0 0 8px var(--yellow);animation:pulse 1.2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.loading-screen{position:fixed;inset:0;background:var(--charcoal);display:flex;align-items:center;justify-content:center;z-index:2000;flex-direction:column;gap:12px}
-.loading-screen .spinner{width:40px;height:40px;border:3px solid rgba(72,196,204,.2);border-top-color:var(--teal);border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-screen .lbl{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase}
-.loading-screen.hidden{display:none}
-.app-header{position:relative}
 .badge.green{background:rgba(29,190,126,.15);color:var(--green);border:1px solid rgba(29,190,126,.3)}
 .badge.yellow{background:rgba(242,182,0,.15);color:var(--yellow);border:1px solid rgba(242,182,0,.3)}
 .badge.red{background:rgba(229,72,77,.15);color:#ff7478;border:1px solid rgba(229,72,77,.3)}
@@ -179,8 +173,8 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .input-row select option{background:var(--card-elevated);color:#fff}
 .input-row button{background:linear-gradient(135deg,var(--pink),var(--pink-deep));border:0;color:#fff;font-family:inherit;font-weight:800;font-size:12px;padding:0 18px;border-radius:10px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;box-shadow:0 3px 12px rgba(239,50,149,.3)}
 .input-row button:active{transform:scale(.97)}
+.input-row button:disabled{opacity:.5;cursor:not-allowed}
 
-/* DASH ROW */
 .dash-row{display:flex;justify-content:space-between;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:8px;gap:10px}
 .dash-row .info{flex:1;min-width:0}
 .dash-row .nm{font-size:13.5px;font-weight:700;color:#fff}
@@ -189,7 +183,6 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .dash-row .you{font-family:'DM Serif Display',serif;font-size:17px;color:#fff;line-height:1}
 .dash-row .gold{font-size:10px;color:var(--yellow);margin-top:2px;font-weight:600}
 
-/* HISTORY */
 .hist-day{margin-bottom:16px}
 .hist-day .date{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--pink);text-transform:uppercase;margin-bottom:8px;padding-left:4px}
 .hist-row{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
@@ -197,18 +190,33 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .hist-row .sc{font-size:14px;font-weight:800;color:#fff;font-family:'DM Serif Display',serif}
 .hist-row .pr{display:inline-block;background:linear-gradient(135deg,var(--pink),var(--pink-deep));color:#fff;font-size:8px;font-weight:800;padding:3px 6px;border-radius:4px;margin-left:6px;letter-spacing:.8px;vertical-align:middle}
 
-/* EMPTY */
 .empty{text-align:center;padding:40px 20px;color:var(--text-muted)}
 .empty .ico{font-size:42px;margin-bottom:8px;opacity:.4}
 .empty .msg{font-size:13px;font-weight:500}
 
-/* TOAST */
+.loading-screen{position:fixed;inset:0;background:var(--charcoal);display:flex;align-items:center;justify-content:center;z-index:2000;flex-direction:column;gap:12px}
+.loading-screen .spinner{width:40px;height:40px;border:3px solid rgba(72,196,204,.2);border-top-color:var(--teal);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-screen .lbl{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase}
+.loading-screen.hidden{display:none}
+
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--card-elevated);border:1px solid var(--border-strong);color:#fff;padding:12px 22px;border-radius:12px;font-size:13px;font-weight:700;z-index:1000;box-shadow:0 8px 32px rgba(0,0,0,.5);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;letter-spacing:.5px}
 .toast.show{opacity:1}
 .toast.pr{background:linear-gradient(135deg,var(--pink),var(--pink-deep));border-color:transparent;box-shadow:0 8px 32px rgba(239,50,149,.4)}
 
-/* FOOT */
+.session-header{margin:14px 16px 0;background:linear-gradient(135deg,rgba(72,196,204,.1),rgba(72,196,204,.03));border:1px solid var(--border-strong);border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.session-header .sh-label{font-size:12px;font-weight:700;color:var(--teal);letter-spacing:.5px}
+.session-header .sh-sub{font-size:11px;color:var(--text-muted);font-weight:500}
 .foot{padding:18px;text-align:center}
+
+.session-switcher{display:flex;gap:8px;padding:10px 16px 2px}
+.session-btn{flex:1;border:1px solid var(--border);background:var(--card-bg);color:var(--text-muted);font-family:inherit;font-weight:700;font-size:12px;padding:10px 8px;border-radius:12px;cursor:pointer;transition:all .25s;text-align:center;line-height:1.3}
+.session-btn .s-label{display:block;font-size:13px;letter-spacing:.3px}
+.session-btn .s-sub{display:block;font-size:10px;font-weight:500;margin-top:2px;opacity:.7}
+.session-btn.active-a{background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(72,196,204,.3)}
+.session-btn.active-b{background:linear-gradient(135deg,var(--pink),var(--pink-deep));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(239,50,149,.3)}
+.session-btn.active-all{background:linear-gradient(135deg,#3a4558,#232E3D);color:#fff;border-color:var(--border-strong);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+
 .foot button{background:none;border:0;color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.5px;cursor:pointer;text-decoration:underline}
 </style>
 </head>
@@ -217,7 +225,7 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 <!-- CANONICAL · sync loading screen (required by Supabase init) -->
 <div class="loading-screen" id="loadingScreen">
   <div class="spinner"></div>
-  <div class="lbl" id="loadingLabel">Loading Annie's data</div>
+  <div class="lbl">Loading athlete data</div>
 </div>
 
 <div class="app-header">
@@ -269,7 +277,23 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
   <button class="view-tab" data-view="history" onclick="setView('history')">📈 History</button>
 </div>
 
-<div id="logView"><div class="content" id="eventList"></div></div>
+<div id="logView">
+  <div class="session-switcher">
+    <button class="session-btn" id="btnSessionA" onclick="switchSession('A')">
+      <span class="s-label">Week A</span>
+      <span class="s-sub">Strength &amp; Power</span>
+    </button>
+    <button class="session-btn" id="btnSessionB" onclick="switchSession('B')">
+      <span class="s-label">Week B</span>
+      <span class="s-sub">Conditioning</span>
+    </button>
+    <button class="session-btn active-all" id="btnSessionAll" onclick="switchSession('all')">
+      <span class="s-label">All</span>
+      <span class="s-sub">Full Session</span>
+    </button>
+  </div>
+  <div class="content" id="eventList"></div>
+</div>
 <div id="statusView" style="display:none"><div class="content" id="statusList"></div></div>
 <div id="historyView" style="display:none"><div class="content" id="historyList"></div></div>
 
@@ -299,18 +323,18 @@ const EVENTS = {
   row:       {name:'Concept Row 500m',       unit:'time',  lowerBetter:true},
   shuttle:   {name:'300 Yd Shuttle Run',     unit:'time',  lowerBetter:true},
 };
-const EVENT_ORDER = ['prowler','kbsquat','dynamax','bench','hang','slams','jumprope','broadjump','row','shuttle'];
+const EVENT_ORDER = ['bench','prowler','kbsquat','dynamax','hang','broadjump','jumprope','slams','row','shuttle'];
 
 const ATHLETES = {
   annie: {
     name:'Annie', division:'Women 60–64',
-    background:`7-time World Marathon finisher — including the six Majors (Tokyo, Boston, London, Berlin, Chicago, NYC). Placed competitively in her division across the slate. Marathon-grade engine and mental durability.`,
+    background:`Six-star World Marathon finisher (Tokyo, Boston, London, Berlin, Chicago, NYC). Placed competitively across all six. Marathon-grade engine, lower-body endurance, mental durability. Minimal upper body strength training history.`,
     loads: {prowler:'2×25 lb plates', kbsquat:'16 kg', dynamax:'4 lb', bench:'50 lb', hang:'Bodyweight', slams:'10 lb', jumprope:'BW', broadjump:'BW', row:'500m', shuttle:'BW'},
     strong:'Legs, speed, aerobic capacity, mental toughness',
-    weak:'Upper body push (bench) + grip endurance (KB hold) — confirmed Day 1. Broader picture updates as remaining 7 events get baselined.',
+    weak:'Upper body push (bench) + grip endurance — confirmed Day 1. 7 events still need baselines.',
     arc:{
       title:'Where this block takes her',
-      body:'Marathon engine attached to an untrained push pattern. <strong>Fix the push and she medals across the board.</strong> Day 1 already shows <em>+12.5% over gold</em> on KB Squat and <em>−9 sec under gold</em> on the shuttle. Target: <strong>38 bench reps by Week 6, 43 (gold) by Week 10.</strong> Realistic projection — gold in 3+ events.'
+      body:'Marathon engine, untrained push pattern. <strong>Fix the push and she medals across the board.</strong> Day 1 already shows <em>+12.5% over gold</em> on KB Squat (90 reps) and <em>−9 sec under gold</em> on the shuttle (1:03). Bench is the project — 30 reps now, <strong>43 reps (gold) by Week 10</strong>. Realistic projection: gold in 3+ events.'
     },
     podium: {
       prowler:[['GOLD','Howell, K.','0:15.1'],['SILVER','Rowe, D.','0:15.4'],['BRONZE','Bobkowski, S.','0:16']],
@@ -324,24 +348,24 @@ const ATHLETES = {
       row:[['GOLD','Bobkowski, S.','2:00'],['SILVER','Howell, K.','2:04'],['BRONZE','Hammel, P.','2:07']],
       shuttle:[['GOLD','Howell, K.','1:12'],['SILVER','Bobkowski, S.','1:13'],['BRONZE','Pope, P.','1:26']],
     },
-    baseline: {
-      kbsquat:{value:90, date:'2026-05-11', note:'@16kg comp wt'},
-      shuttle:{value:'1:03', date:'2026-05-11', note:'post-squat fatigued'},
-      bench:{value:30, date:'2026-05-11', note:'@50lb comp wt'},
-    }
+    baselines: [
+      {event:'kbsquat', value:'90', date:'2026-05-11', note:'@16kg comp wt · arms limiter'},
+      {event:'shuttle', value:'1:03', date:'2026-05-11', note:'post-squat fatigued'},
+      {event:'bench', value:'30', date:'2026-05-11', note:'@50lb comp wt'},
+    ]
   },
   david: {
     name:'David', division:'Men 55–59',
-    background:`Recreational running enthusiast with solid aerobic base — not competitive runner background. Minimal strength training history. Upper body push is the limiter.`,
+    background:`Recreational running enthusiast with solid aerobic base — not a competitive runner. Minimal strength training history. Upper body push is the clear limiter. Annie's husband and training partner.`,
     loads: {prowler:'2×45 lb plates', kbsquat:'24 kg', dynamax:'8 lb', bench:'115 lb', hang:'Bodyweight', slams:'15 lb', jumprope:'BW', broadjump:'BW', row:'500m', shuttle:'BW'},
     strong:'Cardio base, leg endurance',
-    weak:'Upper body push strength + endurance (critical, confirmed Day 1). Broader picture updates as remaining 7 events get baselined.',
+    weak:'Upper body push strength + endurance (critical, confirmed Day 1). 7 events still need baselines.',
     arc:{
       title:'Where this block takes him',
-      body:'Runner\'s body in a strength-endurance sport. Cardio is the asset, upper body is the project. Day 1: <em>4 reps at 115 lb bench — strength base must come first.</em> Build push pattern volume at <strong>75–85 lb for sets of 10–15</strong>, maintain 115 lb neural exposure with singles. <strong>6–8 weeks minimum before meaningful comp-weight bench numbers.</strong> Shuttle and squat are real medal contenders right now.'
+      body:`Runner's body in a strength-endurance sport. Cardio is the asset, upper body is the project. Day 1: <em>4 reps at 115 lb bench — strength base must come first.</em> Build push pattern volume at <strong>75–85 lb for sets of 10–15</strong>, maintain 115 lb neural exposure with singles. <strong>6–8 weeks minimum before meaningful comp-weight bench numbers.</strong> Shuttle (0:55) and squat are real medal contenders right now.`
     },
     podium: {
-      prowler:[['GOLD','Vonk, E.','0:15'],['SILVER','Carson, D.','—'],['BRONZE','Park, A.','—']],
+      prowler:[['GOLD','Vonk, E.','0:15'],['SILVER','—','—'],['BRONZE','—','—']],
       kbsquat:[['GOLD','Vonk, E.','60'],['SILVER','Park, A.','34'],['BRONZE','Woods, D.','24']],
       dynamax:[['GOLD','Gaddis, B.','486'],['SILVER','Carson, D.','444'],['BRONZE','Woods, D.','438']],
       bench:[['GOLD','Gaddis, B.','46'],['SILVER','Carson, D.','41'],['BRONZE','Woods, D.','30']],
@@ -352,18 +376,17 @@ const ATHLETES = {
       row:[['GOLD','Gaddis, B.','1:38'],['SILVER','Carson, D.','1:39'],['BRONZE','Hightower, L.','1:39.6']],
       shuttle:[['GOLD','Hightower, L.','0:59'],['SILVER','Park, A.','1:07'],['BRONZE','Vonk, E.','1:08']],
     },
-    baseline: {
-      kbsquat:{value:62, date:'2026-05-11', note:'@20kg sub-comp'},
-      shuttle:{value:'0:55', date:'2026-05-11', note:'post-squat fatigued'},
-      bench:{value:4, date:'2026-05-11', note:'@115lb comp wt'},
-    }
+    baselines: [
+      {event:'kbsquat', value:'62', date:'2026-05-11', note:'@20kg sub-comp wt · arms/stamina limiter'},
+      {event:'shuttle', value:'0:55', date:'2026-05-11', note:'post-squat fatigued'},
+      {event:'bench', value:'4', date:'2026-05-11', note:'@115lb comp wt'},
+    ]
   }
 };
 
-let currentAthlete='annie',currentView='log';
-let cachedLogs=[]; // logs for currentAthlete only, refreshed on switch/log/reset
+let currentAthlete='annie', currentView='log';
+let cachedLogs=[];
 
-// === SUPABASE CLIENT ===
 async function sbFetch(path, opts={}){
   const url = SUPABASE_URL + '/rest/v1' + path;
   const headers = {
@@ -379,29 +402,31 @@ async function sbFetch(path, opts={}){
   return ct.includes('application/json') ? res.json() : null;
 }
 
-async function loadLogsFor(slug){
-  const data = await sbFetch('/sdsg_logs?athlete_slug=eq.'+slug+'&select=*&order=log_date.asc,created_at.asc');
+async function loadLogs(athleteSlug){
+  const data = await sbFetch('/sdsg_logs?athlete_slug=eq.'+athleteSlug+'&select=*&order=log_date.asc,created_at.asc');
   return data.map(r=>({event:r.event, value:r.value, date:r.log_date, note:r.note||'', id:r.id}));
 }
 
-async function insertLog(slug, event, value, date, note){
-  const body = JSON.stringify([{athlete_slug:slug, event, value:String(value), log_date:date, note:note||null}]);
+async function insertLog(athleteSlug, event, value, date, note){
+  const body = JSON.stringify([{athlete_slug:athleteSlug, event, value:String(value), log_date:date, note:note||null}]);
   const res = await sbFetch('/sdsg_logs', {method:'POST', body});
   return res?.[0];
 }
 
-async function deleteAllLogsFor(slug){
-  await sbFetch('/sdsg_logs?athlete_slug=eq.'+slug, {method:'DELETE'});
+async function deleteAllLogs(athleteSlug){
+  await sbFetch('/sdsg_logs?athlete_slug=eq.'+athleteSlug, {method:'DELETE'});
 }
 
-async function ensureBaselinesFor(slug){
-  const existing = await loadLogsFor(slug);
-  if(existing.length>0) return existing;
-  const a=ATHLETES[slug];
-  const rows = Object.entries(a.baseline||{}).map(([k,v])=>({athlete_slug:slug, event:k, value:String(v.value), log_date:v.date, note:v.note||null}));
-  if(rows.length===0) return [];
-  await sbFetch('/sdsg_logs', {method:'POST', body:JSON.stringify(rows)});
-  return await loadLogsFor(slug);
+async function ensureBaselines(athleteSlug){
+  const existing = await loadLogs(athleteSlug);
+  if(existing.length>0){ cachedLogs = existing; return }
+  setSyncStatus('syncing','Seeding');
+  const baselines = ATHLETES[athleteSlug].baselines || [];
+  if(baselines.length){
+    const rows = baselines.map(b=>({athlete_slug:athleteSlug, event:b.event, value:String(b.value), log_date:b.date, note:b.note||null}));
+    await sbFetch('/sdsg_logs', {method:'POST', body:JSON.stringify(rows)});
+  }
+  cachedLogs = await loadLogs(athleteSlug);
 }
 
 // === END CANONICAL SUPABASE BLOCK ===
@@ -465,7 +490,7 @@ function renderProfile(){
     <div class="profile-head">
       <div class="profile-tag">Athlete Profile</div>
       <div class="profile-title">${a.name}</div>
-      <div class="profile-sub">${a.division} · Trains 1×/week</div>
+      <div class="profile-sub">${a.division} · Trains 1×/week with partner</div>
     </div>
     <div class="profile-body">
       <div class="profile-section">
@@ -473,14 +498,8 @@ function renderProfile(){
         <p>${a.background}</p>
       </div>
       <div class="profile-pillars">
-        <div class="pillar s">
-          <div class="ph">Strengths</div>
-          <div class="pb">${a.strong}</div>
-        </div>
-        <div class="pillar w">
-          <div class="ph">Weaknesses</div>
-          <div class="pb">${a.weak}</div>
-        </div>
+        <div class="pillar s"><div class="ph">Strengths</div><div class="pb">${a.strong}</div></div>
+        <div class="pillar w"><div class="ph">Focus Areas</div><div class="pb">${a.weak}</div></div>
       </div>
       <div class="profile-section" style="margin-top:14px">
         <div class="block-arc">
@@ -518,62 +537,21 @@ function renderEventCard(ev){
       ${deltaBadge(ev)}
     </div>
     <div class="scores">
-      <div class="score-box">
-        <div class="lbl">Best</div>
-        <div class="val">${best?fmtVal(ev,best.value):'—'}</div>
-        <div class="sub">${best?best.date:'No log yet'}</div>
-      </div>
-      <div class="score-box gold">
-        <div class="lbl">2025 Gold</div>
-        <div class="val">${podium[0]?.[2]||'—'}</div>
-        <div class="sub">${podium[0]?.[1]||'—'}</div>
-      </div>
+      <div class="score-box"><div class="lbl">Best</div><div class="val">${best?fmtVal(ev,best.value):'—'}</div><div class="sub">${best?best.date:'No log yet'}</div></div>
+      <div class="score-box gold"><div class="lbl">2025 Gold</div><div class="val">${podium[0]?.[2]||'—'}</div><div class="sub">${podium[0]?.[1]||'—'}</div></div>
     </div>
     <div class="podium">
-      <div class="ph">2025 Podium</div>
+      <div class="ph">2025 Podium · ${a.division}</div>
       ${podium.map(p=>`<div class="podium-row"><span class="place ${p[0]==='GOLD'?'g':p[0]==='SILVER'?'s':'b'}">${p[0]}</span><span class="who">${p[1]}</span><span class="sc">${p[2]}</span></div>`).join('')}
     </div>
     <div class="input-row">
       ${inputCtl}
-      <button onclick="logScore('${ev}')">Log</button>
+      <button id="btn_${ev}" onclick="logScore('${ev}')">Log</button>
     </div>
   </div>`;
 }
 
-async function logScore(ev){
-  const el=document.getElementById('in_'+ev);
-  const raw=el.value.trim();
-  if(!raw){toast('Enter a value first');return}
-  const slug = currentAthlete; // capture in case of athlete switch mid-await
-  const prevBest=bestScore(ev);
-  const today=new Date().toISOString().slice(0,10);
-  try{
-    setSyncStatus('syncing','Saving');
-    await insertLog(slug, ev, raw, today, null);
-    if(slug===currentAthlete){
-      cachedLogs = await loadLogsFor(slug);
-      setSyncStatus('synced');
-      const newBest=bestScore(ev);
-      const isPR=newBest&&(!prevBest||String(prevBest.value)!==String(newBest.value))&&String(newBest.value)===raw;
-      el.value='';
-      render();
-      if(isPR&&prevBest) toast('🔥 NEW PR — '+EVENTS[ev].name,true);
-      else if(isPR) toast('Baseline logged');
-      else toast('Logged');
-    } else {
-      setSyncStatus('synced');
-      toast('Logged');
-    }
-  }catch(e){
-    console.error(e);
-    setSyncStatus('offline','Save failed');
-    toast('Save failed — check connection');
-  }
-}
-
-function renderLog(){
-  document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('');
-}
+function renderLog(){const evs=SESSION_CONFIG[currentSession].events;document.getElementById('eventList').innerHTML=evs.map(renderEventCard).join('')}
 
 function renderStatus(){
   const a=ATHLETES[currentAthlete];
@@ -582,14 +560,8 @@ function renderStatus(){
     const best=bestScore(ev);
     const gold=a.podium[ev]?.[0]?.[2]||'—';
     return `<div class="dash-row">
-      <div class="info">
-        <div class="nm">${cfg.name}</div>
-        <div class="sb">${a.loads[ev]}</div>
-      </div>
-      <div class="vals">
-        <div class="you">${best?fmtVal(ev,best.value):'—'}</div>
-        <div class="gold">Gold: ${gold}</div>
-      </div>
+      <div class="info"><div class="nm">${cfg.name}</div><div class="sb">${a.loads[ev]}</div></div>
+      <div class="vals"><div class="you">${best?fmtVal(ev,best.value):'—'}</div><div class="gold">Gold: ${gold}</div></div>
       ${deltaBadge(ev)}
     </div>`;
   }).join('');
@@ -605,10 +577,7 @@ function renderHistory(){
     const rows=byDate[date].map(l=>{
       const best=bestScore(l.event);
       const isPR=best&&best.date===l.date&&String(best.value)===String(l.value);
-      return `<div class="hist-row">
-        <span class="ev">${EVENTS[l.event].name}${isPR?'<span class="pr">PR</span>':''}</span>
-        <span class="sc">${fmtVal(l.event,l.value)}</span>
-      </div>`;
+      return `<div class="hist-row"><span class="ev">${EVENTS[l.event].name}${isPR?'<span class="pr">PR</span>':''}</span><span class="sc">${fmtVal(l.event,l.value)}</span></div>`;
     }).join('');
     return `<div class="hist-day"><div class="date">${date}</div>${rows}</div>`;
   }).join('');
@@ -618,10 +587,7 @@ function renderStats(){
   const logged=new Set(cachedLogs.map(l=>l.event)).size;
   document.getElementById('statLogged').textContent=logged+'/10';
   let golds=0;
-  EVENT_ORDER.forEach(ev=>{
-    const del=goldDelta(ev);
-    if(del&&del.pct>=0) golds++;
-  });
+  EVENT_ORDER.forEach(ev=>{ const del=goldDelta(ev); if(del&&del.pct>=0) golds++; });
   let prs=0;
   const grouped={};
   cachedLogs.forEach(l=>{if(!grouped[l.event])grouped[l.event]=[];grouped[l.event].push(l)});
@@ -655,32 +621,15 @@ function render(){
 }
 
 async function switchAthlete(a){
-  if(a===currentAthlete) return;
   currentAthlete=a;
   document.getElementById('btnAnnie').classList.toggle('active',a==='annie');
   document.getElementById('btnDavid').classList.toggle('active',a==='david');
-  document.getElementById('loadingLabel').textContent='Loading '+ATHLETES[a].name+'\'s data';
+  setSyncStatus('syncing','Loading');
   try{
-    setSyncStatus('syncing','Loading');
-    cachedLogs = await ensureBaselinesFor(a);
+    await ensureBaselines(a);
     setSyncStatus('synced');
     render();
-  }catch(e){
-    console.error(e);
-    setSyncStatus('offline','Load failed');
-    toast('Load failed — check connection');
-  }
-}
-
-function setSyncStatus(state, label){
-  const el = document.getElementById('syncIndicator');
-  el.classList.remove('show','syncing','offline');
-  if(state==='hide'){return}
-  el.classList.add('show');
-  if(state==='syncing') el.classList.add('syncing');
-  if(state==='offline') el.classList.add('offline');
-  document.getElementById('syncLabel').textContent = label || (state==='synced'?'Synced':state==='syncing'?'Syncing':'Offline');
-  if(state==='synced'){setTimeout(()=>el.classList.remove('show'), 1500)}
+  }catch(e){console.error(e);setSyncStatus('offline','Load failed')}
 }
 
 function setView(v){
@@ -690,6 +639,44 @@ function setView(v){
   document.getElementById('statusView').style.display=v==='status'?'block':'none';
   document.getElementById('historyView').style.display=v==='history'?'block':'none';
   render();
+}
+
+function setSyncStatus(state, label){
+  const el = document.getElementById('syncIndicator');
+  el.classList.remove('show','syncing','offline');
+  if(state==='hide') return;
+  el.classList.add('show');
+  if(state==='syncing') el.classList.add('syncing');
+  if(state==='offline') el.classList.add('offline');
+  document.getElementById('syncLabel').textContent = label || (state==='synced'?'Synced':state==='syncing'?'Syncing':'Offline');
+  if(state==='synced'){setTimeout(()=>el.classList.remove('show'), 1500)}
+}
+
+async function logScore(ev){
+  const el=document.getElementById('in_'+ev);
+  const btn=document.getElementById('btn_'+ev);
+  const raw=el.value.trim();
+  if(!raw){toast('Enter a value first');return}
+  btn.disabled=true;
+  const prevBest=bestScore(ev);
+  const today=new Date().toISOString().slice(0,10);
+  try{
+    setSyncStatus('syncing','Saving');
+    await insertLog(currentAthlete, ev, raw, today, null);
+    cachedLogs = await loadLogs(currentAthlete);
+    setSyncStatus('synced');
+    const newBest=bestScore(ev);
+    const isPR=newBest&&(!prevBest||String(prevBest.value)!==String(newBest.value))&&String(newBest.value)===raw;
+    el.value='';
+    render();
+    if(isPR&&prevBest) toast('🔥 NEW PR — '+EVENTS[ev].name,true);
+    else if(isPR) toast('Baseline logged');
+    else toast('Logged');
+  }catch(e){
+    console.error(e);
+    setSyncStatus('offline','Save failed');
+    toast('Save failed — check connection');
+  }finally{ btn.disabled=false }
 }
 
 function toast(msg,isPR){
@@ -702,26 +689,23 @@ function toast(msg,isPR){
 }
 
 async function resetAthlete(){
-  const slug=currentAthlete;
-  if(!confirm('Reset all logged data for '+ATHLETES[slug].name+'? Baselines will be re-seeded. This action cannot be undone.')) return;
+  const name = ATHLETES[currentAthlete].name;
+  if(!confirm('Reset all logged data for '+name+'? Baselines will be re-seeded.')) return;
   try{
     setSyncStatus('syncing','Resetting');
-    await deleteAllLogsFor(slug);
-    cachedLogs = await ensureBaselinesFor(slug);
+    await deleteAllLogs(currentAthlete);
+    cachedLogs=[];
+    await ensureBaselines(currentAthlete);
     setSyncStatus('synced');
     render();
     toast('Data reset');
-  }catch(e){
-    console.error(e);
-    setSyncStatus('offline','Reset failed');
-    toast('Reset failed — check connection');
-  }
+  }catch(e){console.error(e);setSyncStatus('offline','Reset failed');toast('Reset failed')}
 }
 
 async function init(){
   try{
     setSyncStatus('syncing','Loading');
-    cachedLogs = await ensureBaselinesFor(currentAthlete);
+    await ensureBaselines('annie');
     setSyncStatus('synced');
     document.getElementById('loadingScreen').classList.add('hidden');
     render();

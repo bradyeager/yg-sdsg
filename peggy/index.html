@@ -156,6 +156,15 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .toast.show{opacity:1}
 .toast.pr{background:linear-gradient(135deg,var(--pink),var(--pink-deep));border-color:transparent;box-shadow:0 8px 32px rgba(239,50,149,.4)}
 .foot{padding:18px;text-align:center}
+
+.session-switcher{display:flex;gap:8px;padding:10px 16px 2px}
+.session-btn{flex:1;border:1px solid var(--border);background:var(--card-bg);color:var(--text-muted);font-family:inherit;font-weight:700;font-size:12px;padding:10px 8px;border-radius:12px;cursor:pointer;transition:all .25s;text-align:center;line-height:1.3}
+.session-btn .s-label{display:block;font-size:13px;letter-spacing:.3px}
+.session-btn .s-sub{display:block;font-size:10px;font-weight:500;margin-top:2px;opacity:.7}
+.session-btn.active-a{background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(72,196,204,.3)}
+.session-btn.active-b{background:linear-gradient(135deg,var(--pink),var(--pink-deep));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(239,50,149,.3)}
+.session-btn.active-all{background:linear-gradient(135deg,#3a4558,#232E3D);color:#fff;border-color:var(--border-strong);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+
 .foot button{background:none;border:0;color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.5px;cursor:pointer;text-decoration:underline}
 </style>
 </head>
@@ -191,7 +200,23 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
   <button class="view-tab" data-view="status" onclick="setView('status')">🎯 Status</button>
   <button class="view-tab" data-view="history" onclick="setView('history')">📈 History</button>
 </div>
-<div id="logView"><div class="content" id="eventList"></div></div>
+<div id="logView">
+  <div class="session-switcher">
+    <button class="session-btn" id="btnSessionA" onclick="switchSession('A')">
+      <span class="s-label">Week A</span>
+      <span class="s-sub">Strength &amp; Power</span>
+    </button>
+    <button class="session-btn" id="btnSessionB" onclick="switchSession('B')">
+      <span class="s-label">Week B</span>
+      <span class="s-sub">Conditioning</span>
+    </button>
+    <button class="session-btn active-all" id="btnSessionAll" onclick="switchSession('all')">
+      <span class="s-label">All</span>
+      <span class="s-sub">Full Session</span>
+    </button>
+  </div>
+  <div class="content" id="eventList"></div>
+</div>
 <div id="statusView" style="display:none"><div class="content" id="statusList"></div></div>
 <div id="historyView" style="display:none"><div class="content" id="historyList"></div></div>
 <div class="foot"><button onclick="resetAthlete()">Reset Peggy's data</button></div>
@@ -218,6 +243,21 @@ const EVENTS={
   shuttle:{name:'300 Yd Shuttle Run',unit:'time',lowerBetter:true},
 };
 const EVENT_ORDER=['prowler','kbsquat','dynamax','bench','hang','slams','jumprope','broadjump','row','shuttle'];
+
+const SESSION_CONFIG = {
+  A:   { events:['prowler','kbsquat','dynamax','bench','hang'] },
+  B:   { events:['slams','jumprope','broadjump','row','shuttle'] },
+  all: { events:EVENT_ORDER }
+};
+let currentSession='all';
+function switchSession(s){
+  currentSession=s;
+  document.getElementById('btnSessionA').className='session-btn'+(s==='A'?' active-a':'');
+  document.getElementById('btnSessionB').className='session-btn'+(s==='B'?' active-b':'');
+  document.getElementById('btnSessionAll').className='session-btn'+(s==='all'?' active-all':'');
+  renderLog();
+}
+
 
 const PEGGY={
   name:'Peggy',division:'Women 70–74',
@@ -275,6 +315,7 @@ async function ensureBaselines(){
   await sbFetch('/sdsg_logs',{method:'POST',body:JSON.stringify(rows)});
   cachedLogs=await loadLogs();
 }
+
 // === END CANONICAL SUPABASE BLOCK ===
 function parseTime(t){
   if(typeof t==='number')return t;if(!t)return null;
@@ -354,7 +395,7 @@ function renderEventCard(ev){
     <div class="input-row">${inputCtl}<button id="btn_${ev}" onclick="logScore('${ev}')">Log</button></div>
   </div>`;
 }
-function renderLog(){document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('')}
+function renderLog(){const evs=SESSION_CONFIG[currentSession].events;document.getElementById('eventList').innerHTML=evs.map(renderEventCard).join('')}
 function renderStatus(){
   document.getElementById('statusList').innerHTML=EVENT_ORDER.map(ev=>{
     const cfg=EVENTS[ev],best=bestScore(ev),gold=PEGGY.podium[ev]?.[0]?.[2]||'—';
