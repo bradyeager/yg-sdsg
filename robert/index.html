@@ -125,6 +125,8 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .badge.yellow{background:rgba(242,182,0,.15);color:var(--yellow);border:1px solid rgba(242,182,0,.3)}
 .badge.red{background:rgba(229,72,77,.15);color:#ff7478;border:1px solid rgba(229,72,77,.3)}
 .badge.gray{background:rgba(255,255,255,.05);color:var(--text-muted);border:1px solid rgba(255,255,255,.08)}
+.badge.weight{background:rgba(242,182,0,.15);color:#F2B600;border:1px solid rgba(242,182,0,.4)}
+.score-box .wt-note{font-size:9px;color:#F2B600;font-weight:700;margin-top:5px;letter-spacing:.3px}
 
 .scores{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .score-box{background:var(--card-elevated);border:1px solid var(--border);border-radius:10px;padding:9px 11px}
@@ -268,6 +270,13 @@ const EVENTS = {
 };
 const EVENT_ORDER = ['prowler','kbsquat','dynamax','bench','hang','slams','jumprope','broadjump','row','shuttle'];
 
+// Events where Robert's comp weight changed when aging up from 65–69 to 70–74
+// Scores logged before 2026 were at the heavier bracket weight
+const WEIGHT_CHANGES = {
+  kbsquat: { was: '20 kg', now: '16 kg' },
+  bench:   { was: '95 lb', now: '75 lb' }
+};
+
 const ROBERT = {
   name:'Robert', division:'Men 70–74',
   background:`Two-time Senior Games athlete entering year three. Competitive downhill ski racer — engine built for explosive legs, anaerobic cardio, and balance under load. 2025 showing in Men 65–69: <span class="strong">7 medals across 10 events</span> — Gold in Jump Rope and Concept Row, Silver in KB Box Squat and Med Ball Slams, Bronze in Prowler Push, Dynamax Throw, and Standing Broad Jump. Now aging up to Men 70–74 — many of his 65–69 numbers land at Gold-tier in the new field.`,
@@ -390,7 +399,14 @@ function goldDelta(ev){
 
 function deltaBadge(ev){
   const d=goldDelta(ev);
+  const wChange=WEIGHT_CHANGES[ev];
+  const best=bestScore(ev);
+  const hasOldWeight=wChange&&best&&best.date<'2026-01-01';
   if(!d) return '<span class="badge gray">No Data</span>';
+  if(hasOldWeight){
+    const sign=d.pct>=0?'+':'';
+    return `<span class="badge weight" title="Score logged at ${wChange.was} · now competes at ${wChange.now}">⚖ ${sign}${d.pct.toFixed(1)}%</span>`;
+  }
   const cls=d.pct>=10?'green':d.pct>=0?'yellow':'red';
   const sign=d.pct>=0?'+':'';
   return '<span class="badge '+cls+'">'+sign+d.pct.toFixed(1)+'%</span>';
@@ -426,6 +442,9 @@ function renderEventCard(ev){
   const best=bestScore(ev);
   const podium=ROBERT.podium[ev]||[];
   const load=ROBERT.loads[ev]||'';
+  const wChange=WEIGHT_CHANGES[ev];
+  const hasOldWeight=wChange&&best&&best.date<'2026-01-01';
+  const wtNote=hasOldWeight?`<div class="wt-note">⚖ was ${wChange.was} · now ${wChange.now}</div>`:'';
 
   let inputCtl='';
   if(cfg.unit==='reps'){
@@ -447,7 +466,7 @@ function renderEventCard(ev){
       ${deltaBadge(ev)}
     </div>
     <div class="scores">
-      <div class="score-box"><div class="lbl">Best</div><div class="val">${best?fmtVal(ev,best.value):'—'}</div><div class="sub">${best?best.date:'No log yet'}</div></div>
+      <div class="score-box"><div class="lbl">Best</div><div class="val">${best?fmtVal(ev,best.value):'—'}</div><div class="sub">${best?best.date:'No log yet'}</div>${wtNote}</div>
       <div class="score-box gold"><div class="lbl">2025 Gold</div><div class="val">${podium[0]?.[2]||'—'}</div><div class="sub">${podium[0]?.[1]||'—'}</div></div>
     </div>
     <div class="podium">
