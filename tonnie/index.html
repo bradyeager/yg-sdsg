@@ -387,11 +387,21 @@ async function ensureBaselines(){
 
 // === HELPERS ===
 function parseTime(t){
-  if(typeof t==='number') return t;
-  if(!t) return null;
+  if(t==null) return null;
+  if(typeof t==='number') return isNaN(t)?null:t;
   const s=String(t).trim();
-  if(s.includes(':')){const [m,sec]=s.split(':');return parseFloat(m)*60+parseFloat(sec)}
-  return parseFloat(s);
+  if(s==='') return null;
+  if(s.includes(':')){
+    const parts=s.split(':');
+    if(parts.length!==2) return null;
+    const m=parseInt(parts[0],10), sec=parseInt(parts[1],10);
+    if(isNaN(m)||isNaN(sec)||m<0||sec<0||sec>59) return null;
+    return m*60+sec;
+  }
+  // Legacy data path: bare number string (from older seed data). Treat as seconds.
+  // New user input is blocked upstream by the M:SS-required alert in logScore.
+  const n=parseFloat(s);
+  return isNaN(n)?null:n;
 }
 function formatTime(sec){
   if(sec==null||isNaN(sec)) return '—';
@@ -484,7 +494,7 @@ function renderEventCard(ev){
   } else if(cfg.unit==='inches'){
     inputCtl='<input id="in_'+ev+'" type="number" inputmode="decimal" placeholder="inches" step="0.5">';
   } else {
-    inputCtl='<input id="in_'+ev+'" type="text" inputmode="numeric" placeholder="0:00 or seconds">';
+    inputCtl='<input id="in_'+ev+'" type="text" inputmode="numeric" pattern="^\\d{1,2}:[0-5]\\d$" placeholder="M:SS  (e.g. 2:00)">';
   }
 
   return `<div class="event-card">
@@ -633,6 +643,10 @@ async function logScore(ev){
   const btn=document.getElementById('btn_'+ev);
   const raw=el.value.trim();
   if(!raw){toast('Enter a value first');return}
+  if(EVENTS[ev].unit==='time' && !/^\d{1,2}:[0-5]\d$/.test(raw)){
+    toast('Use M:SS format (e.g. 2:00)');
+    return;
+  }
   btn.disabled=true;
   const prevBest=bestScore(ev);
   const today=new Date().toISOString().slice(0,10);
