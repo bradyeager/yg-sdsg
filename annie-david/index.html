@@ -1,18 +1,3 @@
-
-
-const SESSION_CONFIG = {
-  A:   { events:['prowler','kbsquat','dynamax','bench','hang'] },
-  B:   { events:['slams','jumprope','broadjump','row','shuttle'] },
-  all: { events:EVENT_ORDER }
-};
-let currentSession='all';
-function switchSession(s){
-  currentSession=s;
-  document.getElementById('btnSessionA').className='session-btn'+(s==='A'?' active-a':'');
-  document.getElementById('btnSessionB').className='session-btn'+(s==='B'?' active-b':'');
-  document.getElementById('btnSessionAll').className='session-btn'+(s==='all'?' active-all':'');
-  renderLog();
-}
 <!DOCTYPE html>
 <!-- ============================================================== -->
 <!-- CANONICAL · DO NOT REMOVE · SUPABASE SYNC BLOCK                  -->
@@ -324,6 +309,20 @@ const EVENTS = {
   shuttle:   {name:'300 Yd Shuttle Run',     unit:'time',  lowerBetter:true},
 };
 const EVENT_ORDER = ['bench','prowler','kbsquat','dynamax','hang','broadjump','jumprope','slams','row','shuttle'];
+
+const SESSION_CONFIG = {
+  A:   { events:['prowler','kbsquat','dynamax','bench','hang'] },
+  B:   { events:['slams','jumprope','broadjump','row','shuttle'] },
+  all: { events:EVENT_ORDER }
+};
+let currentSession='all';
+function switchSession(s){
+  currentSession=s;
+  document.getElementById('btnSessionA').className='session-btn'+(s==='A'?' active-a':'');
+  document.getElementById('btnSessionB').className='session-btn'+(s==='B'?' active-b':'');
+  document.getElementById('btnSessionAll').className='session-btn'+(s==='all'?' active-all':'');
+  renderLog();
+}
 
 const ATHLETES = {
   annie: {
