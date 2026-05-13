@@ -208,6 +208,31 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .danger-zone .danger-warn{font-size:11px;color:var(--text-muted);text-align:center;margin-bottom:10px;line-height:1.4;padding:0 8px}
 .danger-zone button{background:transparent;border:1px solid rgba(229,72,77,.5);color:#ff7478;font-size:11px;font-weight:700;letter-spacing:.5px;padding:10px 14px;border-radius:8px;cursor:pointer;width:100%}
 .danger-zone button:hover{background:rgba(229,72,77,.1);border-color:#ff7478}
+
+/* Medical Status Banner — surfaces injury-driven training restrictions */
+.medical-banner{margin:14px 16px 0;background:linear-gradient(135deg,rgba(229,72,77,.16),rgba(229,72,77,.04));border:1px solid rgba(229,72,77,.4);border-left:3px solid var(--red);border-radius:12px;padding:12px 14px;position:relative;overflow:hidden}
+.medical-banner::before{content:"";position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:radial-gradient(circle,rgba(229,72,77,.15) 0%,transparent 70%);pointer-events:none}
+.medical-banner .med-tag{font-size:9px;font-weight:800;letter-spacing:1.5px;color:#ff7478;text-transform:uppercase;margin-bottom:6px;position:relative;z-index:1}
+.medical-banner .med-title{font-size:13px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:4px;position:relative;z-index:1}
+.medical-banner .med-sub{font-size:11px;color:var(--text-secondary);margin-bottom:9px;line-height:1.4;position:relative;z-index:1}
+.medical-banner .med-rules{font-size:11px;color:var(--text-secondary);line-height:1.5;position:relative;z-index:1}
+.medical-banner .med-rules .rule{display:flex;align-items:flex-start;gap:7px;margin-bottom:3px}
+.medical-banner .med-rules .rule::before{content:"";width:4px;height:4px;border-radius:50%;background:#ff7478;flex-shrink:0;margin-top:7px}
+.medical-banner .med-rules strong{color:#fff;font-weight:700}
+
+/* Training Peak row — shows all-time best from Strong app data */
+.training-peak{background:rgba(0,0,0,.22);border:1px solid var(--border);border-left:3px solid var(--text-muted);border-radius:8px;padding:8px 11px;margin-bottom:10px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;transition:border-left-color .2s}
+.training-peak.above{border-left-color:var(--teal);background:linear-gradient(135deg,rgba(72,196,204,.1),rgba(0,0,0,.2))}
+.training-peak.below{border-left-color:var(--text-muted)}
+.training-peak .tp-label{font-size:9px;font-weight:800;letter-spacing:1px;color:var(--text-muted);text-transform:uppercase;flex-shrink:0}
+.training-peak.above .tp-label{color:var(--teal)}
+.training-peak .tp-value{font-family:'DM Serif Display',serif;font-size:16px;color:#fff;line-height:1;flex-shrink:0}
+.training-peak .tp-date{font-size:10px;color:var(--text-muted);font-weight:600;flex-shrink:0}
+.training-peak .tp-up{font-size:11px;color:var(--teal);font-weight:800;flex-shrink:0}
+.training-peak .tp-note{font-size:10.5px;color:var(--text-secondary);line-height:1.45;flex:1;min-width:100%;margin-top:3px;font-style:italic}
+
+/* Peak-vs-Gold badge — teal "training peak hits Gold" treatment */
+.badge.peak-above{background:linear-gradient(135deg,rgba(72,196,204,.2),rgba(72,196,204,.05));color:var(--teal);border:1px solid rgba(72,196,204,.5)}
 </style>
 </head>
 <body>
@@ -241,6 +266,19 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
     </div>
     <div class="progress"><div class="fill" id="blockFill" style="width:5%"></div></div>
     <div class="pct" id="blockPct">5%</div>
+  </div>
+</div>
+
+<!-- Medical Status Banner — surfaces injury restrictions across all session views -->
+<div class="medical-banner">
+  <div class="med-tag">⚠ Medical Status · Apr 24 2026 MRI</div>
+  <div class="med-title">Right shoulder: subscapularis tear (near full-thickness, 1.2 cm retraction)</div>
+  <div class="med-sub">Active bursitis · supra/infraspinatus tendinopathy · mild subscap atrophy · awaiting ortho consult</div>
+  <div class="med-rules">
+    <div class="rule"><span><strong>No bench/pressing AMRAPs</strong> until ortho clearance</span></div>
+    <div class="rule"><span>Velocity floor <strong>0.40 m/s</strong> · VL cap <strong>20%</strong> · max <strong>8 reps</strong> per set</span></div>
+    <div class="rule"><span>Total pressing volume capped at <strong>25 reps</strong> per session</span></div>
+    <div class="rule"><span>If ROM compresses &gt;5% from warm-up → terminate set</span></div>
   </div>
 </div>
 
@@ -349,7 +387,7 @@ const ROBERT = {
     {event:'dynamax', value:'280', date:'2025-09-21', note:'2025 comp · Bronze in 65–69'},
     {event:'slams', value:'40', date:'2025-09-21', note:'2025 comp · Silver in 65–69'},
     {event:'jumprope', value:'169', date:'2025-09-21', note:'2025 comp · Gold in 65–69'},
-    {event:'broadjump', value:'48', date:'2025-09-21', note:'2025 comp · Bronze in 65–69'},
+    {event:'broadjump', value:'48', date:'2025-09-21', note:'2025 comp · Bronze in 65–69 (hamstring strain in warm-up — see training peak)'},
     {event:'row', value:'1:48', date:'2025-09-21', note:'2025 comp · Gold in 65–69'},
   ]
 };
@@ -403,6 +441,59 @@ async function deleteLog(id){
 }
 
 // === END CANONICAL SUPABASE BLOCK ===
+
+const TRAINING_PEAKS = {
+  prowler:   {value:'0:22',  date:'2025-07-15', note:'Multiple sub-25 sec attempts logged consistently'},
+  kbsquat:   {value:'25',    date:'2025-05-22', note:'Goblet Squat @ 35 lb (= 16 kg comp load) — proxy for KB Box Squat; needs proper baseline at the box'},
+  dynamax:   {value:'310',   date:'2025-08-19', note:'Ball Toss @ 8 lb — above 2025 comp result (280)'},
+  bench:     {value:'14',    date:'2024-09-02', note:'@ 95 lb pre-injury · current 1RM ~80 lb after subscap tear'},
+  slams:     {value:'56',    date:'2025-08-19', note:'@ 20 lb training load (5 lb heavier than comp) — expect more at 15 lb event load'},
+  jumprope:  {value:'181',   date:'2025-09-11', note:'Above 2025 comp result (169 reps) — pace is ahead of Gold standard'},
+  broadjump: {value:'66',    date:'2024-06-27', note:'2025 comp dropped to 48" due to hamstring strain in warm-up. Real capacity = 70–74 Gold-tier (matches Hemme 66")'},
+  row:       {value:'1:52',  date:'2025-08-05', note:'500m best in training · competed 4 sec faster on event day (1:48)'}
+  // hang and shuttle: no training data — never competed, will not baseline this season
+};
+
+function trainingPeakSignal(ev){
+  const peak = TRAINING_PEAKS[ev];
+  const best = bestScore(ev);
+  if(!peak || !best) return null;
+  const cfg = EVENTS[ev];
+  const parser = cfg.unit==='time' ? parseTime : parseFloat;
+  const peakN = parser(peak.value);
+  const bestN = parser(best.value);
+  if(isNaN(peakN) || isNaN(bestN)) return null;
+  return (cfg.lowerBetter ? peakN < bestN : peakN > bestN) ? 'above' : 'below';
+}
+
+function peakVsGold(ev){
+  const peak = TRAINING_PEAKS[ev];
+  if(!peak) return null;
+  const goldRaw = ROBERT.podium[ev]?.[0]?.[2];
+  if(!goldRaw || goldRaw==='—') return null;
+  const cfg = EVENTS[ev];
+  const p = cfg.unit==='time' ? parseTime(peak.value) : parseFloat(peak.value);
+  const g = cfg.unit==='time' ? parseTime(goldRaw) : parseFloat(goldRaw);
+  if(isNaN(p) || isNaN(g)) return null;
+  return cfg.lowerBetter ? ((g-p)/g)*100 : ((p-g)/g)*100;
+}
+
+function renderTrainingPeak(ev){
+  const peak = TRAINING_PEAKS[ev];
+  if(!peak) return '';
+  const signal = trainingPeakSignal(ev);
+  const cls = signal ? ' '+signal : '';
+  const arrow = signal==='above' ? '<span class="tp-up">↗</span>' : '';
+  return `<div class="training-peak${cls}">
+    <span class="tp-label">All-Time Training Peak</span>
+    <span class="tp-value">${fmtVal(ev, peak.value)}</span>
+    ${arrow}
+    <span class="tp-date">${peak.date}</span>
+    ${peak.note?`<span class="tp-note">${peak.note}</span>`:''}
+  </div>`;
+}
+
+
 
 function parseTime(t){
   if(t==null) return null;
@@ -463,10 +554,18 @@ function deltaBadge(ev){
   const wChange=WEIGHT_CHANGES[ev];
   const best=bestScore(ev);
   const hasOldWeight=wChange&&best&&best.date<'2026-01-01';
+  const peakSignal = trainingPeakSignal(ev);
+  const peakGold = peakVsGold(ev);
+
   if(!d) return '<span class="badge gray">No Data</span>';
   if(hasOldWeight){
     const sign=d.pct>=0?'+':'';
     return `<span class="badge weight" title="Score logged at ${wChange.was} · now competes at ${wChange.now}">⚖ ${sign}${d.pct.toFixed(1)}%</span>`;
+  }
+  // Surface "training peak ≥ Gold" when comp baseline is below Gold but training peak isn't
+  if(peakSignal==='above' && d.pct<0 && peakGold!==null && peakGold>=0){
+    const sign=peakGold>=0?'+':'';
+    return `<span class="badge peak-above" title="Comp baseline is below Gold, but training peak is at or above Gold (${sign}${peakGold.toFixed(1)}% vs Gold)">↗ Peak ${sign}${peakGold.toFixed(1)}%</span>`;
   }
   const cls=d.pct>=10?'green':d.pct>=0?'yellow':'red';
   const sign=d.pct>=0?'+':'';
@@ -530,6 +629,7 @@ function renderEventCard(ev){
       <div class="score-box"><div class="lbl">Best</div><div class="val">${best?fmtVal(ev,best.value):'—'}</div><div class="sub">${best?best.date:'No log yet'}</div>${wtNote}</div>
       <div class="score-box gold"><div class="lbl">2025 Gold</div><div class="val">${podium[0]?.[2]||'—'}</div><div class="sub">${podium[0]?.[1]||'—'}</div></div>
     </div>
+    ${renderTrainingPeak(ev)}
     <div class="podium">
       <div class="ph">2025 Podium · Men 70–74</div>
       ${podium.map(p=>`<div class="podium-row"><span class="place ${p[0]==='GOLD'?'g':p[0]==='SILVER'?'s':'b'}">${p[0]}</span><span class="who">${p[1]}</span><span class="sc">${p[2]}</span></div>`).join('')}
