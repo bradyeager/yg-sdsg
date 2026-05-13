@@ -533,7 +533,7 @@ async function logScore(ev){
     toast('Use M:SS format (e.g. 2:00)');
     return;
   }btn.disabled=true;
-  const prevBest=bestScore(ev),today=new Date().toISOString().slice(0,10);
+  const prevBest=bestScore(ev),today=(()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');})();
   try{
     setSyncStatus('syncing','Saving');const inserted=await insertLog(ev,raw,today,null);
     cachedLogs=await loadLogs();setSyncStatus('synced');
