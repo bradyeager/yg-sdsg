@@ -203,6 +203,21 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .session-btn.active-all{background:linear-gradient(135deg,#3a4558,#232E3D);color:#fff;border-color:var(--border-strong);box-shadow:0 4px 14px rgba(0,0,0,.35)}
 
 .foot button{background:none;border:0;color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.5px;cursor:pointer;text-decoration:underline}
+
+.hist-row .ev{flex:1;min-width:0}
+.hist-row .actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.hist-del{background:transparent;border:none;color:rgba(229,72,77,.55);cursor:pointer;padding:6px 8px;font-size:14px;line-height:1;border-radius:6px;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.hist-del:hover,.hist-del:active{background:rgba(229,72,77,.12);color:#ff7478}
+.toast-undo{margin-left:12px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);color:#fff;font-weight:800;font-size:11px;letter-spacing:1px;padding:5px 10px;border-radius:6px;cursor:pointer;text-transform:uppercase}
+.toast-undo:hover{background:rgba(255,255,255,.28)}
+.danger-zone{margin-top:18px}
+.danger-zone summary{cursor:pointer;font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(229,72,77,.6);text-transform:uppercase;padding:8px;list-style:none;text-align:center;border:1px dashed rgba(229,72,77,.25);border-radius:8px;transition:all .15s}
+.danger-zone summary::-webkit-details-marker{display:none}
+.danger-zone summary:hover{color:#ff7478;border-color:rgba(229,72,77,.5);background:rgba(229,72,77,.05)}
+.danger-zone[open] summary{color:#ff7478;border-color:rgba(229,72,77,.5);margin-bottom:10px}
+.danger-zone .danger-warn{font-size:11px;color:var(--text-muted);text-align:center;margin-bottom:10px;line-height:1.4;padding:0 8px}
+.danger-zone button{background:transparent;border:1px solid rgba(229,72,77,.5);color:#ff7478;font-size:11px;font-weight:700;letter-spacing:.5px;padding:10px 14px;border-radius:8px;cursor:pointer;width:100%}
+.danger-zone button:hover{background:rgba(229,72,77,.1);border-color:#ff7478}
 </style>
 </head>
 <body>
@@ -283,7 +298,11 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 <div id="historyView" style="display:none"><div class="content" id="historyList"></div></div>
 
 <div class="foot">
-  <button onclick="resetAthlete()">Reset current athlete data</button>
+  <details class="danger-zone">
+    <summary>⚠ Danger Zone</summary>
+    <div class="danger-warn">Wipes ALL logged data for this athlete and re-seeds baselines. Use per-entry delete (🗑) on the History tab instead — this is for full resets only.</div>
+    <button onclick="resetAthlete()">Reset current athlete data</button>
+  </details>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -426,6 +445,12 @@ async function ensureBaselines(athleteSlug){
     await sbFetch('/sdsg_logs', {method:'POST', body:JSON.stringify(rows)});
   }
   cachedLogs = await loadLogs(athleteSlug);
+}
+
+async function deleteLog(id){
+  if(!id) return;
+  await sbFetch('/sdsg_logs?id=eq.'+encodeURIComponent(id), {method:'DELETE'});
+  cachedLogs = cachedLogs.filter(l => l.id !== id);
 }
 
 // === END CANONICAL SUPABASE BLOCK ===
@@ -586,10 +611,34 @@ function renderHistory(){
     const rows=byDate[date].map(l=>{
       const best=bestScore(l.event);
       const isPR=best&&best.date===l.date&&String(best.value)===String(l.value);
-      return `<div class="hist-row"><span class="ev">${EVENTS[l.event].name}${isPR?'<span class="pr">PR</span>':''}</span><span class="sc">${fmtVal(l.event,l.value)}</span></div>`;
+      const delBtn = l.id ? `<button class="hist-del" data-id="${l.id}" data-event="${l.event}" data-value="${String(l.value).replace(/"/g,'&quot;')}" title="Delete this entry" aria-label="Delete entry">🗑</button>` : '';
+      return `<div class="hist-row">
+        <span class="ev">${EVENTS[l.event].name}${isPR?'<span class="pr">PR</span>':''}</span>
+        <span class="actions"><span class="sc">${fmtVal(l.event,l.value)}</span>${delBtn}</span>
+      </div>`;
     }).join('');
     return `<div class="hist-day"><div class="date">${date}</div>${rows}</div>`;
   }).join('');
+  // Wire up delete buttons
+  list.querySelectorAll('.hist-del').forEach(btn=>{
+    btn.addEventListener('click', async (e)=>{
+      const id = btn.dataset.id;
+      const ev = btn.dataset.event;
+      const val = btn.dataset.value;
+      if(!confirm(`Delete this entry?\\n\\n${EVENTS[ev].name}: ${fmtVal(ev,val)}\\n\\nThis cannot be undone.`)) return;
+      try{
+        setSyncStatus('syncing','Deleting');
+        await deleteLog(id);
+        setSyncStatus('synced');
+        render();
+        toast('Entry deleted');
+      }catch(err){
+        console.error(err);
+        setSyncStatus('offline','Delete failed');
+        toast('Delete failed — check connection');
+      }
+    });
+  });
 }
 
 function renderStats(){
@@ -675,16 +724,58 @@ async function logScore(ev){
   const today=new Date().toISOString().slice(0,10);
   try{
     setSyncStatus('syncing','Saving');
-    await insertLog(currentAthlete, ev, raw, today, null);
+    const inserted = await insertLog(currentAthlete, ev, raw, today, null);
     cachedLogs = await loadLogs(currentAthlete);
     setSyncStatus('synced');
     const newBest=bestScore(ev);
     const isPR=newBest&&(!prevBest||String(prevBest.value)!==String(newBest.value))&&String(newBest.value)===raw;
     el.value='';
     render();
-    if(isPR&&prevBest) toast('🔥 NEW PR — '+EVENTS[ev].name,true);
-    else if(isPR) toast('Baseline logged');
-    else toast('Logged');
+    if(isPR&&prevBest) toast('🔥 NEW PR — '+EVENTS[ev].name,true,async ()=>{
+        try{
+          if(inserted&&inserted.id){
+            setSyncStatus('syncing','Removing');
+            await deleteLog(inserted.id);
+            setSyncStatus('synced');
+            render();
+            toast('Removed');
+          }
+        }catch(e){
+          console.error(e);
+          setSyncStatus('offline','Undo failed');
+          toast('Undo failed — check connection');
+        }
+      });
+    else if(isPR) toast('Baseline logged',false,async ()=>{
+        try{
+          if(inserted&&inserted.id){
+            setSyncStatus('syncing','Removing');
+            await deleteLog(inserted.id);
+            setSyncStatus('synced');
+            render();
+            toast('Removed');
+          }
+        }catch(e){
+          console.error(e);
+          setSyncStatus('offline','Undo failed');
+          toast('Undo failed — check connection');
+        }
+      });
+    else toast('Logged',false,async ()=>{
+        try{
+          if(inserted&&inserted.id){
+            setSyncStatus('syncing','Removing');
+            await deleteLog(inserted.id);
+            setSyncStatus('synced');
+            render();
+            toast('Removed');
+          }
+        }catch(e){
+          console.error(e);
+          setSyncStatus('offline','Undo failed');
+          toast('Undo failed — check connection');
+        }
+      });
   }catch(e){
     console.error(e);
     setSyncStatus('offline','Save failed');
@@ -692,13 +783,22 @@ async function logScore(ev){
   }finally{ btn.disabled=false }
 }
 
-function toast(msg,isPR){
+function toast(msg,isPR,undoAction){
   const t=document.getElementById('toast');
-  t.textContent=msg;
   t.classList.toggle('pr',!!isPR);
+  if(undoAction){
+    t.innerHTML='<span></span><button class="toast-undo" type="button">Undo</button>';
+    t.querySelector('span').textContent=msg;
+    t.querySelector('.toast-undo').addEventListener('click', async ()=>{
+      t.classList.remove('show');
+      try{ await undoAction(); }catch(e){ console.error(e); toast('Undo failed'); }
+    }, {once:true});
+  } else {
+    t.textContent=msg;
+  }
   t.classList.add('show');
   clearTimeout(window._toastT);
-  window._toastT=setTimeout(()=>t.classList.remove('show'),2200);
+  window._toastT=setTimeout(()=>t.classList.remove('show'),3500);
 }
 
 async function resetAthlete(){
