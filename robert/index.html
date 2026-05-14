@@ -233,6 +233,15 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 
 /* Peak-vs-Gold badge — teal "training peak hits Gold" treatment */
 .badge.peak-above{background:linear-gradient(135deg,rgba(72,196,204,.2),rgba(72,196,204,.05));color:var(--teal);border:1px solid rgba(72,196,204,.5)}
+
+.medal-trophy{display:inline-block;font-size:14px;line-height:1;margin-left:6px;vertical-align:middle;filter:drop-shadow(0 0 4px rgba(0,0,0,.4))}
+.medal-gold{filter:drop-shadow(0 0 6px rgba(255,200,0,.45))}
+.medal-silver{filter:drop-shadow(0 0 6px rgba(200,200,210,.45))}
+.medal-bronze{filter:drop-shadow(0 0 6px rgba(205,127,50,.45))}
+
+.event-card .input-wrap{position:relative}
+.time-preview{display:block;font-size:10px;color:var(--text-muted);margin-top:4px;font-weight:600;letter-spacing:.3px;min-height:12px}
+.time-preview-warn{color:var(--yellow)}
 </style>
 </head>
 <body>
@@ -442,6 +451,109 @@ async function deleteLog(id){
 
 // === END CANONICAL SUPABASE BLOCK ===
 
+// === iPhone-friendly time input: auto-insert colon as user types ===
+// iOS numeric keypad has no colon key. This helper formats digits into M:SS.
+// Safer rules:
+//   1-2 digits: leave as-is (user might be typing seconds; let them type colon manually)
+//   3 digits "xyz": format as x:yz IF yz is 0-59 (valid seconds)
+//   4 digits "wxyz": format as wx:yz IF yz is 0-59
+//   Anything that doesn't parse cleanly stays as-typed, parseTime rejects on Log.
+// Also writes a tiny live preview ("= 2 min 0 sec") to a sibling .time-preview span.
+function autoColonTime(el){
+  const raw = el.value;
+  const digits = raw.replace(/[^\d:]/g, '');
+  // If user typed a colon themselves, respect it — strip non-digit/colon, leave structure
+  if(digits.includes(':')){
+    el.value = digits;
+    updateTimePreview(el);
+    return;
+  }
+  if(digits.length === 0){ el.value=''; updateTimePreview(el); return; }
+  if(digits.length > 4){ el.value = digits.slice(0,4); }
+  else { el.value = digits; }
+  // Only auto-insert colon when result is unambiguous
+  if(digits.length === 3){
+    const sec = parseInt(digits.slice(1), 10);
+    if(sec >= 0 && sec <= 59) el.value = digits[0] + ':' + digits.slice(1);
+  } else if(digits.length === 4){
+    const sec = parseInt(digits.slice(2), 10);
+    if(sec >= 0 && sec <= 59) el.value = digits.slice(0,2) + ':' + digits.slice(2);
+  }
+  // 1-2 digits: leave alone, user types colon themselves if they want
+  updateTimePreview(el);
+}
+
+function updateTimePreview(el){
+  const wrap = el.parentElement;
+  if(!wrap) return;
+  let preview = wrap.querySelector('.time-preview');
+  const v = el.value.trim();
+  if(!v){ if(preview) preview.textContent = ''; return; }
+  const m = /^(\d{1,2}):([0-5]\d)$/.exec(v);
+  if(!preview){
+    preview = document.createElement('span');
+    preview.className = 'time-preview';
+    wrap.appendChild(preview);
+  }
+  if(m){
+    const mins = parseInt(m[1],10), secs = parseInt(m[2],10);
+    const total = mins*60 + secs;
+    preview.textContent = '= ' + (mins>0 ? mins+' min ' : '') + secs + ' sec (' + total + 's)';
+    preview.classList.remove('time-preview-warn');
+  } else {
+    preview.textContent = 'needs M:SS format';
+    preview.classList.add('time-preview-warn');
+  }
+}
+// === END iPhone time input helper ===
+
+
+// === Medal calculation: athlete's best vs Gold/Silver/Bronze thresholds ===
+// Returns 'gold' | 'silver' | 'bronze' | null
+function medalFor(ev){
+  const best = bestScore(ev);
+  if(!best) return null;
+  // Athlete's data object — locate the right one in scope
+  const athlete = (typeof ATHLETE_DATA !== 'undefined') ? ATHLETE_DATA
+                : (typeof TONNIE !== 'undefined') ? TONNIE
+                : (typeof ROBERT !== 'undefined') ? ROBERT
+                : (typeof KERRY !== 'undefined') ? KERRY
+                : (typeof PEGGY !== 'undefined') ? PEGGY
+                : (typeof ATHLETES !== 'undefined' && typeof currentAthlete !== 'undefined') ? ATHLETES[currentAthlete]
+                : null;
+  if(!athlete || !athlete.podium || !athlete.podium[ev]) return null;
+  const cfg = EVENTS[ev];
+  const parser = cfg.unit==='time' ? parseTime : parseFloat;
+  const bestN = parser(best.value);
+  if(isNaN(bestN)) return null;
+  const podium = athlete.podium[ev];
+  // podium = [['GOLD',name,val],['SILVER',name,val],['BRONZE',name,val]]
+  const gold   = podium.find(p => p[0]==='GOLD');
+  const silver = podium.find(p => p[0]==='SILVER');
+  const bronze = podium.find(p => p[0]==='BRONZE');
+  function val(row){
+    if(!row || row[2]==='—' || row[2]==null) return null;
+    const n = parser(row[2]);
+    return isNaN(n) ? null : n;
+  }
+  const g = val(gold), s = val(silver), b = val(bronze);
+  const better = (mine, threshold) => cfg.lowerBetter ? mine <= threshold : mine >= threshold;
+  if(g !== null && better(bestN, g)) return 'gold';
+  if(s !== null && better(bestN, s)) return 'silver';
+  if(b !== null && better(bestN, b)) return 'bronze';
+  return null;
+}
+
+function medalIcon(level){
+  if(!level) return '';
+  const icon = level==='gold' ? '🥇' : level==='silver' ? '🥈' : '🥉';
+  const label = level.charAt(0).toUpperCase() + level.slice(1);
+  return `<span class="medal-trophy medal-${level}" title="${label} medal pace">${icon}</span>`;
+}
+// === END medal helpers ===
+
+
+
 const TRAINING_PEAKS = {
   prowler:   {value:'0:22',  date:'2025-07-15', note:'Multiple sub-25 sec attempts logged consistently'},
   kbsquat:   {value:'25',    date:'2025-05-22', note:'Goblet Squat @ 35 lb (= 16 kg comp load) — proxy for KB Box Squat; needs proper baseline at the box'},
@@ -614,7 +726,7 @@ function renderEventCard(ev){
   } else if(cfg.unit==='inches'){
     inputCtl='<input id="in_'+ev+'" type="number" inputmode="decimal" placeholder="inches" step="0.5">';
   } else {
-    inputCtl='<input id="in_'+ev+'" type="text" inputmode="numeric" pattern="^\\d{1,2}:[0-5]\\d$" placeholder="M:SS  (e.g. 2:00)">';
+    inputCtl='<span class="input-wrap"><input id="in_'+ev+'" type="text" inputmode="numeric" pattern="^\\d{1,2}:[0-5]\\d$" placeholder="M:SS  (e.g. 2:00)" oninput="autoColonTime(this)"></span>';
   }
 
   return `<div class="event-card">
@@ -626,7 +738,7 @@ function renderEventCard(ev){
       ${deltaBadge(ev)}
     </div>
     <div class="scores">
-      <div class="score-box"><div class="lbl">Best</div><div class="val">${best?fmtVal(ev,best.value):'—'}</div><div class="sub">${best?best.date:'No log yet'}</div>${wtNote}</div>
+      <div class="score-box"><div class="lbl">Best</div><div class="val">${best?fmtVal(ev,best.value):'—'}${best?medalIcon(medalFor(ev)):''}</div><div class="sub">${best?best.date:'No log yet'}</div>${wtNote}</div>
       <div class="score-box gold"><div class="lbl">2025 Gold</div><div class="val">${podium[0]?.[2]||'—'}</div><div class="sub">${podium[0]?.[1]||'—'}</div></div>
     </div>
     ${renderTrainingPeak(ev)}
@@ -657,7 +769,7 @@ function renderStatus(){
     const gold=ROBERT.podium[ev]?.[0]?.[2]||'—';
     return `<div class="dash-row">
       <div class="info"><div class="nm">${cfg.name}</div><div class="sb">${ROBERT.loads[ev]}</div></div>
-      <div class="vals"><div class="you">${best?fmtVal(ev,best.value):'—'}</div><div class="gold">Gold: ${gold}</div></div>
+      <div class="vals"><div class="you">${best?fmtVal(ev,best.value):'—'}${best?medalIcon(medalFor(ev)):''}</div><div class="gold">Gold: ${gold}</div></div>
       ${deltaBadge(ev)}
     </div>`;
   }).join('');
