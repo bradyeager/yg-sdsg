@@ -242,9 +242,15 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .event-card .input-wrap{position:relative}
 .time-preview{display:block;font-size:10px;color:var(--text-muted);margin-top:4px;font-weight:600;letter-spacing:.3px;min-height:12px}
 .time-preview-warn{color:var(--yellow)}
+
+/* === LARGE PRINT MODE — Robert · doubles everything for vision accessibility === */
+body.big-print{zoom:2;-moz-transform:scale(2);-moz-transform-origin:0 0;max-width:240px}
+/* zoom is the right tool — it scales pixels truly. Firefox falls back to transform. */
+@media (min-width:481px){body.big-print{box-shadow:0 0 0 1px rgba(72,196,204,.15),0 0 80px rgba(0,0,0,.75)}}
+/* === END LARGE PRINT MODE === */
 </style>
 </head>
-<body>
+<body class="big-print">
 
 <!-- CANONICAL · sync loading screen (required by Supabase init) -->
 <div class="loading-screen" id="loadingScreen">
