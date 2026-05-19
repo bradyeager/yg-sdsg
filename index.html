@@ -22,7 +22,14 @@ body{background:var(--charcoal);color:var(--text);font-family:'DM Sans',sans-ser
 .tag{font-size:11px;letter-spacing:2px;color:var(--teal);font-weight:700;text-transform:uppercase}
 h1{font-family:'DM Serif Display',serif;font-size:36px;line-height:1.1;margin:6px 0 4px}
 .sub{font-size:13px;color:var(--pink);font-weight:600;letter-spacing:.5px;margin-bottom:32px}
-.athletes{display:grid;gap:10px;margin-top:24px}
+.program-cta{display:block;margin-top:24px;padding:14px 18px;background:linear-gradient(135deg,var(--teal),var(--pink));border-radius:14px;text-decoration:none;color:#fff;font-weight:700;letter-spacing:.5px;text-align:left;box-shadow:0 6px 22px rgba(72,196,204,.25);transition:transform .15s,box-shadow .15s}
+.program-cta:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(239,50,149,.3)}
+.program-cta .pc-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.program-cta .pc-label{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;letter-spacing:0;line-height:1}
+.program-cta .pc-sub{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;margin-top:4px;font-weight:600}
+.program-cta .pc-arrow{font-size:22px;font-weight:700}
+.section-label{margin-top:28px;font-size:10px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;font-weight:700;text-align:left;padding-left:4px}
+.athletes{display:grid;gap:10px;margin-top:10px}
 .athlete{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:var(--card);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:var(--text);transition:all .2s;cursor:pointer}
 .athlete:hover{border-color:var(--teal);transform:translateY(-1px);box-shadow:0 4px 18px rgba(72,196,204,.15)}
 .athlete .left{text-align:left}
@@ -41,6 +48,18 @@ h1{font-family:'DM Serif Display',serif;font-size:36px;line-height:1.1;margin:6p
   <h1>Senior Games '26</h1>
   <div class="sub">San Diego · September 27</div>
   <div class="countdown" id="countdown">— days to go</div>
+
+  <a class="program-cta" href="/program/">
+    <div class="pc-row">
+      <div>
+        <div class="pc-label">This Week's Training</div>
+        <div class="pc-sub">Movement Patterns · All Athletes</div>
+      </div>
+      <div class="pc-arrow">→</div>
+    </div>
+  </a>
+
+  <div class="section-label">Athletes</div>
 
   <div class="athletes">
     <a class="athlete" href="/tonnie">
