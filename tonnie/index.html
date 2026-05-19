@@ -274,16 +274,6 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 </div>
 
 <div id="logView">
-  <div class="session-switcher">
-    <button class="session-btn active-a" id="btnSessionA" onclick="switchSession('A')">
-      <span class="s-label">Session A</span>
-      <span class="s-sub">Tuesday · Strength & Power</span>
-    </button>
-    <button class="session-btn" id="btnSessionB" onclick="switchSession('B')">
-      <span class="s-label">Session B</span>
-      <span class="s-sub">Thursday · Metabolic & Conditioning</span>
-    </button>
-  </div>
   <div class="content" id="eventList"></div>
 </div>
 <div id="statusView" style="display:none"><div class="content" id="statusList"></div></div>
@@ -674,8 +664,7 @@ function switchSession(s){
 }
 
 function renderLog(){
-  const events=SESSION_CONFIG[currentSession].events;
-  document.getElementById('eventList').innerHTML=events.map(renderEventCard).join('');
+  document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('');
 }
 
 function renderStatus(){
