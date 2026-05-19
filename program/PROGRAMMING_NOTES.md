@@ -29,6 +29,8 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 - Load = **the athlete's competition KB**, with permission to go ±1-2 KB sizes (1 or 2 sizes heavier for strength stimulus, 1 or 2 sizes lighter for higher-rep capacity).
 - Athletes train this event across a **5-rep to 100+-rep range**. Do not box yourself into the 8-10 rep zone — that range trains nothing specific.
 - Prefer prescriptions that match the comp stimulus (high-rep AMRAP at comp load) or overload (low-rep heavy with 1-2 sizes up).
+- **Heavy goblet work:** prescribe 10–20 rep range, pick a KB heavy enough that the athlete fails (or barely finishes) at 20.
+- **Light goblet volume option (rotate in on future weeks):** max-rep sets with a KB 1–2 sizes LIGHTER than competition pushes total volume without grinding joints. Good fit for hypertrophy weeks or deload-adjacent sessions.
 
 ### Dynamax OH Throw (max reps · 60 sec)
 - Comp ball weight is **10 lb or 20 lb D-ball** (20 lb substitutes for the unavailable 15 lb).
