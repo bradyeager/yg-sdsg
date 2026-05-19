@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0E17">
+<title>SDSG Training Program · Yeager's Gym</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#48C4CC; --teal-dim:#2d8a8f; --teal-glow:rgba(72,196,204,.15);
+  --pink:#EF3295; --pink-dim:#a82268;
+  --purple:#9B6FD4;
+  --bg:#0A0E17; --bg-card:#131824; --bg-card-elev:#1a2030;
+  --border:#1f2738; --border-bright:#2a3349;
+  --text:#e8ecf2; --text-dim:#8a93a6; --text-muted:#5a6478;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  background:var(--bg);color:var(--text);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  font-size:14px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+body{
+  background:
+    radial-gradient(circle at 15% -5%, rgba(72,196,204,.05) 0%, transparent 50%),
+    radial-gradient(circle at 85% 105%, rgba(239,50,149,.05) 0%, transparent 50%),
+    var(--bg);
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+
+/* ============ HEADER ============ */
+.page-header{
+  padding:14px 18px;
+  border-bottom:1px solid var(--border);
+  background:rgba(10,14,23,.92);
+  backdrop-filter:blur(10px);
+  position:sticky;top:0;z-index:100;
+}
+.header-inner{
+  max-width:1400px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.back{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--bg-card);border:1px solid var(--border);
+  color:var(--text-dim);font-size:18px;flex-shrink:0;
+  transition:all .2s;
+}
+.back:hover{border-color:var(--teal);color:var(--teal)}
+.brand-mark{
+  width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,var(--teal),var(--pink));
+  padding:2px;flex-shrink:0;
+  box-shadow:0 4px 18px rgba(72,196,204,.25);
+}
+.brand-mark>span{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;border-radius:8px;
+  background:var(--bg);
+  font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:1px;color:var(--text);
+}
+.brand-text h1{
+  font-family:'Oswald',sans-serif;
+  font-size:16px;font-weight:600;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.brand-text p{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;color:var(--text-dim);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-top:1px;
+}
+.header-meta{
+  display:flex;align-items:center;gap:14px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10.5px;color:var(--text-dim);
+  letter-spacing:.5px;
+}
+.header-meta strong{color:var(--teal);font-weight:600}
+.header-meta .divider{width:1px;height:14px;background:var(--border-bright)}
+#countdown{color:var(--pink);font-weight:600}
+
+/* ============ TABS ============ */
+.tabs{
+  max-width:1400px;margin:0 auto;
+  padding:14px 18px 0;
+  display:flex;gap:6px;
+  border-bottom:1px solid var(--border);
+}
+.tab{
+  font-family:'Oswald',sans-serif;
+  font-size:12px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  background:transparent;border:none;
+  color:var(--text-dim);
+  padding:10px 16px 12px;cursor:pointer;
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  transition:all .2s;
+}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+
+main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
+
+/* ============ WEEK BANNER ============ */
+.week-banner{
+  margin-bottom:24px;
+  padding:18px 20px;
+  background:linear-gradient(135deg, rgba(72,196,204,.08), rgba(239,50,149,.05));
+  border:1px solid var(--teal-dim);
+  border-radius:8px;
+}
+.week-banner h2{
+  font-family:'Oswald',sans-serif;
+  font-size:22px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text);
+}
+.week-banner .week-sub{
+  font-family:'Oswald',sans-serif;
+  font-size:12px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--pink);margin-top:4px;
+}
+.week-banner .week-dates{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;color:var(--text-dim);
+  letter-spacing:.5px;margin-top:6px;
+}
+.week-banner .week-note{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px dashed var(--border-bright);
+  font-size:13px;color:var(--text-dim);line-height:1.6;
+}
+.week-banner .week-note strong{color:var(--text);font-weight:600}
+
+/* ============ EVENTS GRID ============ */
+.events-grid{
+  display:grid;gap:16px;
+  grid-template-columns:1fr;
+}
+@media(min-width:760px){
+  .events-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:1180px){
+  .events-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+.event{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+}
+
+.event-header{
+  padding:11px 14px;
+  background:linear-gradient(180deg, var(--bg-card-elev), var(--bg-card));
+  border-bottom:1px solid var(--teal-dim);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.event-header h3{
+  font-family:'Oswald',sans-serif;
+  font-size:15px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--teal);
+}
+.event-header .event-tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:500;
+  letter-spacing:.5px;
+  color:var(--text-muted);
+}
+
+.patterns{
+  display:flex;flex-direction:column;
+  padding:4px 0;
+}
+
+.pattern{
+  padding:12px 14px;
+  border-bottom:1px solid var(--border);
+}
+.pattern:last-child{border-bottom:none}
+
+.pattern-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:10px;margin-bottom:6px;
+}
+.pattern-name{
+  font-family:'Oswald',sans-serif;
+  font-size:13px;font-weight:600;
+  letter-spacing:.8px;text-transform:uppercase;
+  color:var(--text);
+}
+.pattern-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:600;
+  color:var(--pink);letter-spacing:1px;
+  flex-shrink:0;
+}
+
+.prescription{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;color:var(--teal);
+  font-weight:500;letter-spacing:.3px;
+  margin-bottom:2px;
+}
+.load{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;color:var(--text-dim);
+  letter-spacing:.3px;
+}
+.cues{
+  list-style:none;
+  margin-top:8px;padding:0;
+}
+.cues li{
+  position:relative;
+  padding:2px 0 2px 14px;
+  font-size:12px;color:var(--text-dim);
+  line-height:1.5;
+}
+.cues li::before{
+  content:"—";
+  position:absolute;left:0;
+  color:var(--teal);font-weight:600;
+}
+
+/* ============ ARCHIVE ============ */
+.archive-empty{
+  margin-top:40px;
+  padding:48px 20px;
+  text-align:center;
+  background:var(--bg-card);
+  border:1px dashed var(--border-bright);
+  border-radius:8px;
+}
+.archive-empty h3{
+  font-family:'Oswald',sans-serif;
+  font-size:15px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dim);
+}
+.archive-empty p{
+  margin-top:8px;
+  font-size:12.5px;color:var(--text-muted);
+  font-family:'IBM Plex Mono',monospace;
+}
+
+/* ============ FOOTER ============ */
+.foot{
+  margin-top:36px;text-align:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;letter-spacing:2px;
+  color:var(--text-muted);text-transform:uppercase;
+}
+
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-inner">
+    <div class="brand">
+      <a class="back" href="/" aria-label="Back to athletes">←</a>
+      <div class="brand-mark"><span>YG</span></div>
+      <div class="brand-text">
+        <h1>Senior Games Training</h1>
+        <p>Yeager's Gym · San Diego '26</p>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span>COMP</span><strong>SEPT 27</strong>
+      <span class="divider"></span>
+      <span id="countdown">— DAYS</span>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="current">Current Week</button>
+    <button class="tab" data-tab="archive">Archive</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ CURRENT WEEK ============ -->
+<section id="currentTab">
+
+  <div class="week-banner">
+    <h2>Week of May 18</h2>
+    <div class="week-sub">Foundation · General Prep</div>
+    <div class="week-dates">May 18 – 24, 2026 · Block 1 · Week 2</div>
+    <div class="week-note">
+      <strong>How to use this page.</strong>
+      Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event — or cherry-pick across events. Aim for 4–6 patterns total per session. Warm up first; stop a set short if form breaks down.
+      <br><br>
+      <strong>Prowler push is out this week</strong> — sled is being repaired. It'll return next week.
+    </div>
+  </div>
+
+  <div class="events-grid">
+
+    <!-- ============ KB BOX SQUAT ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>KB Box Squat</h3>
+        <span class="event-tag">AMRAP · time-capped</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Goblet Squat</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">4 × 8–10 reps</div>
+          <div class="load">Moderate–heavy KB held at chest</div>
+          <ul class="cues">
+            <li>Sit between heels, full depth</li>
+            <li>Drive through midfoot, chest tall</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Tempo Box Squat</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">3 × 10 reps · 2-sec pause on box</div>
+          <div class="load">Competition box height · lighter KB</div>
+          <ul class="cues">
+            <li>Sit, pause, stay tight — don't relax</li>
+            <li>Drive up explosive out of the box</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Wall Sit Hold</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">3 × 45 sec</div>
+          <div class="load">Bodyweight · thighs parallel</div>
+          <ul class="cues">
+            <li>Knees stacked over midfoot</li>
+            <li>Slow nasal breathing the whole hold</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ DYNAMAX OH THROW ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>Dynamax OH Throw</h3>
+        <span class="event-tag">Max reps · 60 sec</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">OH Med Ball Slam</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">4 × 10 reps</div>
+          <div class="load">6–8 lb Dynamax ball</div>
+          <ul class="cues">
+            <li>Full extension overhead at the top</li>
+            <li>Catch on the bounce, no pause</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">DB Push Press</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">3 × 12 reps</div>
+          <div class="load">Light-moderate DBs</div>
+          <ul class="cues">
+            <li>Quick dip-drive from the legs</li>
+            <li>Lock out overhead each rep</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Plate OH Carry</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">3 × 30 sec walk</div>
+          <div class="load">Light plate, one or two hands</div>
+          <ul class="cues">
+            <li>Elbows locked, ribs pulled down</li>
+            <li>Steady steps — no shrugging</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ BENCH PRESS ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>Bench Press</h3>
+        <span class="event-tag">Max reps @ load</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Tempo Bench</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">4 × 5 reps · 3-sec eccentric</div>
+          <div class="load">Moderate working weight</div>
+          <ul class="cues">
+            <li>Brief touch-pause at the chest</li>
+            <li>Glutes tight, feet planted</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Floor Press</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">3 × 8 reps</div>
+          <div class="load">Moderate weight</div>
+          <ul class="cues">
+            <li>Pause when elbows touch floor</li>
+            <li>Drive both arms up evenly</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Push-Ups</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">3 × max reps</div>
+          <div class="load">Bodyweight (knees or full)</div>
+          <ul class="cues">
+            <li>Hollow body — no sagging hips</li>
+            <li>Chest fully touches, lock out at top</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ OVERHEAD ARM HANG ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>Overhead Arm Hang</h3>
+        <span class="event-tag">Max hang time</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Active Dead Hang</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">3 × max time (target ~80% of best)</div>
+          <div class="load">Bodyweight on bar</div>
+          <ul class="cues">
+            <li>Shoulders pulled down, not shrugged</li>
+            <li>Hook grip — let the bones hold you</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Scapular Pull-Up</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">3 × 8–10 reps</div>
+          <div class="load">Bodyweight hanging from bar</div>
+          <ul class="cues">
+            <li>Lift body via shoulder blades only</li>
+            <li>Pause 1 sec at the top of each rep</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Farmer Carry</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">3 × 30 sec</div>
+          <div class="load">Moderate-heavy DBs or KBs</div>
+          <ul class="cues">
+            <li>Tall posture, ribs over hips</li>
+            <li>Grip on the handle, not your knuckles</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ MED BALL SLAMS ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>Med Ball Slams</h3>
+        <span class="event-tag">Max slams · 60 sec</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Half-Kneeling Slam</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">4 × 12 each side</div>
+          <div class="load">Comp ball weight</div>
+          <ul class="cues">
+            <li>Drive through the front hip</li>
+            <li>Slam directly between the knees</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Rotational Slam</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">3 × 8 each side</div>
+          <div class="load">Comp ball weight</div>
+          <ul class="cues">
+            <li>Wind up with hip rotation, not arms</li>
+            <li>Catch on the bounce, reset feet</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Wall Slam-to-Catch</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">3 × 15 reps</div>
+          <div class="load">Comp ball, sturdy wall</div>
+          <ul class="cues">
+            <li>Reset each rep — don't rush the rhythm</li>
+            <li>Eyes stay on the target spot</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ JUMP ROPE 60s ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>Jump Rope · 60s</h3>
+        <span class="event-tag">Max singles · 60 sec</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Single-Leg Calf Raise</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">3 × 15 each leg</div>
+          <div class="load">Bodyweight, step or block</div>
+          <ul class="cues">
+            <li>Full stretch at the bottom</li>
+            <li>1-sec pause at the top of each rep</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Pogo Hops</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">3 × 30 sec</div>
+          <div class="load">Bodyweight, no rope</div>
+          <ul class="cues">
+            <li>Stay on the balls of the feet</li>
+            <li>Minimal ground contact — be a spring</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Pace Practice</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">2 × 60 sec</div>
+          <div class="load">Jump rope at test pace</div>
+          <ul class="cues">
+            <li>Focus rhythm, not max effort</li>
+            <li>Restart cleanly if you trip — don't panic</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ STANDING BROAD JUMP ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>Standing Broad Jump</h3>
+        <span class="event-tag">Longest jump</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Box Jump</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">4 × 5 reps</div>
+          <div class="load">Knee-height box (safe landing)</div>
+          <ul class="cues">
+            <li>Soft, quiet landing on the box</li>
+            <li>Step down — never jump down</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Broad Jump Practice</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">3 × 5 jumps</div>
+          <div class="load">Bodyweight, flat surface</div>
+          <ul class="cues">
+            <li>Big arm swing, full hip extension</li>
+            <li>Stick the landing — no extra hop</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Hip Hinge to Jump</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">3 × 8 reps</div>
+          <div class="load">Bodyweight</div>
+          <ul class="cues">
+            <li>Hinge back at the hip — don't squat</li>
+            <li>Explode forward and up</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ CONCEPT ROW 500m ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>Concept Row · 500m</h3>
+        <span class="event-tag">500m for time</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">250m Intervals</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">4 × 250m · 1:1 rest</div>
+          <div class="load">Faster than 500m pace</div>
+          <ul class="cues">
+            <li>Strong catch, fast drive with legs first</li>
+            <li>Recover on the slide back</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">1000m Steady</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">1 × 1000m continuous</div>
+          <div class="load">Slightly slower than 500m pace</div>
+          <ul class="cues">
+            <li>Smooth, even splits — don't fade</li>
+            <li>Long, controlled breaths</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Power 10s</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">5 rounds · 30s hard / 30s easy</div>
+          <div class="load">All-out on the hard intervals</div>
+          <ul class="cues">
+            <li>Hard means every stroke is full effort</li>
+            <li>Easy means recover — actually breathe</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 300 YD SHUTTLE ============ -->
+    <section class="event">
+      <header class="event-header">
+        <h3>300 Yd Shuttle Run</h3>
+        <span class="event-tag">6 × 50yd for time</span>
+      </header>
+      <div class="patterns">
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">50 Yd Shuttle × 6</div>
+            <div class="pattern-num">01</div>
+          </div>
+          <div class="prescription">1 × 6 shuttles · walk-back rest</div>
+          <div class="load">Pace it slightly under test speed</div>
+          <ul class="cues">
+            <li>Plant foot past the line, not on it</li>
+            <li>Stay low through every turn</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">100 Yd Build-Up</div>
+            <div class="pattern-num">02</div>
+          </div>
+          <div class="prescription">4 × 100 yd · progressive speed</div>
+          <div class="load">Bodyweight, open grass or track</div>
+          <ul class="cues">
+            <li>Start jog → finish near-sprint</li>
+            <li>Walk back to fully recover</li>
+          </ul>
+        </article>
+        <article class="pattern">
+          <div class="pattern-head">
+            <div class="pattern-name">Lateral Shuffle + Sprint</div>
+            <div class="pattern-num">03</div>
+          </div>
+          <div class="prescription">3 × 20 yd each direction</div>
+          <div class="load">Bodyweight</div>
+          <ul class="cues">
+            <li>Stay low, push off the outside foot</li>
+            <li>Explode straight ahead out of the shuffle</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+  </div><!-- /events-grid -->
+
+</section><!-- /currentTab -->
+
+<!-- ============ ARCHIVE ============ -->
+<section id="archiveTab" hidden>
+  <div class="archive-empty">
+    <h3>No Archived Weeks Yet</h3>
+    <p>Past weeks will appear here once a new week is published.</p>
+  </div>
+</section>
+
+<div class="foot">Yeager's Gym · SDSG '26</div>
+
+</main>
+
+<script>
+// Countdown to comp
+(function(){
+  const comp = new Date('2026-09-27T00:00:00');
+  const ms = comp - new Date();
+  const days = Math.max(0, Math.ceil(ms / 86400000));
+  document.getElementById('countdown').textContent = days + ' DAYS';
+})();
+
+// Tab toggle
+(function(){
+  const tabs = document.querySelectorAll('.tab');
+  const panels = {
+    current: document.getElementById('currentTab'),
+    archive: document.getElementById('archiveTab'),
+  };
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabs.forEach(t => t.classList.toggle('active', t === btn));
+      Object.entries(panels).forEach(([k, el]) => {
+        el.hidden = (k !== target);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
