@@ -312,16 +312,6 @@ body.big-print{zoom:2;-moz-transform:scale(2);-moz-transform-origin:0 0;max-widt
 </div>
 
 <div id="logView">
-  <div class="session-switcher">
-    <button class="session-btn active-a" id="btnSessionA" onclick="switchSession('A')">
-      <span class="s-label">Session A</span>
-      <span class="s-sub">Strength & Power</span>
-    </button>
-    <button class="session-btn" id="btnSessionB" onclick="switchSession('B')">
-      <span class="s-label">Session B</span>
-      <span class="s-sub">Metabolic & Conditioning</span>
-    </button>
-  </div>
   <div class="content" id="eventList"></div>
 </div>
 <div id="statusView" style="display:none"><div class="content" id="statusList"></div></div>
@@ -766,7 +756,7 @@ function switchSession(s){
   renderLog();
 }
 
-function renderLog(){ document.getElementById('eventList').innerHTML=SESSION_CONFIG[currentSession].events.map(renderEventCard).join('') }
+function renderLog(){ document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('') }
 
 function renderStatus(){
   document.getElementById('statusList').innerHTML=EVENT_ORDER.map(ev=>{

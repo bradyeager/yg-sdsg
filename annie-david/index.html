@@ -287,20 +287,6 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 </div>
 
 <div id="logView">
-  <div class="session-switcher">
-    <button class="session-btn" id="btnSessionA" onclick="switchSession('A')">
-      <span class="s-label">Week A</span>
-      <span class="s-sub">Strength &amp; Power</span>
-    </button>
-    <button class="session-btn" id="btnSessionB" onclick="switchSession('B')">
-      <span class="s-label">Week B</span>
-      <span class="s-sub">Conditioning</span>
-    </button>
-    <button class="session-btn active-all" id="btnSessionAll" onclick="switchSession('all')">
-      <span class="s-label">All</span>
-      <span class="s-sub">Full Session</span>
-    </button>
-  </div>
   <div class="content" id="eventList"></div>
 </div>
 <div id="statusView" style="display:none"><div class="content" id="statusList"></div></div>
@@ -697,7 +683,7 @@ function renderEventCard(ev){
   </div>`;
 }
 
-function renderLog(){const evs=SESSION_CONFIG[currentSession].events;document.getElementById('eventList').innerHTML=evs.map(renderEventCard).join('')}
+function renderLog(){document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('')}
 
 function renderStatus(){
   const a=ATHLETES[currentAthlete];
