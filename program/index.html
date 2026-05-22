@@ -195,6 +195,12 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
   letter-spacing:.3px;
   margin-top:3px;
 }
+.block-pill .b-desc{
+  margin-top:7px;padding-top:7px;
+  border-top:1px dashed var(--border-bright);
+  font-size:11px;line-height:1.45;color:var(--text-dim);
+}
+.block-pill.current .b-desc{color:var(--text)}
 .block-pill.current .b-now{
   position:absolute;top:-7px;right:8px;
   font-family:'Oswald',sans-serif;
@@ -231,10 +237,10 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
 .event-header:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
 .event-header .eh-left{min-width:0}
 .event-header h3{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#04212a}
-.event-header .eh-meta{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
-.event-header .event-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.6px;color:rgba(4,33,42,.78)}
+.event-header .eh-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.event-header .event-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.6px;color:rgba(4,33,42,.78);display:block;margin-top:4px}
 .type-badge{display:inline-flex;align-items:center;gap:4px;font-family:'Oswald',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:11px;background:var(--bg);color:var(--teal);white-space:nowrap}
-.type-badge.sprint{color:#ffd84a;box-shadow:inset 0 0 0 1px rgba(250,204,21,.5)}
+.type-badge.sprint{color:var(--pink);box-shadow:inset 0 0 0 1px rgba(239,50,149,.55)}
 .type-badge.marathon{color:#7fe0e6;box-shadow:inset 0 0 0 1px var(--teal-dim)}
 .event-header .expand{flex-shrink:0;display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(4,33,42,.62);text-transform:uppercase}
 .event-header .expand .ico{font-size:16px;color:#04212a;line-height:1}
@@ -246,7 +252,9 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
 .pattern-body{padding:11px 12px}
 .prescription{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--pink);font-weight:700;letter-spacing:.3px;line-height:1.4}
 .load{margin-top:8px;padding:7px 10px;background:rgba(72,196,204,.07);border-left:3px solid var(--teal-dim);border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:.2px;line-height:1.5}
-.cues{list-style:none;margin-top:9px;padding:6px 10px 6px 12px;border-left:3px solid var(--teal-dim);background:rgba(72,196,204,.055);border-radius:4px}
+.cues{margin-top:9px;padding:8px 10px 8px 12px;border-left:3px solid var(--teal-dim);background:rgba(72,196,204,.055);border-radius:4px}
+.cues-label{font-family:'Oswald',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.cues ul{list-style:none;margin:0;padding:0}
 .cues li{position:relative;padding:5px 0 5px 16px;font-size:12px;color:var(--text);line-height:1.5}
 .cues li+li{border-top:1px dashed var(--border)}
 .cues li::before{content:"\25B8";position:absolute;left:0;top:5px;color:var(--teal);font-size:10px}
@@ -339,21 +347,25 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
         <div class="b-label">Block 1</div>
         <div class="b-name">Foundation</div>
         <div class="b-dates">May 11 – Jun 14</div>
+        <div class="b-desc">Build the base — clean technique, joint prep, and work capacity before the heavy lifting starts.</div>
       </div>
       <div class="block-pill">
         <div class="b-label">Block 2</div>
         <div class="b-name">Hypertrophy</div>
         <div class="b-dates">Jun 15 – Jul 26</div>
+        <div class="b-desc">Add muscle — higher reps and volume to grow the engine that drives every event.</div>
       </div>
       <div class="block-pill">
         <div class="b-label">Block 3</div>
         <div class="b-name">Strength &amp; Power</div>
         <div class="b-dates">Jul 27 – Aug 30</div>
+        <div class="b-desc">Turn muscle into force — heavier loads, lower reps, explosive intent on every rep.</div>
       </div>
       <div class="block-pill">
         <div class="b-label">Block 4</div>
         <div class="b-name">Peak + Taper</div>
         <div class="b-dates">Aug 31 – Sep 27</div>
+        <div class="b-desc">Sharpen and rest — competition-specific work, then back off the volume so you arrive fresh.</div>
       </div>
       <div class="block-pill comp">
         <div class="b-trophy">🏆</div>
@@ -435,7 +447,7 @@ function patternHTML(p, i){
   const cues = (p.cues||[]).map(c=>`<li>${c}</li>`).join('');
   return `<div class="pattern">
     <div class="pattern-tab"><span class="pattern-name">${p.name}</span><span class="pattern-num">${num}</span></div>
-    <div class="pattern-body"><div class="prescription">${p.rx}</div>${load}<ul class="cues">${cues}</ul></div>
+    <div class="pattern-body"><div class="prescription">${p.rx}</div>${load}<div class="cues"><div class="cues-label">Coaches' Notes</div><ul>${cues}</ul></div></div>
   </div>`;
 }
 function renderGrid(){
@@ -443,7 +455,7 @@ function renderGrid(){
   grid.innerHTML = EVENTS.map((e,ei)=>`
     <section class="event">
       <header class="event-header" data-ev="${ei}" role="button" tabindex="0" aria-label="Open ${e.event} full screen">
-        <div class="eh-left"><h3>${e.event}</h3><div class="eh-meta">${typeBadge(e.type)}<span class="event-tag">${e.tag}</span></div></div>
+        <div class="eh-left"><div class="eh-title-row"><h3>${e.event}</h3>${typeBadge(e.type)}</div><span class="event-tag">${e.tag}</span></div>
         <span class="expand"><span class="ico">&#9974;</span> Tap</span>
       </header>
       <div class="patterns">${e.patterns.map(patternHTML).join('')}</div>
