@@ -58,6 +58,8 @@ _holding in Women 70-74 (3rd year) — same field as teammate Tonnie now._
 
 ### ⬆ Rising in to Women 70-74 (new competition)
 
+- **Tonnie Dahl** — `CLIMBING` · 5🥇 / 20 medals — _confirmed aging up into 70-74 for 2026_  
+  Prowler Push [S22, G23, S24, S25]; KB Box Squat [S22, G23, S24, S25]; Bench Press [B22, G24, G25]; Med Ball Slams [B23, G24, S25]; Concept Row [B23, B25]; 300yd Shuttle [S22, B23, B24, S25]
 - **Nancy Daigle** — `WATCH` · 10🥇 / 15 medals — _2 straight years in 65-69 — near the top of the band_  
   Prowler Push [G24, G25]; KB Box Squat [G24, G25]; Dynamax OH Throw [G24, G25]; Bench Press [G24, S25]; Med Ball Slams [B24, G25]; Jump Rope [B24]; Standing Broad Jump [B24, B25]; Concept Row [G24, G25]
 - **Karilyn Greenwood** — `WATCH` · 5🥇 / 15 medals — _2 straight years in 65-69 — near the top of the band_  
