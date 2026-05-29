@@ -152,6 +152,16 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .podium-row .place.b{color:#CD9B6A}
 .podium-row .who{flex:1;color:var(--text-secondary);font-weight:500}
 .podium-row .sc{font-weight:700;color:#fff}
+.incoming{background:rgba(239,50,149,.08);border:1px solid var(--border-pink);border-radius:10px;padding:9px 11px;margin-bottom:10px}
+.incoming .ph{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--pink);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.incoming .ph::before{content:"⬆";font-size:10px}
+.incoming-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;font-size:11.5px;padding:4px 0;border-bottom:1px solid rgba(239,50,149,.08)}
+.incoming-row:last-child{border-bottom:0}
+.incoming-row .who{flex:1;color:var(--text-secondary);font-weight:500;min-width:0}
+.incoming-row .nt{display:block;font-size:9.5px;color:var(--text-muted);margin-top:2px;font-weight:500;line-height:1.3}
+.incoming-row .sc{font-weight:700;color:#fff;flex-shrink:0}
+.incoming-empty{font-size:10px;color:var(--text-muted);font-style:italic;padding:2px 0}
+
 
 .input-row{display:flex;gap:6px;align-items:stretch}
 .input-row input,.input-row select{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:11px 12px;font-size:14px;font-weight:600;color:#fff;background:var(--card-elevated);min-width:0}
@@ -468,6 +478,50 @@ const TONNIE = {
     row:[['GOLD','Green, M.','2:21'],['SILVER','Bolduc, C.','2:28'],['BRONZE','Garrett, S.','2:35']],
     shuttle:[['GOLD','Green, M.','1:52'],['SILVER','—','—'],['BRONZE','—','—']],
   },
+  incoming: {
+    // 2025 W 65-69 medalists who may age up to W 70-74 for 2026.
+    // [name, value, note]
+    // Brad reviews and prunes — only those whose 70th birthday falls before Sept 27, 2026 actually compete here.
+    prowler: [
+      ['Daigle, N.', '0:15', '2025 W65–69 Gold'],
+      ['Matthews, J.', '0:17', '2025 W65–69 Bronze']
+    ],
+    kbsquat: [
+      ['Daigle, N.', '82', '2025 W65–69 Gold @ 16kg (heavier — reps not directly comparable to 12kg)'],
+      ['Matthews, J.', '70', '2025 W65–69 Bronze @ 16kg']
+    ],
+    dynamax: [
+      ['Daigle, N.', '420', '2025 W65–69 Gold'],
+      ['Singleton, D.', '339', '2025 W65–69 Silver'],
+      ['Brown, S.', '336', '2025 W65–69 Bronze']
+    ],
+    bench: [
+      ['Daigle, N.', '48', '2025 W65–69 Silver @ 50lb (heavier — they used 50lb, 70–74 uses 45lb)'],
+      ['Amaral, J.', '35', '2025 W65–69 Bronze @ 50lb']
+    ],
+    hang: [
+      ['Amaral, J.', '2:33', '2025 W65–69 Gold']
+    ],
+    slams: [],
+    jumprope: [
+      ['Newton, M.', '167', '2025 W65–69 Gold'],
+      ['Starksen, M.', '166', '2025 W65–69 Silver'],
+      ['Singleton, D.', '156', '2025 W65–69 Silver (tie)']
+    ],
+    broadjump: [
+      ['Singleton, D.', '71', '2025 W65–69 Gold'],
+      ['Matthews, J.', '61', '2025 W65–69 Silver'],
+      ['Daigle, N.', '58', '2025 W65–69 Bronze']
+    ],
+    row: [
+      ['Daigle, N.', '1:54', '2025 W65–69 Gold'],
+      ['Matthews, J.', '2:08', '2025 W65–69 Silver']
+    ],
+    shuttle: [
+      ['Matthews, J.', '1:20', '2025 W65–69 Gold'],
+      ['Newton, M.', '1:30', '2025 W65–69 Bronze']
+    ]
+  },
   baselines: [
     {event:'prowler', value:'0:16', date:'2025-09-21', note:'2025 comp · Silver in 65–69'},
     {event:'kbsquat', value:'76', date:'2025-09-21', note:'2025 comp @ 16kg (65–69 div)'},
@@ -651,6 +705,19 @@ function medalIcon(level){
   const label = level.charAt(0).toUpperCase() + level.slice(1);
   return `<span class="medal-trophy medal-${level}" title="${label} medal pace">${icon}</span>`;
 }
+
+function _renderIncomingBlock(ev){
+  const list = TONNIE.incoming?.[ev] || [];
+  if(!list.length) return '';
+  const rows = list.map(r => `<div class="incoming-row">
+    <span class="who">${r[0]}<span class="nt">${r[2]}</span></span>
+    <span class="sc">${r[1]}</span>
+  </div>`).join('');
+  return `<div class="incoming">
+    <div class="ph">Incoming Competitors · Aging In</div>
+    ${rows}
+  </div>`;
+}
 // === END medal helpers ===
 
 
@@ -791,6 +858,7 @@ function renderEventCard(ev){
       <div class="ph">2025 Podium · Women 70–74</div>
       ${podium.map(p=>`<div class="podium-row"><span class="place ${p[0]==='GOLD'?'g':p[0]==='SILVER'?'s':'b'}">${p[0]}</span><span class="who">${p[1]}</span><span class="sc">${p[2]}</span></div>`).join('')}
     </div>
+    ${_renderIncomingBlock(ev)}
     ${_renderTimerBlock(ev)}
     <div class="input-row">
       ${inputCtl}
