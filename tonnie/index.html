@@ -223,6 +223,19 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .event-card .input-wrap{position:relative}
 .time-preview{display:block;font-size:10px;color:var(--text-muted);margin-top:4px;font-weight:600;letter-spacing:.3px;min-height:12px}
 .time-preview-warn{color:var(--yellow)}
+/* ===== TIMER WIDGET ===== */
+.timer-block{margin:10px 0 10px;background:rgba(0,0,0,.25);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px}
+.timer-block .t-label{font-size:9px;font-weight:700;letter-spacing:1.2px;color:var(--text-muted);text-transform:uppercase;flex-shrink:0;min-width:55px}
+.timer-block .t-display{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;line-height:1;flex:1;text-align:center;letter-spacing:.5px;font-variant-numeric:tabular-nums}
+.timer-block.warn .t-display{color:var(--yellow)}
+.timer-block.done .t-display{color:var(--pink);animation:t-pulse .5s ease 3}
+@keyframes t-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.timer-btn{background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;font-family:inherit;font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:8px 14px;border-radius:8px;cursor:pointer;border:0;box-shadow:0 3px 10px rgba(72,196,204,.25);flex-shrink:0}
+.timer-btn.stop{background:linear-gradient(135deg,#3a4558,#232E3D);box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.timer-btn.reset{background:transparent;border:1px solid var(--border-strong);box-shadow:none;color:var(--text-secondary)}
+.timer-btn:active{transform:scale(.96)}
+.timer-btn:disabled{opacity:.5;cursor:not-allowed}
+
 </style>
 </head>
 <body>
@@ -311,6 +324,120 @@ const EVENTS = {
   shuttle:   {name:'300 Yd Shuttle Run',     unit:'time',  lowerBetter:true},
 };
 const EVENT_ORDER = ['prowler','kbsquat','dynamax','bench','hang','slams','jumprope','broadjump','row','shuttle'];
+// ===== TIMER CONFIG =====
+// countup = stopwatch, no limit | countdown = N seconds, beep at zero
+const TIMER_CONFIG = {
+  prowler:  {type:'countup',   label:'Push Timer'},
+  hang:     {type:'countup',   label:'Hang Timer'},
+  row:      {type:'countup',   label:'500m Timer'},
+  shuttle:  {type:'countup',   label:'300yd Timer'},
+  slams:    {type:'countdown', seconds:60, label:'60s Slams'},
+  jumprope: {type:'countdown', seconds:60, label:'60s Rope'}
+};
+// kbsquat, bench, dynamax, broadjump — no timer
+
+// Per-event timer state, isolated so each card runs independently
+const _timerState = {};
+
+function _timerEl(ev, part){ return document.getElementById('tmr_'+part+'_'+ev); }
+function _formatTimerSec(s){
+  const m = Math.floor(s/60), sec = s % 60;
+  return m + ':' + (sec<10?'0':'') + sec;
+}
+function _beep(){
+  try{
+    const ctx = window._audioCtx || (window._audioCtx = new (window.AudioContext||window.webkitAudioContext)());
+    if(ctx.state === 'suspended') ctx.resume();
+    for(let i=0;i<3;i++){
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0, ctx.currentTime + i*0.25);
+      gain.gain.linearRampToValueAtTime(0.15, ctx.currentTime + i*0.25 + 0.01);
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i*0.25 + 0.18);
+      osc.start(ctx.currentTime + i*0.25);
+      osc.stop(ctx.currentTime + i*0.25 + 0.2);
+    }
+  }catch(e){ /* audio not available, silent fail */ }
+}
+function startTimer(ev){
+  const cfg = TIMER_CONFIG[ev]; if(!cfg) return;
+  const state = _timerState[ev] = _timerState[ev] || {};
+  if(state.intervalId) return; // already running
+  const block = _timerEl(ev,'block');
+  if(block){ block.classList.remove('warn','done'); }
+  if(cfg.type === 'countup'){
+    state.elapsed = state.elapsed || 0;
+    state.lastTick = Date.now();
+    state.intervalId = setInterval(()=>{
+      const now = Date.now();
+      state.elapsed += Math.round((now - state.lastTick)/1000);
+      state.lastTick = now;
+      const disp = _timerEl(ev,'display');
+      if(disp) disp.textContent = _formatTimerSec(state.elapsed);
+    }, 250);
+  } else {
+    if(state.remaining == null) state.remaining = cfg.seconds;
+    state.lastTick = Date.now();
+    state.intervalId = setInterval(()=>{
+      const now = Date.now();
+      const delta = Math.round((now - state.lastTick)/1000);
+      if(delta >= 1){
+        state.remaining = Math.max(0, state.remaining - delta);
+        state.lastTick = now;
+        const disp = _timerEl(ev,'display');
+        if(disp) disp.textContent = _formatTimerSec(state.remaining);
+        const b = _timerEl(ev,'block');
+        if(b){
+          if(state.remaining <= 10 && state.remaining > 0) b.classList.add('warn');
+          if(state.remaining === 0){
+            b.classList.remove('warn');
+            b.classList.add('done');
+            _beep();
+            stopTimer(ev);
+          }
+        }
+      }
+    }, 250);
+  }
+  const startBtn = _timerEl(ev,'start');
+  const stopBtn  = _timerEl(ev,'stop');
+  if(startBtn) startBtn.style.display = 'none';
+  if(stopBtn)  stopBtn.style.display  = 'inline-block';
+}
+function stopTimer(ev){
+  const state = _timerState[ev]; if(!state) return;
+  if(state.intervalId){ clearInterval(state.intervalId); state.intervalId = null; }
+  const startBtn = _timerEl(ev,'start');
+  const stopBtn  = _timerEl(ev,'stop');
+  if(startBtn) startBtn.style.display = 'inline-block';
+  if(stopBtn)  stopBtn.style.display  = 'none';
+}
+function resetTimer(ev){
+  stopTimer(ev);
+  const cfg = TIMER_CONFIG[ev]; if(!cfg) return;
+  const state = _timerState[ev] = _timerState[ev] || {};
+  if(cfg.type === 'countup'){ state.elapsed = 0; }
+  else { state.remaining = cfg.seconds; }
+  const disp = _timerEl(ev,'display');
+  if(disp) disp.textContent = _formatTimerSec(cfg.type==='countup' ? 0 : cfg.seconds);
+  const b = _timerEl(ev,'block');
+  if(b) b.classList.remove('warn','done');
+}
+function _renderTimerBlock(ev){
+  const cfg = TIMER_CONFIG[ev]; if(!cfg) return '';
+  const initSec = cfg.type==='countup' ? 0 : cfg.seconds;
+  return `<div class="timer-block" id="tmr_block_${ev}">
+    <span class="t-label">${cfg.label}</span>
+    <span class="t-display" id="tmr_display_${ev}">${_formatTimerSec(initSec)}</span>
+    <button class="timer-btn" id="tmr_start_${ev}" onclick="startTimer('${ev}')">Start</button>
+    <button class="timer-btn stop" id="tmr_stop_${ev}" onclick="stopTimer('${ev}')" style="display:none">Stop</button>
+    <button class="timer-btn reset" id="tmr_reset_${ev}" onclick="resetTimer('${ev}')">Reset</button>
+  </div>`;
+}
+// ===== END TIMER WIDGET =====
+
 
 const SESSION_CONFIG = {
   A: { label:'Session A', day:'Tuesday', theme:'Strength & Power',
@@ -664,6 +791,7 @@ function renderEventCard(ev){
       <div class="ph">2025 Podium · Women 70–74</div>
       ${podium.map(p=>`<div class="podium-row"><span class="place ${p[0]==='GOLD'?'g':p[0]==='SILVER'?'s':'b'}">${p[0]}</span><span class="who">${p[1]}</span><span class="sc">${p[2]}</span></div>`).join('')}
     </div>
+    ${_renderTimerBlock(ev)}
     <div class="input-row">
       ${inputCtl}
       <button id="btn_${ev}" onclick="logScore('${ev}')">Log</button>
