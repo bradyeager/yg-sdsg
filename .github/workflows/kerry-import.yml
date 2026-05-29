@@ -1,0 +1,23 @@
+name: Kerry Strong app import
+
+# Runs only when the importer or CSV changes (or on manual dispatch).
+# Idempotent — script deletes prior 'Strong app import' rows before inserting.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/kerry-import.js'
+      - 'tools/Kerry_strong_workouts.csv'
+      - '.github/workflows/kerry-import.yml'
+  workflow_dispatch:
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run import
+        run: node tools/kerry-import.js
