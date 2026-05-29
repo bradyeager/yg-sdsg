@@ -233,6 +233,8 @@ input,select{font-family:inherit;outline:none;border:none;background:transparent
 .timer-block .t-display{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;line-height:1;flex:1;text-align:center;letter-spacing:.5px;font-variant-numeric:tabular-nums}
 .timer-block.warn .t-display{color:var(--yellow)}
 .timer-block.done .t-display{color:var(--pink);animation:t-pulse .5s ease 3}
+.timer-block.prep .t-display{color:var(--pink)}
+.timer-block.prep .t-label{color:var(--pink)}
 @keyframes t-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .timer-btn{background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;font-family:inherit;font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:8px 14px;border-radius:8px;cursor:pointer;border:0;box-shadow:0 3px 10px rgba(72,196,204,.25);flex-shrink:0}
 .timer-btn.stop{background:linear-gradient(135deg,#3a4558,#232E3D);box-shadow:0 3px 10px rgba(0,0,0,.3)}
@@ -373,36 +375,74 @@ function _beep(){
     }
   }catch(e){ /* audio not available, silent fail */ }
 }
+function _beepShort(){
+  try{
+    const ctx = window._audioCtx || (window._audioCtx = new (window.AudioContext||window.webkitAudioContext)());
+    if(ctx.state === 'suspended') ctx.resume();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = 520;
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.01);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.10);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.12);
+  }catch(e){}
+}
 function startTimer(ev){
   const cfg = TIMER_CONFIG[ev]; if(!cfg) return;
   const state = _timerState[ev] = _timerState[ev] || {};
   if(state.intervalId) return; // already running
   const block = _timerEl(ev,'block');
-  if(block){ block.classList.remove('warn','done'); }
-  // Anchor on wall-clock; previous bug: 250ms ticks with Math.round((now-lastTick)/1000)
-  // always rounded to 0 because lastTick was reset each tick.
+  const lbl   = block ? block.querySelector('.t-label') : null;
+  const disp  = _timerEl(ev,'display');
+  if(block){ block.classList.remove('warn','done','prep'); }
+  // 10-sec "Get Ready" prep, then main timer. Wall-clock anchored to avoid drift.
+  const PREP_SEC = 10;
   const anchorMs = Date.now();
   const baseElapsed = state.elapsed || 0;
   if(cfg.type !== 'countup' && state.remaining == null) state.remaining = cfg.seconds;
   const baseRemaining = state.remaining;
+  state.phase = 'prep';
+  state.mainAnchor = 0;
+  state._lastPrepBeep = -1;
+  if(block) block.classList.add('prep');
+  if(lbl)   lbl.textContent = 'Get Ready';
+  if(disp)  disp.textContent = '0:' + String(PREP_SEC).padStart(2,'0');
   state.intervalId = setInterval(()=>{
-    const secs = Math.floor((Date.now() - anchorMs)/1000);
-    if(cfg.type === 'countup'){
-      state.elapsed = baseElapsed + secs;
-      const disp = _timerEl(ev,'display');
-      if(disp) disp.textContent = _formatTimerSec(state.elapsed);
+    if(state.phase === 'prep'){
+      const elapsedSec = Math.floor((Date.now() - anchorMs)/1000);
+      const remain = PREP_SEC - elapsedSec;
+      if(remain <= 0){
+        state.phase = 'main';
+        state.mainAnchor = Date.now();
+        if(block) block.classList.remove('prep');
+        if(lbl)   lbl.textContent = cfg.label;
+        _beep();   // GO!
+        return;
+      }
+      if(disp) disp.textContent = '0:' + String(remain).padStart(2,'0');
+      if(remain <= 3 && remain !== state._lastPrepBeep){
+        state._lastPrepBeep = remain;
+        _beepShort();
+      }
     } else {
-      state.remaining = Math.max(0, baseRemaining - secs);
-      const disp = _timerEl(ev,'display');
-      if(disp) disp.textContent = _formatTimerSec(state.remaining);
-      const b = _timerEl(ev,'block');
-      if(b){
-        if(state.remaining <= 10 && state.remaining > 0) b.classList.add('warn');
-        if(state.remaining === 0){
-          b.classList.remove('warn');
-          b.classList.add('done');
-          _beep();
-          stopTimer(ev);
+      const secs = Math.floor((Date.now() - state.mainAnchor)/1000);
+      if(cfg.type === 'countup'){
+        state.elapsed = baseElapsed + secs;
+        if(disp) disp.textContent = _formatTimerSec(state.elapsed);
+      } else {
+        state.remaining = Math.max(0, baseRemaining - secs);
+        if(disp) disp.textContent = _formatTimerSec(state.remaining);
+        if(block){
+          if(state.remaining <= 10 && state.remaining > 0) block.classList.add('warn');
+          if(state.remaining === 0){
+            block.classList.remove('warn');
+            block.classList.add('done');
+            _beep();
+            stopTimer(ev);
+          }
         }
       }
     }
@@ -415,6 +455,21 @@ function startTimer(ev){
 function stopTimer(ev){
   const state = _timerState[ev]; if(!state) return;
   if(state.intervalId){ clearInterval(state.intervalId); state.intervalId = null; }
+  const cfg = TIMER_CONFIG[ev];
+  const b = _timerEl(ev,'block');
+  if(b){
+    b.classList.remove('prep');
+    const lbl = b.querySelector('.t-label');
+    if(lbl && cfg) lbl.textContent = cfg.label;
+  }
+  // If stopped during prep, snap back to clean baseline
+  if(state.phase === 'prep' && cfg){
+    if(cfg.type === 'countup'){ state.elapsed = 0; }
+    else { state.remaining = cfg.seconds; }
+    const disp = _timerEl(ev,'display');
+    if(disp) disp.textContent = _formatTimerSec(cfg.type==='countup' ? 0 : cfg.seconds);
+  }
+  state.phase = null;
   const startBtn = _timerEl(ev,'start');
   const stopBtn  = _timerEl(ev,'stop');
   if(startBtn) startBtn.style.display = 'inline-block';
@@ -424,12 +479,17 @@ function resetTimer(ev){
   stopTimer(ev);
   const cfg = TIMER_CONFIG[ev]; if(!cfg) return;
   const state = _timerState[ev] = _timerState[ev] || {};
+  state.phase = null;
   if(cfg.type === 'countup'){ state.elapsed = 0; }
   else { state.remaining = cfg.seconds; }
   const disp = _timerEl(ev,'display');
   if(disp) disp.textContent = _formatTimerSec(cfg.type==='countup' ? 0 : cfg.seconds);
   const b = _timerEl(ev,'block');
-  if(b) b.classList.remove('warn','done');
+  if(b){
+    b.classList.remove('warn','done','prep');
+    const lbl = b.querySelector('.t-label');
+    if(lbl) lbl.textContent = cfg.label;
+  }
 }
 function _renderTimerBlock(ev){
   const cfg = TIMER_CONFIG[ev]; if(!cfg) return '';
