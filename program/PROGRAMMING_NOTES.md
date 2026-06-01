@@ -15,7 +15,7 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 
 ## Equipment Constraints
 
-- **Sled / Prowler:** OUT until further notice. Sled is being repaired. Do not include the Prowler Push event in the program. When the sled is back, Brad will re-enable it explicitly.
+- **Sled / Prowler:** BACK IN as of Week 3 (Jun 7, 2026). Sled is repaired. Include Prowler Push in the program. Do not use as a competition test until Brad says so — program it as sled work only until further notice.
 - **D-balls only for slams.** Stick to D-balls (slam balls). Do NOT prescribe Dynamax balls for slamming patterns. We *do* have Dynamax balls (8 lb, 14 lb) but they have different size, feel, and bounce — not suitable for slam work.
 - **No wall slams.** No sturdy throwing surface available.
 - **No rotational slams.** No space.
@@ -25,6 +25,12 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 
 ## Per-Event Rules
 
+### Prowler Push (50 yd for time)
+- Comp load: **2 × 25 lb plates (women) / 2 × 45 lb plates (men)**.
+- Do NOT badge as a competition test until Brad explicitly authorizes. Program as sled training work only.
+- Prescription options: timed comp-distance pushes at comp load; heavy overload (add 25 lb per side) for short 25 yd strength pushes; fast-and-light (drop one plate) for acceleration mechanics.
+- Cues: body angle ~45°, arms locked (push through the trunk — don't bend elbows to absorb), long steps with full hip extension, drive through the toes.
+
 ### KB Box Squat (AMRAP, time-capped)
 - Load = **the athlete's competition KB**, with permission to go ±1-2 KB sizes (1 or 2 sizes heavier for strength stimulus, 1 or 2 sizes lighter for higher-rep capacity).
 - Athletes train this event across a **5-rep to 100+-rep range**. Do not box yourself into the 8-10 rep zone — that range trains nothing specific.
@@ -32,9 +38,11 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 - **Heavy goblet work:** prescribe 10–20 rep range, pick a KB heavy enough that the athlete fails (or barely finishes) at 20.
 - **Light goblet volume option (rotate in on future weeks):** max-rep sets with a KB 1–2 sizes LIGHTER than competition pushes total volume without grinding joints. Good fit for hypertrophy weeks or deload-adjacent sessions.
 
-### Dynamax OH Throw (max reps · 60 sec)
-- Comp ball weight is **10 lb or 20 lb D-ball** (20 lb substitutes for the unavailable 15 lb).
-- Use D-balls only — see equipment constraints.
+### Dynamax OH Throw (3 attempts for distance)
+- Comp ball weight: **4 lb for women / 8 lb for men** (official Dynamax balls).
+- Train with the comp-weight Dynamax ball. Heavier D-ball overload is permitted as an accessory pattern but always note the ball weight explicitly.
+- Event is 3 max-effort overhead backward throws for distance — train the exact movement pattern. No substitutes.
+- Accessory patterns: hip-hinge loading (KB deadlift), plyo hip extension (box jump → throw), or lat/shoulder activation work to reinforce the overhead position.
 
 ### Bench Press (max reps @ load)
 - This is a **max-rep AMRAP event**. Training stimulus must match: high reps to or near failure at the comp load.
@@ -47,6 +55,7 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 
 ### Med Ball Slams (max slams · 60 sec)
 - **No wall slams. No rotational slams.** Replace with standing slams, half-kneeling slams, AMRAP comp practice, or other vertical slam variations.
+- **D-balls only.** See equipment constraints.
 
 ### Jump Rope · 60s (max singles · 60 sec)
 - Calf raise work: prescribe **doubled rep ranges with added weight**. Include both single-leg and double-leg variations.
@@ -67,9 +76,8 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 
 - **YG logo** must stay at the top of the page (not just text "YG").
 - **Week banner** has room for a training-block timeline. Show all training blocks from now through comp day (Sept 27, 2026) as small text blocks, with the current block highlighted.
-- Layout = single scrolling page, event-grouped, 9 events × 3 patterns = 27 patterns. (8 events × 3 = 24 if sled is restored and prowler is one of them... currently 9 events without prowler.)
-- Sled event count: while prowler is out, 9 events; when it returns, 10.
-- Current Week / Archive tabs remain. Archive empty state OK until first archived week.
+- Layout = single scrolling page, event-grouped, **10 events × 3 patterns = 30 patterns** (Prowler is back).
+- Current Week / Archive tabs remain.
 
 ---
 
