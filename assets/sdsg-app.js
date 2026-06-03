@@ -372,9 +372,14 @@ function renderProgress(){
   var dash=EVENT_ORDER.map(function(ev){
     var cfg=EVENTS[ev], best=bestScore(ev), athlete=A();
     var pod=athlete.podium&&athlete.podium[ev];
-    var gold=(pod&&pod[0]&&pod[0][2])||'—';
-    return '<div class="dash-row"><div class="info"><div class="nm">'+cfg.name+'</div><div class="sb">'+((athlete.loads&&athlete.loads[ev])||'')+'</div></div>'+
-      '<div class="vals"><div class="you">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div><div class="gold">Gold: '+gold+'</div></div>'+deltaBadge(ev)+'</div>';
+    function val(level){ var i=level==='GOLD'?0:level==='SILVER'?1:2; return (pod&&pod[i]&&pod[i][2])||'—'; }
+    var podRows='<div class="pod-mini">'+
+      '<span class="pm-row"><span class="pm-i pm-g">🥇</span><span class="pm-v">'+val('GOLD')+'</span></span>'+
+      '<span class="pm-row"><span class="pm-i pm-s">🥈</span><span class="pm-v">'+val('SILVER')+'</span></span>'+
+      '<span class="pm-row"><span class="pm-i pm-b">🥉</span><span class="pm-v">'+val('BRONZE')+'</span></span>'+
+    '</div>';
+    return '<div class="dash-row"><div class="info"><div class="nm">'+cfg.name+'</div><div class="sb">'+((athlete.loads&&athlete.loads[ev])||'')+'</div>'+podRows+'</div>'+
+      '<div class="vals"><div class="you">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div></div>'+deltaBadge(ev)+'</div>';
   }).join('');
   // History
   var hist;
