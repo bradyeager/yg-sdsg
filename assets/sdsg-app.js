@@ -312,12 +312,20 @@ function medalIcon(level){
 }
 
 // ===== Renders =====
+function _medalFromNote(note){
+  if(!note) return '';
+  var m=/\b(Gold|Silver|Bronze)\b/i.exec(note);
+  if(!m) return '';
+  var t=m[1].toLowerCase();
+  var icon=t==='gold'?'🥇':t==='silver'?'🥈':'🥉';
+  return '<span class="inc-medal" title="'+m[1]+' in their 2025 bracket">'+icon+'</span>';
+}
 function _renderIncomingBlock(ev){
   var inc=A().incoming;
   var list=(inc&&inc[ev])||[];
   if(!list.length) return '';
   var rows=list.map(function(r){
-    return '<div class="incoming-row"><span class="who">'+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>';
+    return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>';
   }).join('');
   return '<div class="incoming"><div class="ph">Incoming Competitors · Aging In</div>'+rows+'</div>';
 }
@@ -414,7 +422,7 @@ function renderScouting(){
         '<div class="sy-sub">'+youSub+(best?' · '+best.date:'')+'</div>'+
       '</div>';
       var caveat='<div class="scout-caveat">Incoming athletes below come from a different division. Their load or standard may differ — your Best above is your apples-to-apples baseline.</div>';
-      var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>'; }).join('');
+      var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>'; }).join('');
       return '<div class="prog-event"><div class="prog-event-head"><span class="pe-name">'+EVENTS[ev].name+'</span></div>'+
         '<div class="scout-body">'+youCard+caveat+'<div class="scout-incoming">'+rows+'</div></div>'+
       '</div>';
