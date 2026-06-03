@@ -208,7 +208,8 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 
 /* ===== History ===== */
 .hist-day{margin-bottom:16px}
-.hist-day .date{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.5px;color:var(--teal);font-weight:600;margin-bottom:7px;text-transform:uppercase}
+.hist-day .date{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.5px;color:var(--teal);font-weight:600;margin-bottom:7px;text-transform:uppercase;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hist-day .comp-day{font-family:'Oswald',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--pink);background:rgba(239,50,149,.10);border:1px solid var(--pink-dim);padding:3px 8px;border-radius:11px}
 .hist-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(180deg, var(--surface-2), rgba(13,18,28,.6));border:1px solid var(--border);border-radius:9px;padding:10px 13px;margin-bottom:6px}
 .hist-row .ev{font-size:13px;color:var(--text);display:flex;align-items:center;gap:7px}
 .hist-row .pr{font-family:'Oswald',sans-serif;font-size:9px;font-weight:700;letter-spacing:.5px;background:rgba(239,50,149,.18);color:var(--pink);padding:2px 6px;border-radius:4px}
@@ -264,7 +265,7 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 .prog-event{background:linear-gradient(180deg, var(--surface-2), rgba(13,18,28,.55));border:1px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:13px}
 .prog-event-head{padding:11px 14px;background:linear-gradient(135deg,var(--teal),var(--teal-deep));display:flex;align-items:center;justify-content:space-between;gap:8px}
 .prog-event-head .pe-name{font-family:'Oswald',sans-serif;font-size:14.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#04212a}
-.prog-event-head .pe-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(4,33,42,.78)}
+.prog-event-head .pe-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:var(--pink);background:rgba(255,255,255,.92);padding:2px 7px;border-radius:11px;letter-spacing:.3px;margin-left:4px}
 .prog-event-head .pe-load{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#04212a;font-weight:700;background:rgba(255,255,255,.35);padding:3px 8px;border-radius:11px;white-space:nowrap}
 .prog-pat{padding:11px 14px;border-bottom:1px solid var(--border)}
 .prog-pat:last-child{border-bottom:0}
@@ -296,30 +297,6 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
   main{padding:22px 16px 70px}
 }
 
-/* ===== Program: jump-to menu (above first exercise) ===== */
-.prog-jump{
-  margin-bottom:14px;padding:12px 14px;border-radius:10px;
-  background:
-    radial-gradient(130% 150% at 0% 0%,   rgba(72,196,204,.07), transparent 55%),
-    radial-gradient(130% 150% at 100% 100%, rgba(239,50,149,.05), transparent 55%),
-    var(--surface-2);
-  border:1px solid var(--border)
-}
-.prog-jump .jh{font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:9px}
-.prog-jump .jc{display:flex;flex-wrap:wrap;gap:6px}
-.prog-jump .jc-chip{
-  background:linear-gradient(180deg, var(--surface-3), rgba(15,20,32,.7));
-  border:1px solid var(--border-bright);color:var(--text);
-  font-family:'Oswald',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.5px;
-  text-transform:uppercase;padding:9px 13px;border-radius:8px;cursor:pointer;
-  -webkit-tap-highlight-color:transparent;transition:transform .12s, box-shadow .15s
-}
-.prog-jump .jc-chip:active{
-  transform:scale(.97);
-  background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#04212a;border-color:transparent;
-  box-shadow:0 6px 18px -8px rgba(72,196,204,.55)
-}
-
 /* ===== Program: collapsible exercise cards ===== */
 .prog-event-head{cursor:pointer;position:relative;padding-right:38px;-webkit-tap-highlight-color:transparent}
 .prog-event-head::after{
@@ -344,7 +321,8 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 .scout-you .sy-lbl{font-family:'Oswald',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);grid-column:1;grid-row:1}
 .scout-you .sy-val{font-family:'Oswald',sans-serif;font-size:28px;font-weight:600;color:#fff;grid-column:2;grid-row:1/3;display:flex;align-items:center;gap:5px;line-height:1}
 .scout-you .sy-sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-dim);grid-column:1;grid-row:2;margin-top:2px}
-.scout-caveat{font-size:11.5px;color:var(--text-dim);line-height:1.5;background:rgba(155,111,212,.07);border:1px solid rgba(155,111,212,.20);border-radius:7px;padding:8px 11px;margin-bottom:10px}
+.scout-caveat{font-size:11.5px;color:var(--text-dim);line-height:1.5;background:rgba(155,111,212,.07);border:1px solid rgba(155,111,212,.20);border-radius:7px;padding:8px 11px;margin-bottom:10px;display:flex;align-items:flex-start;gap:8px}
+.scout-caveat .cv-flag{font-size:15px;line-height:1.3;flex-shrink:0}
 .scout-incoming .incoming-row{padding:6px 0;border-bottom:1px solid var(--border);border-color:rgba(255,255,255,.06)}
 .scout-incoming .incoming-row:last-child{border-bottom:0}
 

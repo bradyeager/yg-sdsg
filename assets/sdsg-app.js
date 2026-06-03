@@ -77,7 +77,12 @@ var EVENTS = {
   row:       {name:'Concept Row 500m',       unit:'time',  lowerBetter:true},
   shuttle:   {name:'300 Yd Shuttle Run',     unit:'time',  lowerBetter:true}
 };
-var EVENT_ORDER = CFG.eventOrder || ['prowler','kbsquat','dynamax','bench','hang','slams','jumprope','broadjump','row','shuttle'];
+var EVENT_ORDER = (function(){
+  var arr = (CFG.eventOrder || ['prowler','kbsquat','dynamax','bench','hang','slams','jumprope','broadjump','row','shuttle']).slice();
+  var i = arr.indexOf('prowler');
+  if(i>-1){ arr.splice(i,1); arr.push('prowler'); }
+  return arr;
+})();
 
 var TIMER_CONFIG = {
   prowler:  {type:'countup',   label:'Push Timer'},
@@ -385,7 +390,8 @@ function renderProgress(){
         var delBtn = l.id ? '<button class="hist-del" data-id="'+l.id+'" title="Delete">🗑</button>' : '';
         return '<div class="hist-row"><span class="ev">'+EVENTS[l.event].name+(isPR?'<span class="pr">PR</span>':'')+'</span><span class="actions"><span class="sc">'+fmtVal(l.event,l.value)+'</span>'+delBtn+'</span></div>';
       }).join('');
-      return '<div class="hist-day"><div class="date">'+date+'</div>'+rows+'</div>';
+      var compTag = (date==='2025-09-21') ? ' <span class="comp-day">🏆 2025 Senior Games</span>' : '';
+      return '<div class="hist-day"><div class="date">'+date+compTag+'</div>'+rows+'</div>';
     }).join('');
   }
   document.getElementById('progressView').innerHTML=
@@ -421,7 +427,7 @@ function renderScouting(){
         '<div class="sy-val">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div>'+
         '<div class="sy-sub">'+youSub+(best?' · '+best.date:'')+'</div>'+
       '</div>';
-      var caveat='<div class="scout-caveat">Incoming athletes below come from a different division. Their load or standard may differ — your Best above is your apples-to-apples baseline.</div>';
+      var caveat='<div class="scout-caveat"><span class="cv-flag">🚩</span>Incoming athletes below come from a different division. Their load or standard may differ — your Best above is your apples-to-apples baseline.</div>';
       var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>'; }).join('');
       return '<div class="prog-event"><div class="prog-event-head"><span class="pe-name">'+EVENTS[ev].name+'</span></div>'+
         '<div class="scout-body">'+youCard+caveat+'<div class="scout-incoming">'+rows+'</div></div>'+
@@ -461,11 +467,6 @@ async function renderProgram(){
       (ws?'<div class="sub">'+ws[1]+'</div>':'')+
       (wd?'<div class="dates">'+wd[1]+'</div>':'')+
       '<a class="open" href="/program/">Open Full Program →</a></div>';
-    var jump='<div class="prog-jump"><div class="jh">Jump to exercise</div><div class="jc">'+
-      events.map(function(e,i){
-        return '<button class="jc-chip" onclick="SDSG.jumpProg('+i+')">'+e.event+'</button>';
-      }).join('')+'</div></div>';
-    html+=jump;
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
     html+=events.map(function(e,idx){
@@ -489,13 +490,6 @@ async function renderProgram(){
     console.error(e);
     host.innerHTML='<div class="empty"><div class="ico">⚠️</div><div class="msg">Couldn’t load the program.<br>Open <a href="/program/" style="color:var(--teal)">/program/</a> directly.</div></div>';
   }
-}
-function jumpProg(idx){
-  var el=document.getElementById('pe_'+idx); if(!el) return;
-  el.classList.remove('collapsed');
-  // small offset so the sticky tabbar doesn't cover the head
-  var y=el.getBoundingClientRect().top+window.pageYOffset-110;
-  window.scrollTo({top:y, behavior:'smooth'});
 }
 function toggleProg(idx){
   var el=document.getElementById('pe_'+idx); if(!el) return;
@@ -673,7 +667,7 @@ async function init(){
 window.SDSG = {
   setView:setView, logScore:logScore, resetAthlete:resetAthlete, switchAthlete:switchAthlete,
   startTimer:startTimer, stopTimer:stopTimer, resetTimer:resetTimer, autoColonTime:autoColonTime,
-  jumpProg:jumpProg, toggleProg:toggleProg, setFontScale:setFontScale
+  toggleProg:toggleProg, setFontScale:setFontScale
 };
 
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
