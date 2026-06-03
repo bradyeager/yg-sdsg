@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0E17">
+<title>SDSG Load Cards · Group Window · Yeager's Gym</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#48C4CC; --teal-dim:#2d8a8f;
+  --pink:#EF3295; --pink-dim:#a82268;
+  --gold:#facc15;
+  --bg:#0A0E17; --bg-card:#131824; --bg-card-elev:#1a2030;
+  --border:#1f2738; --border-bright:#2a3349;
+  --text:#e8ecf2; --text-dim:#8a93a6; --text-muted:#5a6478;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(circle at 15% -5%, rgba(72,196,204,.05) 0%, transparent 50%),radial-gradient(circle at 85% 105%, rgba(239,50,149,.05) 0%, transparent 50%),var(--bg);min-height:100vh}
+a{color:inherit;text-decoration:none}
+.page-header{padding:14px 18px;border-bottom:1px solid var(--border);background:rgba(10,14,23,.92);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.back{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);color:var(--text-dim);font-size:18px;flex-shrink:0;transition:all .2s}
+.back:hover{border-color:var(--teal);color:var(--teal)}
+.brand-mark{width:50px;height:50px;border-radius:50%;background:#fff;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(239,50,149,.55),0 0 14px 2px rgba(239,50,149,.55),0 0 32px 4px rgba(239,50,149,.30),0 0 56px 10px rgba(239,50,149,.15)}
+.brand-mark img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.brand-text h1{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.brand-text p{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
+.header-meta{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-dim);letter-spacing:.5px}
+.header-meta strong{color:var(--teal);font-weight:600}
+
+main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
+.intro{margin-bottom:22px;padding:16px 18px;background:linear-gradient(135deg, rgba(72,196,204,.08), rgba(239,50,149,.05));border:1px solid var(--teal-dim);border-radius:8px}
+.intro h2{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+.intro .sub{font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--pink);margin-top:4px}
+.intro p{margin-top:10px;font-size:13px;color:var(--text-dim);line-height:1.6}
+.intro strong{color:var(--text)}
+
+#status{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-dim);padding:18px;text-align:center}
+
+.events-grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:760px){.events-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1180px){.events-grid{grid-template-columns:repeat(3,1fr)}}
+
+.event{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.event-head{padding:11px 14px;background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dim) 100%);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.event-head h3{font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#04212a}
+.type-badge{display:inline-flex;align-items:center;gap:4px;font-family:'Oswald',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:var(--bg);white-space:nowrap}
+.type-badge.sprint{color:var(--pink);box-shadow:inset 0 0 0 1px rgba(239,50,149,.55)}
+.type-badge.marathon{color:#7fe0e6;box-shadow:inset 0 0 0 1px var(--teal-dim)}
+
+.pattern{padding:11px 12px;border-bottom:1px solid var(--border)}
+.pattern:last-child{border-bottom:none}
+.pattern-name{font-family:'Oswald',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--teal);display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.pattern-num{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;color:var(--teal);opacity:.7}
+.pattern-rx{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--pink);font-weight:600;margin-top:3px;line-height:1.4}
+
+.athletes{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px}
+.ath{padding:5px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg-card-elev);font-size:11.5px;line-height:1.35;display:flex;justify-content:space-between;gap:6px;align-items:baseline}
+.ath .nm{font-family:'Oswald',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text-dim);flex-shrink:0}
+.ath .ld{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text);font-weight:600;text-align:right;word-break:break-word}
+
+.foot{margin-top:32px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--text-muted)}
+.foot a{color:var(--teal-dim);text-decoration:underline}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-inner">
+    <div class="brand">
+      <a class="back" href="/" aria-label="Back to home">←</a>
+      <a class="brand-mark" href="/" aria-label="Back to Senior Games home"><img src="/logo.jpg" alt="YG"></a>
+      <div class="brand-text">
+        <h1>Load Cards · Group Window</h1>
+        <p>Yeager's Gym · SDSG '26</p>
+      </div>
+    </div>
+    <div class="header-meta"><span>COMP</span><strong>SEPT 27</strong></div>
+  </div>
+</header>
+
+<main>
+  <div class="intro">
+    <h2 id="weekTitle">Loading current week…</h2>
+    <div class="sub" id="weekSub"></div>
+    <p><strong>Coach view for the 60-minute group session.</strong> Auto-pulled from this week's <a href="/program/" style="color:var(--teal)">program</a>. Each pattern shows the load each athlete should be using — your athlete-specific competition implement, plus any overload or substitution for that pattern.</p>
+  </div>
+
+  <div id="status">Pulling this week's program…</div>
+  <div class="events-grid" id="eventsGrid" hidden></div>
+
+  <div class="foot">Yeager's Gym · SDSG '26 · loads auto-derived from <a href="/program/">/program/</a></div>
+</main>
+
+<script>
+// ===== Per-athlete competition implements (pulled from each tracker file) =====
+const ATHLETES = [
+  {key:'tonnie', name:'Tonnie', div:'W70-74', loads:{prowler:'2×25 lb plates', kbsquat:'12 kg', dynamax:'4 lb', bench:'45 lb', slams:'10 lb'}},
+  {key:'peggy',  name:'Peggy',  div:'W70-74', loads:{prowler:'2×25 lb plates', kbsquat:'12 kg', dynamax:'4 lb', bench:'45 lb', slams:'10 lb'}},
+  {key:'annie',  name:'Annie',  div:'W60-64', loads:{prowler:'2×25 lb plates', kbsquat:'16 kg', dynamax:'4 lb', bench:'50 lb', slams:'10 lb'}},
+  {key:'robert', name:'Robert', div:'M70-74', loads:{prowler:'2×45 lb plates', kbsquat:'16 kg', dynamax:'8 lb', bench:'75 lb', slams:'15 lb'}},
+  {key:'david',  name:'David',  div:'M55-59', loads:{prowler:'2×45 lb plates', kbsquat:'24 kg', dynamax:'8 lb', bench:'115 lb', slams:'15 lb'}},
+  {key:'kerry',  name:'Kerry',  div:'M50-54', loads:{prowler:'2×45 lb plates', kbsquat:'24 kg', dynamax:'8 lb', bench:'115 lb', slams:'15 lb'}},
+];
+
+// ladders for "+1 size" math
+const KB_LADDER     = ['8 kg','10 kg','12 kg','14 kg','16 kg','18 kg','20 kg','24 kg','28 kg','32 kg'];
+const DYNAMAX_LADDER= ['4 lb','6 lb','8 lb','10 lb','12 lb','14 lb'];
+const SLAMS_LADDER  = ['10 lb','15 lb','20 lb','25 lb','30 lb'];
+function nextSize(ladder, current){
+  const i = ladder.indexOf(current);
+  if(i<0) return current+' +1';
+  return ladder[Math.min(i+1, ladder.length-1)];
+}
+
+// Map program EVENTS event names to short keys
+const EVENT_KEY = {
+  'KB Box Squat':'kbsquat',
+  'Dynamax OH Throw':'dynamax',
+  'Bench Press':'bench',
+  'Overhead Arm Hang':'hang',
+  'Med Ball Slams':'slams',
+  'Jump Rope · 60s':'jumprope',
+  'Standing Broad Jump':'broadjump',
+  'Concept Row · 500m':'row',
+  '300 Yd Shuttle Run':'shuttle',
+  'Prowler Push':'prowler'
+};
+
+// Per-event, per-pattern translation. Returns the per-athlete display string.
+// Keep these terse — coach is reading at a glance.
+const T = {
+  kbsquat: [
+    (a) => a.loads.kbsquat + ' KB',
+    (a) => a.loads.kbsquat + ' KB (paused)',
+    (a) => 'BW (+plate if easy)'
+  ],
+  dynamax: [
+    (a) => a.loads.dynamax + ' Dynamax',
+    (a) => nextSize(DYNAMAX_LADDER, a.loads.dynamax) + ' Dynamax',
+    (a) => 'Moderate KB/DB swing'
+  ],
+  bench: [
+    (a) => a.loads.bench + ' bar (Brad sets reps)',
+    (a) => 'Moderate DBs',
+    (a) => 'BW parallel-bar push-ups'
+  ],
+  hang: [
+    (a) => 'BW (band assist OK)',
+    (a) => 'BW scap pulls',
+    (a) => 'Heavy DB/KB each hand'
+  ],
+  slams: [
+    (a) => a.loads.slams + ' D-ball',
+    (a) => nextSize(SLAMS_LADDER, a.loads.slams) + ' D-ball',
+    (a) => a.loads.slams + ' D-ball'
+  ],
+  jumprope: [
+    (a) => 'Sized jump rope',
+    (a) => 'DB each hand or vest',
+    (a) => 'BW, no rope'
+  ],
+  broadjump: [
+    (a) => 'BW',
+    (a) => 'Knee-height box',
+    (a) => 'BW'
+  ],
+  row: [
+    (a) => 'C2 rower (damper 5-7)',
+    (a) => 'C2 rower',
+    (a) => 'C2 rower (on/off)'
+  ],
+  shuttle: [
+    (a) => 'Two cones 25 yd apart',
+    (a) => '25 yd cones',
+    (a) => 'Grass or track'
+  ],
+  prowler: [
+    (a) => a.loads.prowler,
+    (a) => a.loads.prowler + ' + 25 lb/side',
+    (a) => 'DB each hand or KB at chest'
+  ]
+};
+
+async function loadProgram(){
+  try{
+    const res = await fetch('/program/');
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const html = await res.text();
+    const m = html.match(/const EVENTS = (\[.*?\]);/s);
+    if(!m) throw new Error('EVENTS array not found in /program/');
+    const events = JSON.parse(m[1]);
+    // Try to grab week title too
+    const wt = html.match(/<h2>(Week of [^<]+)<\/h2>/);
+    const wd = html.match(/<div class="week-dates">([^<]+)<\/div>/);
+    const ws = html.match(/<div class="week-sub">([^<]+)<\/div>/);
+    document.getElementById('weekTitle').textContent = wt ? wt[1] : 'Current Week';
+    const subParts = [];
+    if(ws) subParts.push(ws[1].replace(/\s+/g,' ').trim());
+    if(wd) subParts.push(wd[1].replace(/\s+/g,' ').trim());
+    document.getElementById('weekSub').textContent = subParts.join(' · ');
+    render(events);
+  }catch(err){
+    document.getElementById('status').innerHTML =
+      'Could not fetch /program/ — '+err.message+'.<br>Verify /program/ exists and refresh.';
+  }
+}
+
+function patternHTML(eventKey, p, idx){
+  const translator = (T[eventKey] && T[eventKey][idx]) || null;
+  const cells = ATHLETES.map(a => {
+    const load = translator ? translator(a) : (p.load || '');
+    return `<div class="ath"><span class="nm">${a.name}</span><span class="ld">${load}</span></div>`;
+  }).join('');
+  const num = String(idx+1).padStart(2,'0');
+  return `<div class="pattern">
+    <div class="pattern-name"><span>${p.name}</span><span class="pattern-num">${num}</span></div>
+    <div class="pattern-rx">${p.rx}</div>
+    <div class="athletes">${cells}</div>
+  </div>`;
+}
+
+function render(events){
+  const grid = document.getElementById('eventsGrid');
+  grid.innerHTML = events.map(ev => {
+    const key = EVENT_KEY[ev.event];
+    const type = ev.type || 'sprint';
+    const badge = type === 'marathon'
+      ? '<span class="type-badge marathon">🔋 Marathon</span>'
+      : '<span class="type-badge sprint">⚡ Sprint</span>';
+    const patterns = ev.patterns.map((p,i) => patternHTML(key, p, i)).join('');
+    return `<section class="event">
+      <header class="event-head"><h3>${ev.event}</h3>${badge}</header>
+      ${patterns}
+    </section>`;
+  }).join('');
+  document.getElementById('status').hidden = true;
+  grid.hidden = false;
+}
+
+loadProgram();
+</script>
+</body>
+</html>
