@@ -345,6 +345,7 @@ function renderEventCard(ev){
       '<div class="podium"><div class="ph">'+(athlete.podiumLabel||'2025 Podium')+'</div>'+
         podium.map(function(p){ return '<div class="podium-row"><span class="place '+(p[0]==='GOLD'?'g':p[0]==='SILVER'?'s':'b')+'">'+p[0]+'</span><span class="who">'+p[1]+'</span><span class="sc">'+p[2]+'</span></div>'; }).join('')+
       '</div>'+
+      _renderIncomingBlock(ev)+
       _renderTimerBlock(ev)+
       '<div class="input-row">'+inputCtl+'<button id="btn_'+ev+'" onclick="SDSG.logScore(\''+ev+'\')">Log</button></div>'+
     '</div>'+
@@ -404,8 +405,19 @@ function renderScouting(){
   } else {
     html+=EVENT_ORDER.map(function(ev){
       var list=inc[ev]||[]; if(!list.length) return '';
+      var best=bestScore(ev);
+      var youLoad=(athlete.loads&&athlete.loads[ev])||'';
+      var youSub=athlete.division+(youLoad?' · '+youLoad:'');
+      var youCard='<div class="scout-you">'+
+        '<div class="sy-lbl">Your Best</div>'+
+        '<div class="sy-val">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div>'+
+        '<div class="sy-sub">'+youSub+(best?' · '+best.date:'')+'</div>'+
+      '</div>';
+      var caveat='<div class="scout-caveat">Incoming athletes below come from a different division. Their load or standard may differ — your Best above is your apples-to-apples baseline.</div>';
       var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>'; }).join('');
-      return '<div class="prog-event"><div class="prog-event-head"><span class="pe-name">'+EVENTS[ev].name+'</span></div><div style="padding:6px 12px 9px">'+rows+'</div></div>';
+      return '<div class="prog-event"><div class="prog-event-head"><span class="pe-name">'+EVENTS[ev].name+'</span></div>'+
+        '<div class="scout-body">'+youCard+caveat+'<div class="scout-incoming">'+rows+'</div></div>'+
+      '</div>';
     }).join('');
   }
   document.getElementById('scoutingView').innerHTML=html;
@@ -441,16 +453,27 @@ async function renderProgram(){
       (ws?'<div class="sub">'+ws[1]+'</div>':'')+
       (wd?'<div class="dates">'+wd[1]+'</div>':'')+
       '<a class="open" href="/program/">Open Full Program →</a></div>';
+    var jump='<div class="prog-jump"><div class="jh">Jump to exercise</div><div class="jc">'+
+      events.map(function(e,i){
+        return '<button class="jc-chip" onclick="SDSG.jumpProg('+i+')">'+e.event+'</button>';
+      }).join('')+'</div></div>';
+    html+=jump;
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
-    html+=events.map(function(e){
+    html+=events.map(function(e,idx){
       var k=keyByName[e.event];
       var load=k&&aLoads[k]?aLoads[k]:'';
       var pats=(e.patterns||[]).map(function(p){
         var cues=(p.cues||[]).map(function(c){ return '<li>'+c+'</li>'; }).join('');
         return '<div class="prog-pat"><div class="pp-name">'+p.name+'</div><div class="pp-rx">'+(p.rx||'')+'</div>'+(p.load?'<div class="pp-rx" style="color:var(--text-dim);font-weight:500">'+p.load+'</div>':'')+(cues?'<ul class="pp-cues">'+cues+'</ul>':'')+'</div>';
       }).join('');
-      return '<div class="prog-event"><div class="prog-event-head"><div><span class="pe-name">'+e.event+'</span> <span class="pe-tag">'+(TYPE[e.type]||'')+(e.tag?' · '+e.tag:'')+'</span></div>'+(load?'<span class="pe-load">'+load+'</span>':'')+'</div>'+pats+'</div>';
+      return '<div class="prog-event collapsed" id="pe_'+idx+'">'+
+        '<div class="prog-event-head" onclick="SDSG.toggleProg('+idx+')">'+
+          '<div><span class="pe-name">'+e.event+'</span> <span class="pe-tag">'+(TYPE[e.type]||'')+(e.tag?' · '+e.tag:'')+'</span></div>'+
+          (load?'<span class="pe-load">'+load+'</span>':'')+
+        '</div>'+
+        '<div class="prog-body">'+pats+'</div>'+
+      '</div>';
     }).join('');
     _programCache=html;
     host.innerHTML=html;
@@ -458,6 +481,17 @@ async function renderProgram(){
     console.error(e);
     host.innerHTML='<div class="empty"><div class="ico">⚠️</div><div class="msg">Couldn’t load the program.<br>Open <a href="/program/" style="color:var(--teal)">/program/</a> directly.</div></div>';
   }
+}
+function jumpProg(idx){
+  var el=document.getElementById('pe_'+idx); if(!el) return;
+  el.classList.remove('collapsed');
+  // small offset so the sticky tabbar doesn't cover the head
+  var y=el.getBoundingClientRect().top+window.pageYOffset-110;
+  window.scrollTo({top:y, behavior:'smooth'});
+}
+function toggleProg(idx){
+  var el=document.getElementById('pe_'+idx); if(!el) return;
+  el.classList.toggle('collapsed');
 }
 
 // ===== Header / stats =====
@@ -575,9 +609,45 @@ function buildSwitcher(){
     return '<button data-athlete="'+key+'" class="'+(key===cur?'active':'')+(key==='david'?' david':'')+'" onclick="SDSG.switchAthlete(\''+key+'\')">'+a.name+'<span class="div">'+a.division+'</span></button>';
   }).join('');
 }
+// ===== Font scale (zoom) control =====
+var FS_MIN=0.85, FS_MAX=1.6, FS_KEY='sdsg_fs';
+function _readFs(){ var v=parseFloat(localStorage.getItem(FS_KEY)); return (isNaN(v)||!v)?1:v; }
+function _applyFs(){
+  var fs=_readFs();
+  document.documentElement.style.setProperty('--fs', fs);
+  var vEl=document.getElementById('fs-val');
+  if(vEl) vEl.textContent=Math.round(fs*100)+'%';
+  var dec=document.querySelector('.fontctl [data-act="font-dec"]');
+  var inc=document.querySelector('.fontctl [data-act="font-inc"]');
+  if(dec) dec.disabled=fs<=FS_MIN+0.001;
+  if(inc) inc.disabled=fs>=FS_MAX-0.001;
+}
+function setFontScale(delta){
+  var fs=_readFs();
+  fs=Math.max(FS_MIN, Math.min(FS_MAX, Math.round((fs+delta)*100)/100));
+  localStorage.setItem(FS_KEY, fs);
+  _applyFs();
+}
+function _mountFontCtl(){
+  if(document.querySelector('.fontctl')) return;
+  var d=document.createElement('div');
+  d.className='fontctl'; d.setAttribute('aria-label','Text size');
+  d.innerHTML='<button data-act="font-dec" aria-label="Decrease text size">−</button>'+
+    '<span class="fs-val" id="fs-val">100%</span>'+
+    '<button data-act="font-inc" aria-label="Increase text size">+</button>';
+  document.body.appendChild(d);
+  d.addEventListener('click', function(e){
+    var b=e.target.closest('[data-act]'); if(!b) return;
+    if(b.dataset.act==='font-dec') setFontScale(-0.1);
+    if(b.dataset.act==='font-inc') setFontScale(+0.1);
+  });
+  _applyFs();
+}
+
 async function init(){
   try{
     buildSwitcher();
+    _mountFontCtl();
     setSyncStatus('syncing','Loading');
     cachedLogs=await loadLogs(slug());
     await ensureBaselines(slug());
@@ -594,7 +664,8 @@ async function init(){
 // Expose the handful of functions used by inline onclick handlers
 window.SDSG = {
   setView:setView, logScore:logScore, resetAthlete:resetAthlete, switchAthlete:switchAthlete,
-  startTimer:startTimer, stopTimer:stopTimer, resetTimer:resetTimer, autoColonTime:autoColonTime
+  startTimer:startTimer, stopTimer:stopTimer, resetTimer:resetTimer, autoColonTime:autoColonTime,
+  jumpProg:jumpProg, toggleProg:toggleProg, setFontScale:setFontScale
 };
 
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);

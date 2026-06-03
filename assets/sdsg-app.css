@@ -33,7 +33,11 @@
   --text:#E8E6E3;
   --text-dim:rgba(232,230,227,.82);
   --text-muted:rgba(232,230,227,.58);
+
+  /* === Senior-friendly text zoom (driven by .fontctl pill) === */
+  --fs:1;
 }
+main{zoom:var(--fs)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 body{
@@ -291,3 +295,75 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
   .scores{grid-template-columns:1fr 1fr}
   main{padding:22px 16px 70px}
 }
+
+/* ===== Program: jump-to menu (above first exercise) ===== */
+.prog-jump{
+  margin-bottom:14px;padding:12px 14px;border-radius:10px;
+  background:
+    radial-gradient(130% 150% at 0% 0%,   rgba(72,196,204,.07), transparent 55%),
+    radial-gradient(130% 150% at 100% 100%, rgba(239,50,149,.05), transparent 55%),
+    var(--surface-2);
+  border:1px solid var(--border)
+}
+.prog-jump .jh{font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:9px}
+.prog-jump .jc{display:flex;flex-wrap:wrap;gap:6px}
+.prog-jump .jc-chip{
+  background:linear-gradient(180deg, var(--surface-3), rgba(15,20,32,.7));
+  border:1px solid var(--border-bright);color:var(--text);
+  font-family:'Oswald',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.5px;
+  text-transform:uppercase;padding:9px 13px;border-radius:8px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:transform .12s, box-shadow .15s
+}
+.prog-jump .jc-chip:active{
+  transform:scale(.97);
+  background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#04212a;border-color:transparent;
+  box-shadow:0 6px 18px -8px rgba(72,196,204,.55)
+}
+
+/* ===== Program: collapsible exercise cards ===== */
+.prog-event-head{cursor:pointer;position:relative;padding-right:38px;-webkit-tap-highlight-color:transparent}
+.prog-event-head::after{
+  content:"▾";position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(0deg);
+  font-size:15px;color:#04212a;font-weight:700;transition:transform .2s
+}
+.prog-event.collapsed .prog-event-head::after{transform:translateY(-50%) rotate(-90deg)}
+.prog-event .prog-body{max-height:4000px;transition:max-height .25s ease;overflow:hidden}
+.prog-event.collapsed .prog-body{max-height:0}
+
+/* ===== Scouting: your-best pill + caveat ===== */
+.scout-body{padding:11px 13px}
+.scout-you{
+  background:
+    radial-gradient(130% 150% at 0% 0%, rgba(72,196,204,.10), transparent 55%),
+    linear-gradient(180deg, var(--surface-3), rgba(15,20,32,.7));
+  border:1px solid var(--teal-dim);border-radius:9px;padding:10px 13px;margin-bottom:9px;
+  display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:14px;align-items:baseline
+}
+.scout-you .sy-lbl{font-family:'Oswald',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);grid-column:1;grid-row:1}
+.scout-you .sy-val{font-family:'Oswald',sans-serif;font-size:26px;font-weight:600;color:#fff;grid-column:2;grid-row:1/3;display:flex;align-items:center;gap:5px;line-height:1}
+.scout-you .sy-sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-dim);grid-column:1;grid-row:2;margin-top:2px}
+.scout-caveat{font-size:11.5px;color:var(--text-dim);line-height:1.5;background:rgba(155,111,212,.07);border:1px solid rgba(155,111,212,.20);border-radius:7px;padding:8px 11px;margin-bottom:10px}
+.scout-incoming .incoming-row{padding:6px 0;border-bottom:1px solid var(--border);border-color:rgba(255,255,255,.06)}
+.scout-incoming .incoming-row:last-child{border-bottom:0}
+
+/* ===== Fontctl pill (bottom-right) — itself stays at base size ===== */
+.fontctl{
+  position:fixed;right:14px;bottom:14px;z-index:600;
+  display:flex;align-items:center;gap:7px;
+  background:linear-gradient(180deg, var(--surface-3), rgba(15,20,32,.85));
+  backdrop-filter:blur(8px);
+  border:1px solid var(--border-bright);
+  border-radius:26px;padding:5px 8px;
+  box-shadow:0 8px 22px -8px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.06) inset
+}
+.fontctl button{
+  width:38px;height:38px;border-radius:50%;cursor:pointer;border:0;
+  background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#04212a;
+  font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;line-height:1;
+  -webkit-tap-highlight-color:transparent;
+  box-shadow:0 4px 12px -6px rgba(72,196,204,.55),0 1px 0 rgba(255,255,255,.18) inset;
+  transition:transform .12s
+}
+.fontctl button:active{transform:scale(.94)}
+.fontctl button:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.fontctl .fs-val{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-dim);min-width:40px;text-align:center;font-weight:700;letter-spacing:.5px}
