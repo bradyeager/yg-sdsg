@@ -99,19 +99,31 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
 
 <script>
 // ===== Per-athlete competition implements (pulled from each tracker file) =====
+// benchMax = each athlete's tested max reps at their comp bench weight.
+// Used to compute the live "X–Y reps" target for %-of-max-reps prescriptions
+// instead of "Brad sets reps". Refresh when an athlete re-tests.
 const ATHLETES = [
-  {key:'tonnie', name:'Tonnie', div:'W70-74', loads:{prowler:'2×25 lb plates', kbsquat:'12 kg', dynamax:'4 lb', bench:'45 lb', slams:'10 lb'}},
-  {key:'peggy',  name:'Peggy',  div:'W70-74', loads:{prowler:'2×25 lb plates', kbsquat:'12 kg', dynamax:'4 lb', bench:'45 lb', slams:'10 lb'}},
-  {key:'annie',  name:'Annie',  div:'W60-64', loads:{prowler:'2×25 lb plates', kbsquat:'16 kg', dynamax:'4 lb', bench:'50 lb', slams:'10 lb'}},
-  {key:'robert', name:'Robert', div:'M70-74', loads:{prowler:'2×45 lb plates', kbsquat:'16 kg', dynamax:'8 lb', bench:'75 lb', slams:'15 lb'}},
-  {key:'david',  name:'David',  div:'M55-59', loads:{prowler:'2×45 lb plates', kbsquat:'24 kg', dynamax:'8 lb', bench:'115 lb', slams:'15 lb'}},
-  {key:'kerry',  name:'Kerry',  div:'M50-54', loads:{prowler:'2×45 lb plates', kbsquat:'24 kg', dynamax:'8 lb', bench:'115 lb', slams:'15 lb'}},
+  {key:'tonnie', name:'Tonnie', div:'W70-74', benchMax:65, loads:{prowler:'2×25 lb plates', kbsquat:'26 lb', dynamax:'4 lb', bench:'45 lb', slams:'10 lb'}},
+  {key:'peggy',  name:'Peggy',  div:'W70-74', benchMax:20, loads:{prowler:'2×25 lb plates', kbsquat:'26 lb', dynamax:'4 lb', bench:'45 lb', slams:'10 lb'}},
+  {key:'annie',  name:'Annie',  div:'W60-64', benchMax:30, loads:{prowler:'2×25 lb plates', kbsquat:'35 lb', dynamax:'4 lb', bench:'50 lb', slams:'10 lb'}},
+  {key:'robert', name:'Robert', div:'M70-74', benchMax:30, loads:{prowler:'2×45 lb plates', kbsquat:'35 lb', dynamax:'8 lb', bench:'75 lb', slams:'15 lb'}},
+  {key:'david',  name:'David',  div:'M55-59', benchMax:4,  loads:{prowler:'2×45 lb plates', kbsquat:'53 lb', dynamax:'8 lb', bench:'115 lb', slams:'15 lb'}},
+  {key:'kerry',  name:'Kerry',  div:'M50-54', benchMax:28, loads:{prowler:'2×45 lb plates', kbsquat:'53 lb', dynamax:'8 lb', bench:'115 lb', slams:'15 lb'}},
 ];
 
-// ladders for "+1 size" math
-const KB_LADDER     = ['8 kg','10 kg','12 kg','14 kg','16 kg','18 kg','20 kg','24 kg','28 kg','32 kg'];
-const DYNAMAX_LADDER= ['4 lb','6 lb','8 lb','10 lb','12 lb','14 lb'];
+// ladders for "+1 size" math. KB ladder is the actual lb increments the
+// gym stocks; Dynamax ladder is what we have on the rack (no 6 or 12 lb).
+const KB_LADDER     = ['18 lb','26 lb','35 lb','44 lb','53 lb','62 lb','70 lb'];
+const DYNAMAX_LADDER= ['4 lb','8 lb','10 lb','14 lb','20 lb','30 lb'];
 const SLAMS_LADDER  = ['10 lb','15 lb','20 lb','25 lb','30 lb'];
+
+// 50-60% of max-rep bench test → "low-high reps" string
+function benchRepTarget(a){
+  if(!a.benchMax) return 'set by Brad';
+  const lo = Math.max(1, Math.floor(a.benchMax * 0.5));
+  const hi = Math.max(lo+1, Math.ceil(a.benchMax * 0.6));
+  return `${lo}–${hi} reps × 3 sets`;
+}
 function nextSize(ladder, current){
   const i = ladder.indexOf(current);
   if(i<0) return current+' +1';
@@ -140,16 +152,18 @@ const T = {
     (a) => a.loads.kbsquat + ' KB (paused)',
     (a) => 'Bodyweight (+plate if easy)'
   ],
+  // bench: bar weight + per-athlete 50–60% rep target (no more "Brad sets reps")
+  bench: [
+    (a) => `${a.loads.bench} bar · ${benchRepTarget(a)}`,
+    (a) => 'Moderate DBs',
+    (a) => 'Bodyweight parallel-bar push-ups'
+  ],
   dynamax: [
     (a) => a.loads.dynamax + ' Dynamax',
     (a) => nextSize(DYNAMAX_LADDER, a.loads.dynamax) + ' Dynamax',
     (a) => 'Moderate KB/DB swing'
   ],
-  bench: [
-    (a) => a.loads.bench + ' bar (Brad sets reps)',
-    (a) => 'Moderate DBs',
-    (a) => 'Bodyweight parallel-bar push-ups'
-  ],
+  // (bench redefined above with live %-of-max-reps target)
   hang: [
     (a) => 'Bodyweight (band assist OK)',
     (a) => 'Bodyweight scap pulls',
@@ -171,7 +185,7 @@ const T = {
     (a) => 'Bodyweight'
   ],
   row: [
-    (a) => 'C2 rower (damper 5-7)',
+    (a) => 'C2 rower (damper 10)',
     (a) => 'C2 rower',
     (a) => 'C2 rower (on/off)'
   ],
