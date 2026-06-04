@@ -85,7 +85,11 @@ var EVENTS = {
   row:       {name:'Concept Row 500m',       unit:'time',  lowerBetter:true},
   shuttle:   {name:'300 Yd Shuttle Run',     unit:'time',  lowerBetter:true}
 };
+// Known Senior Games competition dates → label for the Progress history badge (B5).
+var COMP_DATES = {'2025-09-21':'2025 Senior Games', '2026-09-27':'2026 Senior Games'};
 var EVENT_ORDER = (function(){
+  // Product requirement: Prowler Push is always displayed last, regardless of the
+  // per-athlete eventOrder. This deliberate override is documented here (B7).
   var arr = (CFG.eventOrder || ['prowler','kbsquat','dynamax','bench','hang','slams','jumprope','broadjump','row','shuttle']).slice();
   var i = arr.indexOf('prowler');
   if(i>-1){ arr.splice(i,1); arr.push('prowler'); }
@@ -105,6 +109,7 @@ var cachedLogs = [];
 var currentView = 'log';
 var _timerState = {};
 var _programCache = null;
+var _loadToken = 0;   // guards against stale async loads clobbering a newer one (B4, D3)
 
 // ===== TIMER (ported verbatim, with 10-sec prep) =====
 function _timerEl(ev, part){ return document.getElementById('tmr_'+part+'_'+ev); }
@@ -247,6 +252,12 @@ function updateTimePreview(el){
 }
 
 // ===== Value helpers =====
+function esc(s){
+  // HTML-escape any DB-sourced string before it enters innerHTML (C1).
+  return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return c==='&'?'&amp;':c==='<'?'&lt;':c==='>'?'&gt;':c==='"'?'&quot;':'&#39;';
+  });
+}
 function parseTime(t){
   if(t==null) return null;
   if(typeof t==='number') return isNaN(t)?null:t;
@@ -267,15 +278,17 @@ function formatTime(sec){
   return m+':'+(s<10?'0':'')+s.toFixed(s%1?1:0);
 }
 function fmtVal(ev,v){
+  // Always returns HTML-escaped text (DB-sourced values are untrusted — C1, B2).
   if(v==null||v==='') return '—';
   var cfg=EVENTS[ev];
-  if(cfg.unit==='time'){ if(typeof v==='string'&&v.includes(':')) return v; return formatTime(parseTime(v)); }
-  return String(v);
+  if(!cfg) return esc(String(v));
+  if(cfg.unit==='time'){ if(typeof v==='string'&&v.includes(':')) return esc(v); return esc(formatTime(parseTime(v))); }
+  return esc(String(v));
 }
 function bestScore(ev){
+  var cfg=EVENTS[ev]; if(!cfg) return null;   // B2: ignore unknown events
   var logs=cachedLogs.filter(function(l){ return l.event===ev&&l.value!=null&&l.value!==''; });
   if(!logs.length) return null;
-  var cfg=EVENTS[ev];
   var parser=cfg.unit==='time'?parseTime:parseFloat;
   var vals=logs.map(function(l){ return Object.assign({},l,{n:parser(l.value)}); }).filter(function(l){ return !isNaN(l.n); });
   if(!vals.length) return null;
@@ -352,7 +365,7 @@ function renderEventCard(ev){
     for(var i=1;i<=200;i++) opts+='<option value="'+i+'">'+i+' reps</option>';
     inputCtl='<select id="in_'+ev+'">'+opts+'</select>';
   } else if(cfg.unit==='inches'){
-    inputCtl='<input id="in_'+ev+'" type="number" inputmode="decimal" placeholder="inches" step="0.5">';
+    inputCtl='<input id="in_'+ev+'" type="number" inputmode="decimal" placeholder="inches" step="0.5" min="1" max="600">';
   } else {
     inputCtl='<span class="input-wrap"><input id="in_'+ev+'" type="text" inputmode="numeric" pattern="^\\d{1,2}:[0-5]\\d$" placeholder="M:SS  (e.g. 2:00)" oninput="SDSG.autoColonTime(this)"></span>';
   }
@@ -360,7 +373,7 @@ function renderEventCard(ev){
     '<div class="event-head"><div><div class="name">'+cfg.name+'</div><div class="meta">Comp Load · '+load+'</div></div>'+deltaBadge(ev)+'</div>'+
     '<div class="card-body">'+
       '<div class="scores">'+
-        '<div class="score-box"><div class="lbl">Your Best</div><div class="val">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div><div class="sub">'+(best?best.date:'No log yet')+'</div></div>'+
+        '<div class="score-box"><div class="lbl">Your Best</div><div class="val">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div><div class="sub">'+(best?esc(best.date):'No log yet')+'</div></div>'+
         '<div class="score-box gold"><div class="lbl">2025 Gold</div><div class="val">'+((podium[0]&&podium[0][2])||'—')+'</div><div class="sub">'+((podium[0]&&podium[0][1])||'—')+'</div></div>'+
       '</div>'+
       '<div class="podium"><div class="ph">'+(athlete.podiumLabel||'2025 Podium')+'</div>'+
@@ -400,11 +413,13 @@ function renderProgress(){
       var rows=byDate[date].map(function(l){
         var best=bestScore(l.event);
         var isPR=best&&best.date===l.date&&String(best.value)===String(l.value);
-        var delBtn = l.id ? '<button class="hist-del" data-id="'+l.id+'" title="Delete">🗑</button>' : '';
-        return '<div class="hist-row"><span class="ev">'+EVENTS[l.event].name+(isPR?'<span class="pr">PR</span>':'')+'</span><span class="actions"><span class="sc">'+fmtVal(l.event,l.value)+'</span>'+delBtn+'</span></div>';
+        var delBtn = l.id ? '<button class="hist-del" data-id="'+esc(l.id)+'" title="Delete">🗑</button>' : '';
+        var evName = EVENTS[l.event] ? EVENTS[l.event].name : esc(l.event);   // B2
+        return '<div class="hist-row"><span class="ev">'+evName+(isPR?'<span class="pr">PR</span>':'')+'</span><span class="actions"><span class="sc">'+fmtVal(l.event,l.value)+'</span>'+delBtn+'</span></div>';
       }).join('');
-      var compTag = (date==='2025-09-21') ? ' <span class="comp-day">🏆 2025 Senior Games</span>' : '';
-      return '<div class="hist-day"><div class="date">'+date+compTag+'</div>'+rows+'</div>';
+      var compName = COMP_DATES[date];   // B5: data-driven comp-day badge
+      var compTag = compName ? ' <span class="comp-day">🏆 '+esc(compName)+'</span>' : '';
+      return '<div class="hist-day"><div class="date">'+esc(date)+compTag+'</div>'+rows+'</div>';
     }).join('');
   }
   document.getElementById('progressView').innerHTML=
@@ -434,12 +449,12 @@ function renderScouting(){
       var list=inc[ev]||[]; if(!list.length) return '';
       var best=bestScore(ev);
       var youLoad=(athlete.loads&&athlete.loads[ev])||'';
-      if(/^bodyweight$/i.test(youLoad)) youLoad='';
+      if(/^(bw|body\s*weight)$/i.test(youLoad)) youLoad='';   // E8
       var youSub=athlete.division+(youLoad?' · '+youLoad:'');
       var youCard='<div class="scout-you">'+
         '<div class="sy-lbl">Your Best</div>'+
         '<div class="sy-val">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div>'+
-        '<div class="sy-sub">'+youSub+(best?' · '+best.date:'')+'</div>'+
+        '<div class="sy-sub">'+esc(youSub)+(best?' · '+esc(best.date):'')+'</div>'+
       '</div>';
       var caveat='<div class="scout-caveat"><span class="cv-flag">🚩</span>Incoming athletes below come from a different division. Their load or standard may differ — your Best above is your apples-to-apples baseline.</div>';
       var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>'; }).join('');
@@ -543,12 +558,18 @@ function render(){
 }
 function setView(v){
   currentView=v;
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.toggle('active',t.dataset.view===v); });
+  document.querySelectorAll('.tab').forEach(function(t){
+    var on=t.dataset.view===v;
+    t.classList.toggle('active',on);
+    t.setAttribute('aria-selected', on?'true':'false');   // E3
+  });
   ['log','program','progress','scouting'].forEach(function(name){
     var el=document.getElementById(name+'View'); if(el) el.hidden=(name!==v);
     var wrap=document.getElementById(name+'Wrap'); if(wrap) wrap.hidden=(name!==v);
   });
   render();
+  var panel=document.getElementById(v+'View');   // E2: move focus to the revealed panel
+  if(panel){ panel.setAttribute('tabindex','-1'); try{ panel.focus({preventScroll:true}); }catch(e){} }
 }
 function setSyncStatus(state,label){
   var el=document.getElementById('syncIndicator'); if(!el) return;
@@ -576,7 +597,16 @@ async function logScore(ev){
   var el=document.getElementById('in_'+ev), btn=document.getElementById('btn_'+ev);
   var raw=el.value.trim();
   if(!raw){ toast('Enter a value first'); return; }
-  if(EVENTS[ev].unit==='time' && !/^\d{1,2}:[0-5]\d$/.test(raw)){ toast('Use M:SS format (e.g. 2:00)'); return; }
+  // Per-unit bounds (D1/D2) — reject garbage before it hits the DB.
+  var unit=EVENTS[ev].unit;
+  if(unit==='time'){
+    if(!/^\d{1,2}:[0-5]\d$/.test(raw)){ toast('Use M:SS format (e.g. 2:00)'); return; }
+    var ts=parseTime(raw); if(ts==null||ts>1800){ toast('That time looks too long — check M:SS'); return; }
+  } else if(unit==='reps'){
+    var rn=parseInt(raw,10); if(isNaN(rn)||rn<1||rn>200){ toast('Enter a rep count between 1 and 200'); return; }
+  } else { // inches
+    var inn=parseFloat(raw); if(isNaN(inn)||inn<1||inn>600){ toast('Enter inches between 1 and 600'); return; }
+  }
   btn.disabled=true;
   var prevBest=bestScore(ev);
   var d=new Date();
@@ -594,7 +624,9 @@ async function logScore(ev){
       try{ if(inserted&&inserted.id){ setSyncStatus('syncing','Removing'); await deleteLog(inserted.id); cachedLogs=await loadLogs(slug()); setSyncStatus('synced'); render(); toast('Removed'); } }
       catch(e){ console.error(e); setSyncStatus('offline','Undo failed'); toast('Undo failed — check connection'); }
     };
+    var matched = !isPR && prevBest && newBest && String(newBest.value)===raw && String(prevBest.value)===raw;
     if(isPR&&prevBest) toast('🔥 NEW PR — '+EVENTS[ev].name,true,undo);
+    else if(matched) toast('Matched your best — '+EVENTS[ev].name,false,undo);   // D5
     else toast('Logged',false,undo);
   }catch(e){ console.error(e); setSyncStatus('offline','Save failed'); toast('Save failed — check connection'); }
   finally{ btn.disabled=false; }
@@ -607,11 +639,20 @@ async function resetAthlete(){
 async function switchAthlete(key){
   if(!ATHLETES[key]||key===cur) return;
   cur=key;
+  // B3: stop any running timers before discarding their state so intervals don't leak.
+  Object.keys(_timerState).forEach(function(ev){ var s=_timerState[ev]; if(s&&s.intervalId) clearInterval(s.intervalId); });
   _timerState={};
+  _programCache=null;   // B1: the Program tab badges per-athlete loads — force a refetch.
   document.querySelectorAll('.athlete-switch button').forEach(function(b){ b.classList.toggle('active',b.dataset.athlete===key); });
   setSyncStatus('syncing','Loading');
-  try{ cachedLogs=await loadLogs(slug()); await ensureBaselines(slug()); setSyncStatus('synced'); render(); }
-  catch(e){ console.error(e); setSyncStatus('offline','Load failed'); toast('Load failed — check connection'); }
+  var tok=++_loadToken;
+  try{
+    var logs=await loadLogs(slug()); if(tok!==_loadToken) return;   // B4/D3: stale load, bail
+    cachedLogs=logs;
+    await ensureBaselines(slug()); if(tok!==_loadToken) return;
+    setSyncStatus('synced'); render();
+  }
+  catch(e){ console.error(e); if(tok===_loadToken){ setSyncStatus('offline','Load failed'); toast('Load failed — check connection'); } }
 }
 function buildSwitcher(){
   var bt=document.getElementById('brandTitle');
@@ -627,10 +668,23 @@ function buildSwitcher(){
 }
 // ===== Font scale (zoom) control =====
 var FS_MIN=0.85, FS_MAX=1.6, FS_KEY='sdsg_fs';
+// CSS `zoom` is supported in all current browsers (Firefox added it in 2024).
+// For older engines that lack it, fall back to transform:scale on <main> (E1).
+var _zoomOK = (typeof CSS!=='undefined' && CSS.supports && CSS.supports('zoom','1.5'));
 function _readFs(){ var v=parseFloat(localStorage.getItem(FS_KEY)); return (isNaN(v)||!v)?1:v; }
 function _applyFs(){
   var fs=_readFs();
   document.documentElement.style.setProperty('--fs', fs);
+  if(!_zoomOK){
+    var main=document.querySelector('main');
+    if(main){
+      main.style.transformOrigin='top center';
+      main.style.transform = fs===1 ? '' : 'scale('+fs+')';
+      main.style.width = fs===1 ? '' : (100/fs)+'%';
+      main.style.marginLeft = fs===1 ? '' : 'auto';
+      main.style.marginRight = fs===1 ? '' : 'auto';
+    }
+  }
   var vEl=document.getElementById('fs-val');
   if(vEl) vEl.textContent=Math.round(fs*100)+'%';
   var dec=document.querySelector('.fontctl [data-act="font-dec"]');
@@ -665,8 +719,10 @@ async function init(){
     buildSwitcher();
     _mountFontCtl();
     setSyncStatus('syncing','Loading');
-    cachedLogs=await loadLogs(slug());
-    await ensureBaselines(slug());
+    var tok=++_loadToken;
+    var logs=await loadLogs(slug()); if(tok!==_loadToken) return;
+    cachedLogs=logs;
+    await ensureBaselines(slug()); if(tok!==_loadToken) return;
     setSyncStatus('synced');
     var ls=document.getElementById('loadingScreen'); if(ls) ls.classList.add('hidden');
     render();

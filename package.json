@@ -1,0 +1,12 @@
+{
+  "name": "yg-sdsg-tests",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Dev-only test harness for the SDSG static site. NOT deployed — Vercel serves the static HTML/CSS/JS directly and ignores this package.",
+  "scripts": {
+    "test": "bash tests/run.sh"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  }
+}

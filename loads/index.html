@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/logo.jpg">
 <meta name="theme-color" content="#0A0E17">
 <title>SDSG Load Cards · Group Window · Yeager's Gym</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -220,8 +221,8 @@ async function loadProgram(){
     document.getElementById('weekSub').textContent = subParts.join(' · ');
     render(events);
   }catch(err){
-    document.getElementById('status').innerHTML =
-      'Could not fetch /program/ — '+err.message+'.<br>Verify /program/ exists and refresh.';
+    const s = document.getElementById('status');
+    s.textContent = 'Could not fetch /program/ — '+(err&&err.message||'unknown error')+'. Verify /program/ exists and refresh.';
   }
 }
 
