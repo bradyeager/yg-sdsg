@@ -117,7 +117,7 @@ in each athlete config as `bench1rm: <pounds>`.
 | Tonnie | 120 lb | 45 lb | Comp = 38% of 1RM |
 | Kerry  | 175 lb | 115 lb | Comp = 66% of 1RM |
 | Peggy  | 57.5 lb | 45 lb | Comp = 78% of 1RM — tight headroom |
-| David  | 110 lb | 115 lb | Comp > 1RM (he's not benching at comp wt yet) |
+| David  | 130 lb | 115 lb | Comp = 88% of 1RM — re-estimated from 4 reps @ 115 lb (2026-05-11) |
 | Annie  | 115 lb | 50 lb | Comp = 43% of 1RM |
 | Robert | 145 lb | 75 lb | Comp = 52% of 1RM |
 
