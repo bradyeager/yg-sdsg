@@ -1,109 +1,108 @@
 DELETE FROM public.sdsg_logs WHERE athlete_slug='robert' AND note='Strong app · imported';
-INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) VALUES
-('robert','bench','12','2024-05-31','Strong app · imported'),
-('robert','broadjump','59','2024-05-31','Strong app · imported'),
-('robert','jumprope','90','2024-05-31','Strong app · imported'),
-('robert','kbsquat','29','2024-05-31','Strong app · imported'),
-('robert','slams','27','2024-05-31','Strong app · imported'),
-('robert','bench','7','2024-06-07','Strong app · imported'),
-('robert','broadjump','61','2024-06-07','Strong app · imported'),
-('robert','jumprope','51','2024-06-07','Strong app · imported'),
-('robert','kbsquat','39','2024-06-07','Strong app · imported'),
-('robert','slams','34','2024-06-07','Strong app · imported'),
-('robert','bench','10','2024-06-12','Strong app · imported'),
-('robert','broadjump','64','2024-06-12','Strong app · imported'),
-('robert','dynamax','151','2024-06-12','Strong app · imported'),
-('robert','kbsquat','40','2024-06-12','Strong app · imported'),
-('robert','slams','31','2024-06-12','Strong app · imported'),
-('robert','bench','12','2024-06-27','Strong app · imported'),
-('robert','broadjump','66','2024-06-27','Strong app · imported'),
-('robert','dynamax','183','2024-06-27','Strong app · imported'),
-('robert','jumprope','100','2024-06-27','Strong app · imported'),
-('robert','kbsquat','40','2024-06-27','Strong app · imported'),
-('robert','slams','33','2024-06-27','Strong app · imported'),
-('robert','bench','13','2024-07-12','Strong app · imported'),
-('robert','broadjump','63','2024-07-12','Strong app · imported'),
-('robert','dynamax','180','2024-07-12','Strong app · imported'),
-('robert','jumprope','142','2024-07-12','Strong app · imported'),
-('robert','kbsquat','43','2024-07-12','Strong app · imported'),
-('robert','slams','37','2024-07-12','Strong app · imported'),
-('robert','bench','13','2024-08-14','Strong app · imported'),
-('robert','broadjump','61','2024-08-14','Strong app · imported'),
-('robert','dynamax','228','2024-08-14','Strong app · imported'),
-('robert','jumprope','131','2024-08-14','Strong app · imported'),
-('robert','kbsquat','45','2024-08-14','Strong app · imported'),
-('robert','slams','35','2024-08-14','Strong app · imported'),
-('robert','bench','13','2024-08-26','Strong app · imported'),
-('robert','broadjump','61','2024-08-26','Strong app · imported'),
-('robert','dynamax','213','2024-08-26','Strong app · imported'),
-('robert','jumprope','150','2024-08-26','Strong app · imported'),
-('robert','kbsquat','50','2024-08-26','Strong app · imported'),
-('robert','slams','37','2024-08-26','Strong app · imported'),
-('robert','bench','13','2024-08-28','Strong app · imported'),
-('robert','broadjump','65','2024-08-28','Strong app · imported'),
-('robert','dynamax','230','2024-08-28','Strong app · imported'),
-('robert','jumprope','113','2024-08-28','Strong app · imported'),
-('robert','kbsquat','54','2024-08-28','Strong app · imported'),
-('robert','bench','14','2024-09-02','Strong app · imported'),
-('robert','broadjump','64','2024-09-02','Strong app · imported'),
-('robert','dynamax','190','2024-09-02','Strong app · imported'),
-('robert','jumprope','167','2024-09-02','Strong app · imported'),
-('robert','slams','37','2024-09-02','Strong app · imported'),
-('robert','broadjump','64','2024-09-11','Strong app · imported'),
-('robert','dynamax','215','2024-09-11','Strong app · imported'),
-('robert','jumprope','152','2024-09-11','Strong app · imported'),
-('robert','kbsquat','60','2024-09-11','Strong app · imported'),
-('robert','slams','36','2024-09-11','Strong app · imported'),
-('robert','bench','14','2025-05-22','Strong app · imported'),
-('robert','kbsquat','30','2025-05-22','Strong app · imported'),
-('robert','jumprope','129','2025-05-29','Strong app · imported'),
-('robert','kbsquat','60','2025-05-29','Strong app · imported'),
-('robert','bench','14','2025-06-05','Strong app · imported'),
-('robert','broadjump','61','2025-06-05','Strong app · imported'),
-('robert','dynamax','213','2025-06-05','Strong app · imported'),
-('robert','jumprope','129','2025-06-05','Strong app · imported'),
-('robert','kbsquat','60','2025-06-05','Strong app · imported'),
-('robert','kbsquat','70','2025-06-19','Strong app · imported'),
-('robert','bench','30','2025-07-15','Strong app · imported'),
-('robert','dynamax','250','2025-07-15','Strong app · imported'),
-('robert','jumprope','135','2025-07-15','Strong app · imported'),
-('robert','kbsquat','70','2025-07-15','Strong app · imported'),
-('robert','prowler','0:22','2025-07-15','Strong app · imported'),
-('robert','slams','36','2025-07-15','Strong app · imported'),
-('robert','bench','30','2025-07-24','Strong app · imported'),
-('robert','broadjump','63','2025-07-24','Strong app · imported'),
-('robert','dynamax','231','2025-07-24','Strong app · imported'),
-('robert','jumprope','140','2025-07-24','Strong app · imported'),
-('robert','kbsquat','70','2025-07-24','Strong app · imported'),
-('robert','prowler','0:22','2025-07-24','Strong app · imported'),
-('robert','slams','37','2025-07-24','Strong app · imported'),
-('robert','dynamax','278','2025-07-31','Strong app · imported'),
-('robert','jumprope','180','2025-07-31','Strong app · imported'),
-('robert','bench','14','2025-08-05','Strong app · imported'),
-('robert','dynamax','288','2025-08-05','Strong app · imported'),
-('robert','row','1:52','2025-08-05','Strong app · imported'),
-('robert','slams','40','2025-08-05','Strong app · imported'),
-('robert','bench','30','2025-08-12','Strong app · imported'),
-('robert','broadjump','63','2025-08-12','Strong app · imported'),
-('robert','dynamax','231','2025-08-12','Strong app · imported'),
-('robert','jumprope','140','2025-08-12','Strong app · imported'),
-('robert','kbsquat','70','2025-08-12','Strong app · imported'),
-('robert','prowler','0:22','2025-08-12','Strong app · imported'),
-('robert','slams','37','2025-08-12','Strong app · imported'),
-('robert','dynamax','305','2025-08-14','Strong app · imported'),
-('robert','jumprope','150','2025-08-14','Strong app · imported'),
-('robert','bench','12','2025-08-19','Strong app · imported'),
-('robert','dynamax','310','2025-08-19','Strong app · imported'),
-('robert','jumprope','145','2025-08-19','Strong app · imported'),
-('robert','kbsquat','77','2025-08-19','Strong app · imported'),
-('robert','prowler','1:00','2025-08-19','Strong app · imported'),
-('robert','slams','56','2025-08-19','Strong app · imported'),
-('robert','dynamax','264','2025-09-02','Strong app · imported'),
-('robert','jumprope','130','2025-09-02','Strong app · imported'),
-('robert','bench','30','2025-09-11','Strong app · imported'),
-('robert','broadjump','63','2025-09-11','Strong app · imported'),
-('robert','dynamax','305','2025-09-11','Strong app · imported'),
-('robert','jumprope','181','2025-09-11','Strong app · imported'),
-('robert','kbsquat','70','2025-09-11','Strong app · imported'),
-('robert','prowler','0:22','2025-09-11','Strong app · imported'),
-('robert','slams','37','2025-09-11','Strong app · imported');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','12','2024-05-31','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='12' AND log_date='2024-05-31');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','59','2024-05-31','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='59' AND log_date='2024-05-31');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','90','2024-05-31','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='90' AND log_date='2024-05-31');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','29','2024-05-31','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='29' AND log_date='2024-05-31');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','27','2024-05-31','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='27' AND log_date='2024-05-31');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','7','2024-06-07','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='7' AND log_date='2024-06-07');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','61','2024-06-07','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='61' AND log_date='2024-06-07');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','51','2024-06-07','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='51' AND log_date='2024-06-07');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','39','2024-06-07','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='39' AND log_date='2024-06-07');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','34','2024-06-07','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='34' AND log_date='2024-06-07');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','10','2024-06-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='10' AND log_date='2024-06-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','64','2024-06-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='64' AND log_date='2024-06-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','151','2024-06-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='151' AND log_date='2024-06-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','40','2024-06-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='40' AND log_date='2024-06-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','31','2024-06-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='31' AND log_date='2024-06-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','12','2024-06-27','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='12' AND log_date='2024-06-27');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','66','2024-06-27','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='66' AND log_date='2024-06-27');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','183','2024-06-27','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='183' AND log_date='2024-06-27');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','100','2024-06-27','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='100' AND log_date='2024-06-27');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','40','2024-06-27','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='40' AND log_date='2024-06-27');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','33','2024-06-27','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='33' AND log_date='2024-06-27');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','13','2024-07-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='13' AND log_date='2024-07-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','63','2024-07-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='63' AND log_date='2024-07-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','180','2024-07-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='180' AND log_date='2024-07-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','142','2024-07-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='142' AND log_date='2024-07-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','43','2024-07-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='43' AND log_date='2024-07-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','37','2024-07-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='37' AND log_date='2024-07-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','13','2024-08-14','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='13' AND log_date='2024-08-14');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','61','2024-08-14','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='61' AND log_date='2024-08-14');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','228','2024-08-14','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='228' AND log_date='2024-08-14');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','131','2024-08-14','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='131' AND log_date='2024-08-14');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','45','2024-08-14','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='45' AND log_date='2024-08-14');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','35','2024-08-14','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='35' AND log_date='2024-08-14');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','13','2024-08-26','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='13' AND log_date='2024-08-26');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','61','2024-08-26','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='61' AND log_date='2024-08-26');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','213','2024-08-26','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='213' AND log_date='2024-08-26');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','150','2024-08-26','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='150' AND log_date='2024-08-26');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','50','2024-08-26','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='50' AND log_date='2024-08-26');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','37','2024-08-26','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='37' AND log_date='2024-08-26');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','13','2024-08-28','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='13' AND log_date='2024-08-28');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','65','2024-08-28','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='65' AND log_date='2024-08-28');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','230','2024-08-28','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='230' AND log_date='2024-08-28');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','113','2024-08-28','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='113' AND log_date='2024-08-28');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','54','2024-08-28','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='54' AND log_date='2024-08-28');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','14','2024-09-02','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='14' AND log_date='2024-09-02');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','64','2024-09-02','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='64' AND log_date='2024-09-02');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','190','2024-09-02','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='190' AND log_date='2024-09-02');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','167','2024-09-02','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='167' AND log_date='2024-09-02');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','37','2024-09-02','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='37' AND log_date='2024-09-02');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','64','2024-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='64' AND log_date='2024-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','215','2024-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='215' AND log_date='2024-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','152','2024-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='152' AND log_date='2024-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','60','2024-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='60' AND log_date='2024-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','36','2024-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='36' AND log_date='2024-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','14','2025-05-22','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='14' AND log_date='2025-05-22');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','30','2025-05-22','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='30' AND log_date='2025-05-22');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','129','2025-05-29','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='129' AND log_date='2025-05-29');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','60','2025-05-29','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='60' AND log_date='2025-05-29');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','14','2025-06-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='14' AND log_date='2025-06-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','61','2025-06-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='61' AND log_date='2025-06-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','213','2025-06-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='213' AND log_date='2025-06-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','129','2025-06-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='129' AND log_date='2025-06-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','60','2025-06-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='60' AND log_date='2025-06-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','70','2025-06-19','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='70' AND log_date='2025-06-19');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','30','2025-07-15','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='30' AND log_date='2025-07-15');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','250','2025-07-15','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='250' AND log_date='2025-07-15');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','135','2025-07-15','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='135' AND log_date='2025-07-15');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','70','2025-07-15','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='70' AND log_date='2025-07-15');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','prowler','0:22','2025-07-15','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='prowler' AND value='0:22' AND log_date='2025-07-15');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','36','2025-07-15','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='36' AND log_date='2025-07-15');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','30','2025-07-24','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='30' AND log_date='2025-07-24');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','63','2025-07-24','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='63' AND log_date='2025-07-24');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','231','2025-07-24','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='231' AND log_date='2025-07-24');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','140','2025-07-24','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='140' AND log_date='2025-07-24');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','70','2025-07-24','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='70' AND log_date='2025-07-24');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','prowler','0:22','2025-07-24','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='prowler' AND value='0:22' AND log_date='2025-07-24');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','37','2025-07-24','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='37' AND log_date='2025-07-24');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','278','2025-07-31','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='278' AND log_date='2025-07-31');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','180','2025-07-31','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='180' AND log_date='2025-07-31');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','14','2025-08-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='14' AND log_date='2025-08-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','288','2025-08-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='288' AND log_date='2025-08-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','row','1:52','2025-08-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='row' AND value='1:52' AND log_date='2025-08-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','40','2025-08-05','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='40' AND log_date='2025-08-05');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','30','2025-08-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='30' AND log_date='2025-08-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','63','2025-08-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='63' AND log_date='2025-08-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','231','2025-08-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='231' AND log_date='2025-08-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','140','2025-08-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='140' AND log_date='2025-08-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','70','2025-08-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='70' AND log_date='2025-08-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','prowler','0:22','2025-08-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='prowler' AND value='0:22' AND log_date='2025-08-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','37','2025-08-12','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='37' AND log_date='2025-08-12');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','305','2025-08-14','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='305' AND log_date='2025-08-14');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','150','2025-08-14','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='150' AND log_date='2025-08-14');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','12','2025-08-19','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='12' AND log_date='2025-08-19');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','310','2025-08-19','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='310' AND log_date='2025-08-19');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','145','2025-08-19','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='145' AND log_date='2025-08-19');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','77','2025-08-19','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='77' AND log_date='2025-08-19');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','prowler','1:00','2025-08-19','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='prowler' AND value='1:00' AND log_date='2025-08-19');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','56','2025-08-19','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='56' AND log_date='2025-08-19');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','264','2025-09-02','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='264' AND log_date='2025-09-02');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','130','2025-09-02','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='130' AND log_date='2025-09-02');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','bench','30','2025-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='bench' AND value='30' AND log_date='2025-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','broadjump','63','2025-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='broadjump' AND value='63' AND log_date='2025-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','dynamax','305','2025-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='dynamax' AND value='305' AND log_date='2025-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','jumprope','181','2025-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='jumprope' AND value='181' AND log_date='2025-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','kbsquat','70','2025-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='kbsquat' AND value='70' AND log_date='2025-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','prowler','0:22','2025-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='prowler' AND value='0:22' AND log_date='2025-09-11');
+INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) SELECT 'robert','slams','37','2025-09-11','Strong app · imported' WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs WHERE athlete_slug='robert' AND event='slams' AND value='37' AND log_date='2025-09-11');
