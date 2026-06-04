@@ -127,12 +127,20 @@ def main():
     print(f"-- {len(byKey)} rows mapped from {csv_path}", file=sys.stderr)
     print(f"-- by event: {dict(ec)}", file=sys.stderr)
 
+    # Idempotent: clear previous Strong-app rows for this athlete, then
+    # insert only entries that don't collide with any existing row
+    # (event + log_date + value). The NOT EXISTS guard prevents a Strong
+    # entry from duplicating a baseline or manual log of the same value.
     print(f"DELETE FROM public.sdsg_logs WHERE athlete_slug='{slug}' AND note='Strong app · imported';")
-    print("INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) VALUES")
-    parts = []
     for (date, ev), (val, num, lower) in sorted(byKey.items()):
-        parts.append(f"('{slug}','{ev}','{val}','{date}','Strong app · imported')")
-    print(",\n".join(parts) + ";")
+        val_q = val.replace("'", "''")
+        print(
+            "INSERT INTO public.sdsg_logs (athlete_slug,event,value,log_date,note) "
+            f"SELECT '{slug}','{ev}','{val_q}','{date}','Strong app · imported' "
+            "WHERE NOT EXISTS (SELECT 1 FROM public.sdsg_logs "
+            f"WHERE athlete_slug='{slug}' AND event='{ev}' "
+            f"AND value='{val_q}' AND log_date='{date}');"
+        )
 
 if __name__ == '__main__':
     main()
