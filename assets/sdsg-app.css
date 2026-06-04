@@ -311,7 +311,7 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 .foot-credit{margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase}
 
 /* ===== Toast ===== */
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:linear-gradient(180deg, var(--surface-3), var(--surface-2));border:1px solid var(--border-bright);color:var(--text);font-size:13px;font-weight:600;padding:12px 18px;border-radius:11px;box-shadow:0 8px 30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.06) inset;opacity:0;pointer-events:none;transition:all .3s;z-index:500;display:flex;align-items:center;gap:14px;max-width:90vw}
+.toast{position:fixed;left:50%;bottom:72px;transform:translateX(-50%) translateY(20px);background:linear-gradient(180deg, var(--surface-3), var(--surface-2));border:1px solid var(--border-bright);color:var(--text);font-size:13px;font-weight:600;padding:12px 18px;border-radius:11px;box-shadow:0 8px 30px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.06) inset;opacity:0;pointer-events:none;transition:all .3s;z-index:500;display:flex;align-items:center;gap:14px;max-width:90vw}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
 .toast.pr{border-color:var(--pink);box-shadow:0 8px 30px rgba(239,50,149,.4)}
 .toast-undo{background:none;border:1px solid var(--border-bright);color:var(--teal);font-family:inherit;font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:5px 11px;border-radius:7px;cursor:pointer;flex-shrink:0}

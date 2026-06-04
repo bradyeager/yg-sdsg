@@ -83,6 +83,34 @@ def make_mapper(slug):
                     return ('prowler', secToMSS(sec), sec, True)
             return None
         return mapper
+    elif slug == 'peggy':
+        # Peggy: Women 70-74. Goblet 26 lb (12 kg) comp, bench 45 lb comp,
+        # slams 10 lb, 4 lb dynamax. Rowing CSV has the 500m->50 distance typo.
+        def mapper(name, w, reps, dist, sec):
+            if name == 'Goblet Squat (Kettlebell)':
+                if w == 26.0 and 0 < reps <= 200:
+                    return ('kbsquat', str(int(reps)), reps, False)
+            elif name == 'Bench Press (Barbell)':
+                if w == 45.0 and 0 < reps <= 200:
+                    return ('bench', str(int(reps)), reps, False)
+            elif name == 'Ball Slams':
+                if w == 10.0 and 0 < reps <= 100:
+                    return ('slams', str(int(reps)), reps, False)
+            elif name == 'Dead Hang':
+                if 5 <= reps <= 600:
+                    return ('hang', secToMSS(reps), reps, False)
+            elif name in ('Overhead Toss', 'Ball Toss'):
+                if w == 4.0 and 50 <= reps <= 500:
+                    return ('dynamax', str(int(reps)), reps, False)
+            elif name == 'Rowing (Machine)':
+                if 90 <= sec <= 360 and (abs(dist - 500) < 50 or dist == 50):
+                    return ('row', secToMSS(sec), sec, True)
+            elif name == 'Broad Jump':
+                # Peggy's CSV logs broad jump in the distance column (Tonnie/Robert use reps)
+                if 12 <= dist <= 120:
+                    return ('broadjump', str(int(dist)), dist, False)
+            return None
+        return mapper
     raise SystemExit("unknown athlete: " + slug)
 
 def main():

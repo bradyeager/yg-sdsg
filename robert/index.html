@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/logo.jpg">
 <meta name="theme-color" content="#0A0E17">
 <title>SDSG Athlete · Yeager's Gym</title>
 <!-- This tracker writes to public.sdsg_logs via athlete_slug. Anonymous (publishable) key, no login. -->
@@ -33,11 +34,11 @@
 
 <div class="athlete-switch" id="athleteSwitch" hidden></div>
 
-<nav class="tabbar">
-  <button class="tab active" data-view="log" onclick="SDSG.setView('log')"><span class="ico">📋</span>Log</button>
-  <button class="tab" data-view="program" onclick="SDSG.setView('program')"><span class="ico">📅</span>Program</button>
-  <button class="tab" data-view="progress" onclick="SDSG.setView('progress')"><span class="ico">📈</span>Progress</button>
-  <button class="tab" data-view="scouting" onclick="SDSG.setView('scouting')"><span class="ico">🎯</span>Scouting</button>
+<nav class="tabbar" role="tablist" aria-label="Athlete views">
+  <button class="tab active" role="tab" aria-selected="true" aria-controls="logView" data-view="log" onclick="SDSG.setView('log')"><span class="ico">📋</span>Log</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="programView" data-view="program" onclick="SDSG.setView('program')"><span class="ico">📅</span>Program</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="progressView" data-view="progress" onclick="SDSG.setView('progress')"><span class="ico">📈</span>Progress</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="scoutingView" data-view="scouting" onclick="SDSG.setView('scouting')"><span class="ico">🎯</span>Scouting</button>
 </nav>
 
 <main>

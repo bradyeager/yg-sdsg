@@ -75,19 +75,31 @@ RLS: public read/write/delete (intentional — single-publishable-key SaaS app; 
 
 ## Adding a New Athlete
 
+The trackers are **thin shells** over the shared `/assets/sdsg-app.{js,css}`. Each
+`/<athlete>/index.html` just sets `window.SDSG_CONFIG` and includes the shared assets —
+there is **no** per-tracker Supabase block anymore. The canonical Supabase block now
+lives once in `/assets/sdsg-app.js` (fenced by `// === CANONICAL SUPABASE BLOCK ===`).
+
 1. Decide solo or shared:
    - **Solo** (one athlete, one phone) → copy `tonnie/index.html` as the template.
-   - **Shared** (training partners, one phone) → copy `annie-david/index.html` as the template.
+   - **Shared** (training partners, one phone) → copy `annie-david/index.html` (it sets `dual:true`).
 
-2. Edit the new file:
-   - Solo: change `ATHLETE_SLUG = '<name>'`, replace the `TONNIE` data object with the new athlete's data, update division/training-days/baselines/podium/loads/background/strong/weak/arc.
-   - Shared: add the new key in `ATHLETES = {...}`, update toggle button labels, update `currentAthlete` default if needed.
+2. Edit only the `window.SDSG_CONFIG` object in the new file:
+   - Solo: set `defaultAthlete:'<slug>'` and replace the single entry in `athletes:{...}`
+     (`slug`, `name`, `division`, `loads` in **lb**, `bench1rm`, `podium`, `incoming`,
+     `baselines`, `background`/`strong`/`weak`/`arc`).
+   - Shared: keep `dual:true`, add the new key under `athletes:{...}`, set `defaultAthlete`.
+   - Do **not** touch the `<script src="/assets/sdsg-app.js">` include or the DOM scaffold
+     (loading screen, sync indicator, tabbar, `#…View` sections) — the shared app references those ids.
 
-3. Place at `/<name>/index.html` (or `/<a>-<b>/index.html` for shared).
+3. Place at `/<slug>/index.html` (or `/<a>-<b>/index.html` for shared).
 
-4. Update root `/index.html` — add a new `<a class="athlete" href="/<name>">...</a>` card.
+4. Update root `/index.html` — add a new `<a class="athlete" href="/<slug>">...</a>` card.
 
-5. Commit → push → Vercel auto-deploys.
+5. The DB enforces `athlete_slug ~ '^[a-z0-9_-]{1,40}$'` plus the 10-event whitelist — keep
+   the slug lowercase and the event keys exact.
+
+6. Commit → push → Vercel auto-deploys.
 
 6. Verify:
    - Landing page card visible and clickable

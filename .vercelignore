@@ -1,0 +1,11 @@
+# Keep the Vercel deploy a pure static upload — never let it detect a Node build.
+# (GitHub Actions checks out the full repo, so CI still sees these.)
+package.json
+package-lock.json
+node_modules
+tests
+.github
+tools
+data
+CONTRIBUTING.md
+README.md
