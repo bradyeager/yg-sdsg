@@ -35,24 +35,17 @@
 <div class="athlete-switch" id="athleteSwitch" hidden></div>
 
 <nav class="tabbar" role="tablist" aria-label="Athlete views">
-  <button class="tab active" role="tab" aria-selected="true" aria-controls="logView" data-view="log" onclick="SDSG.setView('log')"><span class="ico">📋</span>Log</button>
+  <button class="tab active" role="tab" aria-selected="true" aria-controls="dashboardView" data-view="dashboard" onclick="SDSG.setView('dashboard')"><span class="ico">🏠</span>Dashboard</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="logView" data-view="log" onclick="SDSG.setView('log')"><span class="ico">📋</span>Log</button>
   <button class="tab" role="tab" aria-selected="false" aria-controls="programView" data-view="program" onclick="SDSG.setView('program')"><span class="ico">📅</span>Program</button>
   <button class="tab" role="tab" aria-selected="false" aria-controls="progressView" data-view="progress" onclick="SDSG.setView('progress')"><span class="ico">📈</span>Progress</button>
   <button class="tab" role="tab" aria-selected="false" aria-controls="scoutingView" data-view="scouting" onclick="SDSG.setView('scouting')"><span class="ico">🎯</span>Scouting</button>
 </nav>
 
 <main>
-  <section id="logView">
-    <div class="block-strip">
-      <div class="bs-top"><span class="bs-week" id="blockWeek">Week — of —</span><span class="bs-pct" id="blockPct">—%</span></div>
-      <div class="bar"><div class="fill" id="blockFill" style="width:0%"></div></div>
-    </div>
-    <div class="stat-row">
-      <div class="stat"><div class="n" id="statLogged">0/10</div><div class="l">Events Logged</div></div>
-      <div class="stat gold"><div class="n" id="statGold">0</div><div class="l">At Gold Pace</div></div>
-      <div class="stat pink"><div class="n" id="statPRs">0</div><div class="l">PRs Logged</div></div>
-    </div>
-    <div id="profileCard"></div>
+  <section id="dashboardView"></section>
+
+  <section id="logView" hidden>
     <div id="eventList"></div>
     <div class="foot">
       <details class="danger-zone">

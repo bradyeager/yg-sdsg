@@ -156,7 +156,7 @@ var TIMER_CONFIG = {
 };
 
 var cachedLogs = [];
-var currentView = 'log';
+var currentView = 'dashboard';
 var _timerState = {};
 var _programCache = null;
 var _loadToken = 0;   // guards against stale async loads clobbering a newer one (B4, D3)
@@ -604,7 +604,8 @@ function renderLog(){
   document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('');
 }
 function renderProgress(){
-  // Status dashboard
+  // Status dashboard — top row carries event name + delta pill;
+  // bottom row keeps the medals on a single line + your-best on the right.
   var dash=EVENT_ORDER.map(function(ev){
     var cfg=EVENTS[ev], best=bestScore(ev), athlete=A();
     var pod=athlete.podium&&athlete.podium[ev];
@@ -614,21 +615,46 @@ function renderProgress(){
       '<span class="pm-row"><span class="pm-i pm-s">🥈</span><span class="pm-v">'+val('SILVER')+'</span></span>'+
       '<span class="pm-row"><span class="pm-i pm-b">🥉</span><span class="pm-v">'+val('BRONZE')+'</span></span>'+
     '</div>';
-    return '<div class="dash-row"><div class="info"><div class="nm">'+cfg.name+'</div><div class="sb">'+((athlete.loads&&athlete.loads[ev])||'')+'</div>'+podRows+'</div>'+
-      '<div class="vals"><div class="you">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+recordIcons(ev)+'</div></div>'+deltaBadge(ev)+'</div>';
+    var loadTxt=(athlete.loads&&athlete.loads[ev])||'';
+    return '<div class="dash-row">'+
+      '<div class="dr-head"><div class="nm">'+cfg.name+'</div>'+deltaBadge(ev)+'</div>'+
+      (loadTxt?'<div class="sb">'+loadTxt+'</div>':'')+
+      '<div class="dr-body">'+
+        '<div class="info">'+podRows+'</div>'+
+        '<div class="vals"><div class="you">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+recordIcons(ev)+'</div></div>'+
+      '</div>'+
+    '</div>';
   }).join('');
   // Records summary — what this athlete holds + where their best is on record pace.
+  // Written as a sentence + bulleted list so it reads cleanly under fatigue.
   var heldList=[], paceList=[];
   EVENT_ORDER.forEach(function(ev){
-    if(holdsRecord(ev)) heldList.push(EVENTS[ev].name);
+    if(holdsRecord(ev)){
+      var h=holdsRecord(ev);
+      heldList.push(EVENTS[ev].name+(h.band?' · '+h.band:'')+(h.value?' ('+h.value+')':''));
+    }
     var st=recordStatus(ev);
-    if(st&&st.beats&&st.best) paceList.push(EVENTS[ev].name+(st.tie?' (tie)':''));
+    if(st&&st.beats&&st.best) paceList.push(EVENTS[ev].name+(st.tie?' (tied)':''));
   });
   var recSummary='';
   if(heldList.length||paceList.length){
+    var div=esc(A().division);
+    function ul(items){ return '<ul class="rsum-list">'+items.map(function(t){ return '<li>'+esc(t)+'</li>'; }).join('')+'</ul>'; }
     recSummary='<div class="rec-summary">'+
-      (heldList.length?'<div class="rsum-row"><span class="rsum-i">🏅</span><span class="rsum-t"><b>'+heldList.length+' all-time record'+(heldList.length>1?'s':'')+' held</b> · '+esc(heldList.join(', '))+'</span></div>':'')+
-      (paceList.length?'<div class="rsum-row"><span class="rsum-i">🔥</span><span class="rsum-t"><b>On record pace in '+paceList.length+'</b> · best meets or beats the all-time '+esc(A().division)+' record: '+esc(paceList.join(', '))+'</span></div>':'')+
+      (heldList.length
+        ? '<div class="rsum-row"><span class="rsum-i">🏅</span><div class="rsum-t">'+
+            '<b>You hold the all-time record</b> in '+heldList.length+' event'+(heldList.length>1?'s':'')+
+            ' (the highest mark ever set in your past division, 2019–2025):'+
+            ul(heldList)+
+          '</div></div>'
+        : '')+
+      (paceList.length
+        ? '<div class="rsum-row"><span class="rsum-i">🔥</span><div class="rsum-t">'+
+            '<b>Your best is on all-time record pace</b> in '+paceList.length+' event'+(paceList.length>1?'s':'')+'. '+
+            'Your logged best matches or beats the highest mark ever set in <b>'+div+'</b> across the 2019–2025 record books:'+
+            ul(paceList)+
+          '</div></div>'
+        : '')+
     '</div>';
   }
   // History
@@ -706,6 +732,77 @@ function renderProfileInto(elId){
   el.innerHTML=html;
 }
 
+// ===== Personalized program prescriptions =====
+// Goal: substitute the shared /program/ pattern text with the athlete's own
+// numbers so they never do mental math fatigued on the gym floor.
+// Per-pattern lookup keyed by (event_name, pattern_name); returns either
+//   {load:'…'}                          — override the load line
+//   {load:'…', cue:'👉 Your number: …'} — also append a personal-target cue
+// Anything not matched falls through to the original /program/ copy.
+function _personalizePattern(eventName, p, athlete){
+  if(!athlete) return null;
+  var loads=athlete.loads||{};
+  var name=String(p.name||'');
+  // KB Box Squat
+  if(eventName==='KB Box Squat' && /Comp-Pace Box Squat/i.test(name)){
+    return {load:'Your competition KB — <b>'+esc(loads.kbsquat||'')+'</b> — at your competition box height'};
+  }
+  if(eventName==='KB Box Squat' && /Heavy Goblet Squat/i.test(name)){
+    return {load:'Same KB as last week — <b>'+esc(loads.kbsquat||'')+'</b>. The pause is the progression, not more weight.'};
+  }
+  // Dynamax — strip the (women)/(men) split and show just the athlete's ball.
+  if(eventName==='Dynamax OH Throw' && /Throw Technique Practice/i.test(name)){
+    return {load:'Dynamax ball — <b>'+esc(loads.dynamax||'')+'</b>'};
+  }
+  if(eventName==='Dynamax OH Throw' && /Hip Hinge \+ Med Ball Toss/i.test(name)){
+    return {load:'One size up from your '+esc(loads.dynamax||'')+' Dynamax (heavier med ball for power)'};
+  }
+  // Bench Press — compute the rep target from the latest bench best.
+  if(eventName==='Bench Press' && /Bench Volume/i.test(name)){
+    var benchBest=bestScore('bench');
+    var w=esc(loads.bench||'');
+    if(benchBest){
+      var n=parseInt(benchBest.value,10);
+      if(!isNaN(n)){
+        var lo=Math.max(1,Math.round(n*0.50)), hi=Math.max(lo,Math.round(n*0.60));
+        var tgt=lo===hi?(lo+''):(lo+'–'+hi);
+        return {load:w+' · 3 sets × <b>'+tgt+' reps</b> per set',
+          cue:'👉 Your number: <b>'+tgt+' reps × 3 sets</b> at '+w+' (50–60% of your '+n+'-rep test on '+esc(benchBest.date)+').'};
+      }
+    }
+    return {load:w+' · 3 sets to ~50–60% of your max-rep test',
+      cue:'👉 Log a max-rep bench test first so we can compute your exact rep target.'};
+  }
+  // Slams — substitute the D-ball weight.
+  if(eventName==='Med Ball Slams' && /(Standing Slam Volume|60-Sec Slam Practice)/i.test(name)){
+    return {load:'D-ball at your competition weight — <b>'+esc(loads.slams||'')+'</b>'};
+  }
+  if(eventName==='Med Ball Slams' && /Heavy Standing Slam/i.test(name)){
+    return {load:'One size heavier than your '+esc(loads.slams||'')+' comp ball'};
+  }
+  // Prowler — show just the athlete's plate config, drop the (women)/(men) split.
+  if(eventName==='Prowler Push' && /Comp-Distance Sled Push/i.test(name)){
+    return {load:'Competition load — <b>'+esc(loads.prowler||'')+'</b>'};
+  }
+  // Hang — if any future week uses a "% of best" prescription, compute the
+  // actual goal time so they don't do math on the bar.
+  if(eventName==='Overhead Arm Hang'){
+    var pctRx=/(\d{1,3})\s*%\s*of\s*(?:your\s*)?(?:best|max|pr)/i.exec(p.rx||'');
+    var hangBest=bestScore('hang');
+    if(pctRx && hangBest){
+      var pct=parseInt(pctRx[1],10);
+      var sec=parseTime(hangBest.value);
+      if(!isNaN(pct) && sec!=null){
+        var goal=Math.max(1,Math.round(sec*pct/100));
+        var m=Math.floor(goal/60), s=goal%60;
+        var goalStr=m+':'+(s<10?'0':'')+s;
+        return {cue:'👉 Your target: <b>'+goalStr+'</b> hold ('+pct+'% of your '+esc(hangBest.value)+' best from '+esc(hangBest.date)+').'};
+      }
+    }
+  }
+  return null;
+}
+
 // ===== Program tab (fetch /program/, render this week) =====
 async function renderProgram(){
   var host=document.getElementById('programView');
@@ -735,12 +832,16 @@ async function renderProgram(){
       var k=keyByName[e.event];
       var load=k&&aLoads[k]?aLoads[k]:'';
       var pats=(e.patterns||[]).map(function(p, patIdx){
-        var cues=(p.cues||[]).map(function(c){ return '<li>'+c+'</li>'; }).join('');
+        var pers=_personalizePattern(e.event, p, A());
+        var loadText = (pers && pers.load) ? pers.load : p.load;
+        var cuesArr = (p.cues||[]).slice();
+        if(pers && pers.cue) cuesArr.unshift(pers.cue);
+        var cues = cuesArr.map(function(c){ return '<li>'+c+'</li>'; }).join('');
         var tcfg=_patternTimerCfg(p.rx);
         var ptK=idx+'_'+patIdx;
         if(tcfg) _progTimerCfgs[ptK]=tcfg;
         var timerHtml=tcfg ? _renderProgPatternTimer(ptK, tcfg) : '';
-        return '<div class="prog-pat"><div class="pp-name">'+p.name+'</div><div class="pp-rx">'+(p.rx||'')+'</div>'+(p.load?'<div class="pp-rx" style="color:var(--text-dim);font-weight:500">'+p.load+'</div>':'')+timerHtml+(cues?'<ul class="pp-cues">'+cues+'</ul>':'')+'</div>';
+        return '<div class="prog-pat"><div class="pp-name">'+p.name+'</div><div class="pp-rx">'+(p.rx||'')+'</div>'+(loadText?'<div class="pp-rx pp-load">'+loadText+'</div>':'')+timerHtml+(cues?'<ul class="pp-cues">'+cues+'</ul>':'')+'</div>';
       }).join('');
       return '<div class="prog-event collapsed" id="pe_'+idx+'">'+
         '<div class="prog-event-head" onclick="SDSG.toggleProg('+idx+')">'+
@@ -768,6 +869,87 @@ function toggleEventCard(ev){
   if(head) head.setAttribute('aria-expanded', collapsed?'false':'true');
 }
 
+// ===== Dashboard (block periodization + this-week + stats + profile) =====
+// Single source of truth: the block-periodization grid is fetched from
+// /program/ so coach changes there propagate everywhere. Stats + profile
+// + arc live in the athlete config.
+var _dashCache = null;
+async function renderDashboard(){
+  var host = document.getElementById('dashboardView');
+  if(!host) return;
+  // Stats block (always fresh — derived from cachedLogs).
+  var statsHtml = _renderDashStats();
+  if(_dashCache){
+    host.innerHTML = statsHtml + _dashCache;
+    _wireDashProfile();
+    return;
+  }
+  host.innerHTML = statsHtml + '<div class="empty"><div class="spinner"></div><div class="msg" style="margin-top:14px">Loading your dashboard…</div></div>';
+  try{
+    var res = await fetch('/program/');
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    var txt = await res.text();
+    // Extract week banner + 4-block + comp-day grid from /program/ HTML.
+    var wt = txt.match(/<h2>(Week of [^<]+)<\/h2>/);
+    var ws = txt.match(/week-sub">([^<]+)</);
+    var wd = txt.match(/week-dates">([^<]+)</);
+    var tl = txt.match(/<div class="block-timeline">([\s\S]*?)<\/div>\s*<div class="week-note">/);
+    var timeline = tl ? tl[1] : '';
+    var compDate = new Date(COMP_DATE);
+    var days = Math.max(0,Math.ceil((compDate-new Date())/86400000));
+    // /program/ source uses named entities (&middot;, &ndash;, &mdash;, &amp;).
+    // They're trusted coach-authored copy — decode the handful we know before esc().
+    function _decode(s){ return String(s).replace(/&middot;/g,'·').replace(/&ndash;/g,'–').replace(/&mdash;/g,'—').replace(/&amp;/g,'&'); }
+    var weekHtml = '<div class="dash-week">'+
+      (wt ? '<div class="dw-title">'+esc(_decode(wt[1]))+'</div>' : '')+
+      (ws ? '<div class="dw-sub">'+esc(_decode(ws[1]))+'</div>' : '')+
+      (wd ? '<div class="dw-dates">'+esc(_decode(wd[1]))+'</div>' : '')+
+      '<a class="dw-open" href="/program/">Open Full Program →</a>'+
+    '</div>';
+    if(timeline) timeline = _decode(timeline);
+    var periodHtml = '<div class="section-title">Block Periodization · 2026 Season</div>'+
+      '<div class="dash-timeline">'+timeline+'</div>'+
+      '<div class="dash-compline">🏆 <b>'+days+' days</b> to San Diego Senior Games · Sept 27, 2026</div>';
+    _dashCache = '<div class="section-title">This Week</div>'+weekHtml+periodHtml+_renderDashProfile();
+    host.innerHTML = statsHtml + _dashCache;
+    _wireDashProfile();
+  }catch(e){
+    console.error(e);
+    host.innerHTML = statsHtml + '<div class="empty"><div class="ico">⚠️</div><div class="msg">Couldn’t load the program preview.<br>Open <a href="/program/" style="color:var(--teal)">/program/</a> directly.</div></div>';
+  }
+}
+function _renderDashStats(){
+  var logged = new Set(cachedLogs.map(function(l){return l.event;})).size;
+  var golds = 0; EVENT_ORDER.forEach(function(ev){ var d=goldDelta(ev); if(d&&d.pct>=0) golds++; });
+  var grouped = {}; cachedLogs.forEach(function(l){ (grouped[l.event]=grouped[l.event]||[]).push(l); });
+  var prs = 0; Object.keys(grouped).forEach(function(ev){ if(grouped[ev].length>1) prs+=Math.max(0,grouped[ev].length-1); });
+  // Block-strip — week N of M and % through.
+  var now=new Date(), totalDays=Math.ceil((COMP_DATE-BLOCK_START)/86400000);
+  var elapsed=Math.max(0,Math.ceil((now-BLOCK_START)/86400000));
+  var weeksTotal=Math.ceil(totalDays/7);
+  var weekNow=Math.min(weeksTotal,Math.max(1,Math.ceil(elapsed/7)));
+  var pct=Math.min(100,Math.max(0,(elapsed/totalDays)*100)).toFixed(0);
+  return '<div class="block-strip">'+
+      '<div class="bs-top"><span class="bs-week">Week '+weekNow+' of '+weeksTotal+'</span><span class="bs-pct">'+pct+'%</span></div>'+
+      '<div class="bar"><div class="fill" style="width:'+pct+'%"></div></div>'+
+    '</div>'+
+    '<div class="stat-row">'+
+      '<div class="stat"><div class="n">'+logged+'/10</div><div class="l">Events Logged</div></div>'+
+      '<div class="stat gold"><div class="n">'+golds+'</div><div class="l">At Gold Pace</div></div>'+
+      '<div class="stat pink"><div class="n">'+prs+'</div><div class="l">PRs Logged</div></div>'+
+    '</div>';
+}
+function _renderDashProfile(){
+  var a = A();
+  var html = '<div class="section-title">Athlete Profile</div><div class="profile-card"><div class="profile-head"><div class="profile-tag">Athlete</div><div class="profile-title">'+esc(a.name)+'</div><div class="profile-sub">'+esc(a.division)+(a.trains?' · '+esc(a.trains):'')+'</div></div><div class="profile-body">';
+  if(a.background) html += '<div class="profile-section"><div class="lbl teal">Background</div><p>'+a.background+'</p></div>';
+  if(a.strong||a.weak) html += '<div class="profile-pillars">'+(a.strong?'<div class="pillar s"><div class="ph">Strengths</div><div class="pb">'+a.strong+'</div></div>':'')+(a.weak?'<div class="pillar w"><div class="ph">Focus Areas</div><div class="pb">'+a.weak+'</div></div>':'')+'</div>';
+  if(a.arc) html += '<div style="margin-top:14px"><div class="block-arc"><div class="ah">'+esc(a.arc.title)+'</div><div class="ai">'+a.arc.body+'</div></div></div>';
+  html += '</div></div>';
+  return html;
+}
+function _wireDashProfile(){ /* placeholder for future interactive bits */ }
+
 // ===== Header / stats =====
 function renderHeader(){
   var now=new Date();
@@ -793,8 +975,12 @@ function renderStats(){
 }
 function render(){
   try{ document.title = A().name + " · SDSG '26 · Yeager's Gym"; }catch(e){}
+  // renderHeader/renderStats keep the legacy log-tab header IDs in sync when
+  // present (they may be absent on athletes who've moved everything to the
+  // Dashboard tab); both checks are no-ops if the elements aren't there.
   renderHeader(); renderStats(); renderProfileInto('profileCard');
-  if(currentView==='log') renderLog();
+  if(currentView==='dashboard') renderDashboard();
+  else if(currentView==='log') renderLog();
   else if(currentView==='progress') renderProgress();
   else if(currentView==='scouting') renderScouting();
   else if(currentView==='program') renderProgram();
@@ -806,7 +992,7 @@ function setView(v){
     t.classList.toggle('active',on);
     t.setAttribute('aria-selected', on?'true':'false');   // E3
   });
-  ['log','program','progress','scouting'].forEach(function(name){
+  ['dashboard','log','program','progress','scouting'].forEach(function(name){
     var el=document.getElementById(name+'View'); if(el) el.hidden=(name!==v);
     var wrap=document.getElementById(name+'Wrap'); if(wrap) wrap.hidden=(name!==v);
   });
@@ -888,6 +1074,7 @@ async function switchAthlete(key){
   Object.keys(_progTimerState).forEach(function(k){ var s=_progTimerState[k]; if(s&&s.intervalId) clearInterval(s.intervalId); });
   _progTimerState={}; _progTimerCfgs={};
   _programCache=null;   // B1: the Program tab badges per-athlete loads — force a refetch.
+  _dashCache=null;      // dashboard profile/arc are per-athlete — invalidate on switch.
   document.querySelectorAll('.athlete-switch button').forEach(function(b){ b.classList.toggle('active',b.dataset.athlete===key); });
   setSyncStatus('syncing','Loading');
   var tok=++_loadToken;

@@ -125,6 +125,9 @@ test('validation: out-of-range inches value is rejected, no POST fired', async (
   const counters = await mockSupabase(page, []);
   await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(1000);
+  // Default tab is Dashboard — switch to Log to expose the event cards.
+  await page.click('.tab[data-view="log"]');
+  await page.waitForTimeout(400);
   // Cards collapse by default — expand the dynamax card to reveal its input/log button.
   await page.evaluate(() => SDSG.toggleEventCard('dynamax'));
   await page.waitForTimeout(350);
@@ -150,6 +153,9 @@ test('records: holder + record-pace badges render for Tonnie', async () => {
   ]);
   await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(1000);
+  // Default tab is Dashboard — switch to Log so event cards exist.
+  await page.click('.tab[data-view="log"]');
+  await page.waitForTimeout(400);
   // Log tab: the bench card header should carry both the holder + pace icons.
   const benchIcons = await page.evaluate(() => {
     const card = document.getElementById('ec_bench');
@@ -173,8 +179,54 @@ test('records: holder + record-pace badges render for Tonnie', async () => {
     const el = document.querySelector('.rec-summary');
     return el ? el.textContent : '';
   });
-  assert.match(sum, /record.*held/i, 'summary lists records held');
-  assert.match(sum, /record pace/i, 'summary lists on-record-pace events');
+  assert.match(sum, /You hold the all-time record/i, 'summary names records held');
+  assert.match(sum, /on all-time record pace/i, 'summary names on-record-pace events');
+  await page.context().close();
+});
+
+// ---- 7. Dashboard tab is default + renders block-strip, stats, profile, week banner ----
+test('dashboard: default tab shows stats, week banner, periodization grid', async () => {
+  const page = await newPage();
+  await mockSupabase(page, [{ id: 'd1', event: 'bench', value: '58', log_date: '2026-05-07', note: '' }]);
+  await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1400);
+  // Dashboard is the active tab on load.
+  const active = await page.evaluate(() => document.querySelector('.tab.active').dataset.view);
+  assert.strictEqual(active, 'dashboard', 'Dashboard tab is active on load');
+  // Block-strip, stat-row and profile have moved here from the Log tab.
+  const txt = await page.evaluate(() => document.getElementById('dashboardView').textContent);
+  assert.match(txt, /Events Logged/, 'stat row present on dashboard');
+  assert.match(txt, /Week of/, 'this-week banner present on dashboard');
+  assert.match(txt, /Block 1[\s\S]*Foundation/i, 'periodization grid present on dashboard');
+  assert.match(txt, /Athlete Profile/, 'profile section present on dashboard');
+  // Log tab is now slim — no block-strip, no stats — just the event cards container.
+  const logHas = await page.evaluate(() => {
+    const lv = document.getElementById('logView');
+    return { blockStrip: !!lv.querySelector('.block-strip'), statRow: !!lv.querySelector('.stat-row'), profile: !!lv.querySelector('.profile-card') };
+  });
+  assert.deepStrictEqual(logHas, { blockStrip: false, statRow: false, profile: false }, 'Log tab no longer carries dashboard content');
+  await page.context().close();
+});
+
+// ---- 8. Program tab substitutes the athlete's own loads + computes bench rep target ----
+test('program: per-athlete loads + computed bench rep target replace shared copy', async () => {
+  const page = await newPage();
+  // Tonnie's bench best of 58 → 50–60% target = 29–35 reps.
+  await mockSupabase(page, [{ id: 'p1', event: 'bench', value: '58', log_date: '2026-05-07', note: '' }]);
+  await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1200);
+  await page.click('.tab[data-view="program"]');
+  await page.waitForTimeout(900);
+  const txt = await page.evaluate(() => document.getElementById('programView').textContent);
+  // KB Box Squat pattern carries Tonnie's KB load (26 lb) not the generic copy.
+  assert.match(txt, /Your competition KB.*26 lb/, 'KB pattern shows Tonnie\'s 26 lb');
+  // Dynamax shows just Tonnie's 4 lb ball, not the (women)/(men) split.
+  assert.match(txt, /Dynamax ball.*4 lb/, 'Dynamax pattern shows Tonnie\'s 4 lb ball');
+  assert.ok(!/4 lb \(women\) \/ 8 lb \(men\)/.test(txt), 'generic gender split is replaced');
+  // Bench pattern: computed rep target appears.
+  assert.match(txt, /29.*35 reps/, 'bench pattern shows the computed 29–35 rep target');
+  // Prowler shows just Tonnie's plates, not both gender options.
+  assert.match(txt, /Competition load.*2×25 lb plates/, 'prowler pattern shows Tonnie\'s plates');
   await page.context().close();
 });
 
