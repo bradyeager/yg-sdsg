@@ -85,6 +85,56 @@ var EVENTS = {
   row:       {name:'Concept Row 500m',       unit:'time',  lowerBetter:true},
   shuttle:   {name:'300 Yd Shuttle Run',     unit:'time',  lowerBetter:true}
 };
+// === ALL-TIME RECORD BOOK ============================================
+// Source: FitnessQuest10 Masters 50+ "Commissioners' Record Book" (2019–2025),
+// released by the San Diego Senior Games Association. Each entry is
+//   [value, holder(s), year]  (+ test weight as a 4th element for kbsquat/bench)
+// stored in the event's natively-recorded unit:
+//   time events  → "M:SS" / "M:SS.dd"   ·  dynamax → FEET (app logs inches → ×12)
+//   broadjump    → inches               ·  reps events → reps
+// G = gender ('W'/'M'); band keys match the per-athlete config `ageBand`.
+var RECORDS = {
+  prowler: {
+    W:{'50-54':['0:12.00','DeHart, Rachel',2025],'55-59':['0:12.81','Hyacinth, Flora',2022],'60-64':['0:15.00','Howell, Karen',2025],'65-69':['0:15.00','Daigle, Nancy',2025],'70-74':['0:16.38','Matthews, Brenda Steele',2023],'75-79':['0:23.58','Petrie, Marlene',2023],'80-84':['0:21.12','Walker, Sandra',2021],'85-89':['0:34.00','Walker, Sandra',2025]},
+    M:{'50-54':['0:11.40','DeHart, John',2024],'55-59':['0:12.81','Surprenant, Mike',2022],'60-64':['0:13.15','Sitzer, Matthew',2021],'65-69':['0:13.54','Navarro, David',2022],'70-74':['0:14.88','Roberts, Byron',2022],'75-79':['0:16.95','Williams, Stan',2023],'80-84':['0:17.06','Sepin, Arthur',2023],'85-89':['0:18.22','Sepin, Arthur',2024],'90-94':['0:30.26','Walker, Stafford',2023],'95-99':['1:33.00','Schneider, Ronald',2025]}
+  },
+  kbsquat: {
+    W:{'50-54':['62','Hays Morena, Jennifer',2025,'20 kg'],'55-59':['70','Reyes-Williamson, Margarita',2023,'20 kg'],'60-64':['150','Murray, Rowena',2022,'16 kg'],'65-69':['82','Daigle, Nancy',2025,'16 kg'],'70-74':['70','Paine, Constance',2022,'12 kg'],'75-79':['50','Hazard, Gail',2023,'12 kg'],'80-84':['60','Nicholson, Catherine',2025,'8 kg']},
+    M:{'50-54':['125','Fine, Justin',2022,'24 kg'],'55-59':['90','Surprenant, Mike',2022,'24 kg'],'60-64':['90','Butsumyo, Vince',2022,'20 kg'],'65-69':['86','Lawrence, Kirk',2023,'20 kg'],'70-74':['70','Moylan, Jerome',2025,'16 kg'],'75-79':['81','Bridges, John',2025,'16 kg'],'80-84':['61','Scott, Cliff',2023,'12 kg'],'85-89':['48','Scott, Cliff',2025,'12 kg']}
+  },
+  dynamax: {
+    W:{'50-54':['39.4','Reyes-Williamson, Margarita',2021],'55-59':['43.3','Hyacinth, Flora',2022],'60-64':['35.1','Cummings, Kirsten',2024],'65-69':['32.9','Halstead, Paula',2023],'70-74':['29','Halstead, Paula',2024],'75-79':['20.2','Petrie, Marlene',2023],'80-84':['24.7','Nicholson, Catherine',2023]},
+    M:{'50-54':['45.6','Porter, Rod',2021],'55-59':['43','Snowden, Gregg',2024],'60-64':['42.8','Southwick, Jeff',2021],'65-69':['38.6','Hrenko, Ray',2021],'70-74':['35.8','Doyle, William',2021],'75-79':['28.9','Stanton, Edward',2022],'80-84':['27.1','Sepin, Arthur',2022],'85-89':['24.5','Sepin, Arthur',2025],'90-94':['10','Walker, Stafford',2023],'95-99':['7.6','Schneider, Ronald',2025]}
+  },
+  bench: {
+    W:{'50-54':['65','Leano, Alma',2021,'55 lb'],'55-59':['51','Hesser, Michele',2021,'55 lb'],'60-64':['47','Williams, Tonya Davis',2023,'50 lb'],'65-69':['50','Dahl, Tonnie',2025,'50 lb'],'70-74':['46','Clark, Melia',2022,'45 lb'],'75-79':['76','Petrie, Marlene',2023,'45 lb'],'80-84':['50','Nicholson, Catherine',2023,'40 lb'],'85-89':['19','Walker, Sandra',2025,'40 lb']},
+    M:{'50-54':['64','DeHart, John',2025,'115 lb'],'55-59':['49','Surprenant, Mike',2022,'115 lb'],'60-64':['61','Sitzer, M. · Thomas, W. · Harris, O.',2023,'95 lb'],'65-69':['55','Wallace, Mark',2025,'95 lb'],'70-74':['68','Linder, Gary',2025,'75 lb'],'75-79':['42','Edwards, Stanton',2023,'75 lb'],'80-84':['91','Sepin, Arthur',2023,'55 lb'],'85-89':['75','Sepin, Arthur',2025,'55 lb'],'90-94':['29','Walker, Stafford',2025,'50 lb'],'95-99':['9','Schneider, Ronald',2025,'50 lb']}
+  },
+  hang: {
+    W:{'50-54':['2:07','Kim, Lee Ann',2023],'55-59':['3:08','Lyda-Savich, Dianna',2023],'60-64':['3:01','Amaral, Joan',2023],'65-69':['2:41','Greenwood, Karilyn',2023],'70-74':['2:30','Paine, Constance',2023],'75-79':['2:47','Hazard, Gail',2023],'80-84':['1:27','Carraway, Kristine',2025],'85-89':['1:16','Walker, Sandra',2025]},
+    M:{'50-54':['2:34','Porter, Rod',2021],'55-59':['2:47','Sasso, Paul',2021],'60-64':['6:00','Kaplan, Jim',2023],'65-69':['3:43','Hemme, Jerry',2023],'70-74':['4:33','Hemme, Jerry',2025],'75-79':['2:24','Rhodes, Oliver',2025],'80-84':['4:25','Holbrook, John',2023],'85-89':['1:33','Scott, Cliff',2025],'90-94':['0:19','Walker, Stafford',2023]}
+  },
+  slams: {
+    W:{'50-54':['53','Tyrrell, Laurie',2022],'55-59':['53','Southwick, Cheri',2021],'60-64':['58','Southwick, Cheri',2022],'65-69':['48','Dahl, T. · Greenwood, K.',2024],'70-74':['49','Halstead, Paula',2024],'75-79':['29','Sheridan, Suzanne',2025],'80-84':['34','Nicholson, Catherine',2024]},
+    M:{'50-54':['60','Porter, Rod',2019],'55-59':['58','Snowden, Gregg',2024],'60-64':['64','Hrenko, Ray',2019],'65-69':['51','Lawrence, Kirk',2024],'70-74':['48','Doyle, William',2023],'75-79':['44','Williams, Stan',2025],'80-84':['38','Owen, James',2024],'85-89':['27','McAleenan, Michael',2023],'90-94':['22','Schneider, Ronald',2024],'95-99':['15','Schneider, Ronald',2025]}
+  },
+  jumprope: {
+    W:{'50-54':['171','Kim, Lee Ann',2023],'55-59':['226','Sterger, Tara',2025],'60-64':['175','Murray, Rowena',2023],'65-69':['189','Murray, Rowena',2024],'70-74':['152','Halstead, Paula',2024],'75-79':['124','Walker, Sandra',2019],'80-84':['133','Walker, Sandra',2021]},
+    M:{'50-54':['217','Kumar, Akash',2024],'55-59':['183','Vonk, Eric',2024],'60-64':['201','Butsumyo, Vince',2024],'65-69':['197','Lawrence, Kirk',2024],'70-74':['168','Pittman, Patrick',2025],'75-79':['149','Rhodes, Oliver',2025],'80-84':['87','Kim, Yong',2023]}
+  },
+  broadjump: {
+    W:{'50-54':['65','Hallmark, A. · Kim, L. · De Ley, I.',2023],'55-59':['96.2','Hyacinth, Flora',2022],'60-64':['76','Howell, Karen',2025],'65-69':['71','Halstead, P. · Singleton, D.',2025],'70-74':['54','Matthews, Brenda Steele',2023],'75-79':['48','Sheridan, Suzanne',2025],'80-84':['50','Nicholson, Catherine',2025]},
+    M:{'50-54':['95.5','Rogers, Ryan',2022],'55-59':['99','Hightower, Lloyd',2025],'60-64':['92','Butsumyo, Vince',2023],'65-69':['74','Lawrence, Kirk',2023],'70-74':['72','Roberts, Byron',2023],'75-79':['72.5','Gast, Monte',2022],'80-84':['58','Kim, Yong',2023],'85-89':['37','Sepin, Arthur',2025]}
+  },
+  row: {
+    W:{'50-54':['1:52','Reyes-Williamson, M. · Hayes, K.',2025],'55-59':['1:48','White, Tracy',2022],'60-64':['1:47','Towne, Diane',2024],'65-69':['1:54','Daigle, Nancy',2024],'70-74':['1:59','Harris, Sharon',2021],'75-79':['2:19','Petrie, Marlene',2023],'80-84':['2:30','Walker, Sandra',2021],'85-89':['2:37','Walker, Sandra',2025]},
+    M:{'50-54':['1:28','Higgins, Matt',2023],'55-59':['1:36','Sasso, Paul',2021],'60-64':['1:34','Sitzer, Matthew',2021],'65-69':['1:39','Goldman, Danny',2022],'70-74':['1:48','Roberts, Byron',2022],'75-79':['1:54','Bridges, John',2025],'80-84':['2:04','Holbrook, J. · Christison, R.',2025],'90-94':['3:05','Schneider, Ronald',2024],'95-99':['3:22','Schneider, Ronald',2025]}
+  },
+  shuttle: {
+    W:{'50-54':['1:08','Parsons, Natalie',2019],'55-59':['1:02','Hyacinth, Flora',2022],'60-64':['1:12','Murray, R. · Howell, K.',2025],'65-69':['1:13','Murray, Rowena',2024],'70-74':['1:24','Halstead, Paula',2024],'75-79':['1:47','Sheridan, Suzanne',2025],'80-84':['1:46','Nicholson, Catherine',2024]},
+    M:{'50-54':['0:53','Porter, Rod',2022],'55-59':['0:59','Hightower, Lloyd',2025],'60-64':['0:59','Butsumyo, Vince',2024],'65-69':['1:04','Hrenko, Ray',2021],'70-74':['1:08','Hemme, Jerry',2024],'75-79':['1:10','Rose, Ed',2024],'80-84':['1:53','Kim, Yong',2023],'90-94':['3:16','Schneider, Ronald',2024]}
+  }
+};
 // Known Senior Games competition dates → label for the Progress history badge (B5).
 var COMP_DATES = {'2025-09-21':'2025 Senior Games', '2026-09-27':'2026 Senior Games'};
 var EVENT_ORDER = (function(){
@@ -422,6 +472,85 @@ function medalIcon(level){
   return '<span class="medal-trophy medal-'+level+'" title="'+label+' medal pace">'+icon+'</span>';
 }
 
+// ===== All-time record helpers =====
+function _recClock(s){
+  // Parse a record clock that may carry decimals ("0:16.38") or be plain seconds.
+  s=String(s);
+  if(s.indexOf(':')>-1){ var p=s.split(':'); return parseInt(p[0],10)*60 + parseFloat(p[1]); }
+  return parseFloat(s);
+}
+function recordFor(ev){
+  // All-time record entry for the active athlete's gender + division, or null.
+  var a=A(); if(!a||!a.gender||!a.ageBand) return null;
+  var g=RECORDS[ev]; if(!g||!g[a.gender]) return null;
+  var e=g[a.gender][a.ageBand]; if(!e) return null;
+  return {raw:e[0], holder:e[1], year:e[2], weight:e[3]||null};
+}
+function _recordValueN(ev, raw){
+  var cfg=EVENTS[ev]; if(!cfg) return NaN;
+  if(cfg.unit==='time') return _recClock(raw);
+  if(ev==='dynamax') return parseFloat(raw)*12;   // book feet → app inches
+  return parseFloat(raw);
+}
+function recordDisplay(ev, rec){
+  // Plain-text record value in the event's native display unit (already escaped).
+  if(!rec) return '—';
+  var cfg=EVENTS[ev];
+  if(cfg.unit==='time') return esc(rec.raw);
+  if(ev==='dynamax') return esc(rec.raw)+' ft';
+  if(cfg.unit==='inches') return esc(rec.raw)+' in';
+  return esc(rec.raw)+' reps'+(rec.weight?' @ '+esc(rec.weight):'');
+}
+function recordStatus(ev){
+  // {rec, best, beats, tie} — does the athlete's logged best meet/beat the
+  // current all-time record in their division? null when no record applies.
+  var rec=recordFor(ev); if(!rec) return null;
+  var best=bestScore(ev);
+  if(!best) return {rec:rec, best:null, beats:false, tie:false};
+  var cfg=EVENTS[ev];
+  var bestN = cfg.unit==='time'?parseTime(best.value):parseFloat(best.value);
+  var recN  = _recordValueN(ev, rec.raw);
+  if(isNaN(bestN)||isNaN(recN)) return {rec:rec, best:best, beats:false, tie:false};
+  var beats = cfg.lowerBetter ? bestN<=recN : bestN>=recN;
+  return {rec:rec, best:best, beats:beats, tie:bestN===recN};
+}
+function holdsRecord(ev){
+  // Explicit per-config flag — avoids fragile holder-name matching across bands.
+  var a=A(), held=a&&a.recordsHeld; if(!held) return null;
+  for(var i=0;i<held.length;i++){ if(held[i].event===ev) return held[i]; }
+  return null;
+}
+function recordIcons(ev){
+  // Compact 🏅/🔥 chips for collapsed card headers + Progress rows.
+  var out='';
+  var held=holdsRecord(ev);
+  if(held){
+    var ht='Holds the all-time '+esc(held.band||'')+' record'+(held.value?' · '+esc(held.value):'')+(held.year?' ('+held.year+')':'');
+    out+='<span class="rec-icon held" title="'+ht+'" aria-label="Record holder">🏅</span>';
+  }
+  var st=recordStatus(ev);
+  if(st&&st.beats&&st.best){
+    var verb=st.tie?'matches':'beats';
+    var pt='Your best '+verb+' the all-time '+esc(A().division)+' record ('+recordDisplay(ev,st.rec)+')';
+    out+='<span class="rec-icon pace" title="'+pt+'" aria-label="On record pace">🔥</span>';
+  }
+  return out;
+}
+function recordStrip(ev){
+  // Full record context line for the expanded Log card body.
+  var rec=recordFor(ev); if(!rec) return '';
+  var st=recordStatus(ev);
+  var badges='';
+  var held=holdsRecord(ev);
+  if(held) badges+='<span class="rec-badge held">🏅 Record Holder</span>';
+  if(st&&st.beats&&st.best) badges+='<span class="rec-badge pace">'+(st.tie?'🔥 Record Tie':'🔥 Record Pace')+'</span>';
+  return '<div class="rec-strip'+(st&&st.beats?' on':'')+'">'+
+    '<div class="rs-top"><span class="rs-lbl">🏆 All-Time '+esc(A().division)+' Record</span>'+badges+'</div>'+
+    '<div class="rs-val">'+recordDisplay(ev,rec)+'</div>'+
+    '<div class="rs-who">'+esc(rec.holder)+(rec.year?' · '+rec.year:'')+'</div>'+
+  '</div>';
+}
+
 // ===== Renders =====
 function _medalFromNote(note){
   if(!note) return '';
@@ -455,12 +584,13 @@ function renderEventCard(ev){
     inputCtl='<span class="input-wrap"><input id="in_'+ev+'" type="text" inputmode="numeric" pattern="^\\d{1,2}:[0-5]\\d$" placeholder="M:SS  (e.g. 2:00)" oninput="SDSG.autoColonTime(this)"></span>';
   }
   return '<div class="event-card collapsed" id="ec_'+ev+'">'+
-    '<div class="event-head" role="button" tabindex="0" aria-expanded="false" onclick="SDSG.toggleEventCard(\''+ev+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();SDSG.toggleEventCard(\''+ev+'\')}"><div><div class="name">'+cfg.name+'</div><div class="meta">Comp Load · '+load+'</div></div><div class="eh-right">'+deltaBadge(ev)+'<span class="ec-chevron" aria-hidden="true">&#9662;</span></div></div>'+
+    '<div class="event-head" role="button" tabindex="0" aria-expanded="false" onclick="SDSG.toggleEventCard(\''+ev+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();SDSG.toggleEventCard(\''+ev+'\')}"><div><div class="name">'+cfg.name+'</div><div class="meta">Comp Load · '+load+'</div></div><div class="eh-right">'+recordIcons(ev)+deltaBadge(ev)+'<span class="ec-chevron" aria-hidden="true">&#9662;</span></div></div>'+
     '<div class="card-body">'+
       '<div class="scores">'+
         '<div class="score-box"><div class="lbl">Your Best</div><div class="val">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div><div class="sub">'+(best?esc(best.date):'No log yet')+'</div></div>'+
         '<div class="score-box gold"><div class="lbl">2025 Gold</div><div class="val">'+((podium[0]&&podium[0][2])||'—')+'</div><div class="sub">'+((podium[0]&&podium[0][1])||'—')+'</div></div>'+
       '</div>'+
+      recordStrip(ev)+
       '<div class="podium"><div class="ph">'+(athlete.podiumLabel||'2025 Podium')+'</div>'+
         podium.map(function(p){ return '<div class="podium-row"><span class="place '+(p[0]==='GOLD'?'g':p[0]==='SILVER'?'s':'b')+'">'+p[0]+'</span><span class="who">'+p[1]+'</span><span class="sc">'+p[2]+'</span></div>'; }).join('')+
       '</div>'+
@@ -485,8 +615,22 @@ function renderProgress(){
       '<span class="pm-row"><span class="pm-i pm-b">🥉</span><span class="pm-v">'+val('BRONZE')+'</span></span>'+
     '</div>';
     return '<div class="dash-row"><div class="info"><div class="nm">'+cfg.name+'</div><div class="sb">'+((athlete.loads&&athlete.loads[ev])||'')+'</div>'+podRows+'</div>'+
-      '<div class="vals"><div class="you">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div></div>'+deltaBadge(ev)+'</div>';
+      '<div class="vals"><div class="you">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+recordIcons(ev)+'</div></div>'+deltaBadge(ev)+'</div>';
   }).join('');
+  // Records summary — what this athlete holds + where their best is on record pace.
+  var heldList=[], paceList=[];
+  EVENT_ORDER.forEach(function(ev){
+    if(holdsRecord(ev)) heldList.push(EVENTS[ev].name);
+    var st=recordStatus(ev);
+    if(st&&st.beats&&st.best) paceList.push(EVENTS[ev].name+(st.tie?' (tie)':''));
+  });
+  var recSummary='';
+  if(heldList.length||paceList.length){
+    recSummary='<div class="rec-summary">'+
+      (heldList.length?'<div class="rsum-row"><span class="rsum-i">🏅</span><span class="rsum-t"><b>'+heldList.length+' all-time record'+(heldList.length>1?'s':'')+' held</b> · '+esc(heldList.join(', '))+'</span></div>':'')+
+      (paceList.length?'<div class="rsum-row"><span class="rsum-i">🔥</span><span class="rsum-t"><b>On record pace in '+paceList.length+'</b> · best meets or beats the all-time '+esc(A().division)+' record: '+esc(paceList.join(', '))+'</span></div>':'')+
+    '</div>';
+  }
   // History
   var hist;
   if(!cachedLogs.length){ hist='<div class="empty"><div class="ico">📋</div><div class="msg">No sessions logged yet</div></div>'; }
@@ -508,6 +652,7 @@ function renderProgress(){
     }).join('');
   }
   document.getElementById('progressView').innerHTML=
+    recSummary+
     '<div class="section-title">Status · Best vs 2025 Gold</div>'+dash+
     '<div class="section-title" style="margin-top:24px">Training History</div><div id="historyList">'+hist+'</div>';
   // wire deletes

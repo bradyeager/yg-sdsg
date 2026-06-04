@@ -7,5 +7,6 @@ tests
 .github
 tools
 data
+docs
 CONTRIBUTING.md
 README.md

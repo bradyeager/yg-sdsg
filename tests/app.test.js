@@ -139,6 +139,45 @@ test('validation: out-of-range inches value is rejected, no POST fired', async (
   await page.context().close();
 });
 
+// ---- 6. All-time record badges: holder (🏅) + record pace (🔥) ----
+test('records: holder + record-pace badges render for Tonnie', async () => {
+  const page = await newPage();
+  // Tonnie holds the W65-69 bench record; a logged best of 58 also beats the
+  // current W70-74 bench all-time record (46), and 60 in beats broad jump (54).
+  await mockSupabase(page, [
+    { id: 'r1', event: 'bench', value: '58', log_date: '2026-05-07', note: '' },
+    { id: 'r2', event: 'broadjump', value: '60', log_date: '2025-08-21', note: '' },
+  ]);
+  await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1000);
+  // Log tab: the bench card header should carry both the holder + pace icons.
+  const benchIcons = await page.evaluate(() => {
+    const card = document.getElementById('ec_bench');
+    return card ? card.querySelector('.eh-right').textContent : '';
+  });
+  assert.ok(benchIcons.includes('🏅'), 'bench shows the record-holder icon');
+  assert.ok(benchIcons.includes('🔥'), 'bench shows the record-pace icon');
+  // The expanded body should name the all-time record holder.
+  await page.evaluate(() => SDSG.toggleEventCard('bench'));
+  await page.waitForTimeout(300);
+  const strip = await page.evaluate(() => {
+    const el = document.querySelector('#ec_bench .rec-strip');
+    return el ? el.textContent : '';
+  });
+  assert.match(strip, /All-Time Women 70.74 Record/i, 'record strip labels the division');
+  assert.match(strip, /Clark, Melia/, 'record strip names the holder');
+  // Progress tab: the records summary lists held + on-pace events.
+  await page.click('.tab[data-view="progress"]');
+  await page.waitForTimeout(400);
+  const sum = await page.evaluate(() => {
+    const el = document.querySelector('.rec-summary');
+    return el ? el.textContent : '';
+  });
+  assert.match(sum, /record.*held/i, 'summary lists records held');
+  assert.match(sum, /record pace/i, 'summary lists on-record-pace events');
+  await page.context().close();
+});
+
 // ---- 5. Empty state renders cleanly (no logs) ----
 test('empty state: progress shows the no-sessions message', async () => {
   const page = await newPage();
