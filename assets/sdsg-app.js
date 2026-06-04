@@ -895,8 +895,6 @@ async function renderDashboard(){
     var wd = txt.match(/week-dates">([^<]+)</);
     var tl = txt.match(/<div class="block-timeline">([\s\S]*?)<\/div>\s*<div class="week-note">/);
     var timeline = tl ? tl[1] : '';
-    var compDate = new Date(COMP_DATE);
-    var days = Math.max(0,Math.ceil((compDate-new Date())/86400000));
     // /program/ source uses named entities (&middot;, &ndash;, &mdash;, &amp;).
     // They're trusted coach-authored copy — decode the handful we know before esc().
     function _decode(s){ return String(s).replace(/&middot;/g,'·').replace(/&ndash;/g,'–').replace(/&mdash;/g,'—').replace(/&amp;/g,'&'); }
@@ -907,9 +905,7 @@ async function renderDashboard(){
       '<a class="dw-open" href="/program/">Open Full Program →</a>'+
     '</div>';
     if(timeline) timeline = _decode(timeline);
-    var periodHtml = '<div class="section-title">Block Periodization · 2026 Season</div>'+
-      '<div class="dash-timeline">'+timeline+'</div>'+
-      '<div class="dash-compline">🏆 <b>'+days+' days</b> to San Diego Senior Games · Sept 27, 2026</div>';
+    var periodHtml = '<div class="dash-timeline">'+timeline+'</div>';
     _dashCache = '<div class="section-title">This Week</div>'+weekHtml+periodHtml+_renderDashProfile();
     host.innerHTML = statsHtml + _dashCache;
     _wireDashProfile();
@@ -921,8 +917,7 @@ async function renderDashboard(){
 function _renderDashStats(){
   var logged = new Set(cachedLogs.map(function(l){return l.event;})).size;
   var golds = 0; EVENT_ORDER.forEach(function(ev){ var d=goldDelta(ev); if(d&&d.pct>=0) golds++; });
-  var grouped = {}; cachedLogs.forEach(function(l){ (grouped[l.event]=grouped[l.event]||[]).push(l); });
-  var prs = 0; Object.keys(grouped).forEach(function(ev){ if(grouped[ev].length>1) prs+=Math.max(0,grouped[ev].length-1); });
+  var prs = _countPRs();
   // Block-strip — week N of M and % through.
   var now=new Date(), totalDays=Math.ceil((COMP_DATE-BLOCK_START)/86400000);
   var elapsed=Math.max(0,Math.ceil((now-BLOCK_START)/86400000));
@@ -964,14 +959,34 @@ function renderHeader(){
   var bf=document.getElementById('blockFill'); if(bf) bf.style.width=pct.toFixed(0)+'%';
   var bp=document.getElementById('blockPct'); if(bp) bp.textContent=pct.toFixed(0)+'%';
 }
+// True PRs only: a logged value that beat the prior best for its event,
+// processed in chronological order. The initial baseline does not count.
+function _countPRs(){
+  var grouped={}; cachedLogs.forEach(function(l){ (grouped[l.event]=grouped[l.event]||[]).push(l); });
+  var total=0;
+  Object.keys(grouped).forEach(function(ev){
+    var cfg=EVENTS[ev]; if(!cfg) return;
+    var logs=grouped[ev].slice().sort(function(a,b){
+      if(a.date!==b.date) return a.date<b.date?-1:1;
+      return String(a.id||'')<String(b.id||'')?-1:1;
+    });
+    var bestN=null;
+    logs.forEach(function(l){
+      var n=cfg.unit==='time'?parseTime(l.value):parseFloat(l.value);
+      if(n==null||isNaN(n)) return;
+      var beat = bestN==null ? false : (cfg.lowerBetter ? n<bestN : n>bestN);
+      if(bestN==null){ bestN=n; }                       // first log → baseline, not a PR
+      else if(beat){ total++; bestN=n; }                // subsequent log that beats the best
+    });
+  });
+  return total;
+}
 function renderStats(){
   var logged=new Set(cachedLogs.map(function(l){return l.event;})).size;
   var sl=document.getElementById('statLogged'); if(sl) sl.textContent=logged+'/10';
   var golds=0; EVENT_ORDER.forEach(function(ev){ var d=goldDelta(ev); if(d&&d.pct>=0) golds++; });
-  var grouped={}; cachedLogs.forEach(function(l){ (grouped[l.event]=grouped[l.event]||[]).push(l); });
-  var prs=0; Object.keys(grouped).forEach(function(ev){ if(grouped[ev].length>1) prs+=Math.max(0,grouped[ev].length-1); });
   var sg=document.getElementById('statGold'); if(sg) sg.textContent=golds;
-  var sp=document.getElementById('statPRs'); if(sp) sp.textContent=prs;
+  var sp=document.getElementById('statPRs'); if(sp) sp.textContent=_countPRs();
 }
 function render(){
   try{ document.title = A().name + " · SDSG '26 · Yeager's Gym"; }catch(e){}
