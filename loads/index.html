@@ -48,8 +48,13 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
 @media(min-width:1180px){.events-grid{grid-template-columns:repeat(3,1fr)}}
 
 .event{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
-.event-head{padding:11px 14px;background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dim) 100%);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.event-head{padding:11px 14px;background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dim) 100%);display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .event-head h3{font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#04212a}
+.event-head .eh-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.event-head .ev-chevron{color:#04212a;font-weight:700;font-size:14px;line-height:1;transition:transform .2s}
+.event.collapsed .ev-chevron{transform:rotate(-90deg)}
+.event-body{overflow:hidden;max-height:6000px;transition:max-height .3s ease}
+.event.collapsed .event-body{max-height:0}
 .type-badge{display:inline-flex;align-items:center;gap:4px;font-family:'Oswald',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:10px;background:var(--bg);white-space:nowrap}
 .type-badge.sprint{color:var(--pink);box-shadow:inset 0 0 0 1px rgba(239,50,149,.55)}
 .type-badge.marathon{color:#7fe0e6;box-shadow:inset 0 0 0 1px var(--teal-dim)}
@@ -249,13 +254,19 @@ function render(events){
       ? '<span class="type-badge marathon">🔋 Marathon</span>'
       : '<span class="type-badge sprint">⚡ Sprint</span>';
     const patterns = ev.patterns.map((p,i) => patternHTML(key, p, i)).join('');
-    return `<section class="event">
-      <header class="event-head"><h3>${ev.event}</h3>${badge}</header>
-      ${patterns}
+    return `<section class="event collapsed">
+      <header class="event-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleLoad(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleLoad(this)}"><h3>${ev.event}</h3><span class="eh-right">${badge}<span class="ev-chevron" aria-hidden="true">&#9662;</span></span></header>
+      <div class="event-body">${patterns}</div>
     </section>`;
   }).join('');
   document.getElementById('status').hidden = true;
   grid.hidden = false;
+}
+
+function toggleLoad(h){
+  const sec = h.closest('.event');
+  const collapsed = sec.classList.toggle('collapsed');
+  h.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
 }
 
 loadProgram();
