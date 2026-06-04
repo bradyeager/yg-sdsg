@@ -192,8 +192,8 @@ async function loadProgram(){
     const res = await fetch('/program/');
     if(!res.ok) throw new Error('HTTP '+res.status);
     const html = await res.text();
-    const m = html.match(/const EVENTS = (\[.*?\]);/s);
-    if(!m) throw new Error('EVENTS array not found in /program/');
+    const m = html.match(/<script type="application\/json" id="program-events">([\s\S]*?)<\/script>/);
+    if(!m) throw new Error('program-events JSON block not found in /program/');
     const events = JSON.parse(m[1]);
     // Try to grab week title too
     const wt = html.match(/<h2>(Week of [^<]+)<\/h2>/);

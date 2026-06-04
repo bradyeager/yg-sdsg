@@ -469,8 +469,8 @@ async function renderProgram(){
     var res=await fetch('/program/');
     if(!res.ok) throw new Error('HTTP '+res.status);
     var txt=await res.text();
-    var em=txt.match(/const EVENTS = (\[[\s\S]*?\]);/);
-    if(!em) throw new Error('program data not found');
+    var em=txt.match(/<script type="application\/json" id="program-events">([\s\S]*?)<\/script>/);
+    if(!em) throw new Error('program-events JSON block not found');
     var events=JSON.parse(em[1]);
     var wt=txt.match(/<h2>(Week of [^<]+)<\/h2>/);
     var ws=txt.match(/week-sub">([^<]+)</);
