@@ -91,9 +91,13 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
 .type-badge.sprint{color:var(--pink);box-shadow:inset 0 0 0 1px rgba(239,50,149,.55)}
 .type-badge.marathon{color:#7fe0e6;box-shadow:inset 0 0 0 1px var(--teal-dim)}
 .event-tests-badge{display:inline-flex;align-items:center;font-family:'Oswald',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:2px 7px;border-radius:11px;background:var(--pink);color:#fff;white-space:nowrap;box-shadow:0 0 10px rgba(239,50,149,.45)}
-.event-header .expand{flex-shrink:0;display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(4,33,42,.62);text-transform:uppercase}
+.event-header .eh-right{flex-shrink:0;display:flex;align-items:center;gap:10px}
+.event-header .expand{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(4,33,42,.62);text-transform:uppercase;background:none;border:0;cursor:pointer;padding:2px;-webkit-tap-highlight-color:transparent}
 .event-header .expand .ico{font-size:16px;color:#04212a;line-height:1}
-.patterns{display:flex;flex-direction:column;padding:11px 12px;gap:13px}
+.event-header .eh-chevron{color:#04212a;font-size:14px;font-weight:700;line-height:1;transition:transform .2s}
+.event.collapsed .eh-chevron{transform:rotate(-90deg)}
+.patterns{display:flex;flex-direction:column;padding:11px 12px;gap:13px;overflow:hidden;max-height:8000px;transition:max-height .3s ease,padding .3s ease}
+.event.collapsed .patterns{max-height:0;padding-top:0;padding-bottom:0}
 .pattern{background:var(--bg-card-elev);border:1px solid var(--border);border-radius:8px;overflow:hidden}
 .pattern-tab{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;background:linear-gradient(135deg, rgba(72,196,204,.22) 0%, rgba(72,196,204,.05) 100%);border-bottom:1px solid var(--teal-dim);flex-wrap:wrap}
 .pattern-tab-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;flex:1}
@@ -323,9 +327,12 @@ function patternHTML(p, i){
 
 function eventHeaderHTML(e, dataAttrs){
   const testedBadge = e.isTested ? '<span class="event-tests-badge">Test Week</span>' : '';
-  return `<header class="event-header" ${dataAttrs} role="button" tabindex="0" aria-label="Open ${e.event} full screen">
+  return `<header class="event-header" ${dataAttrs} role="button" tabindex="0" aria-expanded="false" aria-label="Expand ${e.event}">
     <div class="eh-left"><div class="eh-title-row"><h3>${e.event}</h3>${typeBadge(e.type)}${testedBadge}</div><span class="event-tag">${e.tag}</span></div>
-    <span class="expand"><span class="ico">&#9974;</span> Tap</span>
+    <div class="eh-right">
+      <button type="button" class="expand" aria-label="Open ${e.event} full screen"><span class="ico">&#9974;</span> Full</button>
+      <span class="eh-chevron" aria-hidden="true">&#9662;</span>
+    </div>
   </header>`;
 }
 
@@ -479,14 +486,19 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMovement(); 
 function renderGrid(){
   const grid = document.getElementById('eventsGrid'); if(!grid) return;
   grid.innerHTML = EVENTS.map((e,ei)=>`
-    <section class="event">
+    <section class="event collapsed">
       ${eventHeaderHTML(e, `data-ev="${ei}"`)}
       <div class="patterns">${e.patterns.map(patternHTML).join('')}</div>
     </section>`).join('');
   grid.querySelectorAll('.event-header[data-ev]').forEach(h=>{
-    const open = () => showInModal(EVENTS[+h.dataset.ev]);
-    h.addEventListener('click', open);
-    h.addEventListener('keydown', ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); open(); }});
+    const toggle = () => {
+      const collapsed = h.closest('.event').classList.toggle('collapsed');
+      h.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    };
+    h.addEventListener('click', toggle);
+    h.addEventListener('keydown', ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); toggle(); }});
+    const exp = h.querySelector('.expand');
+    if(exp) exp.addEventListener('click', ev=>{ ev.stopPropagation(); showInModal(EVENTS[+h.dataset.ev]); });
   });
 }
 
@@ -509,7 +521,7 @@ function renderArchive(){
         ${w.note ? `<div class="week-note-mini">${w.note}</div>` : ''}
         <div class="events-grid">
           ${w.events.map((e, ei) => `
-            <section class="event">
+            <section class="event collapsed">
               ${eventHeaderHTML(e, `data-aw="${wi}" data-ae="${ei}"`)}
               <div class="patterns">${e.patterns.map(patternHTML).join('')}</div>
             </section>
@@ -519,9 +531,14 @@ function renderArchive(){
     </details>
   `).join('');
   container.querySelectorAll('.event-header[data-aw]').forEach(h=>{
-    const open = () => { const e = PAST_WEEKS[+h.dataset.aw].events[+h.dataset.ae]; if(e) showInModal(e); };
-    h.addEventListener('click', open);
-    h.addEventListener('keydown', ev => { if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); open(); }});
+    const toggle = () => {
+      const collapsed = h.closest('.event').classList.toggle('collapsed');
+      h.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    };
+    h.addEventListener('click', toggle);
+    h.addEventListener('keydown', ev => { if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); toggle(); }});
+    const exp = h.querySelector('.expand');
+    if(exp) exp.addEventListener('click', ev=>{ ev.stopPropagation(); const e = PAST_WEEKS[+h.dataset.aw].events[+h.dataset.ae]; if(e) showInModal(e); });
   });
 }
 
