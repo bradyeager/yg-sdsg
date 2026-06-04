@@ -169,6 +169,26 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 .badge.red{background:rgba(239,68,68,.15);color:var(--red)}
 .badge.gray{background:rgba(138,147,166,.13);color:var(--text-dim)}
 
+/* ===== All-time record book: badges, header icons, card strip, summary ===== */
+.rec-icon{font-size:15px;line-height:1;cursor:default}
+.rec-icon.held{filter:drop-shadow(0 0 5px rgba(250,204,21,.55))}
+.rec-icon.pace{filter:drop-shadow(0 0 5px rgba(239,50,149,.6))}
+.rec-badge{font-family:'Oswald',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.4px;padding:3px 8px;border-radius:20px;white-space:nowrap;text-transform:uppercase}
+.rec-badge.held{background:linear-gradient(135deg,rgba(250,204,21,.22),rgba(208,139,91,.18));color:var(--gold);border:1px solid rgba(250,204,21,.35)}
+.rec-badge.pace{background:rgba(239,50,149,.16);color:var(--pink);border:1px solid var(--pink-dim)}
+.rec-strip{background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.10));border:1px solid var(--border);border-radius:9px;padding:9px 11px;margin-bottom:11px}
+.rec-strip.on{border-color:var(--pink-dim);box-shadow:inset 0 0 0 1px var(--pink-glow)}
+.rec-strip .rs-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.rec-strip .rs-lbl{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--text-muted);text-transform:uppercase}
+.rec-strip .rs-val{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;color:var(--text);margin-top:4px;line-height:1}
+.rec-strip.on .rs-val{color:var(--pink)}
+.rec-strip .rs-who{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dim);margin-top:3px}
+.rec-summary{display:flex;flex-direction:column;gap:8px;margin:6px 0 16px}
+.rec-summary .rsum-row{display:flex;gap:10px;align-items:flex-start;background:linear-gradient(180deg,var(--surface-2),rgba(13,18,28,.6));border:1px solid var(--border-bright);border-radius:10px;padding:11px 13px}
+.rec-summary .rsum-i{font-size:18px;line-height:1.2;flex-shrink:0}
+.rec-summary .rsum-t{font-size:12.5px;color:var(--text-dim);line-height:1.45}
+.rec-summary .rsum-t b{color:var(--text);font-weight:700}
+
 .podium{background:rgba(0,0,0,.18);border:1px solid var(--border);border-radius:9px;padding:9px 11px;margin-bottom:11px}
 .podium .ph{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px}
 .podium-row{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:3px 0}
