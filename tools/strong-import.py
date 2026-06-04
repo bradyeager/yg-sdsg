@@ -96,9 +96,14 @@ def main():
             date = r['Date'].split(' ')[0]
             if len(date) != 10 or date[4] != '-':
                 continue
+            # Strong's CSV is inconsistent with whitespace/case in exercise names
+            # ("Broad Jump " with trailing space, "Broad jump" lowercase, etc.).
+            # Normalize once here so the matcher in mapper() is simple.
+            exercise_raw = (r.get('Exercise Name') or '').strip()
+            exercise_norm = exercise_raw.title()  # Title Case for consistency
             try:
                 m = mapper(
-                    r['Exercise Name'],
+                    exercise_norm,
                     float(r.get('Weight')   or 0),
                     float(r.get('Reps')     or 0),
                     float(r.get('Distance') or 0),
