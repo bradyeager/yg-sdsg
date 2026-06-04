@@ -51,10 +51,18 @@ async function deleteAllLogs(athleteSlug){
   await sbFetch('/sdsg_logs?athlete_slug=eq.'+athleteSlug, {method:'DELETE'});
 }
 async function ensureBaselines(athleteSlug){
-  if(cachedLogs.length>0) return;
+  // Idempotent delta-seed. Inserts any config baseline not already present
+  // in the DB (matched by event + log_date + value). This way, baselines
+  // added to an athlete's config AFTER initial seeding still get written.
+  var bls = A().baselines || [];
+  if(!bls.length) return;
+  var have = {};
+  cachedLogs.forEach(function(l){ have[l.event+'|'+l.date+'|'+String(l.value)] = true; });
+  var missing = bls.filter(function(b){ return !have[b.event+'|'+b.date+'|'+String(b.value)]; });
+  if(!missing.length) return;
   setSyncStatus('syncing','Seeding');
-  var rows = (A().baselines||[]).map(function(b){ return {athlete_slug:athleteSlug, event:b.event, value:String(b.value), log_date:b.date, note:b.note||null}; });
-  if(rows.length){ await sbFetch('/sdsg_logs', {method:'POST', body:JSON.stringify(rows)}); }
+  var rows = missing.map(function(b){ return {athlete_slug:athleteSlug, event:b.event, value:String(b.value), log_date:b.date, note:b.note||null}; });
+  await sbFetch('/sdsg_logs', {method:'POST', body:JSON.stringify(rows)});
   cachedLogs = await loadLogs(athleteSlug);
 }
 async function deleteLog(id){
@@ -373,7 +381,7 @@ function renderProgress(){
     var cfg=EVENTS[ev], best=bestScore(ev), athlete=A();
     var pod=athlete.podium&&athlete.podium[ev];
     function val(level){ var i=level==='GOLD'?0:level==='SILVER'?1:2; return (pod&&pod[i]&&pod[i][2])||'—'; }
-    var podRows='<div class="pod-mini">'+
+    var podRows='<div class="pod-mini"><span class="pm-lbl">2025 Results</span>'+
       '<span class="pm-row"><span class="pm-i pm-g">🥇</span><span class="pm-v">'+val('GOLD')+'</span></span>'+
       '<span class="pm-row"><span class="pm-i pm-s">🥈</span><span class="pm-v">'+val('SILVER')+'</span></span>'+
       '<span class="pm-row"><span class="pm-i pm-b">🥉</span><span class="pm-v">'+val('BRONZE')+'</span></span>'+
@@ -467,7 +475,7 @@ async function renderProgram(){
     var wt=txt.match(/<h2>(Week of [^<]+)<\/h2>/);
     var ws=txt.match(/week-sub">([^<]+)</);
     var wd=txt.match(/week-dates">([^<]+)</);
-    var TYPE={sprint:'⚡ Sprint',marathon:'🔋 Marathon'};
+    var TYPE={sprint:'<span class="pe-mode">⚡ Sprint</span>',marathon:'<span class="pe-mode">🔋 Marathon</span>'};
     var html='<div class="prog-banner"><h2>'+(wt?wt[1]:'This Week')+'</h2>'+
       (ws?'<div class="sub">'+ws[1]+'</div>':'')+
       (wd?'<div class="dates">'+wd[1]+'</div>':'')+
@@ -483,7 +491,7 @@ async function renderProgram(){
       }).join('');
       return '<div class="prog-event collapsed" id="pe_'+idx+'">'+
         '<div class="prog-event-head" onclick="SDSG.toggleProg('+idx+')">'+
-          '<div><span class="pe-name">'+e.event+'</span> <span class="pe-tag">'+(TYPE[e.type]||'')+(e.tag?' · '+e.tag:'')+'</span></div>'+
+          '<div><span class="pe-name">'+e.event+'</span> <span class="pe-tag">'+(TYPE[e.type]||'')+(e.tag?' <span class="pe-cue">· '+e.tag+'</span>':'')+'</span></div>'+
           (load?'<span class="pe-load">'+load+'</span>':'')+
         '</div>'+
         '<div class="prog-body">'+pats+'</div>'+
