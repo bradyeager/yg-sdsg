@@ -434,6 +434,7 @@ function renderScouting(){
       var list=inc[ev]||[]; if(!list.length) return '';
       var best=bestScore(ev);
       var youLoad=(athlete.loads&&athlete.loads[ev])||'';
+      if(/^bodyweight$/i.test(youLoad)) youLoad='';
       var youSub=athlete.division+(youLoad?' · '+youLoad:'');
       var youCard='<div class="scout-you">'+
         '<div class="sy-lbl">Your Best</div>'+
