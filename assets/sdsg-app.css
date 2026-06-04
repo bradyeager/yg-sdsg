@@ -138,10 +138,14 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 
 /* ===== Event card (Log) ===== */
 .event-card{background:linear-gradient(180deg, var(--surface-2), rgba(13,18,28,.55));border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px}
-.event-head{padding:13px 15px;background:linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 100%);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.event-head{padding:13px 15px;background:linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 100%);display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .event-head .name{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#04212a}
 .event-head .meta{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:rgba(4,33,42,.75);margin-top:2px;font-weight:600}
-.card-body{padding:13px 15px}
+.event-head .eh-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.event-head .ec-chevron{color:#04212a;font-size:14px;font-weight:700;line-height:1;transition:transform .2s}
+.event-card.collapsed .ec-chevron{transform:rotate(-90deg)}
+.card-body{padding:13px 15px;overflow:hidden;max-height:4000px;transition:max-height .3s ease,padding .3s ease}
+.event-card.collapsed .card-body{max-height:0;padding-top:0;padding-bottom:0}
 
 .scores{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 .score-box{background:linear-gradient(180deg, var(--surface-3), rgba(15,20,32,.7));border:1px solid var(--border);border-radius:9px;padding:11px 12px}
@@ -355,6 +359,17 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 
 /* ===== Incoming competitor medal icon (Gold/Silver/Bronze parsed from note) ===== */
 .inc-medal{font-size:14px;margin-right:6px;display:inline-block;line-height:1;vertical-align:-1px}
+
+/* ===== Program-tab per-pattern timer ===== */
+.pt-timer{margin:9px 0 4px;background:rgba(0,0,0,.22);border:1px solid var(--border);border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pt-timer .pt-label{font-family:'Oswald',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.2px;color:var(--text-muted);text-transform:uppercase;flex-shrink:0;min-width:50px}
+.pt-timer .pt-display{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:#fff;line-height:1;flex:1;text-align:center;letter-spacing:1px;font-variant-numeric:tabular-nums;min-width:62px}
+.pt-timer.warn .pt-display{color:var(--yellow)}
+.pt-timer.done .pt-display{color:var(--pink);animation:t-pulse .5s ease 3}
+.pt-btn{background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#04212a;font-family:'Oswald',sans-serif;font-weight:700;font-size:11px;letter-spacing:.7px;text-transform:uppercase;padding:7px 13px;border-radius:7px;cursor:pointer;border:0;flex-shrink:0;-webkit-tap-highlight-color:transparent;box-shadow:0 4px 12px -6px rgba(72,196,204,.55),0 1px 0 rgba(255,255,255,.18) inset;transition:transform .12s}
+.pt-btn:active{transform:scale(.97)}
+.pt-btn.stop{background:linear-gradient(135deg,#3a4558,#232E3D);color:#fff;box-shadow:0 4px 14px -8px rgba(0,0,0,.6)}
+.pt-btn.reset{background:transparent;border:1px solid var(--border-bright);color:var(--text-dim);box-shadow:none}
 
 /* ===== Fontctl pill (bottom-right) — itself stays at base size ===== */
 .fontctl{

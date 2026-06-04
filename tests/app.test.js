@@ -125,6 +125,9 @@ test('validation: out-of-range inches value is rejected, no POST fired', async (
   const counters = await mockSupabase(page, []);
   await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(1000);
+  // Cards collapse by default — expand the dynamax card to reveal its input/log button.
+  await page.evaluate(() => SDSG.toggleEventCard('dynamax'));
+  await page.waitForTimeout(350);
   // dynamax is an inches event; set an absurd value and click its Log button
   await page.fill('#in_dynamax', '99999');
   const postsBefore = counters.posts || 0;

@@ -226,6 +226,91 @@ function _renderTimerBlock(ev){
   '</div>';
 }
 
+// ===== Per-pattern timer (Program tab) =====
+// If a prescribed pattern is for time, surface a timer right on the pattern card.
+// Detection: a "work" duration in seconds/minutes (rest/between segments are
+// skipped), or a "for time / hold for time / max ... time" stopwatch.
+function _patternTimerCfg(rxRaw){
+  if(!rxRaw) return null;
+  var rx = String(rxRaw);
+  var workMatchers = [
+    /×\s*(\d+)\s*sec\b/i,                                              // "× 60 sec"
+    /\bin\s+(\d+)\s*sec\b/i,                                           // "max reps in 60 sec"
+    /\b(\d+)\s*sec\s+(?:hold|hard|easy|walk|steady|work|max)\b/i,      // "120 sec hold", "30 sec hard"
+    /×\s*(\d+)\s*min\b/i,
+    /\b(\d+)\s*min\s+(?:hold|max|work)\b/i
+  ];
+  for(var i=0;i<workMatchers.length;i++){
+    var m=rx.match(workMatchers[i]);
+    if(m){
+      var n=parseInt(m[1],10);
+      if(workMatchers[i].source.indexOf('min')>=0) n*=60;
+      if(n>0 && n<=3600) return {type:'countdown', seconds:n};
+    }
+  }
+  if(/\bfor\s+time\b|\bhold\s+for\s+time\b|\bmax\s+\w+\s+time\b/i.test(rx)) return {type:'countup'};
+  return null;
+}
+var _progTimerState = {};
+var _progTimerCfgs  = {};
+function _ptEl(k, part){ return document.getElementById('ptmr_'+part+'_'+k); }
+function _renderProgPatternTimer(k, cfg){
+  var initSec = cfg.type==='countup' ? 0 : cfg.seconds;
+  var lbl = cfg.type==='countup' ? 'Stopwatch' : (cfg.seconds+'s Timer');
+  return '<div class="pt-timer" id="ptmr_block_'+k+'">'+
+    '<span class="pt-label">'+lbl+'</span>'+
+    '<span class="pt-display" id="ptmr_display_'+k+'">'+_formatTimerSec(initSec)+'</span>'+
+    '<button class="pt-btn" id="ptmr_start_'+k+'" onclick="SDSG.startProgTimer(\''+k+'\')">Start</button>'+
+    '<button class="pt-btn stop" id="ptmr_stop_'+k+'" onclick="SDSG.stopProgTimer(\''+k+'\')" style="display:none">Stop</button>'+
+    '<button class="pt-btn reset" id="ptmr_reset_'+k+'" onclick="SDSG.resetProgTimer(\''+k+'\')">Reset</button>'+
+  '</div>';
+}
+function startProgTimer(k){
+  var cfg=_progTimerCfgs[k]; if(!cfg) return;
+  var state=_progTimerState[k]=_progTimerState[k]||{};
+  if(state.intervalId) return;
+  if(cfg.type!=='countup' && state.remaining==null) state.remaining=cfg.seconds;
+  var block=_ptEl(k,'block'), disp=_ptEl(k,'display');
+  if(block) block.classList.remove('warn','done');
+  state.anchor=Date.now();
+  state.baseElapsed=state.elapsed||0;
+  state.baseRemaining=state.remaining;
+  state.intervalId=setInterval(function(){
+    var secs=Math.floor((Date.now()-state.anchor)/1000);
+    if(cfg.type==='countup'){
+      state.elapsed=state.baseElapsed+secs;
+      if(disp) disp.textContent=_formatTimerSec(state.elapsed);
+    } else {
+      state.remaining=Math.max(0,state.baseRemaining-secs);
+      if(disp) disp.textContent=_formatTimerSec(state.remaining);
+      if(block){
+        if(state.remaining<=10 && state.remaining>0) block.classList.add('warn');
+        if(state.remaining===0){ block.classList.remove('warn'); block.classList.add('done'); _beep(); stopProgTimer(k); }
+      }
+    }
+  },250);
+  var sb=_ptEl(k,'start'), pb=_ptEl(k,'stop');
+  if(sb) sb.style.display='none';
+  if(pb) pb.style.display='inline-block';
+}
+function stopProgTimer(k){
+  var state=_progTimerState[k]; if(!state) return;
+  if(state.intervalId){ clearInterval(state.intervalId); state.intervalId=null; }
+  var sb=_ptEl(k,'start'), pb=_ptEl(k,'stop');
+  if(sb) sb.style.display='inline-block';
+  if(pb) pb.style.display='none';
+}
+function resetProgTimer(k){
+  stopProgTimer(k);
+  var cfg=_progTimerCfgs[k]; if(!cfg) return;
+  var state=_progTimerState[k]=_progTimerState[k]||{};
+  if(cfg.type==='countup'){ state.elapsed=0; } else { state.remaining=cfg.seconds; }
+  var disp=_ptEl(k,'display');
+  if(disp) disp.textContent=_formatTimerSec(cfg.type==='countup'?0:cfg.seconds);
+  var block=_ptEl(k,'block');
+  if(block) block.classList.remove('warn','done');
+}
+
 // ===== iPhone time input =====
 function autoColonTime(el){
   var raw=el.value;
@@ -369,8 +454,8 @@ function renderEventCard(ev){
   } else {
     inputCtl='<span class="input-wrap"><input id="in_'+ev+'" type="text" inputmode="numeric" pattern="^\\d{1,2}:[0-5]\\d$" placeholder="M:SS  (e.g. 2:00)" oninput="SDSG.autoColonTime(this)"></span>';
   }
-  return '<div class="event-card">'+
-    '<div class="event-head"><div><div class="name">'+cfg.name+'</div><div class="meta">Comp Load · '+load+'</div></div>'+deltaBadge(ev)+'</div>'+
+  return '<div class="event-card collapsed" id="ec_'+ev+'">'+
+    '<div class="event-head" role="button" tabindex="0" aria-expanded="false" onclick="SDSG.toggleEventCard(\''+ev+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();SDSG.toggleEventCard(\''+ev+'\')}"><div><div class="name">'+cfg.name+'</div><div class="meta">Comp Load · '+load+'</div></div><div class="eh-right">'+deltaBadge(ev)+'<span class="ec-chevron" aria-hidden="true">&#9662;</span></div></div>'+
     '<div class="card-body">'+
       '<div class="scores">'+
         '<div class="score-box"><div class="lbl">Your Best</div><div class="val">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div><div class="sub">'+(best?esc(best.date):'No log yet')+'</div></div>'+
@@ -498,12 +583,19 @@ async function renderProgram(){
       '<a class="open" href="/program/">Open Full Program →</a></div>';
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
+    // Re-render means we rebuild the timer registry; clear any running pattern timers first.
+    Object.keys(_progTimerState).forEach(function(k){ var s=_progTimerState[k]; if(s&&s.intervalId) clearInterval(s.intervalId); });
+    _progTimerState = {}; _progTimerCfgs = {};
     html+=events.map(function(e,idx){
       var k=keyByName[e.event];
       var load=k&&aLoads[k]?aLoads[k]:'';
-      var pats=(e.patterns||[]).map(function(p){
+      var pats=(e.patterns||[]).map(function(p, patIdx){
         var cues=(p.cues||[]).map(function(c){ return '<li>'+c+'</li>'; }).join('');
-        return '<div class="prog-pat"><div class="pp-name">'+p.name+'</div><div class="pp-rx">'+(p.rx||'')+'</div>'+(p.load?'<div class="pp-rx" style="color:var(--text-dim);font-weight:500">'+p.load+'</div>':'')+(cues?'<ul class="pp-cues">'+cues+'</ul>':'')+'</div>';
+        var tcfg=_patternTimerCfg(p.rx);
+        var ptK=idx+'_'+patIdx;
+        if(tcfg) _progTimerCfgs[ptK]=tcfg;
+        var timerHtml=tcfg ? _renderProgPatternTimer(ptK, tcfg) : '';
+        return '<div class="prog-pat"><div class="pp-name">'+p.name+'</div><div class="pp-rx">'+(p.rx||'')+'</div>'+(p.load?'<div class="pp-rx" style="color:var(--text-dim);font-weight:500">'+p.load+'</div>':'')+timerHtml+(cues?'<ul class="pp-cues">'+cues+'</ul>':'')+'</div>';
       }).join('');
       return '<div class="prog-event collapsed" id="pe_'+idx+'">'+
         '<div class="prog-event-head" onclick="SDSG.toggleProg('+idx+')">'+
@@ -523,6 +615,12 @@ async function renderProgram(){
 function toggleProg(idx){
   var el=document.getElementById('pe_'+idx); if(!el) return;
   el.classList.toggle('collapsed');
+}
+function toggleEventCard(ev){
+  var el=document.getElementById('ec_'+ev); if(!el) return;
+  var collapsed=el.classList.toggle('collapsed');
+  var head=el.querySelector('.event-head');
+  if(head) head.setAttribute('aria-expanded', collapsed?'false':'true');
 }
 
 // ===== Header / stats =====
@@ -642,6 +740,8 @@ async function switchAthlete(key){
   // B3: stop any running timers before discarding their state so intervals don't leak.
   Object.keys(_timerState).forEach(function(ev){ var s=_timerState[ev]; if(s&&s.intervalId) clearInterval(s.intervalId); });
   _timerState={};
+  Object.keys(_progTimerState).forEach(function(k){ var s=_progTimerState[k]; if(s&&s.intervalId) clearInterval(s.intervalId); });
+  _progTimerState={}; _progTimerCfgs={};
   _programCache=null;   // B1: the Program tab badges per-athlete loads — force a refetch.
   document.querySelectorAll('.athlete-switch button').forEach(function(b){ b.classList.toggle('active',b.dataset.athlete===key); });
   setSyncStatus('syncing','Loading');
@@ -737,7 +837,8 @@ async function init(){
 window.SDSG = {
   setView:setView, logScore:logScore, resetAthlete:resetAthlete, switchAthlete:switchAthlete,
   startTimer:startTimer, stopTimer:stopTimer, resetTimer:resetTimer, autoColonTime:autoColonTime,
-  toggleProg:toggleProg, setFontScale:setFontScale
+  toggleProg:toggleProg, toggleEventCard:toggleEventCard, setFontScale:setFontScale,
+  startProgTimer:startProgTimer, stopProgTimer:stopProgTimer, resetProgTimer:resetProgTimer
 };
 
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
