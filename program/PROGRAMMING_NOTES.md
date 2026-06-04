@@ -102,3 +102,25 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 | Block 4 | Aug 31 – Sep 27 | 4 | Peak + Taper · comp-specific, deload final week |
 
 Competition: **September 27, 2026** · San Diego Senior Games.
+
+---
+
+## Bench Press 1RMs (per athlete, for %-based programming)
+
+When a week prescribes "Bench %-of-1RM" work, compute each athlete's
+prescribed weight from their all-time max below. The athlete sees the
+actual pounds in their live app — never a percent. Store the value
+in each athlete config as `bench1rm: <pounds>`.
+
+| Athlete | Bench 1RM | Comp wt | Notes |
+|---|---|---|---|
+| Tonnie | 120 lb | 45 lb | Comp = 38% of 1RM |
+| Kerry  | 175 lb | 115 lb | Comp = 66% of 1RM |
+| Peggy  | 57.5 lb | 45 lb | Comp = 78% of 1RM — tight headroom |
+| David  | 110 lb | 115 lb | Comp > 1RM (he's not benching at comp wt yet) |
+| Annie  | 115 lb | 50 lb | Comp = 43% of 1RM |
+| Robert | 145 lb | 75 lb | Comp = 52% of 1RM |
+
+These are all-time maxes, not tested today — re-verify before programming
+heavy. Use as the base for percent calculations; show the athlete the
+resulting pounds, not the percent.
