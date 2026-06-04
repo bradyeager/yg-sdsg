@@ -40,6 +40,10 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
 .intro .sub{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--pink);margin-top:4px}
 .intro p{margin-top:10px;font-size:13px;color:var(--text-dim);line-height:1.6}
 .intro p strong{color:var(--text)}
+.intro-bullets{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.intro-bullets li{position:relative;padding:6px 10px 6px 26px;font-size:13px;color:var(--text-dim);line-height:1.5;background:rgba(72,196,204,.04);border-left:2px solid var(--teal-dim);border-radius:0 6px 6px 0}
+.intro-bullets li::before{content:"▸";position:absolute;left:10px;top:6px;color:var(--teal);font-size:12px}
+.intro-bullets strong{color:var(--text)}
 .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--border-bright)}
 .legend .lg{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text-dim);display:flex;align-items:center;gap:5px}
 .badge{display:inline-block;font-family:'Oswald',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap}
@@ -97,7 +101,12 @@ main{max-width:1400px;margin:0 auto;padding:20px 18px 60px}
   <div class="intro">
     <h2>Age-Group Field Watch</h2>
     <div class="sub">Who's moving into &amp; out of our divisions for 2026</div>
-    <p>Senior Games runs in <strong>5-year age bands</strong>. We track every competitor's band year over year — when someone changes bands, that pins their age and tells us where they land in 2026. This board shows only the true <strong>movers</strong> for each Yeager's Gym athlete's 2026 division (competitors who podiumed in events we contest). Athletes already settled in the division aren't movers, so they're not listed here. <strong>Note:</strong> an "aged out" flag needs a competitor seen in the division and then in the older band — only visible within our 2023–2025 results, so departures whose prime predates that window aren't all captured yet.</p>
+    <p>Senior Games runs in <strong>5-year age bands</strong>. We track every competitor's band year over year — when someone changes bands, that pins their age and tells us where they land in 2026.</p>
+    <ul class="intro-bullets">
+      <li>This board shows only true <strong>movers</strong> for each Yeager's Gym athlete's 2026 division — competitors who podiumed in events we contest.</li>
+      <li>Athletes already settled in their division aren't listed here.</li>
+      <li><strong>Aged-out caveat:</strong> an "aged out" flag needs a competitor seen in the division AND in the older band. Only visible within our 2023–2025 results, so departures whose prime predates that window aren't all captured yet.</li>
+    </ul>
     <div class="legend">
       <span class="lg"><span class="badge climbing">Climbing</span> age math says they enter in 2026</span>
       <span class="lg"><span class="badge watch">Watch</span> years deep in the band below — near the top</span>
