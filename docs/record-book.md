@@ -26,12 +26,12 @@ Unit notes baked into the helpers:
   athlete's config (not fragile name-matching). Today only **Tonnie** holds
   records: Bench Press (W65–69, 50 @ 50 lb, 2025) and Med Ball Slams (W65–69,
   48, 2024 tie).
-- **🔥 Record Pace / Record Tie** — computed live: the athlete's logged best
+- **🚀 Record Pace / Record Tie** — computed live: the athlete's logged best
   meets or beats the all-time record **in their current division**
   (`gender` + `ageBand` from config). Time events respect `lowerBetter`;
   Dynamax converts ft↔in.
 
-Surfaced in three places: collapsed Log-card headers (compact 🏆/🔥), the
+Surfaced in three places: collapsed Log-card headers (compact 🏆/🚀), the
 expanded card's "All-Time … Record" strip (value + holder), and a summary
 banner + per-row icons on the Progress tab.
 
