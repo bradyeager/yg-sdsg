@@ -506,20 +506,36 @@ function _crRow(r){
   return '<li><span class="cr-nm">'+esc(nm)+'</span><span class="cr-gap">−'+_gapToGold(r)+'</span></li>';
 }
 function renderCoachRecs(){
-  // Only show on athletes whose podium data lets us compute a gold delta.
-  var below=_coachBelowGold();
+  // Three-section Program-tab header for fatigued senior athletes:
+  //   1. Today's Plan   — plain "pick 2–3 movements" instruction
+  //   2. Coach's Rec.   — Brad's pick of where to spend effort today
+  //   3. All Movements  — (rendered separately in renderProgram, below)
   if(!cachedLogs.length) return '';
+  var below=_coachBelowGold();
+  var todaysPlan = '<section class="cr-section">'+
+    '<div class="section-title">🎯 Today\'s Plan</div>'+
+    '<div class="cr-plan-body">'+
+      '<b>Pick 2 or 3 movements</b> to train today. The full programming for each is in the cards below — choose what fits your energy and time.'+
+    '</div>'+
+  '</section>';
   if(!below.length){
-    return '<div class="coach-recs all-gold">'+
-      '<div class="cr-i">🏆</div>'+
-      '<div class="cr-body"><div class="cr-h">Gold Pace, Across the Board</div>'+
-      '<div class="cr-sub">Your best meets or beats the 2025 Gold in every event. Today is about holding the line and stacking quality reps.</div></div>'+
+    // Gold-pace-everywhere variant — still show the 2/3 instruction up top,
+    // then a celebratory coach card instead of Climb/Closest.
+    return '<div class="coach-recs">'+
+      todaysPlan+
+      '<section class="cr-section">'+
+        '<div class="section-title">🧠 Coach\'s Recommendation <span class="cr-by">· Brad</span></div>'+
+        '<div class="cr-card all-gold">'+
+          '<div class="cr-i">🏆</div>'+
+          '<div class="cr-body">'+
+            '<div class="cr-h">Gold Pace, Across the Board</div>'+
+            '<div class="cr-sub">Your best meets or beats the 2025 Gold in every event you’ve logged. Today is about holding the line — pick the movements that feel best in your body and go.</div>'+
+          '</div>'+
+        '</div>'+
+      '</section>'+
     '</div>';
   }
-  below.sort(function(a,b){ return a.pct-b.pct; });   // most negative first
-  // With only one event below gold, both cards would name the same event; show
-  // a single "Biggest Climb" card plus a "you're at gold pace everywhere else"
-  // header. Otherwise split: worst → Biggest Climb, smallest negatives → Closest.
+  below.sort(function(a,b){ return a.pct-b.pct; });
   var totalBelow = below.length;
   var totalGold = EVENT_ORDER.filter(function(ev){ var d=goldDelta(ev); return d&&d.pct>=0; }).length;
   var bothCards = totalBelow >= 2;
@@ -530,18 +546,22 @@ function renderCoachRecs(){
     ? '<div class="cr-goldnote">🏆 At or above 2025 Gold in '+totalGold+' of '+(totalGold+totalBelow)+' event'+(totalGold+totalBelow>1?'s':'')+'.</div>'
     : '';
   return '<div class="coach-recs">'+
-    '<div class="cr-h0">🎯 Today\'s Plan</div>'+
-    goldNote+
-    (close.length ? '<div class="cr-card cr-close">'+
-      '<div class="cr-ch"><span class="cr-ico">🥇</span><span class="cr-t">Closest to Gold</span></div>'+
-      '<div class="cr-tag">Your quickest wins today — small gains land you on the podium.</div>'+
-      '<ul class="cr-list">'+close.map(_crRow).join('')+'</ul>'+
-    '</div>' : '')+
-    '<div class="cr-card cr-climb">'+
-      '<div class="cr-ch"><span class="cr-ico">⛰</span><span class="cr-t">Biggest Climb</span></div>'+
-      '<div class="cr-tag">Where to spend your hardest work — the largest gaps to bridge.</div>'+
-      '<ul class="cr-list">'+climb.map(_crRow).join('')+'</ul>'+
-    '</div>'+
+    todaysPlan+
+    '<section class="cr-section">'+
+      '<div class="section-title">🧠 Coach\'s Recommendation <span class="cr-by">· Brad</span></div>'+
+      '<div class="cr-coach-intro">Where Brad thinks today’s effort moves the needle most. Use these to pick your 2–3 movements above.</div>'+
+      goldNote+
+      (close.length ? '<div class="cr-card cr-close">'+
+        '<div class="cr-ch"><span class="cr-ico">🥇</span><span class="cr-t">Closest to Gold</span></div>'+
+        '<div class="cr-tag">Your quickest wins today — small gains land you on the podium.</div>'+
+        '<ul class="cr-list">'+close.map(_crRow).join('')+'</ul>'+
+      '</div>' : '')+
+      '<div class="cr-card cr-climb">'+
+        '<div class="cr-ch"><span class="cr-ico">⛰</span><span class="cr-t">Biggest Climb</span></div>'+
+        '<div class="cr-tag">Where to spend your hardest work — the largest gaps to bridge.</div>'+
+        '<ul class="cr-list">'+climb.map(_crRow).join('')+'</ul>'+
+      '</div>'+
+    '</section>'+
   '</div>';
 }
 
@@ -895,7 +915,9 @@ async function renderProgram(){
     if(!em) throw new Error('program-events JSON block not found');
     var events=JSON.parse(em[1]);
     var TYPE={sprint:'<span class="pe-mode">⚡ Sprint</span>',marathon:'<span class="pe-mode">🔋 Marathon</span>'};
-    var html='';
+    // Third section header — visually separates the menu of options from the
+    // Today's Plan + Coach's Recommendation sections rendered above.
+    var html='<div class="section-title">📋 All Movements</div>';
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
     // Re-render means we rebuild the timer registry; clear any running pattern timers first.
