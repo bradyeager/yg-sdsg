@@ -3,7 +3,7 @@
 
 Usage: python3 import_strong.py <athlete_slug>
 """
-import csv, sys
+import csv, sys, os
 from collections import defaultdict
 
 def secToMSS(s):
@@ -116,7 +116,8 @@ def make_mapper(slug):
 def main():
     slug = sys.argv[1]
     name_cap = slug.capitalize()
-    csv_path = f'/home/user/yg-sdsg/tools/{name_cap}_strong_workouts.csv'
+    # Resolve next to the script — works on any machine (dev box, CI runner, etc.).
+    csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'{name_cap}_strong_workouts.csv')
     mapper = make_mapper(slug)
     rows = []
     with open(csv_path) as f:
