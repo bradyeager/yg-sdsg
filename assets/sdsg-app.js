@@ -1,7 +1,7 @@
 /* ============================================================
    SDSG Unified Athlete App — shared logic
    Driven by window.SDSG_CONFIG (set inline per athlete page).
-   Tabs: Log · Program · Progress · Scouting.
+   Tabs (left → right): Dashboard · Program · Log · Progress · Scouting.
    No login — anonymous Supabase writes (publishable key), same
    contract as the legacy trackers. Persistence logic ported
    verbatim from the proven tonnie tracker.
@@ -102,6 +102,11 @@ var RECORDS = {
     W:{'50-54':['62','Hays Morena, Jennifer',2025,'20 kg'],'55-59':['70','Reyes-Williamson, Margarita',2023,'20 kg'],'60-64':['150','Murray, Rowena',2022,'16 kg'],'65-69':['82','Daigle, Nancy',2025,'16 kg'],'70-74':['70','Paine, Constance',2022,'12 kg'],'75-79':['50','Hazard, Gail',2023,'12 kg'],'80-84':['60','Nicholson, Catherine',2025,'8 kg']},
     M:{'50-54':['125','Fine, Justin',2022,'24 kg'],'55-59':['90','Surprenant, Mike',2022,'24 kg'],'60-64':['90','Butsumyo, Vince',2022,'20 kg'],'65-69':['86','Lawrence, Kirk',2023,'20 kg'],'70-74':['70','Moylan, Jerome',2025,'16 kg'],'75-79':['81','Bridges, John',2025,'16 kg'],'80-84':['61','Scott, Cliff',2023,'12 kg'],'85-89':['48','Scott, Cliff',2025,'12 kg']}
   },
+  // ⚠ UNIT TRAP (D3): dynamax values are stored as FEET (the unit the
+  // record book uses), but every other dynamax value in the app (logs,
+  // baselines, 2025 podium results) is INCHES. Never read these raw —
+  // always go through _recordValueN (×12 → inches for math) or
+  // recordDisplay (rounded inches for UI). See `recordDisplay` in this file.
   dynamax: {
     W:{'50-54':['39.4','Reyes-Williamson, Margarita',2021],'55-59':['43.3','Hyacinth, Flora',2022],'60-64':['35.1','Cummings, Kirsten',2024],'65-69':['32.9','Halstead, Paula',2023],'70-74':['29','Halstead, Paula',2024],'75-79':['20.2','Petrie, Marlene',2023],'80-84':['24.7','Nicholson, Catherine',2023]},
     M:{'50-54':['45.6','Porter, Rod',2021],'55-59':['43','Snowden, Gregg',2024],'60-64':['42.8','Southwick, Jeff',2021],'65-69':['38.6','Hrenko, Ray',2021],'70-74':['35.8','Doyle, William',2021],'75-79':['28.9','Stanton, Edward',2022],'80-84':['27.1','Sepin, Arthur',2022],'85-89':['24.5','Sepin, Arthur',2025],'90-94':['10','Walker, Stafford',2023],'95-99':['7.6','Schneider, Ronald',2025]}
@@ -363,13 +368,18 @@ function resetProgTimer(k){
 
 // ===== iPhone time input =====
 function autoColonTime(el){
+  // E2: Always insert the `:` once we have 3+ digits, even if the seconds
+  // portion is out of 0–59 range. The user sees the M:SS shape and can
+  // correct the seconds; submit-time validation rejects the invalid value.
+  // (Previously we silently refused to format when ss>59, leaving the user
+  // with a digit-only value like "260" and no clue what was wrong.)
   var raw=el.value;
   var digits=raw.replace(/[^\d:]/g,'');
   if(digits.includes(':')){ el.value=digits; updateTimePreview(el); return; }
   if(digits.length===0){ el.value=''; updateTimePreview(el); return; }
   el.value = digits.length>4 ? digits.slice(0,4) : digits;
-  if(digits.length===3){ var s3=parseInt(digits.slice(1),10); if(s3>=0&&s3<=59) el.value=digits[0]+':'+digits.slice(1); }
-  else if(digits.length===4){ var s4=parseInt(digits.slice(2),10); if(s4>=0&&s4<=59) el.value=digits.slice(0,2)+':'+digits.slice(2); }
+  if(digits.length===3){ el.value=digits[0]+':'+digits.slice(1); }
+  else if(digits.length===4){ el.value=digits.slice(0,2)+':'+digits.slice(2); }
   updateTimePreview(el);
 }
 function updateTimePreview(el){
@@ -432,7 +442,10 @@ function bestScore(ev){
 }
 function goldDelta(ev){
   var best=bestScore(ev); if(!best) return null;
-  var pod=A().podium[ev]; var goldRaw=pod&&pod[0]&&pod[0][2];
+  // B2: match medalFor()'s defensive pattern — a future athlete config
+  // without `podium` would otherwise TypeError on `A().podium[ev]`.
+  var pod = (A().podium || {})[ev];
+  var goldRaw = pod && pod[0] && pod[0][2];
   if(!goldRaw||goldRaw==='—') return null;
   var cfg=EVENTS[ev];
   var b=cfg.unit==='time'?parseTime(best.value):parseFloat(best.value);
@@ -653,8 +666,10 @@ function _renderIncomingBlock(ev){
   var inc=A().incoming;
   var list=(inc&&inc[ev])||[];
   if(!list.length) return '';
+  // C1: r[0]/r[1]/r[2] are data-shaped (name, score, note) — esc them so
+  // stray "&", "<", '"' in any future config entry can't break layout.
   var rows=list.map(function(r){
-    return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>';
+    return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+esc(r[0])+'<span class="nt">'+esc(r[2])+'</span></span><span class="sc">'+esc(r[1])+'</span></div>';
   }).join('');
   return '<div class="incoming"><div class="ph">Incoming Competitors · Aging In</div>'+rows+'</div>';
 }
@@ -792,7 +807,9 @@ function renderProgress(){
         return '<div class="hist-row"><span class="ev">'+evName+(isPR?'<span class="pr">PR</span>':'')+'</span><span class="actions"><span class="sc">'+fmtVal(l.event,l.value)+'</span>'+delBtn+'</span></div>';
       }).join('');
       var compName = COMP_DATES[date];   // B5: data-driven comp-day badge
-      var compTag = compName ? ' <span class="comp-day">🏆 '+esc(compName)+'</span>' : '';
+      // E3: 📅 instead of 🏆 — 🏆 is now strictly the all-time record-holder
+      // icon (per legend), so the History comp-day chip uses calendar.
+      var compTag = compName ? ' <span class="comp-day">📅 '+esc(compName)+'</span>' : '';
       return '<div class="hist-day"><div class="date">'+esc(date)+compTag+'</div>'+rows+'</div>';
     }).join('');
   }
@@ -833,7 +850,8 @@ function renderScouting(){
         '<div class="sy-sub">'+esc(youSub)+(best?' · '+esc(best.date):'')+'</div>'+
       '</div>';
       var caveat='<div class="scout-caveat"><span class="cv-flag">🚩</span>Incoming athletes below come from a different division. Their load or standard may differ — your Best above is your apples-to-apples baseline.</div>';
-      var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+r[0]+'<span class="nt">'+r[2]+'</span></span><span class="sc">'+r[1]+'</span></div>'; }).join('');
+      // C1: data-shaped fields escaped — same rationale as _renderIncomingBlock.
+      var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+esc(r[0])+'<span class="nt">'+esc(r[2])+'</span></span><span class="sc">'+esc(r[1])+'</span></div>'; }).join('');
       return '<div class="prog-event"><div class="prog-event-head"><span class="pe-name">'+EVENTS[ev].name+'</span></div>'+
         '<div class="scout-body">'+youCard+caveat+'<div class="scout-incoming">'+rows+'</div></div>'+
       '</div>';
@@ -842,12 +860,16 @@ function renderScouting(){
   document.getElementById('scoutingView').innerHTML=html;
 }
 function renderProfileInto(elId){
+  // Trust boundary (C1):
+  //   name / division / trains / arc.title  →  data-shaped, esc()'d
+  //   background / strong / weak / arc.body →  intentionally rich text
+  //                                            (coach uses <strong>, <em>, …)
   var a=A();
   var el=document.getElementById(elId); if(!el) return;
-  var html='<div class="profile-card"><div class="profile-head"><div class="profile-tag">Athlete Profile</div><div class="profile-title">'+a.name+'</div><div class="profile-sub">'+a.division+(a.trains?' · '+a.trains:'')+'</div></div><div class="profile-body">';
+  var html='<div class="profile-card"><div class="profile-head"><div class="profile-tag">Athlete Profile</div><div class="profile-title">'+esc(a.name)+'</div><div class="profile-sub">'+esc(a.division)+(a.trains?' · '+esc(a.trains):'')+'</div></div><div class="profile-body">';
   if(a.background) html+='<div class="profile-section"><div class="lbl teal">Background</div><p>'+a.background+'</p></div>';
   if(a.strong||a.weak) html+='<div class="profile-pillars">'+(a.strong?'<div class="pillar s"><div class="ph">Strengths</div><div class="pb">'+a.strong+'</div></div>':'')+(a.weak?'<div class="pillar w"><div class="ph">Focus Areas</div><div class="pb">'+a.weak+'</div></div>':'')+'</div>';
-  if(a.arc) html+='<div style="margin-top:14px"><div class="block-arc"><div class="ah">'+a.arc.title+'</div><div class="ai">'+a.arc.body+'</div></div></div>';
+  if(a.arc) html+='<div style="margin-top:14px"><div class="block-arc"><div class="ah">'+esc(a.arc.title)+'</div><div class="ai">'+a.arc.body+'</div></div></div>';
   html+='</div></div>';
   el.innerHTML=html;
 }
@@ -1079,21 +1101,22 @@ function renderHeader(){
 // True PRs only: a logged value that beat the prior best for its event,
 // processed in chronological order. The initial baseline does not count.
 function _countPRs(){
+  // D2: cachedLogs comes back from Supabase ordered by (log_date.asc,
+  // created_at.asc) — that is the true chronological order. Preserve it
+  // here. The previous (date, id) re-sort treated UUIDs lexicographically,
+  // which is not chronological and made the PR count nondeterministic for
+  // multiple same-day logs on the same event.
   var grouped={}; cachedLogs.forEach(function(l){ (grouped[l.event]=grouped[l.event]||[]).push(l); });
   var total=0;
   Object.keys(grouped).forEach(function(ev){
     var cfg=EVENTS[ev]; if(!cfg) return;
-    var logs=grouped[ev].slice().sort(function(a,b){
-      if(a.date!==b.date) return a.date<b.date?-1:1;
-      return String(a.id||'')<String(b.id||'')?-1:1;
-    });
     var bestN=null;
-    logs.forEach(function(l){
+    grouped[ev].forEach(function(l){
       var n=cfg.unit==='time'?parseTime(l.value):parseFloat(l.value);
       if(n==null||isNaN(n)) return;
-      var beat = bestN==null ? false : (cfg.lowerBetter ? n<bestN : n>bestN);
-      if(bestN==null){ bestN=n; }                       // first log → baseline, not a PR
-      else if(beat){ total++; bestN=n; }                // subsequent log that beats the best
+      if(bestN==null){ bestN=n; return; }                  // baseline, not a PR
+      var beat = cfg.lowerBetter ? n<bestN : n>bestN;
+      if(beat){ total++; bestN=n; }
     });
   });
   return total;
@@ -1158,11 +1181,17 @@ async function logScore(ev){
   var el=document.getElementById('in_'+ev), btn=document.getElementById('btn_'+ev);
   var raw=el.value.trim();
   if(!raw){ toast('Enter a value first'); return; }
-  // Per-unit bounds (D1/D2) — reject garbage before it hits the DB.
+  // Per-unit bounds (D1/D2/B1) — reject garbage before it hits the DB.
+  // Per-event time floors: a "0:00" prowler/row/shuttle would otherwise sort
+  // first on every lowerBetter best and silently corrupt the leaderboard.
+  var TIME_MIN = {prowler:5, hang:1, row:30, shuttle:20};
   var unit=EVENTS[ev].unit;
   if(unit==='time'){
     if(!/^\d{1,2}:[0-5]\d$/.test(raw)){ toast('Use M:SS format (e.g. 2:00)'); return; }
-    var ts=parseTime(raw); if(ts==null||ts>1800){ toast('That time looks too long — check M:SS'); return; }
+    var ts=parseTime(raw);
+    if(ts==null||ts>1800){ toast('That time looks too long — check M:SS'); return; }
+    var minSec = TIME_MIN[ev] || 1;
+    if(ts<minSec){ toast('That time looks too short — check M:SS'); return; }
   } else if(unit==='reps'){
     var rn=parseInt(raw,10); if(isNaN(rn)||rn<1||rn>200){ toast('Enter a rep count between 1 and 200'); return; }
   } else { // inches

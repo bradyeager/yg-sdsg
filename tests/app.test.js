@@ -142,6 +142,74 @@ test('validation: out-of-range inches value is rejected, no POST fired', async (
   await page.context().close();
 });
 
+// ---- B1: time-value lower bound — 0:00 must be rejected ----
+test('validation: zero-time 0:00 is rejected for lowerBetter time events', async () => {
+  const page = await newPage();
+  const counters = await mockSupabase(page, []);
+  await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1000);
+  await page.click('.tab[data-view="log"]');
+  await page.waitForTimeout(400);
+  // hang is a time event; 0:00 used to pass validation and become the best.
+  await page.evaluate(() => SDSG.toggleEventCard('hang'));
+  await page.waitForTimeout(350);
+  const postsBefore = counters.posts || 0;
+  await page.fill('#in_hang', '0:00');
+  await page.click('#btn_hang');
+  await page.waitForTimeout(400);
+  const toast = await page.evaluate(() => document.getElementById('toast').textContent);
+  assert.match(toast, /too short/i, 'should show the too-short toast');
+  assert.strictEqual(counters.posts || 0, postsBefore, '0:00 must NOT POST');
+  // 0:01 on hang is allowed (min=1s); 0:02 on prowler is below min=5s and must reject.
+  await page.evaluate(() => SDSG.toggleEventCard('prowler'));
+  await page.waitForTimeout(300);
+  await page.fill('#in_prowler', '0:02');
+  await page.click('#btn_prowler');
+  await page.waitForTimeout(400);
+  const t2 = await page.evaluate(() => document.getElementById('toast').textContent);
+  assert.match(t2, /too short/i, 'prowler 0:02 should reject (< 5s floor)');
+  assert.strictEqual(counters.posts || 0, postsBefore, 'still no POSTs');
+  await page.context().close();
+});
+
+// ---- B2: goldDelta tolerates a config without `podium` ----
+test('defensive: athlete without podium still renders the Dashboard', async () => {
+  const page = await newPage();
+  await mockSupabase(page, []);
+  const errors = [];
+  page.on('pageerror', e => errors.push(String(e)));
+  await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(800);
+  // Wipe the podium on the active athlete and force a re-render.
+  await page.evaluate(() => { window.SDSG_CONFIG.athletes.tonnie.podium = undefined; });
+  await page.evaluate(() => SDSG.setView('dashboard'));
+  await page.waitForTimeout(500);
+  assert.deepStrictEqual(errors, [], 'no pageerror from goldDelta with missing podium');
+  const txt = await page.evaluate(() => document.getElementById('dashboardView').textContent);
+  assert.match(txt, /Events Logged/, 'dashboard still renders');
+  await page.context().close();
+});
+
+// ---- C1: config-string escaping on Scouting (incoming row name) ----
+test('xss-defense: ampersand/HTML in incoming-row name renders as literal text', async () => {
+  const page = await newPage();
+  await mockSupabase(page, []);
+  await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(800);
+  // Inject a hostile name into the active athlete's incoming list, then re-render.
+  await page.evaluate(() => {
+    window.SDSG_CONFIG.athletes.tonnie.incoming = {
+      kbsquat: [['Smith, J. & <b>K</b>', '50', '2025 W65–69 Gold']]
+    };
+    SDSG.setView('scouting');
+  });
+  await page.waitForTimeout(500);
+  const html = await page.evaluate(() => document.getElementById('scoutingView').innerHTML);
+  assert.ok(html.includes('Smith, J. &amp; &lt;b&gt;K&lt;/b&gt;'), 'name is HTML-escaped');
+  assert.ok(!html.includes('<b>K</b>'), 'no live <b> injected');
+  await page.context().close();
+});
+
 // ---- 6. All-time record badges: holder (🏆) + record pace (🚀) ----
 test('records: holder + record-pace badges render for Tonnie', async () => {
   const page = await newPage();
