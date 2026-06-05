@@ -524,7 +524,7 @@ function renderCoachRecs(){
       '<section class="cr-section">'+
         '<div class="head">🧠 Coach\'s Recommendation</div>'+
         '<div class="cr-card all-gold">'+
-          '<div class="cr-i">🏆</div>'+
+          '<div class="cr-i">🥇</div>'+
           '<div class="cr-body">'+
             '<div class="cr-h">Gold Pace, Across the Board</div>'+
             '<div class="cr-sub">Your best meets or beats the 2025 Gold in every event you’ve logged. Today is about holding the line — pick the movements that feel best in your body and go.</div>'+
@@ -610,12 +610,12 @@ function holdsRecord(ev){
   return null;
 }
 function recordIcons(ev){
-  // Compact 🏅/🔥 chips for collapsed card headers + Progress rows.
+  // Compact 🏆/🔥 chips for collapsed card headers + Progress rows.
   var out='';
   var held=holdsRecord(ev);
   if(held){
     var ht='Holds the all-time '+esc(held.band||'')+' record'+(held.value?' · '+esc(held.value):'')+(held.year?' ('+held.year+')':'');
-    out+='<span class="rec-icon held" title="'+ht+'" aria-label="Record holder">🏅</span>';
+    out+='<span class="rec-icon held" title="'+ht+'" aria-label="Record holder">🏆</span>';
   }
   var st=recordStatus(ev);
   if(st&&st.beats&&st.best){
@@ -631,7 +631,7 @@ function recordStrip(ev){
   var st=recordStatus(ev);
   var badges='';
   var held=holdsRecord(ev);
-  if(held) badges+='<span class="rec-badge held">🏅 Record Holder</span>';
+  if(held) badges+='<span class="rec-badge held">🏆 Record Holder</span>';
   if(st&&st.beats&&st.best) badges+='<span class="rec-badge pace">'+(st.tie?'🔥 Record Tie':'🔥 Record Pace')+'</span>';
   return '<div class="rec-strip'+(st&&st.beats?' on':'')+'">'+
     '<div class="rs-top"><span class="rs-lbl">🏆 All-Time '+esc(A().division)+' Record</span>'+badges+'</div>'+
@@ -697,7 +697,7 @@ function renderLog(){
   var totalGold = EVENT_ORDER.filter(function(ev){ var d=goldDelta(ev); return d&&d.pct>=0; }).length;
   var totalBelow = below.length;
   var goldNote = (cachedLogs.length && (totalGold+totalBelow)>0)
-    ? '<div class="gold-note">🏆 At or above 2025 Gold in <b>'+totalGold+' of '+(totalGold+totalBelow)+' event'+(totalGold+totalBelow>1?'s':'')+'</b>.</div>'
+    ? '<div class="gold-note">🥇 At or above 2025 Gold in <b>'+totalGold+' of '+(totalGold+totalBelow)+' event'+(totalGold+totalBelow>1?'s':'')+'</b>.</div>'
     : '';
   var header = '<div class="head">📋 Session Log</div>'+
     '<ul class="log-explain">'+
@@ -750,7 +750,7 @@ function renderProgress(){
     function ul(items){ return '<ul class="rsum-list">'+items.map(function(t){ return '<li>'+esc(t)+'</li>'; }).join('')+'</ul>'; }
     recSummary='<div class="rec-summary">'+
       (heldList.length
-        ? '<div class="rsum-row"><span class="rsum-i">🏅</span><div class="rsum-t">'+
+        ? '<div class="rsum-row"><span class="rsum-i">🏆</span><div class="rsum-t">'+
             '<b>You hold the all-time record</b> in '+heldList.length+' event'+(heldList.length>1?'s':'')+
             ' (the highest mark ever set in your past division, 2019–2025):'+
             ul(heldList)+
@@ -789,7 +789,7 @@ function renderProgress(){
   // (gold-pace medal, all-time record holder, on all-time record pace).
   var emojiKey = cachedLogs.length ? '<div class="emoji-key">'+
     '<span class="ek-item">🥇 <span class="ek-lbl">At 2025 Gold pace</span></span>'+
-    '<span class="ek-item">🏅 <span class="ek-lbl">All-time record holder</span></span>'+
+    '<span class="ek-item">🏆 <span class="ek-lbl">All-time record holder</span></span>'+
     '<span class="ek-item">🔥 <span class="ek-lbl">Beats all-time record</span></span>'+
   '</div>' : '';
   document.getElementById('progressView').innerHTML=
