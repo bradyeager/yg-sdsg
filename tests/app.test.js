@@ -230,6 +230,32 @@ test('program: per-athlete loads + computed bench rep target replace shared copy
   await page.context().close();
 });
 
+// ---- 9. Today's Plan (coach recs) lives on the Program tab, not the Log tab ----
+test('coach recs on Program tab, absent from Log tab; tabs ordered Dashboard·Program·Log·Progress·Scouting', async () => {
+  const page = await newPage();
+  await mockSupabase(page, [
+    { id: 'c1', event: 'bench', value: '58', log_date: '2026-05-07' },
+    { id: 'c2', event: 'hang', value: '1:05', log_date: '2026-05-08' },  // below W70-74 gold of 2:27
+  ]);
+  await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1100);
+  // Tab order on load.
+  const order = await page.evaluate(() => Array.from(document.querySelectorAll('.tab')).map(t => t.dataset.view));
+  assert.deepStrictEqual(order, ['dashboard','program','log','progress','scouting'], 'tab order is Dashboard · Program · Log · Progress · Scouting');
+  // Program tab carries Today's Plan.
+  await page.click('.tab[data-view="program"]');
+  await page.waitForTimeout(1300);
+  const progTxt = await page.evaluate(() => document.getElementById('programView').textContent);
+  assert.match(progTxt, /Today's Plan/, 'Today\'s Plan appears on Program tab');
+  assert.ok(!/Week of June 1/.test(progTxt), 'old "Week of" banner is gone from Program tab');
+  // Log tab no longer carries Today's Plan.
+  await page.click('.tab[data-view="log"]');
+  await page.waitForTimeout(400);
+  const logTxt = await page.evaluate(() => document.getElementById('logView').textContent);
+  assert.ok(!/Today's Plan/.test(logTxt), 'Today\'s Plan is no longer on Log tab');
+  await page.context().close();
+});
+
 // ---- 5. Empty state renders cleanly (no logs) ----
 test('empty state: progress shows the no-sessions message', async () => {
   const page = await newPage();
