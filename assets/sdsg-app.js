@@ -203,7 +203,9 @@ function startTimer(ev){
   var lbl=block?block.querySelector('.t-label'):null;
   var disp=_timerEl(ev,'display');
   if(block){ block.classList.remove('warn','done','prep'); }
-  var PREP_SEC=10;
+  // 5-second "Get Ready" countdown with audible 3-2-1 beeps before the
+  // main timer kicks in. Same prep applied to startProgTimer below.
+  var PREP_SEC=5;
   var anchorMs=Date.now();
   var baseElapsed=state.elapsed||0;
   if(cfg.type!=='countup' && state.remaining==null) state.remaining=cfg.seconds;
@@ -325,12 +327,31 @@ function startProgTimer(k){
   var state=_progTimerState[k]=_progTimerState[k]||{};
   if(state.intervalId) return;
   if(cfg.type!=='countup' && state.remaining==null) state.remaining=cfg.seconds;
-  var block=_ptEl(k,'block'), disp=_ptEl(k,'display');
-  if(block) block.classList.remove('warn','done');
+  var block=_ptEl(k,'block'), disp=_ptEl(k,'display'), lbl=block?block.querySelector('.pt-label'):null;
+  if(block) block.classList.remove('warn','done','prep');
+  // 5-second "Get Ready" prep with audible 3-2-1 beeps, mirroring the Log-tab
+  // timer. The prep flips to the main timer at remain=0 with a longer "go" tone.
+  var PREP_SEC=5;
   state.anchor=Date.now();
   state.baseElapsed=state.elapsed||0;
   state.baseRemaining=state.remaining;
+  state.phase='prep'; state._lastPrepBeep=-1;
+  if(block) block.classList.add('prep');
+  if(lbl) lbl.textContent='Get Ready';
+  if(disp) disp.textContent='0:'+String(PREP_SEC).padStart(2,'0');
   state.intervalId=setInterval(function(){
+    if(state.phase==='prep'){
+      var remain=PREP_SEC-Math.floor((Date.now()-state.anchor)/1000);
+      if(remain<=0){
+        state.phase='main'; state.anchor=Date.now();
+        if(block) block.classList.remove('prep');
+        if(lbl) lbl.textContent = cfg.type==='countup' ? 'Stopwatch' : (cfg.seconds+'s Timer');
+        _beep(); return;
+      }
+      if(disp) disp.textContent='0:'+String(remain).padStart(2,'0');
+      if(remain<=3 && remain!==state._lastPrepBeep){ state._lastPrepBeep=remain; _beepShort(); }
+      return;
+    }
     var secs=Math.floor((Date.now()-state.anchor)/1000);
     if(cfg.type==='countup'){
       state.elapsed=state.baseElapsed+secs;
@@ -351,6 +372,17 @@ function startProgTimer(k){
 function stopProgTimer(k){
   var state=_progTimerState[k]; if(!state) return;
   if(state.intervalId){ clearInterval(state.intervalId); state.intervalId=null; }
+  // Stopped during the Get Ready prep — restore the timer's original label
+  // and display so the user doesn't see "Get Ready" frozen on screen.
+  var cfg=_progTimerCfgs[k];
+  if(state.phase==='prep' && cfg){
+    var block=_ptEl(k,'block'), disp=_ptEl(k,'display'), lbl=block?block.querySelector('.pt-label'):null;
+    if(block) block.classList.remove('prep');
+    if(lbl) lbl.textContent = cfg.type==='countup' ? 'Stopwatch' : (cfg.seconds+'s Timer');
+    if(disp) disp.textContent = _formatTimerSec(cfg.type==='countup'?0:cfg.seconds);
+    if(cfg.type==='countup'){ state.elapsed=0; } else { state.remaining=cfg.seconds; }
+  }
+  state.phase=null;
   var sb=_ptEl(k,'start'), pb=_ptEl(k,'stop');
   if(sb) sb.style.display='inline-block';
   if(pb) pb.style.display='none';
