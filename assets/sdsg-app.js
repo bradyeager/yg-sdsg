@@ -513,18 +513,16 @@ function renderCoachRecs(){
   if(!cachedLogs.length) return '';
   var below=_coachBelowGold();
   var todaysPlan = '<section class="cr-section">'+
-    '<div class="section-title">🎯 Today\'s Plan</div>'+
+    '<div class="head">🎯 Today\'s Plan</div>'+
     '<div class="cr-plan-body">'+
       '<b>Pick 2 or 3 movements</b> to train today. The full programming for each is in the cards below — choose what fits your energy and time.'+
     '</div>'+
   '</section>';
   if(!below.length){
-    // Gold-pace-everywhere variant — still show the 2/3 instruction up top,
-    // then a celebratory coach card instead of Climb/Closest.
     return '<div class="coach-recs">'+
       todaysPlan+
       '<section class="cr-section">'+
-        '<div class="section-title">🧠 Coach\'s Recommendation <span class="cr-by">· Brad</span></div>'+
+        '<div class="head">🧠 Coach\'s Recommendation</div>'+
         '<div class="cr-card all-gold">'+
           '<div class="cr-i">🏆</div>'+
           '<div class="cr-body">'+
@@ -537,20 +535,15 @@ function renderCoachRecs(){
   }
   below.sort(function(a,b){ return a.pct-b.pct; });
   var totalBelow = below.length;
-  var totalGold = EVENT_ORDER.filter(function(ev){ var d=goldDelta(ev); return d&&d.pct>=0; }).length;
   var bothCards = totalBelow >= 2;
   var nClimb = bothCards ? Math.min(3, Math.ceil(totalBelow/2)) : totalBelow;
   var climb = below.slice(0, nClimb);
   var close = bothCards ? below.slice(nClimb).reverse().slice(0,2) : [];
-  var goldNote = totalGold>0
-    ? '<div class="cr-goldnote">🏆 At or above 2025 Gold in '+totalGold+' of '+(totalGold+totalBelow)+' event'+(totalGold+totalBelow>1?'s':'')+'.</div>'
-    : '';
   return '<div class="coach-recs">'+
     todaysPlan+
     '<section class="cr-section">'+
-      '<div class="section-title">🧠 Coach\'s Recommendation <span class="cr-by">· Brad</span></div>'+
-      '<div class="cr-coach-intro">Where Brad thinks today’s effort moves the needle most. Use these to pick your 2–3 movements above.</div>'+
-      goldNote+
+      '<div class="head">🧠 Coach\'s Recommendation</div>'+
+      '<div class="cr-coach-intro">Where Brad thinks today’s effort moves the needle most.</div>'+
       (close.length ? '<div class="cr-card cr-close">'+
         '<div class="cr-ch"><span class="cr-ico">🥇</span><span class="cr-t">Closest to Gold</span></div>'+
         '<div class="cr-tag">Your quickest wins today — small gains land you on the podium.</div>'+
@@ -697,7 +690,20 @@ function renderEventCard(ev){
   '</div>';
 }
 function renderLog(){
-  document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('');
+  // Log tab opens with a short "what this tab is for" header so seniors
+  // who land here on a quiet day know exactly what to do. The gold-pace
+  // pulse line lives here too — it's a snapshot of standing, which fits
+  // the data-entry view better than the Program tab's planning view.
+  var below=_coachBelowGold();
+  var totalGold = EVENT_ORDER.filter(function(ev){ var d=goldDelta(ev); return d&&d.pct>=0; }).length;
+  var totalBelow = below.length;
+  var goldNote = (cachedLogs.length && (totalGold+totalBelow)>0)
+    ? '<div class="cr-goldnote">🏆 At or above 2025 Gold in '+totalGold+' of '+(totalGold+totalBelow)+' event'+(totalGold+totalBelow>1?'s':'')+'.</div>'
+    : '';
+  var header = '<div class="head">📋 Session Log</div>'+
+    '<div class="log-explain">Tap a movement to log today’s mark. Your best updates automatically — a new PR rolls into Progress and Dashboard.</div>'+
+    goldNote;
+  document.getElementById('eventList').innerHTML = header + EVENT_ORDER.map(renderEventCard).join('');
 }
 function renderProgress(){
   // Status dashboard — top row carries event name + delta pill;
@@ -775,8 +781,8 @@ function renderProgress(){
   }
   document.getElementById('progressView').innerHTML=
     recSummary+
-    '<div class="section-title">Status · Best vs 2025 Gold</div>'+dash+
-    '<div class="section-title" style="margin-top:24px">Training History</div><div id="historyList">'+hist+'</div>';
+    '<div class="head">📊 Status · Best vs 2025 Gold</div>'+dash+
+    '<div class="head" style="margin-top:24px">🗓 Training History</div><div id="historyList">'+hist+'</div>';
   // wire deletes
   document.querySelectorAll('#historyList .hist-del').forEach(function(btn){
     btn.addEventListener('click', async function(){
@@ -915,9 +921,7 @@ async function renderProgram(){
     if(!em) throw new Error('program-events JSON block not found');
     var events=JSON.parse(em[1]);
     var TYPE={sprint:'<span class="pe-mode">⚡ Sprint</span>',marathon:'<span class="pe-mode">🔋 Marathon</span>'};
-    // Third section header — visually separates the menu of options from the
-    // Today's Plan + Coach's Recommendation sections rendered above.
-    var html='<div class="section-title">📋 All Movements</div>';
+    var html='';
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
     // Re-render means we rebuild the timer registry; clear any running pattern timers first.
@@ -1001,7 +1005,7 @@ async function renderDashboard(){
     '</div>';
     if(timeline) timeline = _decode(timeline);
     var periodHtml = '<div class="dash-timeline">'+timeline+'</div>';
-    _dashCache = '<div class="section-title">This Week</div>'+weekHtml+periodHtml+_renderDashProfile();
+    _dashCache = '<div class="head">📅 This Week</div>'+weekHtml+periodHtml+_renderDashProfile();
     host.innerHTML = statsHtml + _dashCache;
     _wireDashProfile();
   }catch(e){
@@ -1031,7 +1035,7 @@ function _renderDashStats(){
 }
 function _renderDashProfile(){
   var a = A();
-  var html = '<div class="section-title">Athlete Profile</div><div class="profile-card"><div class="profile-head"><div class="profile-tag">Athlete</div><div class="profile-title">'+esc(a.name)+'</div><div class="profile-sub">'+esc(a.division)+(a.trains?' · '+esc(a.trains):'')+'</div></div><div class="profile-body">';
+  var html = '<div class="head">👤 Athlete Profile</div><div class="profile-card"><div class="profile-head"><div class="profile-tag">Athlete</div><div class="profile-title">'+esc(a.name)+'</div><div class="profile-sub">'+esc(a.division)+(a.trains?' · '+esc(a.trains):'')+'</div></div><div class="profile-body">';
   if(a.background) html += '<div class="profile-section"><div class="lbl teal">Background</div><p>'+a.background+'</p></div>';
   if(a.strong||a.weak) html += '<div class="profile-pillars">'+(a.strong?'<div class="pillar s"><div class="ph">Strengths</div><div class="pb">'+a.strong+'</div></div>':'')+(a.weak?'<div class="pillar w"><div class="ph">Focus Areas</div><div class="pb">'+a.weak+'</div></div>':'')+'</div>';
   if(a.arc) html += '<div style="margin-top:14px"><div class="block-arc"><div class="ah">'+esc(a.arc.title)+'</div><div class="ai">'+a.arc.body+'</div></div></div>';

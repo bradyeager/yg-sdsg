@@ -196,13 +196,12 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
    Three sections: Today's Plan · Coach's Recommendation · All Movements.
    Designed for fatigued senior athletes — strong section anchors (reuses
    .section-title with the teal accent bar), high contrast, minimal prose. */
-.coach-recs{margin-bottom:10px}
-.coach-recs .cr-section{margin-bottom:22px}
-.coach-recs .cr-section .section-title{margin-bottom:12px}
-.coach-recs .cr-by{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:none;color:var(--pink)}
-.coach-recs .cr-plan-body{padding:14px 16px;background:linear-gradient(135deg, rgba(72,196,204,.13), rgba(239,50,149,.06));border:1px solid var(--teal-dim);border-radius:10px;font-size:14.5px;line-height:1.55;color:var(--text)}
+.coach-recs{margin-bottom:6px}
+.coach-recs .cr-section{margin-bottom:20px}
+.coach-recs .cr-section .head{margin:0 0 9px}
+.coach-recs .cr-plan-body{padding:12px 14px;background:linear-gradient(135deg, rgba(72,196,204,.12), rgba(239,50,149,.05));border:1px solid var(--teal-dim);border-radius:9px;font-size:13.5px;line-height:1.55;color:var(--text-dim)}
 .coach-recs .cr-plan-body b{color:var(--teal);font-weight:700}
-.coach-recs .cr-coach-intro{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-dim);margin-bottom:11px;line-height:1.5}
+.coach-recs .cr-coach-intro{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);margin-bottom:10px;line-height:1.5}
 .coach-recs .cr-goldnote{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.22);border-radius:7px;padding:8px 11px;margin-bottom:10px}
 .coach-recs .cr-card{padding:13px 14px;border-radius:10px;margin-bottom:10px;background:linear-gradient(180deg, var(--surface-2), rgba(13,18,28,.6));border:1px solid var(--border-bright)}
 .coach-recs .cr-close{border-color:rgba(74,222,128,.30);box-shadow:inset 0 0 0 1px rgba(74,222,128,.10)}
@@ -223,6 +222,9 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 .coach-recs .cr-card.all-gold .cr-i{font-size:28px;line-height:1;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(250,204,21,.5))}
 .coach-recs .cr-card.all-gold .cr-h{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold)}
 .coach-recs .cr-card.all-gold .cr-sub{font-size:12.5px;color:var(--text-dim);margin-top:4px;line-height:1.5}
+
+/* Log tab intro paragraph under the 📋 Session Log header. */
+.log-explain{font-size:13.5px;color:var(--text-dim);line-height:1.55;margin-bottom:11px}
 
 /* ===== Dashboard tab ===== */
 .dash-week{margin-bottom:18px;padding:14px 16px;background:linear-gradient(135deg, rgba(72,196,204,.08), rgba(239,50,149,.05));border:1px solid var(--teal-dim);border-radius:10px}
@@ -299,6 +301,13 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 .section-title{font-family:'Oswald',sans-serif;font-size:23px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text);margin:22px 0 16px;display:flex;align-items:center;gap:11px;line-height:1.1}
 .section-title::before{content:"";width:5px;height:25px;border-radius:3px;background:linear-gradient(180deg,var(--teal),var(--teal-deep));box-shadow:0 0 14px -2px rgba(72,196,204,.65);flex-shrink:0}
 .section-title:first-child{margin-top:6px}
+
+/* .head: smaller, emoji-prefixed section title. Replaces the bigger
+   .section-title (with its teal accent bar) for the routine sections on
+   Dashboard, Program, Progress, and Log so the visual rhythm is calmer. */
+.head{font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--text);margin:20px 0 11px;line-height:1.2;display:flex;align-items:baseline;gap:9px}
+.head:first-child{margin-top:6px}
+.head .ico{font-size:18px;line-height:1}
 .dash-row{display:flex;flex-direction:column;gap:6px;background:linear-gradient(180deg, var(--surface-2), rgba(13,18,28,.6));border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:9px}
 .dash-row .dr-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .dash-row .dr-body{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:2px}
