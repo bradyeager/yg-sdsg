@@ -472,6 +472,79 @@ function medalIcon(level){
   return '<span class="medal-trophy medal-'+level+'" title="'+label+' medal pace">'+icon+'</span>';
 }
 
+// ===== Coach recommendations (Log tab header) =====
+// Two cards above the event list, framed positive then aspirational:
+//   🥇 "Closest to Gold"   — events just below the 2025 Gold pace; today's
+//                            quickest wins (smallest negative delta).
+//   ⛰  "Biggest Climb"     — events farthest from Gold; where the hardest
+//                            work pays off most.
+// If every event is already at/above Gold pace, a single celebratory card
+// replaces both.
+function _coachBelowGold(){
+  var out=[];
+  EVENT_ORDER.forEach(function(ev){
+    var d=goldDelta(ev);
+    if(d && d.pct<0) out.push({ev:ev, pct:d.pct, gold:d.gold, best:d.best});
+  });
+  return out;
+}
+function _gapToGold(r){
+  var cfg=EVENTS[r.ev];
+  if(cfg.unit==='time'){
+    var bSec=parseTime(r.best), gSec=parseTime(r.gold);
+    if(isNaN(bSec)||isNaN(gSec)) return '';
+    return formatTime(Math.abs(bSec-gSec))+' to gold ('+esc(r.gold)+')';
+  }
+  var b=parseFloat(r.best), g=parseFloat(r.gold);
+  if(isNaN(b)||isNaN(g)) return '';
+  var gap=Math.round(Math.abs(b-g)*10)/10;
+  var unit=cfg.unit==='reps'?'reps':'in';
+  return gap+' '+unit+' to gold ('+esc(r.gold)+')';
+}
+function _crRow(r){
+  var nm=EVENTS[r.ev].name;
+  return '<li><span class="cr-nm">'+esc(nm)+'</span><span class="cr-gap">−'+_gapToGold(r)+'</span></li>';
+}
+function renderCoachRecs(){
+  // Only show on athletes whose podium data lets us compute a gold delta.
+  var below=_coachBelowGold();
+  if(!cachedLogs.length) return '';
+  if(!below.length){
+    return '<div class="coach-recs all-gold">'+
+      '<div class="cr-i">🏆</div>'+
+      '<div class="cr-body"><div class="cr-h">Gold Pace, Across the Board</div>'+
+      '<div class="cr-sub">Your best meets or beats the 2025 Gold in every event. Today is about holding the line and stacking quality reps.</div></div>'+
+    '</div>';
+  }
+  below.sort(function(a,b){ return a.pct-b.pct; });   // most negative first
+  // With only one event below gold, both cards would name the same event; show
+  // a single "Biggest Climb" card plus a "you're at gold pace everywhere else"
+  // header. Otherwise split: worst → Biggest Climb, smallest negatives → Closest.
+  var totalBelow = below.length;
+  var totalGold = EVENT_ORDER.filter(function(ev){ var d=goldDelta(ev); return d&&d.pct>=0; }).length;
+  var bothCards = totalBelow >= 2;
+  var nClimb = bothCards ? Math.min(3, Math.ceil(totalBelow/2)) : totalBelow;
+  var climb = below.slice(0, nClimb);
+  var close = bothCards ? below.slice(nClimb).reverse().slice(0,2) : [];
+  var goldNote = totalGold>0
+    ? '<div class="cr-goldnote">🏆 At or above 2025 Gold in '+totalGold+' of '+(totalGold+totalBelow)+' event'+(totalGold+totalBelow>1?'s':'')+'.</div>'
+    : '';
+  return '<div class="coach-recs">'+
+    '<div class="cr-h0">🎯 Today\'s Plan</div>'+
+    goldNote+
+    (close.length ? '<div class="cr-card cr-close">'+
+      '<div class="cr-ch"><span class="cr-ico">🥇</span><span class="cr-t">Closest to Gold</span></div>'+
+      '<div class="cr-tag">Your quickest wins today — small gains land you on the podium.</div>'+
+      '<ul class="cr-list">'+close.map(_crRow).join('')+'</ul>'+
+    '</div>' : '')+
+    '<div class="cr-card cr-climb">'+
+      '<div class="cr-ch"><span class="cr-ico">⛰</span><span class="cr-t">Biggest Climb</span></div>'+
+      '<div class="cr-tag">Where to spend your hardest work — the largest gaps to bridge.</div>'+
+      '<ul class="cr-list">'+climb.map(_crRow).join('')+'</ul>'+
+    '</div>'+
+  '</div>';
+}
+
 // ===== All-time record helpers =====
 function _recClock(s){
   // Parse a record clock that may carry decimals ("0:16.38") or be plain seconds.
@@ -494,10 +567,13 @@ function _recordValueN(ev, raw){
 }
 function recordDisplay(ev, rec){
   // Plain-text record value in the event's native display unit (already escaped).
+  // Dynamax is the unit-mismatch event: the book records in feet, but every
+  // other value in the app (logs, baselines, 2025 podiums) is inches, so we
+  // convert ft → in for display to match the surrounding column.
   if(!rec) return '—';
   var cfg=EVENTS[ev];
   if(cfg.unit==='time') return esc(rec.raw);
-  if(ev==='dynamax') return esc(rec.raw)+' ft';
+  if(ev==='dynamax') return Math.round(parseFloat(rec.raw)*12)+' in';
   if(cfg.unit==='inches') return esc(rec.raw)+' in';
   return esc(rec.raw)+' reps'+(rec.weight?' @ '+esc(rec.weight):'');
 }
@@ -601,7 +677,7 @@ function renderEventCard(ev){
   '</div>';
 }
 function renderLog(){
-  document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('');
+  document.getElementById('eventList').innerHTML=renderCoachRecs()+EVENT_ORDER.map(renderEventCard).join('');
 }
 function renderProgress(){
   // Status dashboard — top row carries event name + delta pill;
