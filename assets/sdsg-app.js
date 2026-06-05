@@ -489,7 +489,9 @@ function goldDelta(ev){
 function deltaBadge(ev){
   var d=goldDelta(ev);
   if(!d) return '<span class="badge gray">No Data</span>';
-  var cls=d.pct>=10?'green':d.pct>=0?'yellow':'red';
+  // 2-tier status: at/above 2025 Gold = green, below = red. Mirrors the
+  // Dashboard "At Gold Pace" stat (counts pct ≥ 0).
+  var cls=d.pct>=0?'green':'red';
   return '<span class="badge '+cls+'">'+(d.pct>=0?'+':'')+d.pct.toFixed(1)+'%</span>';
 }
 function medalFor(ev){
@@ -992,7 +994,10 @@ async function renderProgram(){
     var em=txt.match(/<script type="application\/json" id="program-events">([\s\S]*?)<\/script>/);
     if(!em) throw new Error('program-events JSON block not found');
     var events=JSON.parse(em[1]);
-    var TYPE={sprint:'<span class="pe-mode">⚡ Sprint</span>',marathon:'<span class="pe-mode">🔋 Marathon</span>'};
+    // Emoji rendered outside the chip so iOS's dark-green 🔋 doesn't vanish
+    // into the dark .pe-mode background. The chip stays a pink-on-dark pill;
+    // the icon breathes on the natural teal header.
+    var TYPE={sprint:'<span class="pe-ico">⚡</span><span class="pe-mode">Sprint</span>',marathon:'<span class="pe-ico">🔋</span><span class="pe-mode">Marathon</span>'};
     var html='<div class="head">🏋 Training Events</div>';
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
