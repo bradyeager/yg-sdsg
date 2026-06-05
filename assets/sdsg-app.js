@@ -677,7 +677,7 @@ function renderEventCard(ev){
   '</div>';
 }
 function renderLog(){
-  document.getElementById('eventList').innerHTML=renderCoachRecs()+EVENT_ORDER.map(renderEventCard).join('');
+  document.getElementById('eventList').innerHTML=EVENT_ORDER.map(renderEventCard).join('');
 }
 function renderProgress(){
   // Status dashboard — top row carries event name + delta pill;
@@ -882,8 +882,11 @@ function _personalizePattern(eventName, p, athlete){
 // ===== Program tab (fetch /program/, render this week) =====
 async function renderProgram(){
   var host=document.getElementById('programView');
-  if(_programCache){ host.innerHTML=_programCache; return; }
-  host.innerHTML='<div class="empty"><div class="spinner"></div><div class="msg" style="margin-top:14px">Loading this week’s program…</div></div>';
+  // Coach recs are always live — they depend on cachedLogs, which can change
+  // between Program-tab visits without invalidating the heavier events cache.
+  var recsHtml=renderCoachRecs();
+  if(_programCache){ host.innerHTML=recsHtml+_programCache; return; }
+  host.innerHTML=recsHtml+'<div class="empty"><div class="spinner"></div><div class="msg" style="margin-top:14px">Loading this week’s program…</div></div>';
   try{
     var res=await fetch('/program/');
     if(!res.ok) throw new Error('HTTP '+res.status);
@@ -891,14 +894,8 @@ async function renderProgram(){
     var em=txt.match(/<script type="application\/json" id="program-events">([\s\S]*?)<\/script>/);
     if(!em) throw new Error('program-events JSON block not found');
     var events=JSON.parse(em[1]);
-    var wt=txt.match(/<h2>(Week of [^<]+)<\/h2>/);
-    var ws=txt.match(/week-sub">([^<]+)</);
-    var wd=txt.match(/week-dates">([^<]+)</);
     var TYPE={sprint:'<span class="pe-mode">⚡ Sprint</span>',marathon:'<span class="pe-mode">🔋 Marathon</span>'};
-    var html='<div class="prog-banner"><h2>'+(wt?wt[1]:'This Week')+'</h2>'+
-      (ws?'<div class="sub">'+ws[1]+'</div>':'')+
-      (wd?'<div class="dates">'+wd[1]+'</div>':'')+
-      '<a class="open" href="/program/">Open Full Program →</a></div>';
+    var html='';
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
     // Re-render means we rebuild the timer registry; clear any running pattern timers first.
@@ -928,7 +925,7 @@ async function renderProgram(){
       '</div>';
     }).join('');
     _programCache=html;
-    host.innerHTML=html;
+    host.innerHTML=recsHtml+html;
   }catch(e){
     console.error(e);
     host.innerHTML='<div class="empty"><div class="ico">⚠️</div><div class="msg">Couldn’t load the program.<br>Open <a href="/program/" style="color:var(--teal)">/program/</a> directly.</div></div>';
