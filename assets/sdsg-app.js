@@ -610,7 +610,7 @@ function holdsRecord(ev){
   return null;
 }
 function recordIcons(ev){
-  // Compact 🏆/🔥 chips for collapsed card headers + Progress rows.
+  // Compact 🏆/🚀 chips for collapsed card headers + Progress rows.
   var out='';
   var held=holdsRecord(ev);
   if(held){
@@ -621,7 +621,7 @@ function recordIcons(ev){
   if(st&&st.beats&&st.best){
     var verb=st.tie?'matches':'beats';
     var pt='Your best '+verb+' the all-time '+esc(A().division)+' record ('+recordDisplay(ev,st.rec)+')';
-    out+='<span class="rec-icon pace" title="'+pt+'" aria-label="On record pace">🔥</span>';
+    out+='<span class="rec-icon pace" title="'+pt+'" aria-label="On record pace">🚀</span>';
   }
   return out;
 }
@@ -632,7 +632,7 @@ function recordStrip(ev){
   var badges='';
   var held=holdsRecord(ev);
   if(held) badges+='<span class="rec-badge held">🏆 Record Holder</span>';
-  if(st&&st.beats&&st.best) badges+='<span class="rec-badge pace">'+(st.tie?'🔥 Record Tie':'🔥 Record Pace')+'</span>';
+  if(st&&st.beats&&st.best) badges+='<span class="rec-badge pace">'+(st.tie?'🚀 Record Tie':'🚀 Record Pace')+'</span>';
   return '<div class="rec-strip'+(st&&st.beats?' on':'')+'">'+
     '<div class="rs-top"><span class="rs-lbl">🏆 All-Time '+esc(A().division)+' Record</span>'+badges+'</div>'+
     '<div class="rs-val">'+recordDisplay(ev,rec)+'</div>'+
@@ -757,7 +757,7 @@ function renderProgress(){
           '</div></div>'
         : '')+
       (paceList.length
-        ? '<div class="rsum-row"><span class="rsum-i">🔥</span><div class="rsum-t">'+
+        ? '<div class="rsum-row"><span class="rsum-i">🚀</span><div class="rsum-t">'+
             '<b>Your best is on all-time record pace</b> in '+paceList.length+' event'+(paceList.length>1?'s':'')+'. '+
             'Your logged best matches or beats the highest mark ever set in <b>'+div+'</b> across the 2019–2025 record books:'+
             ul(paceList)+
@@ -790,7 +790,7 @@ function renderProgress(){
   var emojiKey = cachedLogs.length ? '<div class="emoji-key">'+
     '<span class="ek-item">🥇 <span class="ek-lbl">At 2025 Gold pace</span></span>'+
     '<span class="ek-item">🏆 <span class="ek-lbl">All-time record holder</span></span>'+
-    '<span class="ek-item">🔥 <span class="ek-lbl">Beats all-time record</span></span>'+
+    '<span class="ek-item">🚀 <span class="ek-lbl">Beats all-time record</span></span>'+
   '</div>' : '';
   document.getElementById('progressView').innerHTML=
     recSummary+
