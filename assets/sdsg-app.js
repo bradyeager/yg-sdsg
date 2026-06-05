@@ -690,18 +690,21 @@ function renderEventCard(ev){
   '</div>';
 }
 function renderLog(){
-  // Log tab opens with a short "what this tab is for" header so seniors
-  // who land here on a quiet day know exactly what to do. The gold-pace
-  // pulse line lives here too — it's a snapshot of standing, which fits
-  // the data-entry view better than the Program tab's planning view.
+  // Log tab opens with a short "what this tab is for" intro (bullets, easier
+  // to scan than a paragraph) and a framed gold-pace pulse line — a snapshot
+  // of standing that fits the data-entry view.
   var below=_coachBelowGold();
   var totalGold = EVENT_ORDER.filter(function(ev){ var d=goldDelta(ev); return d&&d.pct>=0; }).length;
   var totalBelow = below.length;
   var goldNote = (cachedLogs.length && (totalGold+totalBelow)>0)
-    ? '<div class="cr-goldnote">🏆 At or above 2025 Gold in '+totalGold+' of '+(totalGold+totalBelow)+' event'+(totalGold+totalBelow>1?'s':'')+'.</div>'
+    ? '<div class="gold-note">🏆 At or above 2025 Gold in <b>'+totalGold+' of '+(totalGold+totalBelow)+' event'+(totalGold+totalBelow>1?'s':'')+'</b>.</div>'
     : '';
   var header = '<div class="head">📋 Session Log</div>'+
-    '<div class="log-explain">Tap a movement to log today’s mark. Your best updates automatically — a new PR rolls into Progress and Dashboard.</div>'+
+    '<ul class="log-explain">'+
+      '<li>Tap a movement to log today’s mark.</li>'+
+      '<li>Your best updates automatically.</li>'+
+      '<li>A new PR rolls into Progress and Dashboard.</li>'+
+    '</ul>'+
     goldNote;
   document.getElementById('eventList').innerHTML = header + EVENT_ORDER.map(renderEventCard).join('');
 }
@@ -733,10 +736,13 @@ function renderProgress(){
   EVENT_ORDER.forEach(function(ev){
     if(holdsRecord(ev)){
       var h=holdsRecord(ev);
-      heldList.push(EVENTS[ev].name+(h.band?' · '+h.band:'')+(h.value?' ('+h.value+')':''));
+      heldList.push(EVENTS[ev].name+(h.band?' · '+h.band:'')+(h.value?' · '+h.value:'')+(h.year?' · '+h.year:''));
     }
     var st=recordStatus(ev);
-    if(st&&st.beats&&st.best) paceList.push(EVENTS[ev].name+(st.tie?' (tied)':''));
+    if(st&&st.beats&&st.best){
+      var yrTag = st.rec.year ? ' · record from '+st.rec.year : '';
+      paceList.push(EVENTS[ev].name+(st.tie?' (tied)':'')+yrTag);
+    }
   });
   var recSummary='';
   if(heldList.length||paceList.length){
@@ -921,7 +927,8 @@ async function renderProgram(){
     if(!em) throw new Error('program-events JSON block not found');
     var events=JSON.parse(em[1]);
     var TYPE={sprint:'<span class="pe-mode">⚡ Sprint</span>',marathon:'<span class="pe-mode">🔋 Marathon</span>'};
-    var html='';
+    // Matches the 🎯 Today's Plan and 🧠 Coach's Recommendation headers above.
+    var html='<div class="head">🏋 Movement Library</div>';
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
     // Re-render means we rebuild the timer registry; clear any running pattern timers first.

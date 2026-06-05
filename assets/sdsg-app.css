@@ -202,7 +202,10 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 .coach-recs .cr-plan-body{padding:12px 14px;background:linear-gradient(135deg, rgba(72,196,204,.12), rgba(239,50,149,.05));border:1px solid var(--teal-dim);border-radius:9px;font-size:13.5px;line-height:1.55;color:var(--text-dim)}
 .coach-recs .cr-plan-body b{color:var(--teal);font-weight:700}
 .coach-recs .cr-coach-intro{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);margin-bottom:10px;line-height:1.5}
-.coach-recs .cr-goldnote{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.22);border-radius:7px;padding:8px 11px;margin-bottom:10px}
+/* "🏆 At or above 2025 Gold in N of M events" pulse line — used on the
+   Log tab top and inside the Coach Recs panel. Yellow-tinted frame. */
+.gold-note,.coach-recs .cr-goldnote{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-dim);background:rgba(250,204,21,.10);border:1px solid rgba(250,204,21,.30);border-radius:8px;padding:10px 13px;margin:14px 0 18px}
+.gold-note b,.coach-recs .cr-goldnote b{color:var(--gold);font-weight:700}
 .coach-recs .cr-card{padding:13px 14px;border-radius:10px;margin-bottom:10px;background:linear-gradient(180deg, var(--surface-2), rgba(13,18,28,.6));border:1px solid var(--border-bright)}
 .coach-recs .cr-close{border-color:rgba(74,222,128,.30);box-shadow:inset 0 0 0 1px rgba(74,222,128,.10)}
 .coach-recs .cr-climb{border-color:var(--pink-dim);box-shadow:inset 0 0 0 1px var(--pink-glow)}
@@ -223,8 +226,11 @@ main{max-width:1100px;margin:0 auto;padding:18px 16px 70px}
 .coach-recs .cr-card.all-gold .cr-h{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold)}
 .coach-recs .cr-card.all-gold .cr-sub{font-size:12.5px;color:var(--text-dim);margin-top:4px;line-height:1.5}
 
-/* Log tab intro paragraph under the 📋 Session Log header. */
-.log-explain{font-size:13.5px;color:var(--text-dim);line-height:1.55;margin-bottom:11px}
+/* Log tab intro bullets under the 📋 Session Log header — bulleted list
+   is easier for fatigued seniors to scan than a paragraph. */
+.log-explain{list-style:none;padding:0;margin:0 0 6px;display:flex;flex-direction:column;gap:4px}
+.log-explain li{font-size:13.5px;color:var(--text-dim);line-height:1.55;padding-left:18px;position:relative}
+.log-explain li::before{content:"▸";position:absolute;left:2px;top:0;color:var(--teal);font-weight:700}
 
 /* ===== Dashboard tab ===== */
 .dash-week{margin-bottom:18px;padding:14px 16px;background:linear-gradient(135deg, rgba(72,196,204,.08), rgba(239,50,149,.05));border:1px solid var(--teal-dim);border-radius:10px}
