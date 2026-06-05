@@ -543,7 +543,7 @@ function renderCoachRecs(){
     todaysPlan+
     '<section class="cr-section">'+
       '<div class="head">🧠 Coach\'s Recommendation</div>'+
-      '<div class="cr-coach-intro">Where Brad thinks today’s effort moves the needle most.</div>'+
+      '<div class="cr-coach-intro">Where today’s effort moves your needle most.</div>'+
       (close.length ? '<div class="cr-card cr-close">'+
         '<div class="cr-ch"><span class="cr-ico">🥇</span><span class="cr-t">Closest to Gold</span></div>'+
         '<div class="cr-tag">Your quickest wins today — small gains land you on the podium.</div>'+
@@ -785,8 +785,16 @@ function renderProgress(){
       return '<div class="hist-day"><div class="date">'+esc(date)+compTag+'</div>'+rows+'</div>';
     }).join('');
   }
+  // Small emoji key — explains the three icons that appear on every row
+  // (gold-pace medal, all-time record holder, on all-time record pace).
+  var emojiKey = cachedLogs.length ? '<div class="emoji-key">'+
+    '<span class="ek-item">🥇 <span class="ek-lbl">At 2025 Gold pace</span></span>'+
+    '<span class="ek-item">🏅 <span class="ek-lbl">All-time record holder</span></span>'+
+    '<span class="ek-item">🔥 <span class="ek-lbl">Beats all-time record</span></span>'+
+  '</div>' : '';
   document.getElementById('progressView').innerHTML=
     recSummary+
+    emojiKey+
     '<div class="head">📊 Status · Best vs 2025 Gold</div>'+dash+
     '<div class="head" style="margin-top:24px">🗓 Training History</div><div id="historyList">'+hist+'</div>';
   // wire deletes
@@ -927,8 +935,7 @@ async function renderProgram(){
     if(!em) throw new Error('program-events JSON block not found');
     var events=JSON.parse(em[1]);
     var TYPE={sprint:'<span class="pe-mode">⚡ Sprint</span>',marathon:'<span class="pe-mode">🔋 Marathon</span>'};
-    // Matches the 🎯 Today's Plan and 🧠 Coach's Recommendation headers above.
-    var html='<div class="head">🏋 Movement Library</div>';
+    var html='<div class="head">🏋 Training Events</div>';
     var aLoads=A().loads||{};
     var keyByName={'KB Box Squat':'kbsquat','Dynamax OH Throw':'dynamax','Bench Press':'bench','Overhead Arm Hang':'hang','Med Ball Slams':'slams','Jump Rope · 60s':'jumprope','Standing Broad Jump':'broadjump','Concept Row · 500m':'row','300 Yd Shuttle Run':'shuttle','Prowler Push':'prowler'};
     // Re-render means we rebuild the timer registry; clear any running pattern timers first.
