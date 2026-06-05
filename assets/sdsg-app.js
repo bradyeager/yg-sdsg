@@ -689,10 +689,20 @@ function renderEventCard(ev){
     '</div>'+
   '</div>';
 }
+// Tiny shared legend that decodes the three row icons used on both
+// Log event-card headers and Progress dash rows.
+function _emojiKeyHtml(){
+  return '<div class="emoji-key">'+
+    '<span class="ek-item">🥇 <span class="ek-lbl">At 2025 Gold pace</span></span>'+
+    '<span class="ek-item">🏆 <span class="ek-lbl">All-time record holder</span></span>'+
+    '<span class="ek-item">🚀 <span class="ek-lbl">Beats all-time record</span></span>'+
+  '</div>';
+}
 function renderLog(){
   // Log tab opens with a short "what this tab is for" intro (bullets, easier
-  // to scan than a paragraph) and a framed gold-pace pulse line — a snapshot
-  // of standing that fits the data-entry view.
+  // to scan than a paragraph), a framed gold-pace pulse line, and the same
+  // emoji legend the Progress tab uses so the icons on each event-card
+  // header (🥇/🏆/🚀) are decipherable here too.
   var below=_coachBelowGold();
   var totalGold = EVENT_ORDER.filter(function(ev){ var d=goldDelta(ev); return d&&d.pct>=0; }).length;
   var totalBelow = below.length;
@@ -705,7 +715,8 @@ function renderLog(){
       '<li>Your best updates automatically.</li>'+
       '<li>A new PR rolls into Progress and Dashboard.</li>'+
     '</ul>'+
-    goldNote;
+    goldNote+
+    (cachedLogs.length ? _emojiKeyHtml() : '');
   document.getElementById('eventList').innerHTML = header + EVENT_ORDER.map(renderEventCard).join('');
 }
 function renderProgress(){
@@ -785,16 +796,9 @@ function renderProgress(){
       return '<div class="hist-day"><div class="date">'+esc(date)+compTag+'</div>'+rows+'</div>';
     }).join('');
   }
-  // Small emoji key — explains the three icons that appear on every row
-  // (gold-pace medal, all-time record holder, on all-time record pace).
-  var emojiKey = cachedLogs.length ? '<div class="emoji-key">'+
-    '<span class="ek-item">🥇 <span class="ek-lbl">At 2025 Gold pace</span></span>'+
-    '<span class="ek-item">🏆 <span class="ek-lbl">All-time record holder</span></span>'+
-    '<span class="ek-item">🚀 <span class="ek-lbl">Beats all-time record</span></span>'+
-  '</div>' : '';
   document.getElementById('progressView').innerHTML=
     recSummary+
-    emojiKey+
+    (cachedLogs.length ? _emojiKeyHtml() : '')+
     '<div class="head">📊 Status · Best vs 2025 Gold</div>'+dash+
     '<div class="head" style="margin-top:24px">🗓 Training History</div><div id="historyList">'+hist+'</div>';
   // wire deletes
