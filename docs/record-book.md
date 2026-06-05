@@ -22,7 +22,7 @@ Unit notes baked into the helpers:
 
 ## Badges shipped
 
-- **🏅 Record Holder** — driven by an explicit `recordsHeld` array in the
+- **🏆 Record Holder** — driven by an explicit `recordsHeld` array in the
   athlete's config (not fragile name-matching). Today only **Tonnie** holds
   records: Bench Press (W65–69, 50 @ 50 lb, 2025) and Med Ball Slams (W65–69,
   48, 2024 tie).
@@ -31,7 +31,7 @@ Unit notes baked into the helpers:
   (`gender` + `ageBand` from config). Time events respect `lowerBetter`;
   Dynamax converts ft↔in.
 
-Surfaced in three places: collapsed Log-card headers (compact 🏅/🔥), the
+Surfaced in three places: collapsed Log-card headers (compact 🏆/🔥), the
 expanded card's "All-Time … Record" strip (value + holder), and a summary
 banner + per-row icons on the Progress tab.
 

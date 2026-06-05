@@ -142,7 +142,7 @@ test('validation: out-of-range inches value is rejected, no POST fired', async (
   await page.context().close();
 });
 
-// ---- 6. All-time record badges: holder (🏅) + record pace (🔥) ----
+// ---- 6. All-time record badges: holder (🏆) + record pace (🔥) ----
 test('records: holder + record-pace badges render for Tonnie', async () => {
   const page = await newPage();
   // Tonnie holds the W65-69 bench record; a logged best of 58 also beats the
@@ -161,7 +161,7 @@ test('records: holder + record-pace badges render for Tonnie', async () => {
     const card = document.getElementById('ec_bench');
     return card ? card.querySelector('.eh-right').textContent : '';
   });
-  assert.ok(benchIcons.includes('🏅'), 'bench shows the record-holder icon');
+  assert.ok(benchIcons.includes('🏆'), 'bench shows the record-holder icon');
   assert.ok(benchIcons.includes('🔥'), 'bench shows the record-pace icon');
   // The expanded body should name the all-time record holder.
   await page.evaluate(() => SDSG.toggleEventCard('bench'));
