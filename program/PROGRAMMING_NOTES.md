@@ -20,6 +20,7 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 - **No wall slams.** No sturdy throwing surface available.
 - **No rotational slams.** No space.
 - **No floor press.** Brad doesn't like the movement. Never include it. Replace with a DB or push-up variation if upper-body pressing is needed.
+- **Fat grips available.** Use fat-grip attachments for grip-overload hang work. Do NOT prescribe towel hangs — Brad uses fat grips instead.
 
 ---
 
@@ -43,11 +44,13 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 - Train with the comp-weight Dynamax ball. Heavier D-ball overload is permitted as an accessory pattern but always note the ball weight explicitly.
 - Event is 3 max-effort overhead backward throws for distance — train the exact movement pattern. No substitutes.
 - Accessory patterns: hip-hinge loading (KB deadlift), plyo hip extension (box jump → throw), or lat/shoulder activation work to reinforce the overhead position.
+- **Measurement unit: FEET AND INCHES.** As of June 2026 all throw distances are measured with the 100-ft tape and recorded as feet + inches (e.g. `24 ft 6 in`) — never plain inches. The athlete app stores the value as total inches internally (so sorting and gold-gap math keep working) and displays ft + in everywhere. This applies to every Dynamax distance the athletes see: their logs, baselines, the 2025 podium, incoming competitors, and the all-time record book.
 
 ### Bench Press (max reps @ load)
 - **Comp test stimulus:** max reps at the athlete's comp bench weight. That is how we TEST the event — high reps to or near failure at the comp load.
-- **Volume / hypertrophy work:** prescribe a **percentage of the athlete's bench 1RM** (see the 1RM table below) at a target rep range. A fixed comp weight is trivial for some athletes (60+ reps) and near-max for others (6 reps), so percent-of-1RM scales the load to each lifter. Typical ranges: hypertrophy 65–75% for 8–15 reps; strength-endurance 60–70% for higher reps.
-- The athlete always sees **pounds** in their live app, never a percent. Compute pounds from the 1RM table and put the number in front of them.
+- **Volume work:** prescribe a **percentage of the athlete's max-rep test** at comp weight. Name the pattern exactly `Bench Volume @ % of Max Reps` so the athlete app computes each athlete's personal rep target from their latest bench best. Comp weight is identical across athletes but rep capacity ranges from ~6 to 60+, so a percentage of each athlete's own max-rep number is what scales the stimulus. (Block guide: Foundation ~50–60%, Hypertrophy ~60–70% for higher volume.)
+- The athlete always sees a **rep target** in their live app, never a percent.
+- The bench 1RM table below is retained for reference only — the current volume method is percent-of-max-reps, not percent-of-1RM.
 - 5-rep heavy work doesn't train the comp stimulus — skip it for this event.
 - **No floor press, ever.**
 

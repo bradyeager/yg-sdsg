@@ -120,25 +120,33 @@ test('program tab shows the switched athlete\'s loads', async () => {
 });
 
 // ---- 4. Input validation rejects out-of-range values before a DB write (D1/D2) ----
-test('validation: out-of-range inches value is rejected, no POST fired', async () => {
+test('validation: out-of-range distance is rejected on the new ft+in input, no POST fired', async () => {
   const page = await newPage();
   const counters = await mockSupabase(page, []);
   await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(1000);
-  // Default tab is Dashboard — switch to Log to expose the event cards.
   await page.click('.tab[data-view="log"]');
   await page.waitForTimeout(400);
-  // Cards collapse by default — expand the dynamax card to reveal its input/log button.
+  // Dynamax is now a feet+inches event with separate ft / in number inputs.
   await page.evaluate(() => SDSG.toggleEventCard('dynamax'));
   await page.waitForTimeout(350);
-  // dynamax is an inches event; set an absurd value and click its Log button
-  await page.fill('#in_dynamax', '99999');
+  // Case A: bogus inches portion (>11) — independent of total bounds.
+  await page.fill('#in_dynamax_ft', '20');
+  await page.fill('#in_dynamax_in', '99');
   const postsBefore = counters.posts || 0;
   await page.click('#btn_dynamax');
   await page.waitForTimeout(400);
-  const toast = await page.evaluate(() => document.getElementById('toast').textContent);
-  assert.match(toast, /between 1 and 600/, 'should show the inches bounds toast');
-  assert.strictEqual(counters.posts || 0, postsBefore, 'no insert POST should fire for invalid input');
+  let toastA = await page.evaluate(() => document.getElementById('toast').textContent);
+  assert.match(toastA, /inches.*0.*11/i, 'inches portion must be 0–11');
+  assert.strictEqual(counters.posts || 0, postsBefore, 'no POST on bad inches portion');
+  // Case B: absurd total (999 ft 0 in = 11988 in, well over the 600-in floor).
+  await page.fill('#in_dynamax_ft', '999');
+  await page.fill('#in_dynamax_in', '0');
+  await page.click('#btn_dynamax');
+  await page.waitForTimeout(400);
+  let toastB = await page.evaluate(() => document.getElementById('toast').textContent);
+  assert.match(toastB, /distance looks off/i, 'over-range total triggers distance toast');
+  assert.strictEqual(counters.posts || 0, postsBefore, 'no POST on over-range total');
   await page.context().close();
 });
 
