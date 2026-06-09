@@ -76,7 +76,7 @@ async function deleteLog(id){
 var EVENTS = {
   prowler:   {name:'Prowler Push',           unit:'time',  lowerBetter:true},
   kbsquat:   {name:'KB Box Squat',           unit:'reps',  lowerBetter:false},
-  dynamax:   {name:'Dynamax Overhead Throw', unit:'inches',lowerBetter:false},
+  dynamax:   {name:'Dynamax Overhead Throw', unit:'feetinches',lowerBetter:false},
   bench:     {name:'Bench Press',            unit:'reps',  lowerBetter:false},
   hang:      {name:'Overhead Arm Hang',      unit:'time',  lowerBetter:false},
   slams:     {name:'Med Ball Slams',         unit:'reps',  lowerBetter:false},
@@ -454,12 +454,29 @@ function formatTime(sec){
   var m=Math.floor(sec/60), s=(sec-m*60);
   return m+':'+(s<10?'0':'')+s.toFixed(s%1?1:0);
 }
+function inchesToFtIn(totalIn){
+  // Dynamax distances are stored as total inches (canonical for all math);
+  // the gym now measures with a ft+in tape, so every dynamax value is SHOWN
+  // as "X ft Y in". Storage/sorting/gold-gap math stay in inches.
+  if(totalIn==null||totalIn===''||isNaN(parseFloat(totalIn))) return '—';
+  var t=Math.round(parseFloat(totalIn));
+  var ft=Math.floor(t/12), inch=t%12;
+  return ft+' ft '+inch+' in';
+}
+function compVal(ev,raw){
+  // Display a competition/podium/incoming value in the event's display unit
+  // without mutating the stored data. Dynamax (feetinches) → ft+in; else raw.
+  if(raw==null||raw==='—'||raw==='') return esc(raw==null?'—':String(raw));
+  if(EVENTS[ev]&&EVENTS[ev].unit==='feetinches') return esc(inchesToFtIn(raw));
+  return esc(String(raw));
+}
 function fmtVal(ev,v){
   // Always returns HTML-escaped text (DB-sourced values are untrusted — C1, B2).
   if(v==null||v==='') return '—';
   var cfg=EVENTS[ev];
   if(!cfg) return esc(String(v));
   if(cfg.unit==='time'){ if(typeof v==='string'&&v.includes(':')) return esc(v); return esc(formatTime(parseTime(v))); }
+  if(cfg.unit==='feetinches') return esc(inchesToFtIn(v));
   return esc(String(v));
 }
 function bestScore(ev){
@@ -544,6 +561,9 @@ function _gapToGold(r){
   }
   var b=parseFloat(r.best), g=parseFloat(r.gold);
   if(isNaN(b)||isNaN(g)) return '';
+  if(cfg.unit==='feetinches'){
+    return inchesToFtIn(Math.abs(b-g))+' to gold ('+esc(inchesToFtIn(g))+')';
+  }
   var gap=Math.round(Math.abs(b-g)*10)/10;
   var unit=cfg.unit==='reps'?'reps':'in';
   return gap+' '+unit+' to gold ('+esc(r.gold)+')';
@@ -633,7 +653,7 @@ function recordDisplay(ev, rec){
   if(!rec) return '—';
   var cfg=EVENTS[ev];
   if(cfg.unit==='time') return esc(rec.raw);
-  if(ev==='dynamax') return Math.round(parseFloat(rec.raw)*12)+' in';
+  if(ev==='dynamax') return esc(inchesToFtIn(Math.round(parseFloat(rec.raw)*12)));
   if(cfg.unit==='inches') return esc(rec.raw)+' in';
   return esc(rec.raw)+' reps'+(rec.weight?' @ '+esc(rec.weight):'');
 }
@@ -703,7 +723,7 @@ function _renderIncomingBlock(ev){
   // C1: r[0]/r[1]/r[2] are data-shaped (name, score, note) — esc them so
   // stray "&", "<", '"' in any future config entry can't break layout.
   var rows=list.map(function(r){
-    return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+esc(r[0])+'<span class="nt">'+esc(r[2])+'</span></span><span class="sc">'+esc(r[1])+'</span></div>';
+    return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+esc(r[0])+'<span class="nt">'+esc(r[2])+'</span></span><span class="sc">'+compVal(ev,r[1])+'</span></div>';
   }).join('');
   return '<div class="incoming"><div class="ph">Incoming Competitors · Aging In</div>'+rows+'</div>';
 }
@@ -716,6 +736,13 @@ function renderEventCard(ev){
     var opts='<option value="">Select reps</option>';
     for(var i=1;i<=200;i++) opts+='<option value="'+i+'">'+i+' reps</option>';
     inputCtl='<select id="in_'+ev+'">'+opts+'</select>';
+  } else if(cfg.unit==='feetinches'){
+    inputCtl='<span class="input-wrap ftin">'+
+      '<input id="in_'+ev+'_ft" type="number" inputmode="numeric" placeholder="ft" step="1" min="0" max="100" style="max-width:5.5em">'+
+      '<span class="ftin-sep" style="margin:0 .35em;color:var(--muted,#8a93a6)">ft</span>'+
+      '<input id="in_'+ev+'_in" type="number" inputmode="numeric" placeholder="in" step="1" min="0" max="11" style="max-width:5.5em">'+
+      '<span class="ftin-sep" style="margin:0 .35em;color:var(--muted,#8a93a6)">in</span>'+
+    '</span>';
   } else if(cfg.unit==='inches'){
     inputCtl='<input id="in_'+ev+'" type="number" inputmode="decimal" placeholder="inches" step="0.5" min="1" max="600">';
   } else {
@@ -726,11 +753,11 @@ function renderEventCard(ev){
     '<div class="card-body">'+
       '<div class="scores">'+
         '<div class="score-box"><div class="lbl">Your Best</div><div class="val">'+(best?fmtVal(ev,best.value):'—')+(best?medalIcon(medalFor(ev)):'')+'</div><div class="sub">'+(best?esc(best.date):'No log yet')+'</div></div>'+
-        '<div class="score-box gold"><div class="lbl">2025 Gold</div><div class="val">'+((podium[0]&&podium[0][2])||'—')+'</div><div class="sub">'+((podium[0]&&podium[0][1])||'—')+'</div></div>'+
+        '<div class="score-box gold"><div class="lbl">2025 Gold</div><div class="val">'+(podium[0]?compVal(ev,podium[0][2]):'—')+'</div><div class="sub">'+((podium[0]&&podium[0][1])||'—')+'</div></div>'+
       '</div>'+
       recordStrip(ev)+
       '<div class="podium"><div class="ph">'+(athlete.podiumLabel||'2025 Podium')+'</div>'+
-        podium.map(function(p){ return '<div class="podium-row"><span class="place '+(p[0]==='GOLD'?'g':p[0]==='SILVER'?'s':'b')+'">'+p[0]+'</span><span class="who">'+p[1]+'</span><span class="sc">'+p[2]+'</span></div>'; }).join('')+
+        podium.map(function(p){ return '<div class="podium-row"><span class="place '+(p[0]==='GOLD'?'g':p[0]==='SILVER'?'s':'b')+'">'+p[0]+'</span><span class="who">'+p[1]+'</span><span class="sc">'+compVal(ev,p[2])+'</span></div>'; }).join('')+
       '</div>'+
       _renderIncomingBlock(ev)+
       _renderTimerBlock(ev)+
@@ -1215,24 +1242,38 @@ function toast(msg,isPR,undoAction){
   window._toastT=setTimeout(function(){ t.classList.remove('show'); },3500);
 }
 async function logScore(ev){
-  var el=document.getElementById('in_'+ev), btn=document.getElementById('btn_'+ev);
-  var raw=el.value.trim();
-  if(!raw){ toast('Enter a value first'); return; }
+  var btn=document.getElementById('btn_'+ev);
+  var unit=EVENTS[ev].unit;
   // Per-unit bounds (D1/D2/B1) — reject garbage before it hits the DB.
   // Per-event time floors: a "0:00" prowler/row/shuttle would otherwise sort
   // first on every lowerBetter best and silently corrupt the leaderboard.
   var TIME_MIN = {prowler:5, hang:1, row:30, shuttle:20};
-  var unit=EVENTS[ev].unit;
-  if(unit==='time'){
-    if(!/^\d{1,2}:[0-5]\d$/.test(raw)){ toast('Use M:SS format (e.g. 2:00)'); return; }
-    var ts=parseTime(raw);
-    if(ts==null||ts>1800){ toast('That time looks too long — check M:SS'); return; }
-    var minSec = TIME_MIN[ev] || 1;
-    if(ts<minSec){ toast('That time looks too short — check M:SS'); return; }
-  } else if(unit==='reps'){
-    var rn=parseInt(raw,10); if(isNaN(rn)||rn<1||rn>200){ toast('Enter a rep count between 1 and 200'); return; }
-  } else { // inches
-    var inn=parseFloat(raw); if(isNaN(inn)||inn<1||inn>600){ toast('Enter inches between 1 and 600'); return; }
+  var raw, el;
+  if(unit==='feetinches'){
+    // Dynamax: entered as feet + inches (new ft+in tape), stored as total inches.
+    var ftEl=document.getElementById('in_'+ev+'_ft'), inEl=document.getElementById('in_'+ev+'_in');
+    var ftStr=((ftEl&&ftEl.value)||'').trim(), inStr=((inEl&&inEl.value)||'').trim();
+    if(ftStr===''&&inStr===''){ toast('Enter feet and inches'); return; }
+    var ftN=ftStr===''?0:parseInt(ftStr,10), inN=inStr===''?0:parseInt(inStr,10);
+    if(isNaN(ftN)||isNaN(inN)||inN<0||inN>11){ toast('Inches must be 0–11'); return; }
+    var total=ftN*12+inN;
+    if(total<1||total>600){ toast('That distance looks off — check feet and inches'); return; }
+    raw=String(total);
+  } else {
+    el=document.getElementById('in_'+ev);
+    raw=el.value.trim();
+    if(!raw){ toast('Enter a value first'); return; }
+    if(unit==='time'){
+      if(!/^\d{1,2}:[0-5]\d$/.test(raw)){ toast('Use M:SS format (e.g. 2:00)'); return; }
+      var ts=parseTime(raw);
+      if(ts==null||ts>1800){ toast('That time looks too long — check M:SS'); return; }
+      var minSec = TIME_MIN[ev] || 1;
+      if(ts<minSec){ toast('That time looks too short — check M:SS'); return; }
+    } else if(unit==='reps'){
+      var rn=parseInt(raw,10); if(isNaN(rn)||rn<1||rn>200){ toast('Enter a rep count between 1 and 200'); return; }
+    } else { // inches (broad jump)
+      var inn=parseFloat(raw); if(isNaN(inn)||inn<1||inn>600){ toast('Enter inches between 1 and 600'); return; }
+    }
   }
   btn.disabled=true;
   var prevBest=bestScore(ev);
@@ -1245,7 +1286,7 @@ async function logScore(ev){
     setSyncStatus('synced');
     var newBest=bestScore(ev);
     var isPR=newBest&&(!prevBest||String(prevBest.value)!==String(newBest.value))&&String(newBest.value)===raw;
-    el.value='';
+    if(unit==='feetinches'){ var _fe=document.getElementById('in_'+ev+'_ft'), _ie=document.getElementById('in_'+ev+'_in'); if(_fe)_fe.value=''; if(_ie)_ie.value=''; } else if(el){ el.value=''; }
     render();
     var undo=async function(){
       try{ if(inserted&&inserted.id){ setSyncStatus('syncing','Removing'); await deleteLog(inserted.id); cachedLogs=await loadLogs(slug()); setSyncStatus('synced'); render(); toast('Removed'); } }
