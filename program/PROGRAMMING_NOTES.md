@@ -45,9 +45,10 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 - Accessory patterns: hip-hinge loading (KB deadlift), plyo hip extension (box jump → throw), or lat/shoulder activation work to reinforce the overhead position.
 
 ### Bench Press (max reps @ load)
-- This is a **max-rep AMRAP event**. Training stimulus must match: high reps to or near failure at the comp load.
-- 5-rep work doesn't train this stimulus. Skip it.
-- No prescribed percentage system — reference the athlete's comp bench weight directly.
+- **Comp test stimulus:** max reps at the athlete's comp bench weight. That is how we TEST the event — high reps to or near failure at the comp load.
+- **Volume / hypertrophy work:** prescribe a **percentage of the athlete's bench 1RM** (see the 1RM table below) at a target rep range. A fixed comp weight is trivial for some athletes (60+ reps) and near-max for others (6 reps), so percent-of-1RM scales the load to each lifter. Typical ranges: hypertrophy 65–75% for 8–15 reps; strength-endurance 60–70% for higher reps.
+- The athlete always sees **pounds** in their live app, never a percent. Compute pounds from the 1RM table and put the number in front of them.
+- 5-rep heavy work doesn't train the comp stimulus — skip it for this event.
 - **No floor press, ever.**
 
 ### Overhead Arm Hang (max hang time)
