@@ -801,7 +801,12 @@ function renderProgress(){
   var dash=EVENT_ORDER.map(function(ev){
     var cfg=EVENTS[ev], best=bestScore(ev), athlete=A();
     var pod=athlete.podium&&athlete.podium[ev];
-    function val(level){ var i=level==='GOLD'?0:level==='SILVER'?1:2; return (pod&&pod[i]&&pod[i][2])||'—'; }
+    function val(level){
+      var i=level==='GOLD'?0:level==='SILVER'?1:2;
+      var raw=pod&&pod[i]&&pod[i][2];
+      if(raw==null||raw==='') return '—';
+      return compVal(ev, raw);   // ft+in for dynamax; raw text otherwise
+    }
     var podRows='<div class="pod-mini"><span class="pm-lbl">2025 Results</span>'+
       '<span class="pm-row"><span class="pm-i pm-g">🥇</span><span class="pm-v">'+val('GOLD')+'</span></span>'+
       '<span class="pm-row"><span class="pm-i pm-s">🥈</span><span class="pm-v">'+val('SILVER')+'</span></span>'+
