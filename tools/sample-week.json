@@ -1,0 +1,115 @@
+{
+  "_comment": "Copy this file, fill in next week's content, then run: python3 tools/build_week.py path/to/your-copy.json --archive-note '...'. Read program/PUBLISHING.md for the full runbook.",
+
+  "weekTitle":  "Week of June 15",
+  "weekSub":    "Hypertrophy · Week 2",
+  "weekDates":  "June 15 – 21, 2026 · Block 2 · Week 2 of 7",
+  "blockMarker": "Hypertrophy",
+
+  "weekNoteHtml": "<strong>How to use this page.</strong> Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event &mdash; or cherry-pick across events. Aim for 4&ndash;6 patterns total per session. Warm up first; stop a set short if form breaks down.<br><br><strong>Tap any movement's teal header</strong> to open it full-screen &mdash; easy to read on the gym iPad, pinch to zoom, scroll through all three exercises.<br><br><strong>This week.</strong> Hypertrophy Week 2. Same movements as last week so we can add a rep, a set, or a small load bump. Stay controlled on the eccentric. Stop a set when form breaks.",
+
+  "testsLineHtml": "<strong>Working number week.</strong> No formal test &mdash; tap your name below anytime to log a working number you want to track.",
+
+  "events": [
+    {
+      "event": "KB Box Squat",
+      "type":  "marathon",
+      "tag":   "Hypertrophy · legs",
+      "patterns": [
+        { "name": "Tempo Box Squat",
+          "rx":   "4 × 12–15 reps · rest 90 sec between · 3-sec descent + 1-sec pause on the box",
+          "load": "Your competition KB (or one size up if 15 is easy)",
+          "cues": ["Lower over a slow 3-count, sit on the box for a full second, then stand.",
+                   "Add 1 rep per set or 1 KB size if last week's top set was clean.",
+                   "KB tight to the chest, elbows tucked, heels down.",
+                   "Last 2–3 reps of each set should be hard. Stop if your chest dumps forward."] },
+        { "name": "Bulgarian Split Squat",
+          "rx":   "3 × 10–12 reps each leg · rest 60 sec between sets",
+          "load": "A DB in each hand, or one KB held at the chest",
+          "cues": ["Back foot up on a bench, front foot a stride forward.",
+                   "Drop straight down — front knee tracks over the toes, back knee toward the floor.",
+                   "Drive through the front heel to stand. All the work stays on the front leg.",
+                   "Add 5 lb to each DB if last week's top set was easy."] },
+        { "name": "Heels-Elevated Goblet Squat",
+          "rx":   "3 × 15 reps · rest 60 sec between sets",
+          "load": "A moderate KB or DB held at the chest",
+          "cues": ["Heels up on a small plate or wedge.",
+                   "Sit straight down between your knees, chest tall.",
+                   "Full depth, controlled tempo, no bouncing at the bottom.",
+                   "Keep the KB tight to your chest the whole set."] }
+      ]
+    },
+    {
+      "event": "Dynamax OH Throw",
+      "type":  "sprint",
+      "tag":   "Hypertrophy · hinge + back",
+      "patterns": [
+        { "name": "Romanian Deadlift (RDL)", "rx": "4 × 10–12 reps · rest 90 sec between sets",
+          "load": "Loaded barbell, or a DB/KB in each hand — moderate", "cues": ["..."] },
+        { "name": "Single-Arm DB Row",       "rx": "3 × 12 reps each side · rest 60 sec between sets",
+          "load": "Moderate DB",                                          "cues": ["..."] },
+        { "name": "Comp-Ball Throw Technique","rx": "5 sets × 3 throws · rest 60 sec · technical",
+          "load": "Dynamax 4 lb (women) / 8 lb (men)",                    "cues": ["..."] }
+      ]
+    },
+    {
+      "event": "Bench Press",
+      "type":  "marathon",
+      "tag":   "Hypertrophy · push",
+      "patterns": [
+        { "name": "Incline DB Press",     "rx": "4 × 10–12 reps · rest 90 sec",      "load": "Moderate DBs",                "cues": ["..."] },
+        { "name": "Push-Up Volume",       "rx": "3 × max reps · rest 60 sec",        "load": "Bodyweight, or hands elevated", "cues": ["..."] },
+        { "name": "Bench Volume @ % of Max Reps", "rx": "3 × @ 60% of your max-rep bench test · rest 90 sec", "load": "Competition bench weight",            "cues": ["The app shows your personal rep target. Hit it clean across all 3 sets."] }
+      ]
+    },
+    { "event": "Overhead Arm Hang",   "type": "marathon", "tag": "Hypertrophy · grip + back",
+      "patterns": [
+        { "name": "Fat-Grip Hang", "rx": "4 × max time · rest 90 sec", "load": "Fat-grip attachments at ~80% of your best", "cues": ["..."] },
+        { "name": "Active Bar Hang", "rx": "3 × 20 sec · rest 60 sec",   "load": "Pull-up bar, shoulders packed",            "cues": ["..."] },
+        { "name": "Pull-Down Volume","rx": "3 × 10–12 reps · rest 60 sec","load": "Moderate stack",                          "cues": ["..."] }
+      ]
+    },
+    { "event": "Med Ball Slams",      "type": "sprint", "tag": "Hypertrophy · power volume",
+      "patterns": [
+        { "name": "Standing Slam Volume",   "rx": "5 × 10 slams · rest 45 sec", "load": "D-ball 10 lb (women) / 20 lb (men)", "cues": ["..."] },
+        { "name": "Half-Kneeling Slam",      "rx": "4 × 8 each side · rest 45 sec","load": "D-ball 10 lb / 20 lb",              "cues": ["..."] },
+        { "name": "Comp-Pace 60s",           "rx": "2 × 60 sec for max slams",   "load": "Competition D-ball",                "cues": ["..."] }
+      ]
+    },
+    { "event": "Jump Rope · 60s",     "type": "sprint", "tag": "Hypertrophy · calves",
+      "patterns": [
+        { "name": "Loaded Calf Raises",   "rx": "4 × 20 reps · rest 60 sec",   "load": "Hold a DB in each hand", "cues": ["..."] },
+        { "name": "Single-Leg Calf Raise","rx": "3 × 15 each leg · rest 45 sec","load": "Bodyweight",            "cues": ["..."] },
+        { "name": "60-Sec Pace Practice","rx": "3 × 60 sec · rest 60 sec",    "load": "Your jump rope",         "cues": ["..."] }
+      ]
+    },
+    { "event": "Standing Broad Jump", "type": "sprint", "tag": "Hypertrophy · hip drive",
+      "patterns": [
+        { "name": "Hip Thrust",         "rx": "4 × 10–12 · rest 90 sec", "load": "Barbell across hips",            "cues": ["..."] },
+        { "name": "Box Jump · Step Down","rx": "5 × 5 jumps · rest 60 sec", "load": "Moderate box, step down each time", "cues": ["..."] },
+        { "name": "Comp-Distance Test", "rx": "5 attempts · rest as needed", "load": "Bodyweight",                  "cues": ["..."] }
+      ]
+    },
+    { "event": "Concept Row · 500m",  "type": "marathon", "tag": "Hypertrophy · engine",
+      "patterns": [
+        { "name": "Long Steady Row",    "rx": "3 × 1000 m · rest 90 sec", "load": "Conversational pace",                "cues": ["..."] },
+        { "name": "Inverted Row",        "rx": "3 × 10–12 reps · rest 60 sec","load": "Bodyweight, bar at hip height",     "cues": ["..."] },
+        { "name": "500 m Practice",      "rx": "1 × 500 m for time",      "load": "Hard, but not max",                 "cues": ["..."] }
+      ]
+    },
+    { "event": "300 Yd Shuttle Run",  "type": "sprint", "tag": "Hypertrophy · capacity",
+      "patterns": [
+        { "name": "Build-Up Sprints", "rx": "6 × 50 yd · rest 60 sec",   "load": "Bodyweight",        "cues": ["..."] },
+        { "name": "Tempo Shuttles",    "rx": "4 × 100 yd · rest 90 sec",  "load": "Bodyweight, ~80% effort", "cues": ["..."] },
+        { "name": "Change-of-Direction Drill", "rx": "5 × 4 cuts · rest 60 sec","load": "Bodyweight",        "cues": ["..."] }
+      ]
+    },
+    { "event": "Prowler Push",        "type": "sprint", "tag": "Hypertrophy · sled work",
+      "patterns": [
+        { "name": "Comp-Distance Sled Push","rx": "5 × 50 yd · rest 90 sec","load": "Competition load: 2×25 lb plates (women) / 2×45 lb plates (men)","cues": ["..."] },
+        { "name": "Heavy 25 yd",            "rx": "5 × 25 yd · rest 90 sec","load": "Add 25 lb per side over comp load","cues": ["..."] },
+        { "name": "Fast & Light",           "rx": "6 × 30 yd · rest 60 sec","load": "Drop one plate per side · max speed","cues": ["..."] }
+      ]
+    }
+  ]
+}
