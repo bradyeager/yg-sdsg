@@ -13,6 +13,14 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 
 ---
 
+## Volume & Intensity
+
+- **3-set cap. Hard rule, no exceptions.** Never prescribe more than 3 sets / rounds / intervals on any pattern. Same rule applies to sprint, agility, and sled work: 3 rounds, fully recovered between, max quality. A 4th set is not a progression — it's a tax on the session and on the body.
+- **Progress within the cap.** Week-to-week progression is load up, reps-per-set up, tempo slower, rest shorter, or effort higher — never an added set. If a movement maxed out at 3 × 20 reps, the next progression is load, not 4 × 20.
+- **Total session length stays short.** 4–6 patterns per session at 3 sets each is the right session size for this population. Asking for a 4th set means asking them to skip a different pattern they need.
+
+---
+
 ## Equipment Constraints
 
 - **Sled / Prowler:** BACK IN as of Week 3 (Jun 7, 2026). Sled is repaired. Include Prowler Push in the program. Do not use as a competition test until Brad says so — program it as sled work only until further notice.
