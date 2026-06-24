@@ -108,8 +108,8 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 
 | Block | Dates | Weeks | Focus |
 |---|---|---|---|
-| Block 1 | May 11 – Jun 14 | 5 | Foundation · technique, base capacity |
-| Block 2 | Jun 15 – Jul 26 | 6 | Hypertrophy · build muscle + work capacity |
+| Block 1 | May 11 – Jun 7 | 4 | Foundation · technique, base capacity |
+| Block 2 | Jun 8 – Jul 26 | 7 | Hypertrophy · build muscle + work capacity |
 | Block 3 | Jul 27 – Aug 30 | 5 | Strength & Power · intensity up, reps down |
 | Block 4 | Aug 31 – Sep 27 | 4 | Peak + Taper · comp-specific, deload final week |
 
