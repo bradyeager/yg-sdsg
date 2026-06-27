@@ -81,7 +81,7 @@ var EVENTS = {
   hang:      {name:'Overhead Arm Hang',      unit:'time',  lowerBetter:false},
   slams:     {name:'Med Ball Slams',         unit:'reps',  lowerBetter:false},
   jumprope:  {name:'Jump Rope (60s)',        unit:'reps',  lowerBetter:false},
-  broadjump: {name:'Standing Broad Jump',    unit:'inches',lowerBetter:false},
+  broadjump: {name:'Standing Broad Jump',    unit:'feetinches',lowerBetter:false},
   row:       {name:'Concept Row 500m',       unit:'time',  lowerBetter:true},
   shuttle:   {name:'300 Yd Shuttle Run',     unit:'time',  lowerBetter:true}
 };
@@ -654,6 +654,7 @@ function recordDisplay(ev, rec){
   var cfg=EVENTS[ev];
   if(cfg.unit==='time') return esc(rec.raw);
   if(ev==='dynamax') return esc(inchesToFtIn(Math.round(parseFloat(rec.raw)*12)));
+  if(cfg.unit==='feetinches') return esc(inchesToFtIn(rec.raw));   // broad jump: stored in inches (not feet like the dynamax book), shown ft+in
   if(cfg.unit==='inches') return esc(rec.raw)+' in';
   return esc(rec.raw)+' reps'+(rec.weight?' @ '+esc(rec.weight):'');
 }
@@ -1256,7 +1257,7 @@ async function logScore(ev){
   var TIME_MIN = {prowler:5, hang:1, row:30, shuttle:20};
   var raw, el;
   if(unit==='feetinches'){
-    // Dynamax: entered as feet + inches (new ft+in tape), stored as total inches.
+    // Dynamax + Broad Jump: entered as feet + inches (ft+in tape), stored as total inches.
     var ftEl=document.getElementById('in_'+ev+'_ft'), inEl=document.getElementById('in_'+ev+'_in');
     var ftStr=((ftEl&&ftEl.value)||'').trim(), inStr=((inEl&&inEl.value)||'').trim();
     if(ftStr===''&&inStr===''){ toast('Enter feet and inches'); return; }

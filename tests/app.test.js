@@ -330,6 +330,27 @@ test('field watch: incoming dynamax distances render as ft+in, not raw inches', 
   await page.context().close();
 });
 
+// ---- 8c. Broad Jump renders as ft+in (converted from inches), not a bare number ----
+test('broad jump: distances render as ft+in, not a bare inches number', async () => {
+  // Broad Jump was unit:'inches' and showed bare numbers (e.g. "66") while every
+  // other distance used ft+in. Converted to feetinches (data already in inches).
+  // Robert's broad-jump podium Gold is 66 in -> 5 ft 6 in.
+  const page = await newPage();
+  await mockSupabase(page, []);
+  await page.goto(BASE + '/robert/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1100);
+  await page.click('.tab[data-view="log"]');
+  await page.waitForTimeout(900);
+  const txt = await page.evaluate(() => {
+    const cards = Array.from(document.querySelectorAll('.event-card'));
+    const bj = cards.find(c => /Standing Broad Jump/i.test((c.querySelector('.name') || {}).textContent || ''));
+    return bj ? bj.textContent : '';
+  });
+  assert.match(txt, /5 ft 6 in/, 'broad-jump Gold (66 in) must render as 5 ft 6 in');
+  assert.ok(!/\b66\b/.test(txt), 'bare inches "66" must not appear');
+  await page.context().close();
+});
+
 // ---- 9. Today's Plan (coach recs) lives on the Program tab, not the Log tab ----
 test('coach recs on Program tab, absent from Log tab; tabs ordered Dashboard·Program·Log·Progress·Scouting', async () => {
   const page = await newPage();
