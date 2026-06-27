@@ -285,11 +285,12 @@
       "patterns": [
         {
           "name": "Shuttle Pace Practice",
-          "rx": "3 × 150-yd shuttle (3 × 50 yd) · comp-pattern turns at near-race effort",
-          "load": "Bodyweight · run at near-comp effort, sharp and competition-specific",
+          "rx": "1 × full 300 yd (6 × 50 yd) · controlled, even comp pace · log your time as a pacing reference",
+          "load": "Bodyweight",
           "cues": [
-            "Run three 50s at near-race effort, rehearsing the exact down-and-back pattern of the event.",
-            "Hit each turn the way you will on comp day — controlled brake, firm plant, explosive exit."
+            "Run the full competition distance — six 50-yard lengths — at a controlled, even pace, not a max effort.",
+            "Rehearse comp-day pacing and your turns: smooth decelerations, no hard cuts.",
+            "Note your time so you have a pacing reference before the real test in two weeks."
           ]
         },
         {

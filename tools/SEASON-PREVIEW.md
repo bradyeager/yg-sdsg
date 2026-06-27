@@ -83,7 +83,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 - **Jump Rope · 60s** — **60-Sec Pace Practice** · 3 × 60 sec of singles  |  **Paused Heavy Calf Raise** · 3 × 12 reps  |  **Lateral Pogo Hops** · 3 × 12 hops each direction
 - **Standing Broad Jump** — **Broad Jump — Distance Practice** · 3 × 4 jumps  |  **Heavy Goblet Squat** · 3 × 6 reps  |  **Seated-to-Stand Jump** · 3 × 5 jumps
 - **Concept Row · 500m** — **500m Practice** · 2 × 500m  |  **Chest-Supported T-Bar Row** · 3 × 6 reps  |  **Trap-Bar Deadlift** · 3 × 5 reps
-- **300 Yd Shuttle Run** — **Shuttle Pace Practice** · 3 × 150-yd shuttle (3 × 50 yd)  |  **Bulgarian Split Squat** · 3 × 6 reps per leg  |  **Pogo Bound Series** · 3 × 10 yards of continuous bounds
+- **300 Yd Shuttle Run** — **Shuttle Pace Practice** · 3 × 150-yd shuttle (3 × 50 yd)  |  **Tempo Acceleration Runs** · 3 × 30 yards  |  **Pogo Bound Series** · 3 × 10 yards of continuous bounds
 - **Prowler Push** — **Comp-Distance Sled Push** · 3 × 50 yards  |  **Barbell Hip Thrust** · 3 × 6 reps  |  **Kettlebell Swing** · 3 × 8 reps
 
 ## Week of August 17 — Strength & Power · Week 4
@@ -97,7 +97,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 - **Jump Rope · 60s** — **60-Sec Pace Practice** · 3 × 60 sec of singles  |  **Rebound Calf Raise** · 3 × 15 reps  |  **Quick-Contact Skips** · 3 × 20 sec of fast skips
 - **Standing Broad Jump** — **Broad Jump — Distance Practice** · 3 × 4 jumps  |  **Continuous Low Hurdle Hops** · 3 × 8 hops  |  **Banded Hip-Snap Pull-Through** · 3 × 12 reps
 - **Concept Row · 500m** — **500m Practice** · 3 × 200m  |  **Band-Resisted Row Pull** · 3 × 10 fast reps  |  **Speed Lat Pulldown** · 3 × 8 fast reps
-- **300 Yd Shuttle Run** — **Shuttle Pace Practice** · 3 × 100-yd shuttle (2 × 50 yd)  |  **Jump Squat** · 3 × 5 reps  |  **Flying 20s** · 3 × 20 yards with a rolling start
+- **300 Yd Shuttle Run** — **Shuttle Pace Practice** · 3 × 100-yd shuttle (2 × 50 yd)  |  **Jump Squat** · 3 × 5 reps  |  **Build-Up Strides** · 3 × 30 yards
 - **Prowler Push** — **Comp-Distance Sled Push** · 3 × 50 yards  |  **Sprint Build-Up** · 3 × 30 yards  |  **Banded Speed Squat** · 3 × 5 reps
 
 ## Week of August 24 — Strength & Power · Week 5
@@ -111,7 +111,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 - **Jump Rope · 60s** — **60-Sec Pace Practice** · 3 × 60 sec of singles  |  **Loaded Standing Calf Raise — Double Reps** · 3 × 20 reps  |  **Sprint-Cadence Rope Skips** · 3 × 15 sec all-out singles
 - **Standing Broad Jump** — **Broad Jump — Distance Practice** · 3 × 4 jumps  |  **Standing Long Jump to Box** · 3 × 4 jumps  |  **Quick Ankle Pogo Bounce** · 3 × 12 bounces
 - **Concept Row · 500m** — **500m Practice** · 3 × 250m  |  **Kettlebell Swing** · 3 × 12 reps  |  **Renegade DB Row** · 3 × 8 reps each arm
-- **300 Yd Shuttle Run** — **Shuttle Pace Practice** · 3 × 150-yd shuttle (3 × 50 yd)  |  **Backpedal-to-Sprint Transition** · 3 × 6 transitions  |  **Rolling-Start Sprint** · 3 × 15 yards from a walking rolling start
+- **300 Yd Shuttle Run** — **Shuttle Pace Practice** · 1 × full 300 yd (6 × 50 yd)  |  **Backpedal-to-Sprint Transition** · 3 × 6 transitions  |  **Rolling-Start Sprint** · 3 × 15 yards from a walking rolling start
 - **Prowler Push** — **Comp-Distance Sled Push** · 3 × 50 yards  |  **Heavy Sled March (15 yd)** · 3 × 15 yards  |  **Tall-Kneeling Med Ball Chest Pass** · 3 × 5 reps
 
 ## Week of August 31 — Peak + Taper · Week 1  ·  🎯 TEST: KB Box Squat, Dynamax OH Throw, Bench Press, Overhead Arm Hang, Standing Broad Jump
@@ -119,7 +119,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 
 - **KB Box Squat** — 🎯**Comp-Pace Box Squat** · 1 max-effort AMRAP  |  **Light Goblet Squat Flush** · 2 × 12 reps  |  **Bodyweight Box Sit-to-Stand** · 2 × 10 reps
 - **Dynamax OH Throw** — 🎯**Throw Technique Practice** · TEST: 3 max-effort throws for distance  |  **Light KB Hinge — Movement Prep** · 2 × 8 reps  |  **Band Pull-Apart** · 2 × 12 reps
-- **Bench Press** — 🎯**Comp Bench Max-Rep Test** · 1 max-effort set  |  **Bench Volume @ % of Max Reps** · 3 sets  |  **Light DB Press Flush** · 2 × 12 reps
+- **Bench Press** — 🎯**Comp Bench Max-Rep Test** · 1 max-effort set  |  **Light Back-Off Bench Press** · 2 sets × 8 reps  |  **Light DB Press Flush** · 2 × 12 reps
 - **Overhead Arm Hang** — 🎯**Max Hang Practice** · 1 max-effort hang for time  |  **Easy Scap Activation** · 2 × 8 reps  |  **Light Band Face Pull** · 2 × 12 reps
 - **Med Ball Slams** — **Standing Slam Volume** · 3 × 15 sec  |  **Light D-Ball Speed Slam** · 3 × 6 reps  |  **Bird Dog** · 3 × 8 reps each side
 - **Jump Rope · 60s** — **60-Sec Pace Practice** · 2 × 60 sec of singles  |  **Bodyweight Calf Pulses** · 2 × 20 reps each leg  |  **Easy Bounce Skips** · 2 × 30 sec relaxed singles
