@@ -246,6 +246,16 @@
       "tag": "Strength & Power · hips + legs",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 4 jumps · rest 2 min between sets · powerful and crisp",
+          "load": "Bodyweight",
+          "cues": [
+            "Load the arms back, explode the hips forward, and jump for distance — every rep a max-quality effort.",
+            "Stick the landing on both feet, absorbing softly through the knees and hips so nothing jars.",
+            "Walk back and reset completely between jumps. End the set if a landing gets sloppy."
+          ]
+        },
+        {
           "name": "Standing Vertical Jump to Stick",
           "rx": "3 × 5 jumps · rest 2 min between sets · jump high, land soft",
           "load": "Bodyweight",
@@ -263,16 +273,6 @@
             "Stand on the box on one leg and lower the other foot slowly toward the floor under full control.",
             "Keep the working knee tracking over your toes and your hips level — don't let one hip drop.",
             "Tap the floor lightly, then drive back up through the standing heel. Hold a rail for balance as needed."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 4 jumps · rest 2 min between sets · powerful and crisp",
-          "load": "Bodyweight",
-          "cues": [
-            "Load the arms back, explode the hips forward, and jump for distance — every rep a max-quality effort.",
-            "Stick the landing on both feet, absorbing softly through the knees and hips so nothing jars.",
-            "Walk back and reset completely between jumps. End the set if a landing gets sloppy."
           ]
         }
       ]

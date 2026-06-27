@@ -243,6 +243,16 @@
       "tag": "Strength & Power · power emphasis",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 4 jumps · rest 2 min between sets · lighter intent, fast and sharp",
+          "load": "Bodyweight",
+          "cues": [
+            "Focus on speed off the floor — quick arm swing, fast hip snap, jump forward and stick both feet.",
+            "Rehearse competition-pattern velocity: crisp and explosive rather than grinding for every last inch.",
+            "Reset fully between reps. Every jump should feel snappy; stop if they start to drag."
+          ]
+        },
+        {
           "name": "Continuous Low Hurdle Hops",
           "rx": "3 × 8 hops · rest 90 sec between sets · fast off the floor",
           "load": "Bodyweight over a line of low, ankle-height objects (rolled towels or small cones)",
@@ -260,16 +270,6 @@
             "Hinge your hips back to load the band, then snap your hips forward fast to stand tall and squeeze your glutes.",
             "Drive the movement with a quick hip snap, not your arms or lower back — let the band ride between your legs.",
             "Control the band on the way back to reset each rep. Keep your spine flat throughout."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 4 jumps · rest 2 min between sets · lighter intent, fast and sharp",
-          "load": "Bodyweight",
-          "cues": [
-            "Focus on speed off the floor — quick arm swing, fast hip snap, jump forward and stick both feet.",
-            "Rehearse competition-pattern velocity: crisp and explosive rather than grinding for every last inch.",
-            "Reset fully between reps. Every jump should feel snappy; stop if they start to drag."
           ]
         }
       ]

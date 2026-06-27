@@ -179,13 +179,13 @@
           ]
         },
         {
-          "name": "Trap-Bar Deadlift",
-          "rx": "3 × 5 reps · rest 2 min between sets",
-          "load": "A heavy trap-bar load you can pull for 5 strong reps",
+          "name": "Heavy D-Ball Power Slam",
+          "rx": "3 × 8 reps · rest 90 sec between sets · max intent on every slam",
+          "load": "A D-ball heavier than your comp ball — one you can still slam explosively for 8",
           "cues": [
-            "Stand inside the bar, flat back, and drive the floor away to stand tall.",
-            "Squeeze your glutes at the top; lower under control and reset each rep.",
-            "This is your heaviest pull — it builds the base power your slam draws from."
+            "Reach the ball fully overhead, then slam it straight down between your feet with everything you have.",
+            "Drive your hips and lats into each slam — low reps, full power, not a paced set.",
+            "D-ball only, no walls or rotation. Reset tall and take a breath before each rep."
           ]
         },
         {
@@ -243,6 +243,17 @@
       "tag": "Strength & Power · hips + legs (peak loads)",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 4 jumps · rest 2 min between sets · crisp max-quality reps",
+          "load": "Bodyweight, jumping for distance — aim near your best broad jump, around 4 ft 0 in to 6 ft 0 in, and place a marker to measure each jump",
+          "cues": [
+            "Swing the arms back, snap the hips fully open, and jump forward hard — then freeze the landing on both feet.",
+            "Absorb each landing by bending knees and hips together; a clean stick proves you stayed in control.",
+            "Drop a marker at your heels and check the feet-and-inches distance each jump, then reset fully at the line.",
+            "Stop the set if you can no longer stick the landing on two feet."
+          ]
+        },
+        {
           "name": "Heavy Goblet Squat",
           "rx": "3 × 6 reps · rest 2 min between sets · full rest, perfect setup",
           "load": "The heaviest KB or DB you can goblet-squat for 6 clean reps with full control",
@@ -260,17 +271,6 @@
             "Sit tall on the bench, then explode up and forward, landing softly on both feet on the flat floor.",
             "Starting from a seated stop means all the power comes from snapping the hips open — drive the arms up too.",
             "Reset on the bench between reps; land flat-footed and quiet — never jump onto a box or raised surface alone."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 4 jumps · rest 2 min between sets · crisp max-quality reps",
-          "load": "Bodyweight, jumping for distance — aim near your best broad jump, around 4 ft 0 in to 6 ft 0 in, and place a marker to measure each jump",
-          "cues": [
-            "Swing the arms back, snap the hips fully open, and jump forward hard — then freeze the landing on both feet.",
-            "Absorb each landing by bending knees and hips together; a clean stick proves you stayed in control.",
-            "Drop a marker at your heels and check the feet-and-inches distance each jump, then reset fully at the line.",
-            "Stop the set if you can no longer stick the landing on two feet."
           ]
         }
       ]

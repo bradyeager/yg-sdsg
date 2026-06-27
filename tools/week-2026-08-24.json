@@ -216,6 +216,15 @@
       "tag": "Strength & Power · power + transition",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 4 jumps · near-comp effort, sharp and fast",
+          "load": "Bodyweight",
+          "cues": [
+            "Run the full competition motion: arms back, hips snap, jump forward at near-max effort, stick both feet.",
+            "Reset completely at the line between jumps. Stop the set if you can't land it under control."
+          ]
+        },
+        {
           "name": "Standing Long Jump to Box",
           "rx": "3 × 4 jumps · jump out and onto a low box",
           "load": "Bodyweight, jumping forward onto a knee-height sturdy box set a comfortable distance ahead",
@@ -231,15 +240,6 @@
           "cues": [
             "Bounce in place off the balls of both feet with nearly straight knees — let the ankles do all the springing.",
             "Stay light and quiet. Hold a wall or rail for balance and stop if your contacts get flat or heavy."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 4 jumps · near-comp effort, sharp and fast",
-          "load": "Bodyweight",
-          "cues": [
-            "Run the full competition motion: arms back, hips snap, jump forward at near-max effort, stick both feet.",
-            "Reset completely at the line between jumps. Stop the set if you can't land it under control."
           ]
         }
       ]
@@ -293,12 +293,13 @@
           ]
         },
         {
-          "name": "Kettlebell Swing",
-          "rx": "3 × 10 reps · explosive hips",
-          "load": "One kettlebell ~35–53 lb — heavy enough to feel it, light enough to snap fast",
+          "name": "Backpedal-to-Sprint Transition",
+          "rx": "3 × 6 transitions · rest 75 sec between sets · controlled change of direction",
+          "load": "Bodyweight",
           "cues": [
-            "Hinge at the hips and snap them forward to float the bell to chest height — power comes from the hips, not the arms.",
-            "Keep your back flat and let the bell swing back between your legs under control."
+            "Backpedal 5 yards under control, plant both feet, then turn and accelerate forward 10 yards.",
+            "Slow down before you plant — smooth, controlled turns, never a hard cut at speed.",
+            "Walk back and recover fully between reps so every transition stays sharp."
           ]
         },
         {

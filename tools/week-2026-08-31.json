@@ -94,16 +94,6 @@
       "tag": "Peak · comp test",
       "patterns": [
         {
-          "name": "Bench Volume @ % of Max Reps",
-          "rx": "3 sets · each set to ~60% of your max-rep test · rest 90 sec between",
-          "load": "Your competition bench weight",
-          "cues": [
-            "Your app shows your personal rep target — hit that number cleanly on all 3 sets and stop there.",
-            "Lower the bar to a light touch on your chest and press back up with a steady, controlled tempo.",
-            "End the set the instant the bar stalls or your hips lift off the bench."
-          ]
-        },
-        {
           "name": "Comp Bench Max-Rep Test",
           "rx": "1 max-effort set · as many reps as you can at comp weight, taken to or near failure · rest fully first",
           "load": "Your competition bench weight",
@@ -113,6 +103,16 @@
             "Press each rep to a full lockout and pause briefly on the chest. Log your final rep count — that's your new max-rep number."
           ],
           "isTest": true
+        },
+        {
+          "name": "Bench Volume @ % of Max Reps",
+          "rx": "3 sets · each set to ~60% of your max-rep test · rest 90 sec between",
+          "load": "Your competition bench weight",
+          "cues": [
+            "Your app shows your personal rep target — hit that number cleanly on all 3 sets and stop there.",
+            "Lower the bar to a light touch on your chest and press back up with a steady, controlled tempo.",
+            "End the set the instant the bar stalls or your hips lift off the bench."
+          ]
         },
         {
           "name": "Light DB Press Flush",

@@ -243,6 +243,16 @@
       "tag": "Peak · sharpening",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 3 jumps · rest 2 min between sets · comp rehearsal at submax effort",
+          "load": "Bodyweight · competition standard",
+          "cues": [
+            "Run the full comp motion at a crisp submaximal effort — touch the pattern to stay sharp, don't max out.",
+            "Swing the arms, snap the hips, jump forward, and stick both feet cleanly every single rep.",
+            "Reset fully at the line between jumps. No maxing this week — keep it low-volume and fresh."
+          ]
+        },
+        {
           "name": "Crisp Countermovement Jump",
           "rx": "3 × 4 jumps · rest 90 sec between sets · submaximal, snappy",
           "load": "Bodyweight",
@@ -260,16 +270,6 @@
             "Take one easy step in, then push off and bound forward a short, comfortable distance and stick both feet.",
             "Keep it submaximal and rehearse a smooth, controlled landing — quality over reach.",
             "Walk back and reset every rep. Stop the set if you can't land it softly and balanced."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 3 jumps · rest 2 min between sets · comp rehearsal at submax effort",
-          "load": "Bodyweight · competition standard",
-          "cues": [
-            "Run the full comp motion at a crisp submaximal effort — touch the pattern to stay sharp, don't max out.",
-            "Swing the arms, snap the hips, jump forward, and stick both feet cleanly every single rep.",
-            "Reset fully at the line between jumps. No maxing this week — keep it low-volume and fresh."
           ]
         }
       ]

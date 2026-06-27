@@ -243,6 +243,16 @@
       "tag": "Strength & Power · hips + legs",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 4 jumps · rest 2 min between sets · near-max with a clean stick",
+          "load": "Bodyweight",
+          "cues": [
+            "Swing the arms back hard, snap the hips open, and jump forward for real distance — then stick both feet.",
+            "Drive through the floor and reach with the hips; absorb the landing by bending knees and hips together.",
+            "Fully reset at the line between each powerful jump. Stop the set if you can't stick the landing."
+          ]
+        },
+        {
           "name": "Low Box Step-Off to Stick",
           "rx": "3 × 6 reps · rest 2 min between sets · max-quality landings",
           "load": "Bodyweight, stepping off a shin-height box",
@@ -260,16 +270,6 @@
             "Dip a few inches at the hips, then snap them open fast and shrug the shoulders up — come up tall onto the balls of your feet.",
             "All the speed comes from snapping the hips, not from pulling with the arms — let the DBs hang.",
             "Land flat and reset your stance fully before each rep. Keep every rep crisp; stop if they slow down."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 4 jumps · rest 2 min between sets · near-max with a clean stick",
-          "load": "Bodyweight",
-          "cues": [
-            "Swing the arms back hard, snap the hips open, and jump forward for real distance — then stick both feet.",
-            "Drive through the floor and reach with the hips; absorb the landing by bending knees and hips together.",
-            "Fully reset at the line between each powerful jump. Stop the set if you can't stick the landing."
           ]
         }
       ]
@@ -364,13 +364,13 @@
           ]
         },
         {
-          "name": "Trap-Bar Deadlift",
-          "rx": "3 × 5 reps · rest 2.5 min between · heavy and crisp",
-          "load": "A trap bar loaded heavy enough that the 5th rep is a strong grind but still clean form",
+          "name": "Backward Sled Drag",
+          "rx": "3 × 25 yards · rest 2 min between sets · heavy, controlled",
+          "load": "Your competition sled load or a touch heavier — heavy enough that 25 yards is hard",
           "cues": [
-            "Stand inside the bar, brace hard, and drive the floor away to build the hip and leg strength behind every push.",
-            "Keep your back flat and chest up the whole pull — don't let your hips shoot up first or your back round.",
-            "Lower under control and reset your brace before each rep instead of bouncing off the floor."
+            "Face the sled, hold the straps, and walk backward pulling it toward you — stay low with bent knees.",
+            "Drive through your whole foot and keep your chest up; this hammers the quads for sled strength.",
+            "Take short, controlled steps. Stop if your low back rounds or your footing gets unsure."
           ]
         },
         {

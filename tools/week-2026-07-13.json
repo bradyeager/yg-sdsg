@@ -243,6 +243,16 @@
       "tag": "Hypertrophy · hips + legs",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 6 jumps · rest 90 sec between sets · steady, repeatable reach",
+          "load": "Bodyweight",
+          "cues": [
+            "Swing the arms back, dip the hips, and jump forward landing softly on both feet at the same time.",
+            "Aim for the same comfortable distance on every rep so each landing stays controlled and quiet.",
+            "Walk back to the line and fully reset between jumps. Keep them clean, not maximal, this week."
+          ]
+        },
+        {
           "name": "DB Romanian Deadlift",
           "rx": "3 × 15 reps · rest 75 sec between sets · 3-sec lower on every rep",
           "load": "A DB in each hand, heavy enough that the last 2 of 15 reps are hard with a flat back",
@@ -260,16 +270,6 @@
             "Slide down the wall until your knees are bent about 90 degrees and hold there, weight in your heels.",
             "Keep your back flat against the wall and your knees tracking over your toes — don't let them cave in.",
             "Breathe steadily through the hold. Stand up early if your knees ache; come down only as far as is comfortable."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 6 jumps · rest 90 sec between sets · steady, repeatable reach",
-          "load": "Bodyweight",
-          "cues": [
-            "Swing the arms back, dip the hips, and jump forward landing softly on both feet at the same time.",
-            "Aim for the same comfortable distance on every rep so each landing stays controlled and quiet.",
-            "Walk back to the line and fully reset between jumps. Keep them clean, not maximal, this week."
           ]
         }
       ]

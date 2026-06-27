@@ -244,6 +244,16 @@
       "tag": "Hypertrophy · hips + legs (bridge to strength)",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 5 jumps · rest 90 sec between sets · a touch more reach, still controlled",
+          "load": "Bodyweight",
+          "cues": [
+            "Swing your arms back, then jump forward with a little more intent than easy — but still stick both feet on landing.",
+            "Bend the knees and hips to soak up each landing quietly; a sloppy landing means you reached too far.",
+            "Reset fully at the line between every jump. Quality landings come first, distance second."
+          ]
+        },
+        {
           "name": "Tempo Goblet Squat",
           "rx": "3 × 10 reps · rest 75 sec between sets · 3-sec lower, 1-sec pause at the bottom",
           "load": "A KB or DB at your chest, a touch heavier than a comfortable 12-rep weight so 10 controlled reps are challenging",
@@ -261,16 +271,6 @@
             "Rest your upper back on a bench, feet flat, and drive your hips up until your body forms a straight line.",
             "Squeeze your glutes hard at the top and tuck your ribs down so your lower back doesn't over-arch.",
             "Lower under control and tap the hips low before the next rep. Drop the weight if your back takes over."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 5 jumps · rest 90 sec between sets · a touch more reach, still controlled",
-          "load": "Bodyweight",
-          "cues": [
-            "Swing your arms back, then jump forward with a little more intent than easy — but still stick both feet on landing.",
-            "Bend the knees and hips to soak up each landing quietly; a sloppy landing means you reached too far.",
-            "Reset fully at the line between every jump. Quality landings come first, distance second."
           ]
         }
       ]

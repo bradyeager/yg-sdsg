@@ -9,6 +9,9 @@ node --check tools/kerry-import.js && echo "  kerry-import.js OK"
 python3 -c "import ast,sys; ast.parse(open('tools/strong-import.py').read())" && echo "  strong-import.py OK"
 python3 -c "import json; json.load(open('vercel.json'))" && echo "  vercel.json OK"
 
+echo "== Program week files lint (3-set cap · slot-1 anchors · test slots · no movement dupes) =="
+node tools/lint-week.js
+
 echo "== .vercelignore guards Vercel from detecting a Node project =="
 # F2: Without these entries Vercel would see package.json at the deploy root
 # and run a Node build pipeline instead of serving the static files. Catch

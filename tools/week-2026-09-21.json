@@ -189,13 +189,13 @@
           ]
         },
         {
-          "name": "Arm Circles",
-          "rx": "2 × 15 sec each direction · no rest needed",
-          "load": "Bodyweight",
+          "name": "Band Shoulder Pass-Through",
+          "rx": "2 × 12 reps · rest 45 sec between sets · slow and easy",
+          "load": "A light resistance band held wide in both hands",
           "cues": [
-            "Make slow, full circles with both arms to loosen the shoulders before comp.",
-            "Keep them gentle and relaxed — just waking the joints up.",
-            "Stop the moment you feel loose; save all your energy for comp day."
+            "Hold a light band wide and sweep it slowly from in front of your thighs up over your head to behind you, then reverse.",
+            "Keep your arms straight and only travel as far as your shoulders comfortably allow.",
+            "Easy taper-week mobility — no force, just open the shoulders before comp week."
           ]
         }
       ]
@@ -243,6 +243,16 @@
       "tag": "Taper · comp week",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "2 × 2 jumps · rest 90 sec between · very light, snappy rehearsal",
+          "load": "Bodyweight",
+          "cues": [
+            "Take just a couple of easy, snappy practice jumps to feel the competition motion — well under any real effort.",
+            "Swing the arms, dip, jump forward at a relaxed pace, and stick both feet cleanly.",
+            "Reset between reps and keep it short. Save every bit of spring for comp day."
+          ]
+        },
+        {
           "name": "Easy Skip in Place",
           "rx": "2 × 20 sec · rest 60 sec between · light and loose",
           "load": "Bodyweight",
@@ -260,16 +270,6 @@
             "Take a small, easy two-foot hop forward and stick the landing softly — just grooving the pattern.",
             "Keep the hops tiny and the effort low; the goal is to stay primed and fresh, not to build anything.",
             "Reset between reps and stop early. Arrive at comp day loose and rested."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "2 × 2 jumps · rest 90 sec between · very light, snappy rehearsal",
-          "load": "Bodyweight",
-          "cues": [
-            "Take just a couple of easy, snappy practice jumps to feel the competition motion — well under any real effort.",
-            "Swing the arms, dip, jump forward at a relaxed pace, and stick both feet cleanly.",
-            "Reset between reps and keep it short. Save every bit of spring for comp day."
           ]
         }
       ]

@@ -41,6 +41,10 @@ jobs:
             echo "file=" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Lint the week file before publishing
+        if: steps.pick.outputs.file != ''
+        run: node tools/lint-week.js "${{ steps.pick.outputs.file }}"
+
       - name: Build the week into program/index.html
         if: steps.pick.outputs.file != ''
         run: |

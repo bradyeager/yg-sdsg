@@ -246,6 +246,16 @@
       "tag": "Peak · supportive",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 3 jumps · rest 90 sec between sets · easy comp-pattern rehearsal",
+          "load": "Bodyweight",
+          "cues": [
+            "Rehearse the competition motion at an easy effort — arms back, hips snap, jump and stick both feet.",
+            "Keep it low-volume and crisp; the goal this week is to stay sharp without digging into fatigue.",
+            "Reset at the line between each jump. Stop if the landings stop feeling clean and controlled."
+          ]
+        },
+        {
           "name": "Submax Standing Jump-and-Stick",
           "rx": "3 × 4 jumps · rest 90 sec between sets · about 80% effort, perfect landings",
           "load": "Bodyweight",
@@ -263,16 +273,6 @@
             "March in place lifting each knee to hip height, holding a light bell at your chest and staying tall.",
             "Keep your stomach braced and your steps controlled — this is easy support work to stay loose.",
             "Stay relaxed and stop early if your posture sags. Nothing about this should feel taxing."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 3 jumps · rest 90 sec between sets · easy comp-pattern rehearsal",
-          "load": "Bodyweight",
-          "cues": [
-            "Rehearse the competition motion at an easy effort — arms back, hips snap, jump and stick both feet.",
-            "Keep it low-volume and crisp; the goal this week is to stay sharp without digging into fatigue.",
-            "Reset at the line between each jump. Stop if the landings stop feeling clean and controlled."
           ]
         }
       ]

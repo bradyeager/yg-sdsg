@@ -242,6 +242,16 @@
       "tag": "Hypertrophy · hips + legs",
       "patterns": [
         {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 5 jumps · rest 90 sec between sets · smooth and controlled",
+          "load": "Bodyweight",
+          "cues": [
+            "Swing your arms back, then jump forward for distance and stick the landing on both feet.",
+            "Bend your knees and hips to absorb each landing softly — this week is about clean, controlled landings, not max reach.",
+            "Step back to the line and reset before every jump. Stop the set if your landings get sloppy."
+          ]
+        },
+        {
           "name": "Goblet Box Step-Up",
           "rx": "3 × 12 reps each leg · rest 75 sec between sets · controlled up, slow down",
           "load": "A KB or single DB held at your chest, heavy enough that 12 reps per leg is challenging on a knee-height box",
@@ -259,16 +269,6 @@
             "Squeeze your glutes to lift your hips into a straight bridge, then lift one knee toward your chest without letting the hips drop.",
             "Brace your stomach so your low back doesn't arch — the work is in your glutes, not your spine.",
             "Move slowly and alternate legs. Set both feet down and rest if your hips start to sag."
-          ]
-        },
-        {
-          "name": "Broad Jump — Distance Practice",
-          "rx": "3 × 5 jumps · rest 90 sec between sets · smooth and controlled",
-          "load": "Bodyweight",
-          "cues": [
-            "Swing your arms back, then jump forward for distance and stick the landing on both feet.",
-            "Bend your knees and hips to absorb each landing softly — this week is about clean, controlled landings, not max reach.",
-            "Step back to the line and reset before every jump. Stop the set if your landings get sloppy."
           ]
         }
       ]
