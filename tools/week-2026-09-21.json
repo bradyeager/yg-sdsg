@@ -1,0 +1,389 @@
+{
+  "weekTitle": "Week of September 21",
+  "weekSub": "Peak + Taper · Week 4",
+  "weekDates": "September 21 – 27, 2026 · Block 4 · Week 4 of 4 · COMP WEEK (Sept 27)",
+  "blockMarker": "Peak + Taper",
+  "weekNoteHtml": "<strong>How to use this page.</strong> Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event &mdash; or cherry-pick across events. This week is the exception &mdash; do less, not more: 2&ndash;4 short patterns total, just enough to stay loose. Warm up gently; stop well before fatigue.<br><br><strong>Tap any movement's teal header</strong> to open it full-screen &mdash; easy to read on the gym iPad, pinch to zoom, scroll through all three exercises.<br><br><strong>This week &mdash; taper into comp day (Sept 27).</strong> Deload: very light movement-prep only, nothing taxing. The training is done &mdash; this week is about arriving fresh, loose, and confident. Everything is fresh this week; keep loads easy, reps few, and stay well under 3 sets. If in doubt, do less. Rest is part of the plan.",
+  "testsLineHtml": "<strong>No tests &mdash; comp week.</strong> Save it for the platform on Sept 27. Just light movement prep this week &mdash; no maxing, no working numbers to chase. Show up fresh.",
+  "events": [
+    {
+      "event": "KB Box Squat",
+      "type": "marathon",
+      "tag": "Peak · taper",
+      "patterns": [
+        {
+          "name": "Comp-Pace Box Squat",
+          "rx": "2 × 5 reps · rest 90 sec between sets · very light, short and snappy movement prep",
+          "load": "A KB 1–2 sizes LIGHTER than competition, at competition box height",
+          "cues": [
+            "Keep it short and easy — just remind your legs of the comp pattern.",
+            "Stand up snappy and tall, but stop while everything still feels fresh.",
+            "No grinding and no fatigue — you want to arrive primed for comp day.",
+            "Touch the box clean and stand fully on every easy rep."
+          ]
+        },
+        {
+          "name": "Bodyweight Sit-to-Stand Loosener",
+          "rx": "2 × 6 reps · rest 60 sec between sets · slow easy reps to stay loose",
+          "load": "Bodyweight only — pure movement prep",
+          "cues": [
+            "Sit to the box and stand slowly just to stay loose and mobile.",
+            "Keep effort very low — this should feel restful, not like training.",
+            "Breathe easy and relax your shoulders through each rep.",
+            "Stop immediately if anything feels tight or tired."
+          ]
+        },
+        {
+          "name": "Standing Quad Activation",
+          "rx": "2 × 8 reps · rest 45 sec between sets · light controlled knee extensions, no load",
+          "load": "Bodyweight only — gentle, snappy activation",
+          "cues": [
+            "Stand tall and gently straighten and bend one knee to wake up the quad.",
+            "Keep it light and snappy with no strain at all.",
+            "Hold a wall or rack for balance if you need it.",
+            "This is just to stay primed — finish completely fresh for comp day."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Dynamax OH Throw",
+      "type": "sprint",
+      "tag": "Peak · comp-week taper",
+      "patterns": [
+        {
+          "name": "Throw Technique Practice",
+          "rx": "2 × 2 throws · rest 90 sec between sets · 4 easy snappy throws, very light, just stay loose",
+          "load": "Dynamax ball — 4 lb (women) / 8 lb (men)",
+          "cues": [
+            "Take a few easy, snappy throws up and back overhead — just enough to feel fast and loose for comp day.",
+            "Keep these very light and short; this is taper week, so prime the pattern without any fatigue.",
+            "Quick hip snap, relaxed arms — stop while the throws still feel crisp and effortless.",
+            "Arrive at comp day Sept 27 fresh — never chase distance this week."
+          ]
+        },
+        {
+          "name": "Walking Hip Openers",
+          "rx": "1 × 6 reps each side · easy mobility only",
+          "load": "Bodyweight, slow and controlled",
+          "cues": [
+            "Slowly lift one knee up and open it out to the side, then step down — loosen the hips with easy, controlled circles.",
+            "Move at a relaxed walking pace and keep every circle smooth, never forcing the range or rushing the reps.",
+            "Hold a wall or rail for balance if you need it and keep every rep smooth.",
+            "Stop the moment you feel warm and loose; freshness is the goal."
+          ]
+        },
+        {
+          "name": "Arm Circles — Easy",
+          "rx": "1 × 10 reps each direction · light shake-out only",
+          "load": "Bodyweight, arms only",
+          "cues": [
+            "Make slow, easy circles with both arms, forward then backward, gradually opening up your shoulders.",
+            "Keep it light and short — just warming the shoulders so you feel loose and ready on comp day.",
+            "Stay relaxed and never force the range; this should feel like a gentle shake-out.",
+            "Finish feeling primed and fresh, not worked."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Bench Press",
+      "type": "marathon",
+      "tag": "Taper · comp week",
+      "patterns": [
+        {
+          "name": "Bench Volume @ % of Max Reps",
+          "rx": "1 light set · ~30% of your max-rep test at comp weight · just enough to feel sharp",
+          "load": "Your competition bench weight",
+          "cues": [
+            "Your app shows your personal rep target — do one easy, snappy set to stay loose for comp day, nothing more.",
+            "Every rep should feel fast and effortless. This is movement prep, not training — leave loads in the tank.",
+            "Stop the moment it feels like work. Arrive fresh on Sept 27."
+          ]
+        },
+        {
+          "name": "Empty-Bar Press",
+          "rx": "1 × 8 reps · slow, easy, full range",
+          "load": "An empty barbell or two very light DBs",
+          "cues": [
+            "Press an empty bar or very light DBs for a few smooth reps just to grease the movement.",
+            "Keep it slow and easy through a full range — this is a loosener, not a workout.",
+            "Stop after one easy set. The only goal is to feel primed and fresh."
+          ]
+        },
+        {
+          "name": "Arm Circles",
+          "rx": "1 × 20 sec each direction · easy and loose",
+          "load": "Bodyweight, no equipment",
+          "cues": [
+            "Stretch both arms out to the sides and make small, easy circles forward, then backward, to warm the shoulders.",
+            "Keep it gentle and loose — this is just movement prep to stay snappy for comp day.",
+            "No strain, no fatigue. Stop while it still feels easy."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Overhead Arm Hang",
+      "type": "marathon",
+      "tag": "Taper · comp week deload",
+      "patterns": [
+        {
+          "name": "Max Hang Practice",
+          "rx": "2 × 10-second easy hold · rest as needed · movement prep only",
+          "load": "Pull-up bar — very light, easy 10-second holds just to feel the bar, nothing taxing",
+          "cues": [
+            "Hop up, feel a packed-shoulder hang for 10 seconds, and step down fresh.",
+            "Keep it short and snappy — this is loosening up, not training.",
+            "No grinding and no near-failure holds; arrive primed for comp day Sept 27.",
+            "Crush the bar lightly so the pattern feels familiar, then rest."
+          ]
+        },
+        {
+          "name": "Arm Swing Mobility",
+          "rx": "1 × 10 easy swings each direction",
+          "load": "Bodyweight — gentle shoulder circles and arm swings, no load",
+          "cues": [
+            "Swing the arms forward and back, then big circles, to loosen the shoulders.",
+            "Keep everything light, smooth, and pain-free.",
+            "This is movement prep to feel loose, nothing more.",
+            "Stop before any fatigue — full freshness is the goal."
+          ]
+        },
+        {
+          "name": "Easy Band Pull-Apart",
+          "rx": "1 × 12 reps",
+          "load": "A light band held at chest height — easy tension only",
+          "cues": [
+            "Hold the band out front and pull your hands apart, squeezing the shoulder blades.",
+            "Keep it light and snappy to wake up the upper back.",
+            "No straining — this is a primer, not a workout.",
+            "Finish feeling loose and ready, not worked."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Med Ball Slams",
+      "type": "sprint",
+      "tag": "Peak · taper / deload",
+      "patterns": [
+        {
+          "name": "Standing Slam Volume",
+          "rx": "2 × 6 reps · rest 90 sec between · easy and snappy",
+          "load": "A light D-ball, 6 lb (women) / 12 lb (men) — well under your comp D-ball for the deload",
+          "cues": [
+            "Just a few easy, snappy slams with the light ball to stay loose — nothing taxing this week.",
+            "Full reach and a clean slam, but stop while it still feels effortless.",
+            "Arrive at comp fresh; this is movement-prep only."
+          ]
+        },
+        {
+          "name": "D-Ball Halo",
+          "rx": "2 × 5 reps each direction · rest 60 sec between sets",
+          "load": "A light D-ball, 6 lb (women) / 12 lb (men)",
+          "cues": [
+            "Circle the light ball slowly around your head, keeping your trunk tall and braced.",
+            "Move smooth and easy — this is gentle shoulder and overhead prep, not a workout.",
+            "Switch directions each round and keep it relaxed."
+          ]
+        },
+        {
+          "name": "Arm Circles",
+          "rx": "2 × 15 sec each direction · no rest needed",
+          "load": "Bodyweight",
+          "cues": [
+            "Make slow, full circles with both arms to loosen the shoulders before comp.",
+            "Keep them gentle and relaxed — just waking the joints up.",
+            "Stop the moment you feel loose; save all your energy for comp day."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Jump Rope · 60s",
+      "type": "sprint",
+      "tag": "Taper · comp week",
+      "patterns": [
+        {
+          "name": "60-Sec Pace Practice",
+          "rx": "1 × 30 sec of easy singles · just one short, snappy set · stop fresh",
+          "load": "Your jump rope, very easy movement-prep pace",
+          "cues": [
+            "Just one short, easy set to stay loose — nothing taxing this week.",
+            "Keep it light and snappy and finish feeling completely fresh.",
+            "Save every bit of energy for comp day on Sept 27."
+          ]
+        },
+        {
+          "name": "Gentle Calf Wake-Up Raise",
+          "rx": "1 × 12 reps · bodyweight · slow and easy",
+          "load": "Bodyweight only, rail for balance",
+          "cues": [
+            "Do one easy set of slow rises just to keep the ankles moving.",
+            "No weight and no burn — this is movement prep only.",
+            "Stop the moment it feels like work."
+          ]
+        },
+        {
+          "name": "Loose Ankle Bounces",
+          "rx": "1 × 20 sec of soft bounces · light and relaxed",
+          "load": "Bodyweight, very light bounces",
+          "cues": [
+            "Bounce softly on the balls of your feet to stay springy and relaxed.",
+            "Keep it tiny and easy — you are just staying loose for comp day.",
+            "Stop while you feel fresh and bouncy, never tired."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Standing Broad Jump",
+      "type": "sprint",
+      "tag": "Taper · comp week",
+      "patterns": [
+        {
+          "name": "Easy Skip in Place",
+          "rx": "2 × 20 sec · rest 60 sec between · light and loose",
+          "load": "Bodyweight",
+          "cues": [
+            "Skip gently in place, driving each knee up easily and staying light on the balls of your feet.",
+            "Keep it short and snappy just to wake the legs up — nothing taxing this close to comp day.",
+            "Stop the moment you feel loose and warm. This is movement prep, not a workout."
+          ]
+        },
+        {
+          "name": "Soft Two-Foot Hop-and-Stick",
+          "rx": "2 × 3 hops · rest 60 sec between · tiny hops, perfect landings",
+          "load": "Bodyweight",
+          "cues": [
+            "Take a small, easy two-foot hop forward and stick the landing softly — just grooving the pattern.",
+            "Keep the hops tiny and the effort low; the goal is to stay primed and fresh, not to build anything.",
+            "Reset between reps and stop early. Arrive at comp day loose and rested."
+          ]
+        },
+        {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "2 × 2 jumps · rest 90 sec between · very light, snappy rehearsal",
+          "load": "Bodyweight",
+          "cues": [
+            "Take just a couple of easy, snappy practice jumps to feel the competition motion — well under any real effort.",
+            "Swing the arms, dip, jump forward at a relaxed pace, and stick both feet cleanly.",
+            "Reset between reps and keep it short. Save every bit of spring for comp day."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Concept Row · 500m",
+      "type": "marathon",
+      "tag": "Peak · taper / comp prep",
+      "patterns": [
+        {
+          "name": "500m Practice",
+          "rx": "1 × 200m easy-snappy · one short piece only · well under all-out",
+          "load": "Rower · light and quick — just a few sharp strokes to stay primed, not a workout",
+          "cues": [
+            "One short, snappy 200m to stay loose — feel fast, but keep it easy.",
+            "A couple of crisp strokes at pace, then back off — nothing taxing this week.",
+            "Get off the rower fresh; the goal is freshness for comp day, not fitness."
+          ]
+        },
+        {
+          "name": "Standing Row Posture Drill",
+          "rx": "1 × 8 easy reps · light, movement-prep only",
+          "load": "A very light band — barely any tension, just grooving the pattern",
+          "cues": [
+            "Pull a light band to your ribs and stand tall to rehearse a clean finish position.",
+            "Keep it feather-light — this is movement prep, not strengthening.",
+            "Move slow and easy, then you're done; stay loose and rested for comp day."
+          ]
+        },
+        {
+          "name": "Gentle Cat-Cow Flow",
+          "rx": "1 × 8 slow reps · easy mobility only",
+          "load": "Bodyweight on hands and knees · no load, just easy movement",
+          "cues": [
+            "On hands and knees, slowly round your back up, then let it sag and lift your chest.",
+            "Move with your breath and keep it gentle — this loosens the spine, nothing more.",
+            "No straining at the ends — just a few easy reps to feel loose for comp day."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "300 Yd Shuttle Run",
+      "type": "sprint",
+      "tag": "Peak + Taper · comp-week deload",
+      "patterns": [
+        {
+          "name": "Shuttle Pace Practice",
+          "rx": "2 × 50 yd · easy stride into one smooth turn · rest as needed",
+          "load": "Bodyweight · very light, snappy movement prep only — nowhere near a hard effort",
+          "cues": [
+            "Stride one easy 50, make one smooth controlled turn, and stride back — just to feel the pattern.",
+            "Stay relaxed and loose; this is movement prep to arrive primed, not a workout.",
+            "Two short reps and you're done — freshness for comp day is the whole goal."
+          ]
+        },
+        {
+          "name": "Walking Leg Swings",
+          "rx": "2 × 10 swings per leg · gentle and controlled · no rest needed",
+          "load": "Bodyweight",
+          "cues": [
+            "Swing each leg gently forward and back through a comfortable range, holding a wall for balance.",
+            "Keep the swings smooth and easy — this loosens the hips without any strain.",
+            "Stay light and brief; nothing taxing this close to comp."
+          ]
+        },
+        {
+          "name": "Quick Feet Taps",
+          "rx": "2 × 10 seconds of fast foot taps · light and snappy · rest 60 sec",
+          "load": "Bodyweight",
+          "cues": [
+            "Tap your feet quickly in place on the balls of your feet, staying light and relaxed.",
+            "Keep it brief and snappy to wake up your turnover — barely any effort.",
+            "Two short bursts is plenty; arrive fresh and ready for comp day."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Prowler Push",
+      "type": "sprint",
+      "tag": "Peak + Taper · comp-week taper (sled, not tested)",
+      "patterns": [
+        {
+          "name": "Comp-Distance Sled Push",
+          "rx": "1 × 30 yards · easy and snappy · movement prep only (not timed, never a test)",
+          "load": "Light: drop to 1 × 25 lb plate per side (women) / 1 × 45 lb plate per side (men) — well under comp weight",
+          "cues": [
+            "Just one easy, light 30-yard push to feel the movement — stay snappy and well under comp weight, and never make this a timed test.",
+            "Run through your setup: 45° angle, arms locked, push through the trunk — a quick rehearsal, not a workout.",
+            "Stop completely fresh; the only goal this week is arriving loose and primed for comp day."
+          ]
+        },
+        {
+          "name": "Bodyweight Reverse Lunge to Reach",
+          "rx": "1 × 6 reps per leg · easy pace · rest as needed",
+          "load": "Bodyweight only",
+          "cues": [
+            "Step back into a shallow lunge and reach your arms up to gently open your hips and stay loose for comp day.",
+            "Move slow and tall with no load — this is light movement prep, nothing taxing.",
+            "Do just enough to feel warm and springy, then stop."
+          ]
+        },
+        {
+          "name": "Ankle Bounce",
+          "rx": "1 × 12 reps · easy, quiet bounces · rest as needed",
+          "load": "Bodyweight only, small bounces off the balls of your feet",
+          "cues": [
+            "Do small, quiet bounces on the balls of your feet to prime your legs and ankles for race day.",
+            "Keep your legs almost straight and the bounces tiny and springy — no deep knee bend.",
+            "Keep it short and snappy and stop while you feel fresh; freshness is the whole point this week."
+          ]
+        }
+      ]
+    }
+  ]
+}

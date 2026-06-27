@@ -1,0 +1,64 @@
+name: Publish weekly program
+
+# Auto-publishes the program for the current week, every Monday morning.
+# It looks for tools/week-<this-Monday>.json. If that file exists it builds it
+# into program/index.html (archiving the prior week), runs the full test suite
+# as a safety gate, and only then commits + pushes (which triggers the Vercel
+# deploy). If no dated file exists for today, it does nothing.
+#
+# REVIEW MODEL: the 12 week files live in tools/. Edit any future week's JSON
+# any time before its Monday and the change auto-publishes on the day. To skip
+# a week, delete or rename its file. Manual run: Actions tab -> Run workflow.
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'   # Mondays 12:00 UTC (~4-5am Pacific) — live before anyone trains
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Pick this week's program file
+        id: pick
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          FILE="tools/week-$DATE.json"
+          if [ -f "$FILE" ]; then
+            echo "Found $FILE — will publish."
+            echo "file=$FILE" >> "$GITHUB_OUTPUT"
+            echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          else
+            echo "No program file for $DATE — nothing to publish today."
+            echo "file=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build the week into program/index.html
+        if: steps.pick.outputs.file != ''
+        run: |
+          python3 tools/build_week.py "${{ steps.pick.outputs.file }}" \
+            --archive-note "Auto-published — week of ${{ steps.pick.outputs.date }}"
+
+      - name: Test gate (must pass before publishing)
+        if: steps.pick.outputs.file != ''
+        run: |
+          npm install
+          npx playwright install --with-deps chromium
+          bash tests/run.sh
+
+      - name: Commit & push (triggers Vercel deploy)
+        if: steps.pick.outputs.file != ''
+        run: |
+          git config user.name "yg-sdsg-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add program/index.html
+          git commit -m "Auto-publish program: week of ${{ steps.pick.outputs.date }}"
+          git push

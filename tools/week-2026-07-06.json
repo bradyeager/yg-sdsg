@@ -1,0 +1,388 @@
+{
+  "weekTitle": "Week of July 6",
+  "weekSub": "Hypertrophy · Week 5",
+  "weekDates": "July 6 – 12, 2026 · Block 2 · Week 5 of 7",
+  "blockMarker": "Hypertrophy",
+  "weekNoteHtml": "<strong>How to use this page.</strong> Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event &mdash; or cherry-pick across events. Aim for 4&ndash;6 patterns total per session. Warm up first; stop a set short if form breaks down.<br><br><strong>Tap any movement's teal header</strong> to open it full-screen &mdash; easy to read on the gym iPad, pinch to zoom, scroll through all three exercises.<br><br><strong>This week &mdash; all-new movements.</strong> Hypertrophy: chase reps and clean volume at moderate loads, not heavy singles. Everything here is fresh this week &mdash; read each card's cues before your first set, and never go past 3 sets on any pattern. Progress by moving a little better, not by adding a set.",
+  "testsLineHtml": "<strong>Working number week.</strong> No formal test this week &mdash; tap your name below anytime to log a working number you want to track.",
+  "events": [
+    {
+      "event": "KB Box Squat",
+      "type": "marathon",
+      "tag": "Hypertrophy · legs",
+      "patterns": [
+        {
+          "name": "Comp-Pace Box Squat",
+          "rx": "3 × 20 reps · rest 90 sec between sets · sit fully to the box and stand tall each rep",
+          "load": "Your competition KB at competition box height",
+          "cues": [
+            "Tap the box under control on every rep — do not drop or bounce off it.",
+            "Stand all the way up and squeeze your glutes at the top before the next rep.",
+            "Keep your chest up and knees tracking over your toes the whole set.",
+            "Breathe in on the way down and out as you stand — do not hold your breath."
+          ]
+        },
+        {
+          "name": "Tempo Goblet Squat",
+          "rx": "3 × 15 reps · rest 75 sec between sets · lower for a slow 3-count on every rep",
+          "load": "A KB 1–2 sizes LIGHTER than your competition KB, held at the chest",
+          "cues": [
+            "Take a full 3 seconds to lower so the muscles stay under tension.",
+            "Keep the bell tight against your chest and your elbows tucked in.",
+            "Sit between your knees, not back onto your heels, to stay tall.",
+            "Stand up at a normal speed — slow down only on the way down."
+          ]
+        },
+        {
+          "name": "Step-Up to Knee Drive",
+          "rx": "3 × 12 reps each leg · rest 75 sec between sets · drive the back knee up at the top",
+          "load": "Bodyweight, or a light KB held at the chest if bodyweight is easy",
+          "cues": [
+            "Push through the whole foot on the box, not your toes, to stand up.",
+            "Drive the trailing knee up to hip height and pause for a beat.",
+            "Step down softly and quietly — do not let your foot slam down.",
+            "Use a box height where your working thigh is about parallel to start."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Dynamax OH Throw",
+      "type": "sprint",
+      "tag": "Hypertrophy · hinge volume",
+      "patterns": [
+        {
+          "name": "Throw Technique Practice",
+          "rx": "3 × 5 throws · rest 75 sec between sets · 15 smooth throws total, technique over max effort",
+          "load": "Dynamax ball — 4 lb (women) / 8 lb (men)",
+          "cues": [
+            "Drop into a low hip hinge, then explode up and throw the ball up and back over your head. Let the hips do the work, not the arms.",
+            "Keep these throws smooth and repeatable this week — chase clean technique, not your farthest throw.",
+            "Reset your stance fully between every throw and take a breath before you load the next one.",
+            "Stop the set if your low back starts to arch — brace your stomach and keep your ribs stacked over your hips."
+          ]
+        },
+        {
+          "name": "Romanian Deadlift — Tempo",
+          "rx": "3 × 12 reps · rest 75 sec between sets · lower for a slow 3-count each rep",
+          "load": "A pair of DBs or one KB you can control for 12 clean reps with smooth form",
+          "cues": [
+            "Push your hips straight back and slide the weights down your thighs until you feel a stretch in your hamstrings, then stand tall by squeezing your glutes.",
+            "Lower for a slow 3-count and keep the weights close to your legs the whole way down.",
+            "Keep a soft bend in your knees and a flat back — don't round your shoulders or let your back hunch.",
+            "Stop the set the moment your back rounds; this builds the hinge, not your grip endurance."
+          ]
+        },
+        {
+          "name": "Standing DB Overhead Press",
+          "rx": "3 × 12 reps · rest 60 sec between sets",
+          "load": "A pair of DBs light enough that rep 12 is still clean (no leaning back)",
+          "cues": [
+            "Press both DBs straight overhead until your arms are locked out by your ears, then lower under control to your shoulders.",
+            "Brace your stomach and squeeze your glutes so your lower back stays flat — don't lean back to finish a rep.",
+            "Keep the reps smooth and controlled; this is volume work for the overhead position, not a max lift."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Bench Press",
+      "type": "marathon",
+      "tag": "Hypertrophy · push",
+      "patterns": [
+        {
+          "name": "Bench Volume @ % of Max Reps",
+          "rx": "3 sets · each set to ~65% of your max-rep test · rest 90 sec between · smooth controlled tempo",
+          "load": "Your competition bench weight",
+          "cues": [
+            "Your app shows your personal rep target — hit that number cleanly on all 3 sets and stop there, don't grind for extras.",
+            "Lower the bar to a light touch on your chest and press back up with a steady, controlled tempo.",
+            "End the set the instant the bar slows to a stall or your hips lift off the bench."
+          ]
+        },
+        {
+          "name": "Incline DB Press",
+          "rx": "3 × 12 reps · rest 75 sec between sets",
+          "load": "Two DBs you can press for 12 clean reps with about 2 left in the tank",
+          "cues": [
+            "Set a bench to a low incline, press both DBs straight up over your chest, and lock the arms out at the top.",
+            "Lower slowly until you feel a stretch across the front of your chest, then press back up — don't bang the DBs together.",
+            "Keep your feet flat and your back steady on the bench. Stop when your form starts to break down."
+          ]
+        },
+        {
+          "name": "Banded Push-Up",
+          "rx": "3 × 15 reps · rest 75 sec between sets",
+          "load": "Bodyweight with a light resistance band looped across your upper back",
+          "cues": [
+            "Loop a band over your back and under both hands so it adds tension as you press up — pick a band that lets you reach 15 clean reps.",
+            "Lower your chest with your elbows tracking back along your ribs, then press to a full lockout in one straight line.",
+            "Drop to your knees for the last reps rather than letting your hips sag. Quality over quantity."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Overhead Arm Hang",
+      "type": "marathon",
+      "tag": "Hypertrophy · pull + grip",
+      "patterns": [
+        {
+          "name": "Max Hang Practice",
+          "rx": "3 × hold for time · rest 2 min between",
+          "load": "Pull-up bar at ~80% of your current best hang time — stop the clock at 80%, do not chase a max today",
+          "cues": [
+            "Pull your shoulders down away from your ears and stay active — this is not a relaxed dangle.",
+            "Breathe slow through your nose; never hold your breath under the bar.",
+            "Step down the moment your grip starts to fail rather than dropping suddenly.",
+            "Log the time you held so the app can set your next target."
+          ]
+        },
+        {
+          "name": "Fat-Grip Bent-Over Row",
+          "rx": "3 × 15 reps · rest 75 sec between sets",
+          "load": "Dumbbells you can row for a clean 15 with 2 reps left in the tank · fat grips on the handles",
+          "cues": [
+            "Hinge to a flat back, chest proud, and let the fat grips force your hand to work the whole set.",
+            "Pull the dumbbells to your hip pockets and squeeze the shoulder blades together at the top.",
+            "Lower under control for a 2-second count; do not let the weight yank your arms straight.",
+            "If the fat grips slip before 15, that rep counts — finish what your grip allows."
+          ]
+        },
+        {
+          "name": "Scap Pull-Up",
+          "rx": "3 × 12 reps · rest 60 sec between sets",
+          "load": "Bodyweight hanging from the bar — band-assist under one foot if you cannot reach 12",
+          "cues": [
+            "Hang at full stretch, then pull only your shoulder blades down to lift your body an inch — arms stay straight.",
+            "Pause at the top and feel the lats switch on before lowering.",
+            "Move slowly and smoothly; this is a small range, not a swing.",
+            "If you cannot get 12, loop a light band under one foot to assist."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Med Ball Slams",
+      "type": "sprint",
+      "tag": "Hypertrophy · slam volume",
+      "patterns": [
+        {
+          "name": "Standing Slam Volume",
+          "rx": "3 × 15 reps · rest 60 sec between sets",
+          "load": "Your competition D-ball",
+          "cues": [
+            "Stand tall, reach the ball fully overhead, then slam it straight down between your feet.",
+            "Catch the bounce and reset each rep — don't rush and lose your full overhead reach.",
+            "Keep volume smooth and controlled; this is muscle-building reps, not a race."
+          ]
+        },
+        {
+          "name": "Tall-Kneeling D-Ball Slam",
+          "rx": "3 × 12 reps · rest 60 sec between sets",
+          "load": "A light D-ball, 10 lb (women) / 20 lb (men)",
+          "cues": [
+            "Kneel upright on a pad with hips locked out, then slam straight down in front of your knees.",
+            "Drive the slam with your lats and trunk since your legs are taken out of it.",
+            "Stay tall — don't let your butt sink back toward your heels as you tire."
+          ]
+        },
+        {
+          "name": "Lat Pulldown",
+          "rx": "3 × 15 reps · rest 60 sec between sets",
+          "load": "A moderate stack you can control for 15 clean reps",
+          "cues": [
+            "Pull the bar to your upper chest by driving your elbows down, then return slow to a full stretch.",
+            "Squeeze your shoulder blades down and back; don't lean way back and heave the weight.",
+            "This builds the pulling muscles that finish every slam."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Jump Rope · 60s",
+      "type": "sprint",
+      "tag": "Hypertrophy · calves",
+      "patterns": [
+        {
+          "name": "60-Sec Pace Practice",
+          "rx": "3 × 60 sec of singles · rest 90 sec between sets · steady, repeatable pace",
+          "load": "Your jump rope, at a controlled comp pace",
+          "cues": [
+            "Turn the rope with your wrists, not big arm circles, so you can hold the pace for the full 60 seconds.",
+            "Jump just an inch or two off the floor — barely clear the rope rather than bouncing high.",
+            "Count your singles each set and aim to repeat the same number, not sprint and burn out."
+          ]
+        },
+        {
+          "name": "Seated Weighted Calf Raise",
+          "rx": "3 × 24 reps · rest 60 sec between sets · 2-sec hold at the top",
+          "load": "Heavy DB or KB resting on your knees — heavy enough that 24 reps is hard but doable",
+          "cues": [
+            "Press all the way up onto the balls of your feet and squeeze the calf at the top.",
+            "Lower slowly until you feel a stretch at the bottom — don't bounce off the bottom.",
+            "Keep the weight settled on your thighs, not sliding toward your knees."
+          ]
+        },
+        {
+          "name": "Single-Leg Standing Calf Raise",
+          "rx": "3 × 16 reps each leg · rest 60 sec between sets",
+          "load": "Bodyweight holding one light DB on the working side; hold a rail with the other hand",
+          "cues": [
+            "Stand tall on one foot and rise all the way onto the ball of that foot.",
+            "Hold a wall or rail for balance only — let the calf do the work, not your arm.",
+            "Control the way down for a full count instead of dropping fast."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Standing Broad Jump",
+      "type": "sprint",
+      "tag": "Hypertrophy · hips + legs",
+      "patterns": [
+        {
+          "name": "Goblet Box Step-Up",
+          "rx": "3 × 12 reps each leg · rest 75 sec between sets · controlled up, slow down",
+          "load": "A KB or single DB held at your chest, heavy enough that 12 reps per leg is challenging on a knee-height box",
+          "cues": [
+            "Plant your whole foot on the box and drive through that heel to stand tall — don't push off your back toe.",
+            "Lower yourself slowly back down under control; tap the floor and go again rather than bouncing.",
+            "Keep your chest up and the bell tight to your body. Hold a rail with one hand if your balance wavers."
+          ]
+        },
+        {
+          "name": "Glute Bridge March",
+          "rx": "3 × 20 reps total · rest 60 sec between sets · 2-sec hold each lift",
+          "load": "Bodyweight, lying on your back with knees bent and feet flat",
+          "cues": [
+            "Squeeze your glutes to lift your hips into a straight bridge, then lift one knee toward your chest without letting the hips drop.",
+            "Brace your stomach so your low back doesn't arch — the work is in your glutes, not your spine.",
+            "Move slowly and alternate legs. Set both feet down and rest if your hips start to sag."
+          ]
+        },
+        {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 5 jumps · rest 90 sec between sets · smooth and controlled",
+          "load": "Bodyweight",
+          "cues": [
+            "Swing your arms back, then jump forward for distance and stick the landing on both feet.",
+            "Bend your knees and hips to absorb each landing softly — this week is about clean, controlled landings, not max reach.",
+            "Step back to the line and reset before every jump. Stop the set if your landings get sloppy."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Concept Row · 500m",
+      "type": "marathon",
+      "tag": "Hypertrophy · engine + pull",
+      "patterns": [
+        {
+          "name": "500m Practice",
+          "rx": "3 × 500m · rest 3 min fully between · row at a strong, repeatable effort",
+          "load": "Rower · about 4–6 sec/500m slower than an all-out 500m so all three pieces match",
+          "cues": [
+            "Settle into a pace you can hit on all three pieces without fading on the last one.",
+            "Drive with the legs first, then swing the back, then pull the handle to the ribs — in that order every stroke.",
+            "Keep the stroke rate around 24–26 and breathe in rhythm with the recovery — don't hold your breath."
+          ]
+        },
+        {
+          "name": "Seated Cable Row",
+          "rx": "3 × 15 reps · rest 60 sec between sets",
+          "load": "A cable stack weight heavy enough that the last 2 reps are hard at 15",
+          "cues": [
+            "Sit tall, pull the handle to your belly button, and squeeze the shoulder blades together at the back.",
+            "Let the handle travel back out under control for a full count — don't let the stack yank your arms forward.",
+            "Keep your torso quiet; row with your back and arms, not by rocking from the hips."
+          ]
+        },
+        {
+          "name": "Long Steady Bike Engine",
+          "rx": "1 × 12 min continuous · easy, steady spin",
+          "load": "Stationary bike · a conversational pace you could hold and still talk",
+          "cues": [
+            "Pedal at an easy, even effort the whole way — you should be able to chat through it.",
+            "Keep your cadence smooth and steady; this builds the engine without pounding the joints.",
+            "Sit tall and relaxed — ease off if your breathing gets ragged."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "300 Yd Shuttle Run",
+      "type": "sprint",
+      "tag": "Hypertrophy · speed + change of direction",
+      "patterns": [
+        {
+          "name": "Shuttle Pace Practice",
+          "rx": "3 × 200-yd shuttle (4 × 50 yd) · rest 3 min between · controlled comp-tempo turns",
+          "load": "Bodyweight · run at a steady comp-rehearsal pace you could hold for the full 300, not a sprint",
+          "cues": [
+            "Run four 50-yard lengths at the pace you plan to hold on comp day, decelerating a step before each turn.",
+            "Plant low and push back off smoothly — no hard cuts since no one is spotting you.",
+            "Walk and breathe for the full 3 minutes between sets so each one stays clean and repeatable."
+          ]
+        },
+        {
+          "name": "Reverse Lunge Walk",
+          "rx": "3 × 16 reps (8 per leg) · slow controlled tempo · rest 90 sec",
+          "load": "Bodyweight, or hold one 15–25 lb dumbbell at your chest if bodyweight feels easy",
+          "cues": [
+            "Step back into a long lunge, lower your back knee toward the floor under control, then drive up tall.",
+            "Keep your front shin vertical and your weight in the front heel — don't let the knee cave inward.",
+            "Move slowly for muscle, not speed; finish all 16 reps with good form before resting."
+          ]
+        },
+        {
+          "name": "Marching High-Knee Drill",
+          "rx": "3 × 30 yards · brisk march · rest 60–90 sec",
+          "load": "Bodyweight",
+          "cues": [
+            "March forward driving each knee up to hip height with a tall posture and pumping arms.",
+            "Stay light and rhythmic on the balls of your feet — this builds the leg turnover you need to shuttle.",
+            "Keep the volume high and the effort moderate; this is capacity work, not a sprint."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Prowler Push",
+      "type": "sprint",
+      "tag": "Hypertrophy · legs + back",
+      "patterns": [
+        {
+          "name": "Comp-Distance Sled Push",
+          "rx": "3 × 50 yards · rest 90 sec between · steady, controlled (not timed)",
+          "load": "Competition load: 2 × 25 lb plates (women) / 2 × 45 lb plates (men)",
+          "cues": [
+            "Push the full 50 yards at a steady, controlled pace — this is volume work, not a max sprint and not timed.",
+            "Hold your body at about a 45° angle with arms locked, and push through your trunk — don't bend your elbows to absorb the load.",
+            "Take long steps with full hip extension and drive through your toes the whole way."
+          ]
+        },
+        {
+          "name": "Goblet Reverse Lunge",
+          "rx": "3 × 12 reps per leg · controlled tempo · rest 75 sec between",
+          "load": "One dumbbell or kettlebell held at your chest, heavy enough that the last 2 reps per leg are tough but clean",
+          "cues": [
+            "Step straight back into a lunge and lower under control, then drive up through your front heel to build the same leg power the sled needs.",
+            "Keep your chest tall and the weight at your sternum — don't let your shoulders round forward.",
+            "Pause for a beat at the bottom so each rep is quality, and stop the set if your form starts to break down."
+          ]
+        },
+        {
+          "name": "DB Suitcase Carry",
+          "rx": "3 × 50 ft (25 ft down and back) per side · rest 75 sec between",
+          "load": "One dumbbell in one hand, heavy enough that your grip and trunk are working hard by the end of the walk",
+          "cues": [
+            "Carry the weight in one hand and walk tall and steady — your free side will want to tip, so brace your core to stay upright.",
+            "Take controlled steps and squeeze the handle hard to build the grip and bracing that holds your push position.",
+            "Set the weight down and switch hands between trips — don't let the load drag your shoulder down."
+          ]
+        }
+      ]
+    }
+  ]
+}

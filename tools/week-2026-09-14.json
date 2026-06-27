@@ -1,0 +1,389 @@
+{
+  "weekTitle": "Week of September 14",
+  "weekSub": "Peak + Taper · Week 3",
+  "weekDates": "September 14 – 20, 2026 · Block 4 · Week 3 of 4",
+  "blockMarker": "Peak + Taper",
+  "weekNoteHtml": "<strong>How to use this page.</strong> Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event &mdash; or cherry-pick across events. Aim for 4&ndash;6 patterns total per session. Warm up first; stop a set short if form breaks down.<br><br><strong>Tap any movement's teal header</strong> to open it full-screen &mdash; easy to read on the gym iPad, pinch to zoom, scroll through all three exercises.<br><br><strong>This week &mdash; comp rehearsal.</strong> Sharpening: rehearse the competition movements at comp loads, crisp and submaximal, with low volume. No maxing this week &mdash; just clean, confident reps that groove the patterns. Everything is fresh this week; read the cues, leave reps in the tank, and stay at 3 sets or fewer. Bank freshness for comp day.",
+  "testsLineHtml": "<strong>No tests this week.</strong> Comp rehearsal only &mdash; light, crisp reps at competition loads, nothing to failure. Tap your name below to log a working number if you want, but leave the maxing for comp day.",
+  "events": [
+    {
+      "event": "KB Box Squat",
+      "type": "marathon",
+      "tag": "Peak · rehearsal",
+      "patterns": [
+        {
+          "name": "Comp-Pace Box Squat",
+          "rx": "3 × 6 reps · rest 2 min between sets · comp loads, low volume, no maxing",
+          "load": "Your competition KB at competition box height",
+          "cues": [
+            "Rehearse exact comp reps — same box, same bell, same rhythm.",
+            "Stop each set crisp and submaximal, never near failure.",
+            "Full sit and full stand so the pattern is dialed for comp day.",
+            "Stay relaxed and confident — this is a dress rehearsal, not a test."
+          ]
+        },
+        {
+          "name": "KB Box Squat Walkthrough",
+          "rx": "2 × 5 reps · rest 90 sec between sets · slow deliberate reps to rehearse setup and stance",
+          "load": "Your competition KB at competition box height",
+          "cues": [
+            "Walk through your exact setup: foot position, grip, brace, then squat.",
+            "Move slow and deliberate to lock in a clean comp pattern.",
+            "Keep effort low — you are practicing, not training hard.",
+            "Reset fully between reps like you would on the comp floor."
+          ]
+        },
+        {
+          "name": "Bodyweight Squat Primer",
+          "rx": "2 × 8 reps · rest 60 sec between sets · easy unloaded reps to warm the pattern",
+          "load": "Bodyweight only — easy movement prep",
+          "cues": [
+            "Squat to about comp depth with no load to grease the groove.",
+            "Keep it smooth and easy — finish feeling looser, not tired.",
+            "Reach your arms forward for balance as you sit and stand.",
+            "Stop well short of any fatigue."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Dynamax OH Throw",
+      "type": "sprint",
+      "tag": "Peak · comp rehearsal",
+      "patterns": [
+        {
+          "name": "Throw Technique Practice",
+          "rx": "3 × 2 throws · rest 90 sec between sets · 6 crisp rehearsal throws at comp standard, submaximal",
+          "load": "Dynamax ball — 4 lb (women) / 8 lb (men)",
+          "cues": [
+            "Hinge and explode up, throwing the ball up and back overhead with comp-day rhythm — crisp, not maximal.",
+            "Touch the pattern to stay sharp: full setup, one breath, smooth explosive throw, then reset.",
+            "Keep effort submaximal (around 80%) — feel fast and loose, don't dig into fatigue this close to comp.",
+            "Walk through your exact comp-day routine on each rep so it's automatic on game day."
+          ]
+        },
+        {
+          "name": "Bodyweight Hip Hinge — Dowel",
+          "rx": "2 × 8 reps · rest 45 sec between sets · easy groove work",
+          "load": "Bodyweight holding a dowel or broomstick along your back",
+          "cues": [
+            "Hold a dowel touching your head, upper back, and tailbone, then push your hips back and fold forward keeping all three contact points.",
+            "This grooves the perfect flat-back hinge you launch the throw from — keep it light and easy.",
+            "Push your hips straight back rather than bending your knees or rounding your back.",
+            "Move slowly and smoothly; this is rehearsal, not a workout."
+          ]
+        },
+        {
+          "name": "Wall Slide Shoulder Prep",
+          "rx": "2 × 10 reps · rest 45 sec between sets · light overhead prep",
+          "load": "Bodyweight against a wall, arms only",
+          "cues": [
+            "Stand with your back and arms against a wall, then slide your arms up overhead and back down while keeping them touching the wall.",
+            "This opens up your overhead position so you reach tall and clean on comp day — keep it light and easy.",
+            "Keep your lower back flat against the wall; don't let your ribs flare as you reach up.",
+            "Move slowly and only as far up as you can while staying in contact with the wall."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Bench Press",
+      "type": "marathon",
+      "tag": "Peak · comp rehearsal",
+      "patterns": [
+        {
+          "name": "Bench Volume @ % of Max Reps",
+          "rx": "2 sets · each set to ~40% of your max-rep test · rest 2 min between · crisp comp-speed reps",
+          "load": "Your competition bench weight",
+          "cues": [
+            "Your app shows your personal rep target — rehearse your comp setup and press each rep at competition speed.",
+            "Stay submaximal and crisp; touch the comp lift to stay sharp without building any fatigue. No maxing.",
+            "Stop the set as soon as the bar slows or your hips lift off the bench."
+          ]
+        },
+        {
+          "name": "Scapular Wall Slide",
+          "rx": "2 × 10 reps · rest 60 sec between sets · slow and controlled",
+          "load": "Bodyweight, back and arms against a wall",
+          "cues": [
+            "Stand with your back, arms, and hands flat against a wall, then slide your arms up overhead and back down without losing wall contact.",
+            "This primes the shoulders and upper back for a strong bench setup — keep it slow and easy.",
+            "Only slide as high as you can while keeping your hands on the wall. No strain at all."
+          ]
+        },
+        {
+          "name": "Standing Band Pull-Apart",
+          "rx": "2 × 12 reps · rest 60 sec between sets · light band",
+          "load": "A light resistance band held at shoulder height",
+          "cues": [
+            "Hold a light band out in front at shoulder height and pull your hands apart by squeezing your shoulder blades together.",
+            "This sets the upper-back tightness that protects your shoulders on the bench — keep the band light.",
+            "Return slowly to the front under control. Keep the effort easy and the reps smooth."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Overhead Arm Hang",
+      "type": "marathon",
+      "tag": "Peak · comp rehearsal",
+      "patterns": [
+        {
+          "name": "Max Hang Practice",
+          "rx": "3 × hold for time · rest 2 min between · each hold to ~70% of your best, crisp and submaximal",
+          "load": "Pull-up bar at ~70% of your best hang time — rehearse the comp setup at race standard without maxing",
+          "cues": [
+            "Rehearse your exact comp-day setup: grip width, shoulder pack, breathing.",
+            "Hold submaximal and step down well before failure — no maxing this week.",
+            "Crush the bar with spread fingers so the pattern feels automatic.",
+            "Log the holds to confirm you feel sharp and fresh."
+          ]
+        },
+        {
+          "name": "Comp-Grip Bar Touch",
+          "rx": "3 × 20-second hold · rest 90 sec between",
+          "load": "Pull-up bar at your exact comp grip width — short, crisp 20-second holds only",
+          "cues": [
+            "Take your competition grip and hold a clean, packed hang for the full 20 seconds.",
+            "Keep it short and snappy — this is rehearsal, not a fatigue set.",
+            "Breathe slow and stay quiet under the bar.",
+            "Step down on time, not at failure, to protect freshness."
+          ]
+        },
+        {
+          "name": "Light Cable Row",
+          "rx": "3 × 10 reps · rest 75 sec between sets",
+          "load": "A light cable weight you can row crisply for 10 with plenty left in the tank",
+          "cues": [
+            "Row to your belly with shoulder blades pinching, then control the return.",
+            "Keep the load light and the reps sharp — touch the pattern, do not grind.",
+            "Chest up, no leaning back to muscle the weight.",
+            "Stop well short of fatigue; staying fresh is the goal."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Med Ball Slams",
+      "type": "sprint",
+      "tag": "Peak · comp rehearsal",
+      "patterns": [
+        {
+          "name": "Standing Slam Volume",
+          "rx": "3 × 20 sec · rest 2 min between · comp pace, submaximal",
+          "load": "Your competition D-ball",
+          "cues": [
+            "Rehearse race pace at about 80 percent effort — crisp and smooth, never maxing out.",
+            "Full overhead reach and a clean slam straight down on every rep.",
+            "Stop each round with reps left in the tank; this is sharpening, not testing."
+          ]
+        },
+        {
+          "name": "D-Ball Catch-and-Slam Rhythm",
+          "rx": "3 × 8 reps · rest 90 sec between sets",
+          "load": "Your competition D-ball",
+          "cues": [
+            "Catch the bounce off the floor and flow straight into the next slam, finding a smooth rhythm.",
+            "Stay relaxed and let the ball's bounce feed your timing — don't muscle every rep.",
+            "Keep it crisp and submaximal to rehearse a clean, repeatable cadence."
+          ]
+        },
+        {
+          "name": "Standing Calf Raise",
+          "rx": "3 × 12 reps · rest 60 sec between sets",
+          "load": "Bodyweight or a light dumbbell in each hand",
+          "cues": [
+            "Rise up onto the balls of your feet, pause at the top, then lower slowly under control.",
+            "Keep your knees straight and balance tall — hold something if you need it.",
+            "Easy supportive work to keep your ankles springy for comp."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Jump Rope · 60s",
+      "type": "sprint",
+      "tag": "Peak · comp rehearsal",
+      "patterns": [
+        {
+          "name": "60-Sec Pace Practice",
+          "rx": "2 × 60 sec of singles at race pace · rest 2 min between sets · crisp but submaximal",
+          "load": "Your jump rope, at race pace but held back from all-out",
+          "cues": [
+            "Touch race speed to stay sharp, but leave a little in the tank — no maxing this week.",
+            "Rehearse your opening pace so it feels automatic on comp day.",
+            "Keep your feet quick and quiet and stop each set feeling fresh."
+          ]
+        },
+        {
+          "name": "Light Standing Calf Raise",
+          "rx": "2 × 15 reps · rest 60 sec between sets · smooth and easy",
+          "load": "Light DB or KB in each hand — comfortable for 15 easy reps",
+          "cues": [
+            "Keep the load light and the reps smooth to stay loose, not sore.",
+            "Rise tall onto the balls of your feet and lower with control.",
+            "Stop well short of any burn — this is sharpening, not building."
+          ]
+        },
+        {
+          "name": "Rhythm Pogo Taps",
+          "rx": "2 × 20 sec light pogos · rest 60 sec between sets",
+          "load": "Bodyweight, light springy taps",
+          "cues": [
+            "Do light, springy ankle taps to keep your legs reactive and quick.",
+            "Stay tall and bounce small — quality and freshness over effort.",
+            "Keep it short and snappy and stop while you still feel light."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Standing Broad Jump",
+      "type": "sprint",
+      "tag": "Peak · sharpening",
+      "patterns": [
+        {
+          "name": "Crisp Countermovement Jump",
+          "rx": "3 × 4 jumps · rest 90 sec between sets · submaximal, snappy",
+          "load": "Bodyweight",
+          "cues": [
+            "Dip quickly, throw the arms up, and jump straight up with a sharp, snappy effort — not all-out.",
+            "Land softly on the balls of your feet and bend the knees to absorb — crisp up, quiet down.",
+            "Reset fully between reps. This is sharpening, so stay submaximal and stop if landings get sloppy."
+          ]
+        },
+        {
+          "name": "Short Approach Bound to Stick",
+          "rx": "3 × 4 reps · rest 90 sec between sets · one easy step, then stick",
+          "load": "Bodyweight",
+          "cues": [
+            "Take one easy step in, then push off and bound forward a short, comfortable distance and stick both feet.",
+            "Keep it submaximal and rehearse a smooth, controlled landing — quality over reach.",
+            "Walk back and reset every rep. Stop the set if you can't land it softly and balanced."
+          ]
+        },
+        {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 3 jumps · rest 2 min between sets · comp rehearsal at submax effort",
+          "load": "Bodyweight · competition standard",
+          "cues": [
+            "Run the full comp motion at a crisp submaximal effort — touch the pattern to stay sharp, don't max out.",
+            "Swing the arms, snap the hips, jump forward, and stick both feet cleanly every single rep.",
+            "Reset fully at the line between jumps. No maxing this week — keep it low-volume and fresh."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Concept Row · 500m",
+      "type": "marathon",
+      "tag": "Peak · sharpening",
+      "patterns": [
+        {
+          "name": "500m Practice",
+          "rx": "2 × 250m · rest 3 min fully between · race-pace touch, submaximal",
+          "load": "Rower · right at your goal 500m split — crisp and short, not maxed",
+          "cues": [
+            "Touch race pace on two short pieces just to stay sharp — do not max out.",
+            "Clean, powerful strokes at your goal split, then stop while it still feels easy.",
+            "Full rest between; this is rehearsal, not a workout."
+          ]
+        },
+        {
+          "name": "Scap Retraction Hold",
+          "rx": "2 × 5 slow reps · rest 60 sec between sets",
+          "load": "A light band or cable — easy tension, sharpening only",
+          "cues": [
+            "Pull the shoulder blades back and down, hold for a 3-count, then release slowly.",
+            "Keep it light and deliberate — wake the back up without fatiguing it.",
+            "No grinding; stop the moment it feels like real effort."
+          ]
+        },
+        {
+          "name": "Short Bike Pickups",
+          "rx": "2 × 20 sec brisk · rest 2 min fully between · quick legs, easy effort",
+          "load": "Stationary bike · a brisk but comfortable cadence, nowhere near all-out",
+          "cues": [
+            "Spin the legs up quick for 20 seconds to feel snappy, then ease right back down.",
+            "Keep it light and crisp — wake the legs up without digging into fatigue.",
+            "Long full rest between — this is sharpening, not conditioning."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "300 Yd Shuttle Run",
+      "type": "sprint",
+      "tag": "Peak + Taper · comp rehearsal",
+      "patterns": [
+        {
+          "name": "Shuttle Pace Practice",
+          "rx": "2 × 100-yd shuttle (2 × 50 yd) · rest 3–4 min · crisp submaximal race pace",
+          "load": "Bodyweight · run at comp race pace but submaximal — sharp, never maxing",
+          "cues": [
+            "Run two short shuttles at your race pace to rehearse the feel without digging into fatigue.",
+            "Touch each turn exactly at comp standard — controlled brake, firm plant, clean exit.",
+            "Stop while you feel fast; this is sharpening, not testing."
+          ]
+        },
+        {
+          "name": "Skip for Height",
+          "rx": "3 × 20 yards of A-skips · light and rhythmic · rest 90 sec",
+          "load": "Bodyweight",
+          "cues": [
+            "Skip forward driving one knee up at a time with a light, bouncy rhythm and pumping arms.",
+            "Stay tall and springy on the balls of your feet — crisp coordination, not effort.",
+            "Keep it sharp and easy to prime your mechanics for comp day."
+          ]
+        },
+        {
+          "name": "Lateral Bound Touch",
+          "rx": "2 × 6 bounds (3 each side) · stick each landing · rest 90 sec",
+          "load": "Bodyweight",
+          "cues": [
+            "Push off one foot to bound sideways, land softly on the other, and balance before the next.",
+            "Land under control and hold for a beat — this rehearses the side push-off of your turns at low volume.",
+            "Keep it crisp and light; no fatigue this close to comp."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Prowler Push",
+      "type": "sprint",
+      "tag": "Peak + Taper · sharpening (sled, not tested)",
+      "patterns": [
+        {
+          "name": "Comp-Distance Sled Push",
+          "rx": "2 × 50 yards · rest 3 min between · submaximal comp rehearsal (not timed, never a test)",
+          "load": "Competition load: 2 × 25 lb plates (women) / 2 × 45 lb plates (men)",
+          "cues": [
+            "Touch the full 50 yards at comp weight twice, crisp but submaximal — stay sharp without digging in, and sled is never a timed test.",
+            "Rehearse your race feel: 45° angle, arms locked, push through the trunk, long steps with full hip extension.",
+            "No maxing and no grinding — leave plenty in the tank so you arrive fresh for comp day."
+          ]
+        },
+        {
+          "name": "Walking Knee Hug to Lunge",
+          "rx": "2 × 6 reps per leg · easy pace · rest 60 sec between",
+          "load": "Bodyweight only, moving down the turf",
+          "cues": [
+            "Hug one knee to your chest, then step into a gentle lunge to open the hips and rehearse your stride length.",
+            "Move smooth and tall through each rep — this is a primer, not a stretch to push into.",
+            "Keep it light and easy; the goal is loose, sharp legs for comp day."
+          ]
+        },
+        {
+          "name": "Pogo Hop",
+          "rx": "2 × 10 reps · rest 75 sec between · light, springy bounces",
+          "load": "Bodyweight only, hopping in place off the balls of your feet",
+          "cues": [
+            "Bounce lightly off the balls of your feet, springing up quickly to wake up your legs without any pounding.",
+            "Stay tall with stiff, springy ankles and a soft, quiet landing — don't sink into deep squats between hops.",
+            "Keep it short and snappy; stop while it still feels easy and bouncy."
+          ]
+        }
+      ]
+    }
+  ]
+}

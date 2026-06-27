@@ -1,0 +1,392 @@
+{
+  "weekTitle": "Week of August 3",
+  "weekSub": "Strength & Power · Week 2",
+  "weekDates": "August 3 – 9, 2026 · Block 3 · Week 2 of 5",
+  "blockMarker": "Strength & Power",
+  "weekNoteHtml": "<strong>How to use this page.</strong> Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event &mdash; or cherry-pick across events. Aim for 4&ndash;6 patterns total per session. Warm up first; stop a set short if form breaks down.<br><br><strong>Tap any movement's teal header</strong> to open it full-screen &mdash; easy to read on the gym iPad, pinch to zoom, scroll through all three exercises.<br><br><strong>This week &mdash; all-new movements.</strong> Strength + power: heavy compound work paired with jumps, throws, and short sprints. Everything is fresh this week &mdash; read the cues, rest fully before each explosive effort, and keep it to 3 sets. Progress with load or sharper speed, never an added set.",
+  "testsLineHtml": "<strong>Working number week.</strong> No formal test this week &mdash; tap your name below anytime to log a working number you want to track.",
+  "events": [
+    {
+      "event": "KB Box Squat",
+      "type": "marathon",
+      "tag": "Strength & Power · legs",
+      "patterns": [
+        {
+          "name": "Comp-Pace Box Squat",
+          "rx": "3 × 5 reps · rest 2–3 min between sets · max-quality, fast stand off the box",
+          "load": "A KB 2 sizes HEAVIER than competition, at competition box height",
+          "cues": [
+            "Treat all 5 reps as your best, fastest standups of the day.",
+            "Pause briefly on the box, stay tight, then drive straight up.",
+            "Rest the full 2–3 minutes so power stays high every set.",
+            "Keep your core braced — stop the set the moment your back rounds."
+          ]
+        },
+        {
+          "name": "Seated Box to Broad Jump",
+          "rx": "3 × 4 jumps · rest 2 min between sets · sit to the box, then jump forward for distance",
+          "load": "Bodyweight only — explosive, no added load",
+          "cues": [
+            "Sit fully to the box, then swing your arms and jump forward off the floor.",
+            "Land soft on two feet with bent knees and stick the landing.",
+            "Stand up and walk back to reset fully before each jump.",
+            "Quality over distance — a clean controlled landing beats an extra inch."
+          ]
+        },
+        {
+          "name": "KB Heartbeat Squat Pulse",
+          "rx": "3 × 8 reps · rest 90 sec between sets · short fast pulse out of the bottom of each squat",
+          "load": "A KB about 1 size heavier than competition, held at the chest",
+          "cues": [
+            "Squat down, then snap up out of the bottom with a quick punchy drive.",
+            "Stand fully tall at the top of every rep before the next one.",
+            "Keep the bell locked to your chest so the speed comes from your legs.",
+            "Reset your brace each rep — fast does not mean loose."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Dynamax OH Throw",
+      "type": "sprint",
+      "tag": "Strength & Power · plyo + pull",
+      "patterns": [
+        {
+          "name": "Throw Technique Practice",
+          "rx": "3 × 3 throws · rest 2 min between sets · 9 throws, every one a max-quality effort",
+          "load": "Dynamax ball — 4 lb (women) / 8 lb (men)",
+          "cues": [
+            "Drop into a low hinge and explode up, launching the ball up and back over your head for maximum distance.",
+            "Every throw is a full-power rep — chase your farthest throw, then fully reset.",
+            "Power comes from snapping the hips open fast; keep the arms loose and let them whip the ball over.",
+            "Take long rest between sets so the ball moves fast every single attempt."
+          ]
+        },
+        {
+          "name": "Low Box Step-Up Jump",
+          "rx": "3 × 5 reps each leg · rest 90 sec between sets",
+          "load": "Bodyweight onto a low, stable box (knee height or lower)",
+          "cues": [
+            "Plant one foot on a low box and drive up explosively until your driving leg is tall, then step back down with control.",
+            "Push hard through the box-leg heel and reach tall — this builds the explosive hip drive your throw needs.",
+            "Use a low box and step down softly one foot at a time — do not jump or hop off the box.",
+            "Hold a rail or sturdy support nearby if you want extra balance security."
+          ]
+        },
+        {
+          "name": "Bent-Over DB Row",
+          "rx": "3 × 8 reps · rest 90 sec between sets",
+          "load": "A pair of DBs heavy enough that rep 8 is a real effort with a flat back",
+          "cues": [
+            "Hinge forward with a flat back, let the DBs hang, then row them to your ribs by driving your elbows back.",
+            "Squeeze your shoulder blades together at the top and lower under control — this strengthens the back that decelerates the ball.",
+            "Keep your back flat and your neck long; don't round or jerk the weight up with your back.",
+            "Brace your stomach the whole set to protect your lower back."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Bench Press",
+      "type": "marathon",
+      "tag": "Strength & Power · push",
+      "patterns": [
+        {
+          "name": "Bench Volume @ % of Max Reps",
+          "rx": "3 sets · each set to ~55% of your max-rep test · rest 2 min between · explosive press, controlled lower",
+          "load": "Your competition bench weight",
+          "cues": [
+            "Your app shows your personal rep target — lower under control, then drive the bar up off your chest as fast as it will move.",
+            "Treat every rep as a max-quality effort and take the full 2-minute rest so the bar stays fast.",
+            "End the set when bar speed drops or your hips lift off the bench."
+          ]
+        },
+        {
+          "name": "Banded Speed Bench Press",
+          "rx": "3 × 6 reps · rest 90 sec between sets · explosive press, controlled lower",
+          "load": "An empty or light bar with a band looped over it for speed — light enough that the bar flies up fast for all 6 reps",
+          "cues": [
+            "Lower the bar under control to your chest, then press it up as fast as it will move against the band's pull.",
+            "Keep both feet planted and your hips down on the bench the whole set — the speed comes from the press, not a bounce.",
+            "Re-rack the bar safely onto the rack hooks between reps if you need to reset; never lower a loaded bar toward your face.",
+            "Stop the set the moment the bar slows down — this drill is only useful while every rep is fast."
+          ]
+        },
+        {
+          "name": "Spoto Press with DBs",
+          "rx": "3 × 6 reps · rest 2 min between sets",
+          "load": "Two DBs heavier than your usual press DBs — challenging for 6 reps",
+          "cues": [
+            "Press two DBs up, lower them to about an inch above your chest, pause for one count, then drive them back up fast.",
+            "Holding that pause an inch off the chest builds power right where the comp bench is hardest.",
+            "Keep the DBs steady over your chest during the pause. Stop the set if you can't hold the pause cleanly."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Overhead Arm Hang",
+      "type": "marathon",
+      "tag": "Strength & Power · pull + grip",
+      "patterns": [
+        {
+          "name": "Max Hang Practice",
+          "rx": "3 × hold for time · rest 3 min between",
+          "load": "Pull-up bar at ~80% of your current best hang time — full rest, treat each hold as max-quality and step down at 80%",
+          "cues": [
+            "Pack the shoulders and stay rock-steady; no swinging or kipping.",
+            "Crush the bar with spread fingers and breathe slow and even.",
+            "Step down on a strong note rather than dropping when grip fails.",
+            "Write down the hold time for the app to track."
+          ]
+        },
+        {
+          "name": "Fat-Grip Pull-Up",
+          "rx": "3 × 5 reps · rest 2 min 30 sec between sets",
+          "load": "Fat grips on the pull-up bar · band-assist under one foot if 5 clean reps is too many",
+          "cues": [
+            "The thick grip overloads the hand — pull explosively to your chin each rep.",
+            "Drive your elbows down and pinch the shoulder blades at the top.",
+            "Lower under control to a full hang; do not just drop off the bar.",
+            "Loop a band under one foot for assistance if you cannot reach 5 strict."
+          ]
+        },
+        {
+          "name": "Plate Pinch Hold",
+          "rx": "3 × hold for time · rest 90 sec between",
+          "load": "Two smooth 10–25 lb plates pinched together in each hand — pick a weight your fingers can hold 15–30 seconds",
+          "cues": [
+            "Pinch the plates with your thumb on one side and fingers on the other — no hook.",
+            "Stand tall and hold them at your sides until your fingers give out.",
+            "Set the plates down safely the instant they start to slip — that is your time.",
+            "This trains the explosive thumb-and-finger crush behind a strong hang."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Med Ball Slams",
+      "type": "sprint",
+      "tag": "Strength & Power · slam power",
+      "patterns": [
+        {
+          "name": "Standing Slam Volume",
+          "rx": "3 × 6 reps · rest 2 min between sets",
+          "load": "Your competition D-ball, one size heavier",
+          "cues": [
+            "Fewer reps, max intent — treat every slam like a throw for maximum speed.",
+            "Full overhead reach, then drive the ball down hard and reset fresh each rep.",
+            "Rest the full two minutes so every set stays explosive."
+          ]
+        },
+        {
+          "name": "Countermovement Jump to Stick",
+          "rx": "3 × 5 reps · rest 2 min between sets",
+          "load": "Bodyweight only — no box, jump straight up and land in the same spot",
+          "cues": [
+            "Dip fast, throw your arms up, and jump straight up as high as you can off the floor — no box, nothing to clear.",
+            "Land in the same spot on the balls of both feet, bend your knees to absorb, and stick it quiet and balanced.",
+            "Reset fully and stand tall before each rep — this explosive jump trains the same fast hip drive your slam needs.",
+            "Hold a rail nearby for steadiness if you want it; never reach for height you can't land softly."
+          ]
+        },
+        {
+          "name": "D-Ball Push Press from Floor",
+          "rx": "3 × 6 reps · rest 2 min between sets",
+          "load": "A heavy D-ball, 15 lb (women) / 25 lb (men)",
+          "cues": [
+            "Pick the ball off the floor to your chest, dip your knees, then drive it overhead with your legs.",
+            "The pop comes from a sharp leg drive, not a slow arm press.",
+            "Lower to your chest and reset on the floor before the next rep."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Jump Rope · 60s",
+      "type": "sprint",
+      "tag": "Strength & Power · calves",
+      "patterns": [
+        {
+          "name": "60-Sec Pace Practice",
+          "rx": "3 × 60 sec of singles · rest 2 min between sets · fast turnover, count your reps",
+          "load": "Your jump rope, at a fast comp-plus pace",
+          "cues": [
+            "Drive a quick rope and quick feet, and note your singles each set.",
+            "Keep your jumps barely off the floor so you can match the fast rope.",
+            "Rest the full two minutes so every set is sharp and fast."
+          ]
+        },
+        {
+          "name": "Explosive Single-Leg Calf Raise",
+          "rx": "3 × 10 reps each leg · rest 90 sec between sets",
+          "load": "Bodyweight plus a 15–25 lb DB held on the working side; rail for balance",
+          "cues": [
+            "Drive up onto the ball of your foot as fast as you can on every rep.",
+            "Lower under control for a slow count to load the calf safely.",
+            "Use the rail for balance only — let the working leg supply all the power.",
+            "Pick a DB in the 15–25 lb range that lets you still drive up fast and finish all 10 with good height."
+          ]
+        },
+        {
+          "name": "Continuous Speed Pogos",
+          "rx": "3 × 20 sec of fast pogos · rest 90 sec between sets",
+          "load": "Bodyweight, fast ground contacts",
+          "cues": [
+            "Bounce as fast as you can with stiff ankles, spending as little time on the floor as possible.",
+            "Keep the bounces low and quick rather than high and slow.",
+            "Stay tall and let the ankles snap — don't sink into a squat."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Standing Broad Jump",
+      "type": "sprint",
+      "tag": "Strength & Power · hips + legs",
+      "patterns": [
+        {
+          "name": "Standing Vertical Jump to Stick",
+          "rx": "3 × 5 jumps · rest 2 min between sets · jump high, land soft",
+          "load": "Bodyweight",
+          "cues": [
+            "Dip fast, throw the arms up, and jump straight up as high as you can, landing in the same spot.",
+            "Land on the balls of your feet and bend the knees to absorb — quiet, controlled landings every time.",
+            "Reset fully between reps. Treat each jump as a max-quality effort, not a rushed bounce."
+          ]
+        },
+        {
+          "name": "Single-Leg Box Step-Down",
+          "rx": "3 × 8 reps each leg · rest 90 sec between sets · 3-sec lower",
+          "load": "Bodyweight on a knee-height box; hold a light DB at your chest if you want more challenge",
+          "cues": [
+            "Stand on the box on one leg and lower the other foot slowly toward the floor under full control.",
+            "Keep the working knee tracking over your toes and your hips level — don't let one hip drop.",
+            "Tap the floor lightly, then drive back up through the standing heel. Hold a rail for balance as needed."
+          ]
+        },
+        {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 4 jumps · rest 2 min between sets · powerful and crisp",
+          "load": "Bodyweight",
+          "cues": [
+            "Load the arms back, explode the hips forward, and jump for distance — every rep a max-quality effort.",
+            "Stick the landing on both feet, absorbing softly through the knees and hips so nothing jars.",
+            "Walk back and reset completely between jumps. End the set if a landing gets sloppy."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Concept Row · 500m",
+      "type": "marathon",
+      "tag": "Strength & Power · power + pull",
+      "patterns": [
+        {
+          "name": "500m Practice",
+          "rx": "3 × 300m · rest 2–3 min fully between · faster than your 500m race pace",
+          "load": "Rower · about 2–3 sec/500m FASTER than your goal 500m split, full recovery between",
+          "cues": [
+            "Open with two or three full-power strokes, then hold the fast split to the end of each piece.",
+            "Sit tall and snap the legs down hard — let the legs do the work, not just the arms.",
+            "Rest fully between pieces so each 300m is a max-quality effort."
+          ]
+        },
+        {
+          "name": "DB Power High-Pull",
+          "rx": "3 × 8 reps · rest 90 sec between sets",
+          "load": "Two DBs light enough to move explosively for 8 — about half your usual row weight",
+          "cues": [
+            "Stand tall, dip slightly, then drive the DBs upward fast until your elbows reach shoulder height.",
+            "Lead with the elbows and keep the DBs close to your body on the way up.",
+            "Lower under control and reset each rep — this is about speed up, not heavy weight."
+          ]
+        },
+        {
+          "name": "Box Step-Up Drive",
+          "rx": "3 × 6 reps each leg · rest 90 sec between sets",
+          "load": "Bodyweight onto a knee-high box, or hold one light DB · explosive drive up",
+          "cues": [
+            "Plant the whole foot on the box, then drive up powerfully through the heel to stand tall.",
+            "Step back down under control — don't bounce or jump down off the box.",
+            "Hold a rail for balance if you need it; the focus is a fast, strong drive up."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "300 Yd Shuttle Run",
+      "type": "sprint",
+      "tag": "Strength & Power · heavy + explosive",
+      "patterns": [
+        {
+          "name": "Shuttle Pace Practice",
+          "rx": "3 × 100-yd shuttle (2 × 50 yd) · rest 2–3 min · fast with sharp turns",
+          "load": "Bodyweight · run these fast — at or just under your comp race pace",
+          "cues": [
+            "Run down 50 and back 50 fast, treating each as a max-quality effort.",
+            "Decelerate hard but controlled into the single turn, plant, and re-accelerate explosively.",
+            "Rest fully so all three short shuttles stay sharp and quick."
+          ]
+        },
+        {
+          "name": "Trap Bar Deadlift",
+          "rx": "3 × 5 reps · firm controlled pulls · rest 2–3 min",
+          "load": "Trap bar (or two dumbbells), ~70–80% of a load you could lift once — heavy, clean form",
+          "cues": [
+            "Set your hips, brace your trunk, and stand the weight up by driving your feet through the floor.",
+            "Keep your back flat and arms straight — push the floor away rather than yanking with your back.",
+            "Heavy and low-rep this week; reset your setup before every pull."
+          ]
+        },
+        {
+          "name": "Standing Long Jump",
+          "rx": "3 × 3 jumps · stick each landing · rest 90 sec",
+          "load": "Bodyweight",
+          "cues": [
+            "Swing your arms, load your hips, and jump forward as far as you can, landing soft and balanced.",
+            "Bend your knees to absorb the landing and hold it for a beat — quality and control over distance.",
+            "These explosive jumps build the push-off power your turns rely on."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Prowler Push",
+      "type": "sprint",
+      "tag": "Strength & Power · legs + power",
+      "patterns": [
+        {
+          "name": "Comp-Distance Sled Push",
+          "rx": "3 × 50 yards · rest 2.5 min between · strong and powerful (not timed)",
+          "load": "Competition load + 10 lb per side (women: 2 × 35 lb / men: 2 × 55 lb) · overload over comp",
+          "cues": [
+            "Push the full 50 yards with hard, deliberate power against the heavier sled — this is strength work, not a timed test.",
+            "Hold about 45° with arms locked and push through your whole body — don't bend your elbows to absorb the load.",
+            "Take long, forceful steps with full hip extension and rest fully so every push is a max-quality effort."
+          ]
+        },
+        {
+          "name": "Bulgarian Split Squat",
+          "rx": "3 × 6 reps per leg · rest 2 min between · heavy and controlled",
+          "load": "A dumbbell in each hand with your back foot on a bench, heavy enough that the last rep per leg is a strong effort",
+          "cues": [
+            "With your back foot elevated, lower straight down and drive up through your front heel to build single-leg power for the sled.",
+            "Keep your torso tall and your front knee tracking over your foot — don't let it cave inward.",
+            "Control the descent and pause briefly at the bottom; drop the dumbbells if your balance or form breaks."
+          ]
+        },
+        {
+          "name": "Broad Jump",
+          "rx": "3 × 3 reps · rest 2 min between · max-effort explosive reps",
+          "load": "Bodyweight only, jumping for distance onto a flat, non-slip surface",
+          "cues": [
+            "Swing your arms and explode forward off both feet, jumping for distance to train the hip drive that powers your push.",
+            "Land softly on both feet with bent knees to absorb the landing — don't land stiff-legged.",
+            "Stand and reset fully between reps so every jump is fresh, fast, and your hardest effort."
+          ]
+        }
+      ]
+    }
+  ]
+}

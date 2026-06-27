@@ -1,0 +1,394 @@
+{
+  "weekTitle": "Week of September 7",
+  "weekSub": "Peak + Taper · Week 2",
+  "weekDates": "September 7 – 13, 2026 · Block 4 · Week 2 of 4",
+  "blockMarker": "Peak + Taper",
+  "weekNoteHtml": "<strong>How to use this page.</strong> Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event &mdash; or cherry-pick across events. Aim for 4&ndash;6 patterns total per session. Warm up first; stop a set short if form breaks down.<br><br><strong>Tap any movement's teal header</strong> to open it full-screen &mdash; easy to read on the gym iPad, pinch to zoom, scroll through all three exercises.<br><br><strong>This week &mdash; second test wave.</strong> Peak block: comp-specific movements at competition standards on the remaining events. Volume stays low and sharp so you arrive fresh to each test. Everything is fresh this week; warm up fully, give one honest max per tested event, and keep the supporting work at 3 sets or fewer.",
+  "testsLineHtml": "<strong>Test week &mdash; wave 2.</strong> Max-effort competition tests this week: <strong>Med Ball Slams, Jump Rope (60s), Concept Row 500m, and 300 Yd Shuttle.</strong> Warm up, take your best shot, and tap your name below to log each result. This completes the test waves &mdash; next week is comp rehearsal.",
+  "events": [
+    {
+      "event": "KB Box Squat",
+      "type": "marathon",
+      "tag": "Peak · sharpen",
+      "patterns": [
+        {
+          "name": "Comp-Pace Box Squat",
+          "rx": "3 × 8 reps · rest 2 min between sets · crisp and submaximal, well short of failure",
+          "load": "Your competition KB at competition box height",
+          "cues": [
+            "Hit comp weight at comp box height but stop each set feeling strong.",
+            "Make every rep clean — full sit, full stand, sharp turnaround.",
+            "Leave plenty in the tank; this is staying sharp, not testing.",
+            "Rest the full 2 minutes so each short set feels easy and fast."
+          ]
+        },
+        {
+          "name": "KB Goblet Box Squat Singles",
+          "rx": "3 × 3 reps · rest 2 min between sets · one crisp rep at a time, reset between",
+          "load": "Your competition KB, held at the chest, at competition box height",
+          "cues": [
+            "Treat each of the 3 reps as its own clean effort with a quick reset.",
+            "Sit to the box, stand fast and tall, then settle before the next.",
+            "Keep it crisp and easy — stop well before any grind.",
+            "Focus on a perfect comp-pattern rep every single time."
+          ]
+        },
+        {
+          "name": "Tall-Box Quick Squat",
+          "rx": "2 × 8 reps · rest 90 sec between sets · higher box, fast and easy standups",
+          "load": "A light KB at the chest — keep it snappy and unloaded-feeling",
+          "cues": [
+            "Use a box higher than comp height so the range is short and easy.",
+            "Stand up fast off the taller box to stay quick on your feet.",
+            "Keep it light and low-effort — this is sharpening, not loading.",
+            "Finish each set fresh, never fatigued."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Dynamax OH Throw",
+      "type": "sprint",
+      "tag": "Peak · sharp + supportive",
+      "patterns": [
+        {
+          "name": "Throw Technique Practice",
+          "rx": "3 × 3 throws · rest 90 sec between sets · 9 crisp submaximal throws at comp standard, no maxing",
+          "load": "Dynamax ball — 4 lb (women) / 8 lb (men)",
+          "cues": [
+            "Hinge and explode up, throwing the ball up and back overhead — sharp and crisp, but not all-out this week.",
+            "Stay around 80–90% effort: rehearse perfect comp-day technique without digging into fatigue.",
+            "Drive from a fast hip snap and keep your arms loose to whip the ball over.",
+            "Reset fully between throws and keep every rep clean and controlled."
+          ]
+        },
+        {
+          "name": "Single-Leg Glute Bridge",
+          "rx": "2 × 10 reps each leg · rest 60 sec between sets",
+          "load": "Bodyweight, lying on your back with one foot planted",
+          "cues": [
+            "Lie on your back, plant one foot, and drive your hips up by squeezing the glute of the working leg, then lower under control.",
+            "Keep it light and supportive — this wakes up the glutes that power your throw without taxing you.",
+            "Keep your stomach braced so your lower back doesn't arch at the top.",
+            "Move smoothly and stop well short of fatigue."
+          ]
+        },
+        {
+          "name": "Scarecrow External Rotation",
+          "rx": "2 × 12 reps · rest 45 sec between sets · light shoulder care",
+          "load": "Very light DBs (2–5 lb) or no weight",
+          "cues": [
+            "Raise your elbows to shoulder height, then rotate your hands up and back so your forearms point to the ceiling.",
+            "Keep it slow and very light — this keeps your throwing shoulders healthy heading into comp.",
+            "Squeeze your shoulder blades back gently and don't shrug up toward your ears.",
+            "Lower under control; quality and comfort over any load here."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Bench Press",
+      "type": "marathon",
+      "tag": "Peak · supportive",
+      "patterns": [
+        {
+          "name": "Bench Volume @ % of Max Reps",
+          "rx": "2 sets · each set to ~40% of your max-rep test · rest 2 min between · easy and crisp",
+          "load": "Your competition bench weight",
+          "cues": [
+            "Your app shows your personal rep target — keep it light and crisp, well short of any grind.",
+            "This is sharp, low-volume touch work on the comp lift, not a hard session — leave plenty in the tank.",
+            "Stop the set the moment the bar slows or it stops feeling easy."
+          ]
+        },
+        {
+          "name": "Tempo Incline Push-Up",
+          "rx": "2 × 8 reps · rest 75 sec between sets · slow and controlled",
+          "load": "Bodyweight, hands on a bench or counter",
+          "cues": [
+            "Place your hands on a bench so the angle is easy, then lower for a slow 3-count and press back up smoothly.",
+            "Keep your body in one straight line and the effort moderate — leave several reps in the tank.",
+            "Raise the hands higher to make it easier. Stop well before failure."
+          ]
+        },
+        {
+          "name": "Seated DB Front Raise",
+          "rx": "2 × 10 reps · rest 60 sec between sets · light",
+          "load": "Two light DBs you can raise easily for 10 reps",
+          "cues": [
+            "Sit tall and raise two light DBs straight out in front to about shoulder height, then lower under control.",
+            "This is easy supportive shoulder work — keep it light and smooth with no swinging.",
+            "Stop the set well short of fatigue. Keep your torso still and let the shoulders do the work."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Overhead Arm Hang",
+      "type": "marathon",
+      "tag": "Peak · supportive",
+      "patterns": [
+        {
+          "name": "Max Hang Practice",
+          "rx": "3 × hold for time · rest 2 min between · keep each at ~70% of your best, low volume",
+          "load": "Pull-up bar at a comfortable 70% of your best hang time — sharp and easy, no maxing this week",
+          "cues": [
+            "Hold sub-max and crisp; this is sharpening, not a second test.",
+            "Pack the shoulders and crush the bar with spread fingers.",
+            "Step down well before true failure to stay fresh.",
+            "Log the holds but do not chase a number this week."
+          ]
+        },
+        {
+          "name": "Light Inverted Hold",
+          "rx": "2 × hold for time · rest 90 sec between",
+          "load": "Bar at hip height, body straight, heels on the floor — easy isometric hold of 15–20 seconds",
+          "cues": [
+            "Set up under the bar and just hold the top position with shoulder blades pinched.",
+            "Keep the body straight from shoulders to heels — no sagging hips.",
+            "Hold easy and breathe; step down when the position softens.",
+            "Keep it light and supportive so the comp events stay the priority."
+          ]
+        },
+        {
+          "name": "Light Wrist Curl",
+          "rx": "2 × 15 reps · rest 60 sec between sets",
+          "load": "A light dumbbell or pair of dumbbells — easy forearm work, no straining",
+          "cues": [
+            "Rest your forearms on your thighs and curl the wrists up and down slowly.",
+            "Keep the load light to flush the forearms, not fatigue them.",
+            "Full smooth range each rep — no jerking the weight.",
+            "Stop if the grip feels at all taxed; this week stays easy."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Med Ball Slams",
+      "type": "sprint",
+      "tag": "Peak · comp test",
+      "patterns": [
+        {
+          "name": "Standing Slam Volume",
+          "rx": "1 × 60 sec · max slams · full rest before and after",
+          "load": "Your competition D-ball",
+          "cues": [
+            "This is the test: as many clean slams as you can in 60 seconds at competition standard.",
+            "Go all-out, but every rep must reach full overhead and slam straight down to count.",
+            "Warm up thoroughly first, then empty the tank and log your final number."
+          ],
+          "isTest": true
+        },
+        {
+          "name": "Easy D-Ball Slam Primer",
+          "rx": "2 × 8 reps · rest 60 sec between sets",
+          "load": "A light D-ball, 6 lb (women) / 12 lb (men)",
+          "cues": [
+            "Before your test, slam a light ball easy and smooth to groove the pattern.",
+            "Keep it relaxed — this is a warm-up primer, not a workout.",
+            "Stop well short of any fatigue so the test gets your best effort."
+          ]
+        },
+        {
+          "name": "Dead Bug",
+          "rx": "2 × 8 reps each side · rest 45 sec between sets",
+          "load": "Bodyweight",
+          "cues": [
+            "On your back, lower the opposite arm and leg slowly, then return without letting your low back arch.",
+            "Keep your ribs down and core gently braced the whole time.",
+            "Light supportive work only — keep everything else easy on test day."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Jump Rope · 60s",
+      "type": "sprint",
+      "tag": "Peak · comp test",
+      "patterns": [
+        {
+          "name": "60-Sec Pace Practice",
+          "rx": "1 × 60 sec MAX singles for score · 1 all-out test set · full rest before and after",
+          "load": "Your jump rope, all-out at competition standard — every clean single counts",
+          "cues": [
+            "This is the test: count every clean single you complete in the full 60 seconds.",
+            "Open at a fast but holdable pace so you don't blow up in the first 20 seconds.",
+            "If you trip, get the rope moving again immediately — the clock keeps running.",
+            "Empty the tank in the final 15 seconds and finish on a sprint."
+          ],
+          "isTest": true
+        },
+        {
+          "name": "Primer Calf Raise",
+          "rx": "2 × 10 reps · rest 60 sec between sets · light and brisk",
+          "load": "Light DB or KB in each hand, just enough to feel the calves switch on",
+          "cues": [
+            "Do a few brisk, light raises to wake up the calves before your test.",
+            "Keep it easy — this primes, it does not fatigue.",
+            "Rise tall and lower with control, no grinding."
+          ]
+        },
+        {
+          "name": "Tempo Warm-Up Skips",
+          "rx": "2 × 30 sec easy singles · rest 60 sec between sets · finish well before the test",
+          "load": "Your jump rope, easy warm-up pace",
+          "cues": [
+            "Use these easy sets to find your rhythm before the max test.",
+            "Stay relaxed and quiet on your feet to save your legs.",
+            "Rest fully after warming up so you hit the test fresh."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Standing Broad Jump",
+      "type": "sprint",
+      "tag": "Peak · supportive",
+      "patterns": [
+        {
+          "name": "Submax Standing Jump-and-Stick",
+          "rx": "3 × 4 jumps · rest 90 sec between sets · about 80% effort, perfect landings",
+          "load": "Bodyweight",
+          "cues": [
+            "Jump forward at a comfortable, submaximal effort — about 80 percent — and stick both feet softly each time.",
+            "Keep your volume low and your landings flawless; this week is light and supportive, not a max test.",
+            "Reset fully at the line between reps and stop the moment a landing feels less than clean."
+          ]
+        },
+        {
+          "name": "Light Goblet March",
+          "rx": "3 × 30 sec · rest 60 sec between sets · tall and easy",
+          "load": "A light KB or DB at your chest, easy enough to march for 30 seconds with good posture",
+          "cues": [
+            "March in place lifting each knee to hip height, holding a light bell at your chest and staying tall.",
+            "Keep your stomach braced and your steps controlled — this is easy support work to stay loose.",
+            "Stay relaxed and stop early if your posture sags. Nothing about this should feel taxing."
+          ]
+        },
+        {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 3 jumps · rest 90 sec between sets · easy comp-pattern rehearsal",
+          "load": "Bodyweight",
+          "cues": [
+            "Rehearse the competition motion at an easy effort — arms back, hips snap, jump and stick both feet.",
+            "Keep it low-volume and crisp; the goal this week is to stay sharp without digging into fatigue.",
+            "Reset at the line between each jump. Stop if the landings stop feeling clean and controlled."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Concept Row · 500m",
+      "type": "marathon",
+      "tag": "Peak · comp test",
+      "patterns": [
+        {
+          "name": "500m Practice",
+          "rx": "1 × 500m for time · ALL OUT · full warm-up first, then one max effort",
+          "load": "Rower · maximum effort — this is the competition test, row 500m as fast as you can",
+          "cues": [
+            "This is the real test — warm up fully, then row 500m as fast as you can for one piece.",
+            "Start strong but controlled; don't redline in the first 100m and blow up at the end.",
+            "Empty the tank on the last 150m — finish with everything you've got and record your time."
+          ],
+          "isTest": true
+        },
+        {
+          "name": "Easy Recovery Spin",
+          "rx": "1 × 5 min easy · very light, conversational",
+          "load": "Rower · easy flush pace, well below race effort",
+          "cues": [
+            "Spin easy to flush the legs before and after the test — keep it conversational.",
+            "Long, relaxed strokes; no pushing, this is recovery only.",
+            "Stop if you feel any strain — the goal is fresh legs, not more work."
+          ]
+        },
+        {
+          "name": "Light Scarecrow Raise",
+          "rx": "2 × 10 reps · rest 60 sec between sets",
+          "load": "Very light DBs or no weight — supportive shoulder prep only this week",
+          "cues": [
+            "Hinge slightly, raise the arms out and rotate the hands up like a scarecrow, then lower slowly.",
+            "Keep it light and easy — this keeps the shoulders healthy, it's not a hard set.",
+            "Stop the set the moment your form gets sloppy; freshness is the goal this week."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "300 Yd Shuttle Run",
+      "type": "sprint",
+      "tag": "Peak · comp test",
+      "patterns": [
+        {
+          "name": "Shuttle Pace Practice",
+          "rx": "1 × full 300 yd (6 × 50 yd) for time · one max effort · full warm-up first",
+          "load": "Bodyweight · all-out competition effort — the real 300-yard shuttle for time",
+          "cues": [
+            "Warm up thoroughly, then run the full 300 yards — six 50-yard lengths — as fast as you can for time.",
+            "Attack each turn with a controlled brake and explosive exit; pace the first lengths so you don't fade at the end.",
+            "Record your time. This is the comp test — one true max effort, nothing else taxing today."
+          ],
+          "isTest": true
+        },
+        {
+          "name": "Easy Shakeout Jog",
+          "rx": "2 × 60 yards · very easy jog · rest as needed",
+          "load": "Bodyweight",
+          "cues": [
+            "Jog two easy lengths to loosen up before and stay limber around your test effort.",
+            "Keep it conversational and relaxed — no speed, just blood flow.",
+            "This stays easy so all your energy goes into the timed test."
+          ]
+        },
+        {
+          "name": "Standing Calf Raise",
+          "rx": "2 × 15 reps · slow controlled · rest 60 sec",
+          "load": "Bodyweight, or hold a light 10–20 lb dumbbell in one hand",
+          "cues": [
+            "Rise onto the balls of your feet, pause at the top, then lower slowly under control.",
+            "Keep a steady rhythm — this primes the ankles and calves without fatigue.",
+            "Light and supportive; the timed shuttle is the only hard work today."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Prowler Push",
+      "type": "sprint",
+      "tag": "Peak + Taper · comp rehearsal (sled, not tested)",
+      "patterns": [
+        {
+          "name": "Comp-Distance Sled Push",
+          "rx": "3 × 50 yards · rest 3 min between · comp-pace rehearsal (not timed, never a test)",
+          "load": "Competition load: 2 × 25 lb plates (women) / 2 × 45 lb plates (men)",
+          "cues": [
+            "Push the full 50 yards at comp pace and comp weight, crisp and controlled — sled stays a training rehearsal, never a timed test.",
+            "Run your race setup: 45° body angle, arms locked, push through the trunk, long steps, drive through the toes.",
+            "Take full rest between pushes and keep effort moderate — the tested events get your fresh max this week."
+          ]
+        },
+        {
+          "name": "Cossack Squat",
+          "rx": "2 × 6 reps per side · rest 75 sec between · light and controlled",
+          "load": "Bodyweight or a very light weight held at your chest for balance",
+          "cues": [
+            "Shift slowly side to side, sitting into one hip at a time to open your hips and keep your legs loose for the push.",
+            "Keep the heel of your bent leg down and your chest up — don't rush or bounce out of the bottom.",
+            "Go only as deep as feels comfortable; this is easy mobility-strength, not a hard set."
+          ]
+        },
+        {
+          "name": "Banded Lateral Walk",
+          "rx": "2 × 12 steps per direction · rest 60 sec between · light activation",
+          "load": "A light resistance band around your legs, just above the knees or ankles",
+          "cues": [
+            "Sink into a quarter-squat and step sideways against the band to switch on the hips that stabilize your drive.",
+            "Keep tension on the band the whole time and your feet pointing forward — don't let your knees cave in.",
+            "Keep the steps small, slow, and easy; this is supportive prep, not fatigue work."
+          ]
+        }
+      ]
+    }
+  ]
+}

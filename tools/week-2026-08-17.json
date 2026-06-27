@@ -1,0 +1,389 @@
+{
+  "weekTitle": "Week of August 17",
+  "weekSub": "Strength & Power · Week 4",
+  "weekDates": "August 17 – 23, 2026 · Block 3 · Week 4 of 5",
+  "blockMarker": "Strength & Power",
+  "weekNoteHtml": "<strong>How to use this page.</strong> Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event &mdash; or cherry-pick across events. Aim for 4&ndash;6 patterns total per session. Warm up first; stop a set short if form breaks down.<br><br><strong>Tap any movement's teal header</strong> to open it full-screen &mdash; easy to read on the gym iPad, pinch to zoom, scroll through all three exercises.<br><br><strong>This week &mdash; all-new movements.</strong> Power emphasis: speed-strength and rate of force &mdash; lighter and faster than last block's grind, moving at competition speed. Everything is fresh this week; read the cues, chase bar and ball speed, and stop at 3 sets. The moment reps slow down, you're done &mdash; never add a set.",
+  "testsLineHtml": "<strong>Working number week.</strong> No formal test this week &mdash; tap your name below anytime to log a working number you want to track.",
+  "events": [
+    {
+      "event": "KB Box Squat",
+      "type": "marathon",
+      "tag": "Strength & Power · power",
+      "patterns": [
+        {
+          "name": "Comp-Pace Box Squat",
+          "rx": "3 × 8 reps · rest 90 sec between sets · lighter and fast, rehearse comp-speed standups",
+          "load": "Your competition KB at competition box height — move it fast",
+          "cues": [
+            "Use comp weight but make every standup as fast as you can.",
+            "Touch the box light and reverse quick — keep the rhythm snappy.",
+            "Stand fully tall each rep so you practice clean comp reps at speed.",
+            "Keep your chest up and breathe steady through all 8 reps."
+          ]
+        },
+        {
+          "name": "KB Swing to Box Squat",
+          "rx": "3 × 6 reps · rest 90 sec between sets · one hard swing, then one box squat = 1 rep",
+          "load": "A KB about 1 size lighter than competition for crisp swings",
+          "cues": [
+            "Snap your hips to float the bell to chest height — let the hips do the work.",
+            "Catch it at your chest and flow straight into a fast box squat.",
+            "Keep your back flat on the swing and your arms relaxed.",
+            "Stop if the swing gets sloppy — every rep should be sharp."
+          ]
+        },
+        {
+          "name": "Speed Box Squat to Calf Raise",
+          "rx": "3 × 10 reps · rest 75 sec between sets · fast up off the box, then rise onto your toes",
+          "load": "A KB about 1-2 sizes lighter than your comp KB, light enough to move quickly",
+          "cues": [
+            "Stand fast off the box and finish by pressing up onto your toes.",
+            "Lower your heels under control before the next squat.",
+            "Keep the whole rep quick and bouncy without losing balance.",
+            "Hold a wall or rack with one hand if the toe-raise feels tippy."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Dynamax OH Throw",
+      "type": "sprint",
+      "tag": "Strength & Power · speed-strength",
+      "patterns": [
+        {
+          "name": "Throw Technique Practice",
+          "rx": "3 × 4 throws · rest 90 sec between sets · 12 fast throws, rehearse comp-day speed",
+          "load": "Dynamax ball — 4 lb (women) / 8 lb (men)",
+          "cues": [
+            "Hinge and explode up, throwing the ball up and back over your head — make the ball move as fast as possible.",
+            "This week chase speed: a quick, snappy hip drive on every throw rather than a slow grind.",
+            "Keep the arms loose and fast so the ball whips overhead; let the hips fire first.",
+            "Reset your stance crisply between throws and keep your stomach braced through the finish."
+          ]
+        },
+        {
+          "name": "KB Swing — Light and Fast",
+          "rx": "3 × 10 reps · rest 75 sec between sets",
+          "load": "A KB you can float to chest height fast, about 1 size below your comp swing bell — roughly 10-15 lb lighter so it flies up weightless",
+          "cues": [
+            "Hike the bell back between your legs, then snap your hips forward fast to float it to chest or eye height.",
+            "Chase speed, not grind — a sharp, quick hip snap on every rep so the bell flies up weightless.",
+            "Let the bell swing down on its own and load the next rep; don't muscle it with your arms or shoulders.",
+            "Brace your stomach at the top so your lower back stays flat, ribs over hips."
+          ]
+        },
+        {
+          "name": "Vertical Jump — Countermovement",
+          "rx": "3 × 4 reps · rest 90 sec between sets",
+          "load": "Bodyweight, jumping straight up for height on a flat, non-slip surface",
+          "cues": [
+            "Dip quickly into a quarter squat, then jump straight up as high as you can, reaching tall with both arms.",
+            "Make the dip-and-jump one fast, snappy motion — this rehearses the explosive pop your throw needs.",
+            "Land soft on both feet with bent knees, absorbing quietly, then reset before the next jump.",
+            "Hold a sturdy support nearby for balance if you need it, and stop if landing feels shaky."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Bench Press",
+      "type": "marathon",
+      "tag": "Strength & Power · push",
+      "patterns": [
+        {
+          "name": "Bench Volume @ % of Max Reps",
+          "rx": "3 sets · each set to ~45% of your max-rep test · rest 2 min between · max bar speed every rep",
+          "load": "Your competition bench weight",
+          "cues": [
+            "Your app shows your personal rep target — keep the reps few and fast, exploding the bar off your chest every time.",
+            "This week is about speed: lighten the effort by stopping well short of a grind and chasing bar velocity instead.",
+            "End the set as soon as the bar slows down even slightly or your hips lift off the bench."
+          ]
+        },
+        {
+          "name": "Speed Push-Up",
+          "rx": "3 × 6 reps · rest 90 sec between sets · pop off the floor",
+          "load": "Bodyweight (hands on a bench to scale easier)",
+          "cues": [
+            "Lower under control, then press up explosively so your hands leave the floor a touch at the top.",
+            "Land soft with slightly bent elbows and reset your body in a straight line before the next rep.",
+            "Scale easier by placing your hands on a bench. Stop the set when you can't get any pop off the floor."
+          ]
+        },
+        {
+          "name": "Overhead D-Ball Slam to Press Position",
+          "rx": "3 × 8 reps · rest 90 sec between sets · fast, snappy reps",
+          "load": "A light D-ball you can move fast for 8 reps",
+          "cues": [
+            "Hold a light D-ball at your chest and punch it straight overhead as fast as you can, then bring it back down under control.",
+            "Punch the ball overhead fast and lock the arms out tall, then lower it under control to your chest before the next rep.",
+            "Keep your stomach braced so you don't arch your lower back. Stop if the speed drops off."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Overhead Arm Hang",
+      "type": "marathon",
+      "tag": "Strength & Power · pull + grip (speed-strength)",
+      "patterns": [
+        {
+          "name": "Max Hang Practice",
+          "rx": "3 × hold for time · rest 2 min 30 sec between",
+          "load": "Pull-up bar at ~80% of your current best hang time — crisp setups, slightly lighter feel so you stay fresh, step down at 80%",
+          "cues": [
+            "Jump up, settle into a packed-shoulder hang fast, and hold clean.",
+            "Grip hard with spread fingers and keep your breathing slow.",
+            "Step down with control rather than dropping when grip fades.",
+            "Record the hold time for the app."
+          ]
+        },
+        {
+          "name": "Explosive Band Pulldown",
+          "rx": "3 × 12 reps · rest 75 sec between sets",
+          "load": "A resistance band anchored overhead — pick a band tension you can pull fast for a snappy 12",
+          "cues": [
+            "Stand or kneel under the anchor and pull the band to your hips fast and hard.",
+            "Drive the elbows down with speed, then control the band back up slowly.",
+            "Keep your chest up and shoulder blades working on every quick rep.",
+            "Move the band fast — this is about speed and rate of force, not grinding."
+          ]
+        },
+        {
+          "name": "Fat-Grip Bar Hang",
+          "rx": "3 × hold for time · rest 90 sec between",
+          "load": "Fat-grip attachments clamped on the pull-up bar, one hand each · pick a hold goal of 15–25 seconds",
+          "cues": [
+            "Wrap your hands around the fat grips and crush hard — the thick surface forces an explosive grip.",
+            "Pack the shoulders and keep your body still so you do not start to swing.",
+            "Step down safely the instant your hand starts to open.",
+            "Spread your fingers around the fat grip for the strongest possible hold."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Med Ball Slams",
+      "type": "sprint",
+      "tag": "Strength & Power · slam speed",
+      "patterns": [
+        {
+          "name": "Standing Slam Volume",
+          "rx": "3 × 8 reps · rest 90 sec between sets",
+          "load": "Your competition D-ball",
+          "cues": [
+            "Use your competition D-ball so the slam moves fast — speed is the whole point.",
+            "Snap each slam down as quickly as you can while keeping full overhead reach.",
+            "If reps slow down, rest a little longer rather than grinding."
+          ]
+        },
+        {
+          "name": "Pogo Hops",
+          "rx": "3 × 20 sec · rest 90 sec between sets",
+          "load": "Bodyweight",
+          "cues": [
+            "Bounce quickly off the balls of your feet with stiff ankles, like a quick spring.",
+            "Stay tall and keep ground contacts short and snappy — minimal knee bend.",
+            "Keep your legs nearly straight and rebound the instant your feet touch the floor."
+          ]
+        },
+        {
+          "name": "Banded Overhead Slam",
+          "rx": "3 × 8 reps · rest 90 sec between sets",
+          "load": "A light band anchored overhead plus a light D-ball, 8 lb (women) / 15 lb (men)",
+          "cues": [
+            "With a band adding downward pull, slam the light ball down as fast as you possibly can.",
+            "Chase bar speed — the band trains your arms to accelerate all the way to the floor.",
+            "Keep a full reach overhead before each fast slam."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Jump Rope · 60s",
+      "type": "sprint",
+      "tag": "Strength & Power · calves",
+      "patterns": [
+        {
+          "name": "60-Sec Pace Practice",
+          "rx": "3 × 60 sec of singles · rest 2 min between sets · race-speed turnover",
+          "load": "Your jump rope, rehearsing race-day speed",
+          "cues": [
+            "Rehearse the exact fast pace you want on comp day and feel it become automatic.",
+            "Keep your feet quick and your bounce tiny so the rope never catches you.",
+            "Make each set crisp and fast, then rest fully before the next."
+          ]
+        },
+        {
+          "name": "Rebound Calf Raise",
+          "rx": "3 × 15 reps · rest 90 sec between sets · fast up, controlled down",
+          "load": "A DB/KB you can move fast for 15 reps, roughly 10-20 lb per hand",
+          "cues": [
+            "Snap up onto the balls of your feet as quickly as possible on each rep.",
+            "Keep the load light so speed never slows down across the set.",
+            "Lower under control and reset your stretch before the next fast rep."
+          ]
+        },
+        {
+          "name": "Quick-Contact Skips",
+          "rx": "3 × 20 sec of fast skips · rest 90 sec between sets",
+          "load": "Bodyweight, fast light skipping in place",
+          "cues": [
+            "Skip in place with the lightest, fastest ground contacts you can manage.",
+            "Stay tall on the balls of your feet and barely touch the floor.",
+            "Keep it snappy and relaxed rather than forceful and heavy."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Standing Broad Jump",
+      "type": "sprint",
+      "tag": "Strength & Power · power emphasis",
+      "patterns": [
+        {
+          "name": "Continuous Low Hurdle Hops",
+          "rx": "3 × 8 hops · rest 90 sec between sets · fast off the floor",
+          "load": "Bodyweight over a line of low, ankle-height objects (rolled towels or small cones)",
+          "cues": [
+            "Hop over each low object with both feet, spending as little time on the ground as possible between hops.",
+            "Stay tall on the balls of your feet and let your ankles spring — small, quick, light contacts.",
+            "Keep the objects ankle-height and stop the set if your hops get heavy or your landings get flat."
+          ]
+        },
+        {
+          "name": "Banded Hip-Snap Pull-Through",
+          "rx": "3 × 12 reps · rest 75 sec between sets · snap fast, return slow",
+          "load": "A resistance band anchored low behind you, tension you can snap through for a sharp 12 reps",
+          "cues": [
+            "Hinge your hips back to load the band, then snap your hips forward fast to stand tall and squeeze your glutes.",
+            "Drive the movement with a quick hip snap, not your arms or lower back — let the band ride between your legs.",
+            "Control the band on the way back to reset each rep. Keep your spine flat throughout."
+          ]
+        },
+        {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 4 jumps · rest 2 min between sets · lighter intent, fast and sharp",
+          "load": "Bodyweight",
+          "cues": [
+            "Focus on speed off the floor — quick arm swing, fast hip snap, jump forward and stick both feet.",
+            "Rehearse competition-pattern velocity: crisp and explosive rather than grinding for every last inch.",
+            "Reset fully between reps. Every jump should feel snappy; stop if they start to drag."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Concept Row · 500m",
+      "type": "marathon",
+      "tag": "Strength & Power · speed-strength",
+      "patterns": [
+        {
+          "name": "500m Practice",
+          "rx": "3 × 200m · rest 2 min fully between · sprint pace, faster than race",
+          "load": "Rower · about 4–5 sec/500m FASTER than your goal 500m split — short and quick",
+          "cues": [
+            "Short sprints — chase a fast split and keep the stroke rate up around 30+.",
+            "Snap the legs down and rip the handle in, then recover smooth and reset for the next stroke.",
+            "Quality over grinding — if the split slows, stop the piece and take your rest."
+          ]
+        },
+        {
+          "name": "Band-Resisted Row Pull",
+          "rx": "3 × 10 fast reps · rest 75 sec between sets",
+          "load": "A resistance band light enough to snap back fast for all 10 reps",
+          "cues": [
+            "Anchor the band ahead of you, sit tall, and pull the handles to your ribs as fast as you can.",
+            "Let the band pull your arms back out under control — don't let it yank you forward.",
+            "Every rep is a quick, sharp pull; the band should move fast, not slow."
+          ]
+        },
+        {
+          "name": "Speed Lat Pulldown",
+          "rx": "3 × 8 fast reps · rest 75 sec between sets",
+          "load": "A cable stack light enough to pull down explosively for all 8 reps",
+          "cues": [
+            "Grab the bar, sit tall, and pull it down to your collarbone as fast as you can.",
+            "Control the bar all the way back up — the speed is on the pull-down, not the return.",
+            "Keep your chest up and don't lean way back; let the lats snap the bar down."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "300 Yd Shuttle Run",
+      "type": "sprint",
+      "tag": "Strength & Power · speed-strength",
+      "patterns": [
+        {
+          "name": "Shuttle Pace Practice",
+          "rx": "3 × 100-yd shuttle (2 × 50 yd) · rest 2–3 min · top-speed lengths",
+          "load": "Bodyweight · run these at near-top speed to rehearse race velocity",
+          "cues": [
+            "Run the two 50s fast, focusing on quick leg turnover and a relaxed upper body.",
+            "Decelerate under control into the turn, plant, and snap back out — fast feet, smooth plant.",
+            "Full rest keeps every rep at true speed across all three sets."
+          ]
+        },
+        {
+          "name": "Jump Squat",
+          "rx": "3 × 5 reps · fast off the floor · rest 2 min",
+          "load": "Bodyweight, or light dumbbells ~10–15 lb each — light enough to jump fast",
+          "cues": [
+            "Dip a quarter of the way down, then jump as high and fast as you can, landing soft.",
+            "Move the load with speed — lighten or drop the weights if they slow you down at all.",
+            "Rate of force is the goal; reset between every fast, explosive rep."
+          ]
+        },
+        {
+          "name": "Flying 20s",
+          "rx": "3 × 20 yards with a rolling start · rest as needed · full speed",
+          "load": "Bodyweight",
+          "cues": [
+            "Build over a short run-in, then hit your top relaxed speed for a 20-yard fly zone.",
+            "Stay tall and smooth at speed — chase fast, easy turnover rather than straining.",
+            "Take full recovery so each flying run is genuinely fast."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Prowler Push",
+      "type": "sprint",
+      "tag": "Strength & Power · speed-strength",
+      "patterns": [
+        {
+          "name": "Comp-Distance Sled Push",
+          "rx": "3 × 50 yards · rest 2.5 min between · fast and crisp (not timed)",
+          "load": "Competition load: 2 × 25 lb plates (women) / 2 × 45 lb plates (men) · comp weight for speed",
+          "cues": [
+            "Push at competition weight (2x25 lb women / 2x45 lb men), fast and crisp, not as a timed test.",
+            "Stay at about 45° with arms locked and move your feet quick — push through your trunk, never bending the elbows.",
+            "Drive fast, long steps and rest fully so every push is sharp and explosive."
+          ]
+        },
+        {
+          "name": "Sprint Build-Up",
+          "rx": "3 × 30 yards · rest 2 min between · accelerate to fast, not a max test",
+          "load": "Bodyweight only, building speed smoothly over the 30 yards",
+          "cues": [
+            "Start easy and smoothly build up to a fast, controlled run over the 30 yards to rehearse the leg turnover of the push.",
+            "Stay tall and relaxed, pumping your arms — don't strain or lunge for top speed.",
+            "Walk back and recover fully between runs so each build-up feels smooth and quick, not labored."
+          ]
+        },
+        {
+          "name": "Banded Speed Squat",
+          "rx": "3 × 5 reps · rest 2 min between · explosive up out of the bottom",
+          "load": "A light barbell or empty bar — light enough that every rep moves fast and snappy",
+          "cues": [
+            "Sit down under control then stand up as fast as you can to train the speed-strength your push needs.",
+            "Keep the load light so the bar moves quickly — this is about speed, not grinding a heavy weight.",
+            "Stay tall with your chest up, and reset your stance before each rep so every one is a fast, clean effort."
+          ]
+        }
+      ]
+    }
+  ]
+}

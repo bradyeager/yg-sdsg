@@ -1,0 +1,350 @@
+{
+  "weekTitle": "Week of August 24",
+  "weekSub": "Strength & Power · Week 5",
+  "weekDates": "August 24 – 30, 2026 · Block 3 · Week 5 of 5",
+  "blockMarker": "Strength & Power",
+  "weekNoteHtml": "<strong>How to use this page.</strong> Three movement patterns per competition event. Pick the events you want to train, then do all three patterns for that event &mdash; or cherry-pick across events. Aim for 4&ndash;6 patterns total per session. Warm up first; stop a set short if form breaks down.<br><br><strong>Tap any movement's teal header</strong> to open it full-screen &mdash; easy to read on the gym iPad, pinch to zoom, scroll through all three exercises.<br><br><strong>This week &mdash; all-new movements.</strong> Power + transition: explosive, comp-specific patterns to prime you for the peak block and the first test wave next week. Everything is fresh this week; read the cues, keep efforts sharp and short, and hold to 3 sets. Stay crisp &mdash; bank the freshness, don't add a set.",
+  "testsLineHtml": "<strong>Working number week.</strong> No formal test this week &mdash; tap your name below anytime to log a working number you want to track.",
+  "events": [
+    {
+      "event": "KB Box Squat",
+      "type": "marathon",
+      "tag": "Strength & Power · power",
+      "patterns": [
+        {
+          "name": "Comp-Pace Box Squat",
+          "rx": "3 × 10 reps · rest 90 sec between sets · near-comp load, every rep sharp and fast",
+          "load": "Your competition KB, or 1 size heavier, at competition box height",
+          "cues": [
+            "Drive off the box fast on every rep to prime your comp speed.",
+            "Keep the volume modest and the quality high — no grinding reps."
+          ]
+        },
+        {
+          "name": "Slow-Eccentric Box Squat",
+          "rx": "3 × 8 reps · 3-sec lower",
+          "load": "Your competition KB held at the chest, at competition box height",
+          "cues": [
+            "Lower yourself to the box over a slow three-count, then sit fully before you stand back up.",
+            "Keep the descent smooth and braced — don't drop or flop onto the box."
+          ]
+        },
+        {
+          "name": "Paused Box Squat — Heavy",
+          "rx": "3 × 6 reps · hold 2 sec on the box",
+          "load": "Your competition KB 1 size heavier, held at the chest, at competition box height",
+          "cues": [
+            "Sit all the way onto the box and hold a still two-count before you drive up.",
+            "Stay tight in the pause — keep your chest up and core braced, don't relax onto the box."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Dynamax OH Throw",
+      "type": "sprint",
+      "tag": "Strength & Power · comp-pattern primer",
+      "patterns": [
+        {
+          "name": "Throw Technique Practice",
+          "rx": "3 × 3 throws · 9 sharp throws at near-comp effort",
+          "load": "Dynamax ball — 4 lb (women) / 8 lb (men)",
+          "cues": [
+            "Hinge low and explode up, throwing the ball up and back overhead with sharp, fast, full-effort intent.",
+            "Drive from a fast hip snap and let the arms whip the ball over your head behind you."
+          ]
+        },
+        {
+          "name": "Dead-Stop KB Deadlift to Tall Pull",
+          "rx": "3 × 5 reps",
+          "load": "A KB about 35–53 lb you can pull fast — heavy enough to feel it, light enough to finish tall with speed",
+          "cues": [
+            "From a dead stop on the floor, hinge down and pull the bell up fast, finishing tall with a hard glute squeeze.",
+            "Keep your chest up and back flat; stop the set if your back rounds."
+          ]
+        },
+        {
+          "name": "Overhead D-Ball Toss for Height",
+          "rx": "3 × 4 reps",
+          "load": "A 20 lb D-ball — heavier than the comp Dynamax ball, light enough to toss cleanly overhead",
+          "cues": [
+            "Hinge low holding the 20 lb D-ball, then explode up and toss it straight up and slightly back, letting it land safely.",
+            "Step clear and let the ball land if it comes back toward you — never try to catch a falling heavy ball."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Bench Press",
+      "type": "marathon",
+      "tag": "Strength & Power · push",
+      "patterns": [
+        {
+          "name": "Bench Volume @ % of Max Reps",
+          "rx": "3 sets · each set to ~50% of your max-rep test",
+          "load": "Your competition bench weight",
+          "cues": [
+            "Your app shows your personal rep target — rehearse competition speed and pace, driving each rep up sharp off the chest.",
+            "Stop the set when the bar slows or your hips lift off the bench."
+          ]
+        },
+        {
+          "name": "Larsen Press with DBs",
+          "rx": "3 × 6 reps",
+          "load": "Two DBs you can press for 6 sharp reps with your legs lifted off the floor",
+          "cues": [
+            "Lie on the bench and lift your feet off the floor, then press two DBs up fast with only your upper body driving.",
+            "Keep your back flat on the bench and core tight for balance. Put your feet down and stop if you feel wobbly."
+          ]
+        },
+        {
+          "name": "Single-Arm DB Floor-to-Lockout Punch",
+          "rx": "3 × 8 reps each arm · fast punch up",
+          "load": "One moderate DB you can punch up fast for 8 reps per arm",
+          "cues": [
+            "Lie on the bench with one DB at your shoulder and punch it straight up to a fast full lockout, one arm at a time.",
+            "Lower under control to your shoulder. Stop the set when the punch loses its snap."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Overhead Arm Hang",
+      "type": "marathon",
+      "tag": "Strength & Power · pull + grip (comp-specific bridge)",
+      "patterns": [
+        {
+          "name": "Max Hang Practice",
+          "rx": "3 × hold for time",
+          "load": "Pull-up bar at ~80% of your current best hang time — near-comp feel, sharp setups, step down at 80%",
+          "cues": [
+            "Get under the bar, pack the shoulders quickly, and hold quiet and tight.",
+            "Breathe slow; step down deliberately when grip begins to slip."
+          ]
+        },
+        {
+          "name": "Mixed-Grip Hang",
+          "rx": "3 × hold for time · switch which hand faces you each set",
+          "load": "Pull-up bar, one palm facing you and one facing away · hold goal of 20–30 seconds",
+          "cues": [
+            "Set one hand over and one hand under the bar to rehearse a comp-specific grip.",
+            "Step down under control the moment either hand fails."
+          ]
+        },
+        {
+          "name": "Fat-Grip Crush Hang",
+          "rx": "3 × hold for time · feet on the floor, take weight off as your grip allows",
+          "load": "Fat-grip attachments on the pull-up bar, feet lightly on the floor for support · hold goal of 20–30 seconds",
+          "cues": [
+            "Clamp the fat-grip attachments and squeeze hard to overload the open-hand crush.",
+            "Set your feet back down and step out the moment your grip starts to fail."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Med Ball Slams",
+      "type": "sprint",
+      "tag": "Strength & Power · comp bridge",
+      "patterns": [
+        {
+          "name": "Standing Slam Volume",
+          "rx": "3 × 20 sec · comp pace",
+          "load": "Your competition D-ball",
+          "cues": [
+            "Slam at full competition pace for 20 seconds, then rest — this rehearses race speed.",
+            "Keep each rep clean and full-reach even as your breathing climbs."
+          ]
+        },
+        {
+          "name": "D-Ball Clean to Slam",
+          "rx": "3 × 6 reps",
+          "load": "A moderate D-ball, 10 lb (women) / 20 lb (men)",
+          "cues": [
+            "Lift the ball from the floor to your chest, drive it overhead, then slam it straight down — one flow.",
+            "Reset on the floor and keep every rep crisp and fast."
+          ]
+        },
+        {
+          "name": "Medicine Ball Overhead Toss for Height",
+          "rx": "3 × 5 reps",
+          "load": "A light D-ball, 8 lb (women) / 15 lb (men)",
+          "cues": [
+            "Dip your knees and throw the ball as high straight up as you can, then step aside and let it land.",
+            "Drive through your legs and finish with a full overhead reach — the mirror of your slam."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Jump Rope · 60s",
+      "type": "sprint",
+      "tag": "Strength & Power · calves",
+      "patterns": [
+        {
+          "name": "60-Sec Pace Practice",
+          "rx": "3 × 60 sec of singles · near-comp speed, dialed-in rhythm",
+          "load": "Your jump rope, at near-comp speed with a locked-in rhythm",
+          "cues": [
+            "Lock into the rhythm you'll use on comp day and keep every set identical.",
+            "Keep your jumps low and even so the pace never wobbles."
+          ]
+        },
+        {
+          "name": "Loaded Standing Calf Raise — Double Reps",
+          "rx": "3 × 20 reps · full stretch at the bottom, full squeeze at the top",
+          "load": "A 30–45 lb DB or KB held in one hand (other hand on a wall or rail), or two lighter DBs",
+          "cues": [
+            "Rise all the way onto the balls of your feet, squeeze the top for a beat, then lower until you feel a full calf stretch.",
+            "Hold a wall or rail with your free hand so you stay steady through all twenty reps."
+          ]
+        },
+        {
+          "name": "Sprint-Cadence Rope Skips",
+          "rx": "3 × 15 sec all-out singles",
+          "load": "Your jump rope, all-out turnover for the short window",
+          "cues": [
+            "Go all-out fast for the short window to rehearse top-end speed.",
+            "Rest fully between bursts so each one stays truly fast."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Standing Broad Jump",
+      "type": "sprint",
+      "tag": "Strength & Power · power + transition",
+      "patterns": [
+        {
+          "name": "Standing Long Jump to Box",
+          "rx": "3 × 4 jumps · jump out and onto a low box",
+          "load": "Bodyweight, jumping forward onto a knee-height sturdy box set a comfortable distance ahead",
+          "cues": [
+            "Swing the arms back and jump forward and up to land both feet flat on the low box, sticking it softly.",
+            "Step down between reps and reset at the line. Set the box close enough that you land it cleanly every time."
+          ]
+        },
+        {
+          "name": "Quick Ankle Pogo Bounce",
+          "rx": "3 × 12 bounces · stiff ankles, low and fast",
+          "load": "Bodyweight, bouncing in place on both feet",
+          "cues": [
+            "Bounce in place off the balls of both feet with nearly straight knees — let the ankles do all the springing.",
+            "Stay light and quiet. Hold a wall or rail for balance and stop if your contacts get flat or heavy."
+          ]
+        },
+        {
+          "name": "Broad Jump — Distance Practice",
+          "rx": "3 × 4 jumps · near-comp effort, sharp and fast",
+          "load": "Bodyweight",
+          "cues": [
+            "Run the full competition motion: arms back, hips snap, jump forward at near-max effort, stick both feet.",
+            "Reset completely at the line between jumps. Stop the set if you can't land it under control."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Concept Row · 500m",
+      "type": "marathon",
+      "tag": "Strength & Power · comp-specific power",
+      "patterns": [
+        {
+          "name": "500m Practice",
+          "rx": "3 × 250m · near-comp 500m pace",
+          "load": "Rower · right at your goal 500m split, shorter rest to feel race effort",
+          "cues": [
+            "Hold your goal 500m split on every piece with only short rest between.",
+            "If you can't hold the split on the third piece, the first two were too fast — even them out."
+          ]
+        },
+        {
+          "name": "Kettlebell Swing",
+          "rx": "3 × 12 reps",
+          "load": "A KB you can snap to chest height explosively for 12 — moderate, not a grind",
+          "cues": [
+            "Hinge at the hips and snap them forward to float the bell to chest height — power comes from the hips.",
+            "Keep your arms relaxed; let the hip drive throw the bell, don't lift it with your shoulders."
+          ]
+        },
+        {
+          "name": "Renegade DB Row",
+          "rx": "3 × 8 reps each arm",
+          "load": "Two moderate DBs in a hands-on-DB plank · light enough to keep your hips still",
+          "cues": [
+            "Set up in a plank on two DBs, then row one DB to your hip while the other stays planted.",
+            "Drop to your knees if your hips can't stay steady; quality plank over heavy weight."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "300 Yd Shuttle Run",
+      "type": "sprint",
+      "tag": "Strength & Power · comp-specific power bridge",
+      "patterns": [
+        {
+          "name": "Shuttle Pace Practice",
+          "rx": "3 × 150-yd shuttle (3 × 50 yd) · comp-pattern turns at near-race effort",
+          "load": "Bodyweight · run at near-comp effort, sharp and competition-specific",
+          "cues": [
+            "Run three 50s at near-race effort, rehearsing the exact down-and-back pattern of the event.",
+            "Hit each turn the way you will on comp day — controlled brake, firm plant, explosive exit."
+          ]
+        },
+        {
+          "name": "Kettlebell Swing",
+          "rx": "3 × 10 reps · explosive hips",
+          "load": "One kettlebell ~35–53 lb — heavy enough to feel it, light enough to snap fast",
+          "cues": [
+            "Hinge at the hips and snap them forward to float the bell to chest height — power comes from the hips, not the arms.",
+            "Keep your back flat and let the bell swing back between your legs under control."
+          ]
+        },
+        {
+          "name": "Rolling-Start Sprint",
+          "rx": "3 × 15 yards from a walking rolling start · build to a fast finish",
+          "load": "Bodyweight",
+          "cues": [
+            "Start from a few easy walking steps, then smoothly accelerate into a 15-yard sprint — no sudden lurch.",
+            "Slow down gradually after the line; don't stop short or cut hard."
+          ]
+        }
+      ]
+    },
+    {
+      "event": "Prowler Push",
+      "type": "sprint",
+      "tag": "Strength & Power · power + transition",
+      "patterns": [
+        {
+          "name": "Comp-Distance Sled Push",
+          "rx": "3 × 50 yards · near-comp speed, sharp (not timed)",
+          "load": "Competition load: 2 × 25 lb plates (women) / 2 × 45 lb plates (men)",
+          "cues": [
+            "Push the full 50 yards sharp and fast at comp weight to bridge into the peak block — this is rehearsal, not a timed test.",
+            "Hold about 45° with arms locked and push through your whole body — don't let your elbows bend."
+          ]
+        },
+        {
+          "name": "Heavy Sled March (15 yd)",
+          "rx": "3 × 15 yards · short, powerful starts",
+          "load": "Competition load + 25 lb per side (women: 2 × 50 lb / men: 2 × 70 lb) · short-distance strength overload",
+          "cues": [
+            "Heavy and short — drive the sled just 15 yards with powerful, deliberate steps to train your starting strength.",
+            "Take big, forceful steps and stop the run if the sled stalls — quality over distance every time."
+          ]
+        },
+        {
+          "name": "Tall-Kneeling Med Ball Chest Pass",
+          "rx": "3 × 5 reps · max-effort explosive pushes",
+          "load": "A med ball light enough to throw hard and fast, pushed forward to a partner or open space",
+          "cues": [
+            "From a tall-kneeling position, push the ball forward as explosively as you can to train a fast horizontal push like the sled.",
+            "Reset your position between throws so each push is fresh and at full speed."
+          ]
+        }
+      ]
+    }
+  ]
+}
