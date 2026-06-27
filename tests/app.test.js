@@ -351,6 +351,31 @@ test('broad jump: distances render as ft+in, not a bare inches number', async ()
   await page.context().close();
 });
 
+// ---- 8d. A malformed time log must not become the "best" (parseTime null-guard) ----
+test('best ignores a malformed time value instead of ranking it first', async () => {
+  // Row is lower-better. "1:75" is an invalid clock (sec>59) -> parseTime returns null.
+  // isNaN(null) is false, so pre-fix it slipped past the guard and sorted to the front
+  // as 0, becoming a false best. The fix filters null like the PR-counter already does.
+  const page = await newPage();
+  await mockSupabase(page, [
+    { id: 'r1', event: 'row', value: '2:10', log_date: '2026-06-01', note: '' },
+    { id: 'r2', event: 'row', value: '1:75', log_date: '2026-06-02', note: '' },
+  ]);
+  await page.goto(BASE + '/robert/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1100);
+  await page.click('.tab[data-view="log"]');
+  await page.waitForTimeout(900);
+  const txt = await page.evaluate(() => {
+    const cards = Array.from(document.querySelectorAll('.event-card'));
+    const row = cards.find(c => /Concept Row/i.test((c.querySelector('.name') || {}).textContent || ''));
+    const box = row && row.querySelector('.score-box .val');
+    return box ? box.textContent : '';
+  });
+  assert.match(txt, /2:10/, 'best must be the valid 2:10, not the malformed 1:75');
+  assert.ok(!/1:75/.test(txt), 'the malformed value must not render as the best');
+  await page.context().close();
+});
+
 // ---- 9. Today's Plan (coach recs) lives on the Program tab, not the Log tab ----
 test('coach recs on Program tab, absent from Log tab; tabs ordered Dashboard·Program·Log·Progress·Scouting', async () => {
   const page = await newPage();

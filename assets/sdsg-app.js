@@ -484,7 +484,7 @@ function bestScore(ev){
   var logs=cachedLogs.filter(function(l){ return l.event===ev&&l.value!=null&&l.value!==''; });
   if(!logs.length) return null;
   var parser=cfg.unit==='time'?parseTime:parseFloat;
-  var vals=logs.map(function(l){ return Object.assign({},l,{n:parser(l.value)}); }).filter(function(l){ return !isNaN(l.n); });
+  var vals=logs.map(function(l){ return Object.assign({},l,{n:parser(l.value)}); }).filter(function(l){ return l.n!=null && !isNaN(l.n); });   // parseTime returns null on bad input; isNaN(null) is false, so guard null too (matches line ~1187)
   if(!vals.length) return null;
   vals.sort(function(a,b){ return cfg.lowerBetter?a.n-b.n:b.n-a.n; });
   return vals[0];
@@ -499,7 +499,7 @@ function goldDelta(ev){
   var cfg=EVENTS[ev];
   var b=cfg.unit==='time'?parseTime(best.value):parseFloat(best.value);
   var g=cfg.unit==='time'?parseTime(goldRaw):parseFloat(goldRaw);
-  if(isNaN(b)||isNaN(g)) return null;
+  if(b==null||isNaN(b)||g==null||isNaN(g)) return null;
   var pct = cfg.lowerBetter ? ((g-b)/g)*100 : ((b-g)/g)*100;
   return {pct:pct, gold:goldRaw, best:best.value};
 }
@@ -517,7 +517,7 @@ function medalFor(ev){
   if(!athlete||!athlete.podium||!athlete.podium[ev]) return null;
   var cfg=EVENTS[ev];
   var parser=cfg.unit==='time'?parseTime:parseFloat;
-  var bestN=parser(best.value); if(isNaN(bestN)) return null;
+  var bestN=parser(best.value); if(bestN==null||isNaN(bestN)) return null;
   var podium=athlete.podium[ev];
   function val(row){ if(!row||row[2]==='—'||row[2]==null) return null; var n=parser(row[2]); return isNaN(n)?null:n; }
   var g=val(podium.find(function(p){return p[0]==='GOLD';}));
