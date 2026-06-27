@@ -916,8 +916,9 @@ function renderScouting(){
         '<div class="sy-sub">'+esc(youSub)+(best?' · '+esc(best.date):'')+'</div>'+
       '</div>';
       var caveat='<div class="scout-caveat"><span class="cv-flag">🚩</span>Incoming athletes below come from a different division. Their load or standard may differ — your Best above is your apples-to-apples baseline.</div>';
-      // C1: data-shaped fields escaped — same rationale as _renderIncomingBlock.
-      var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+esc(r[0])+'<span class="nt">'+esc(r[2])+'</span></span><span class="sc">'+esc(r[1])+'</span></div>'; }).join('');
+      // C1: data-shaped fields escaped. Dynamax distances → ft+in via compVal
+      // (matches _renderIncomingBlock); every other event renders its raw value.
+      var rows=list.map(function(r){ return '<div class="incoming-row"><span class="who">'+_medalFromNote(r[2])+esc(r[0])+'<span class="nt">'+esc(r[2])+'</span></span><span class="sc">'+compVal(ev,r[1])+'</span></div>'; }).join('');
       return '<div class="prog-event"><div class="prog-event-head"><span class="pe-name">'+EVENTS[ev].name+'</span></div>'+
         '<div class="scout-body">'+youCard+caveat+'<div class="scout-incoming">'+rows+'</div></div>'+
       '</div>';
