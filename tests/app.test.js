@@ -308,6 +308,28 @@ test('program: per-athlete loads replace shared copy on personalized patterns', 
   await page.context().close();
 });
 
+// ---- 8b. Field Watch (Scouting) renders dynamax distances as ft+in, not raw inches ----
+test('field watch: incoming dynamax distances render as ft+in, not raw inches', async () => {
+  // Regression (fixed a0d56f3): renderScouting() printed incoming values raw, so the
+  // medicine-ball toss showed inches (e.g. 427) instead of ft+in (35 ft 7 in). The
+  // June-9 ft+in pass missed this surface; the fix routes it through compVal like
+  // every other value-render site. Robert's incoming Gold (Wallace) is 427 in.
+  const page = await newPage();
+  await mockSupabase(page, []);
+  await page.goto(BASE + '/robert/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1100);
+  await page.click('.tab[data-view="scouting"]');
+  await page.waitForTimeout(900);
+  const txt = await page.evaluate(() => {
+    const evs = Array.from(document.querySelectorAll('.prog-event'));
+    const dyn = evs.find(e => /Dynamax/i.test((e.querySelector('.pe-name') || {}).textContent || ''));
+    return dyn ? ((dyn.querySelector('.scout-incoming') || {}).textContent || '') : '';
+  });
+  assert.match(txt, /35 ft 7 in/, 'incoming dynamax (Wallace 427 in) must render as 35 ft 7 in');
+  assert.ok(!/\b427\b/.test(txt), 'raw inches (427) must not appear in Field Watch');
+  await page.context().close();
+});
+
 // ---- 9. Today's Plan (coach recs) lives on the Program tab, not the Log tab ----
 test('coach recs on Program tab, absent from Log tab; tabs ordered Dashboard·Program·Log·Progress·Scouting', async () => {
   const page = await newPage();
