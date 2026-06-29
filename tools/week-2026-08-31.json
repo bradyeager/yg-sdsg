@@ -360,13 +360,14 @@
       "patterns": [
         {
           "name": "Comp-Distance Sled Push",
-          "rx": "3 × 50 yards · rest 3 min between · comp-pace rehearsal (not timed, never a test)",
+          "rx": "1 × 50 yards for time · all-out · log your time as your competition baseline",
           "load": "Competition load: 2 × 25 lb plates (women) / 2 × 45 lb plates (men)",
           "cues": [
-            "Rehearse the full 50 yards at comp pace and comp weight — sharp but not maxed, and remember sled is never a timed test.",
-            "Lock in your race setup: body at 45°, arms locked, pushing through your trunk with long steps and toe drive.",
-            "Rest fully between pushes and keep this supportive — save your fresh max effort for the tested events this week."
-          ]
+            "Push the full 50 yards as fast as you can and log your time — this is your fresh competition opener.",
+            "Stay low with arms locked, take long powerful steps, and drive through your toes the whole way.",
+            "Warm up with a couple of easy pushes first, and don't bend your elbows to absorb the load."
+          ],
+          "isTest": true
         },
         {
           "name": "Tempo Goblet Squat",

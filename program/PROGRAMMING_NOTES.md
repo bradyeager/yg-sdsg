@@ -23,7 +23,7 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 
 ## Equipment Constraints
 
-- **Sled / Prowler:** BACK IN as of Week 3 (Jun 7, 2026). Sled is repaired. Include Prowler Push in the program. Do not use as a competition test until Brad says so — program it as sled work only until further notice.
+- **Sled / Prowler:** BACK IN as of Week 3 (Jun 7, 2026). Sled is repaired. Include Prowler Push in the program. **Comp test AUTHORIZED 2026-06-28** — the Aug 31 (Peak Week 1) comp-distance push is timed for record as the competition baseline; otherwise program it as sled training work.
 - **D-balls only for slams.** Stick to D-balls (slam balls). Do NOT prescribe Dynamax balls for slamming patterns. We *do* have Dynamax balls (8 lb, 14 lb) but they have different size, feel, and bounce — not suitable for slam work.
 - **No wall slams.** No sturdy throwing surface available.
 - **No rotational slams.** No space.
@@ -36,7 +36,7 @@ Coaching rules and constraints for writing weekly programs at `/program/index.ht
 
 ### Prowler Push (50 yd for time)
 - Comp load: **2 × 25 lb plates (women) / 2 × 45 lb plates (men)**.
-- Do NOT badge as a competition test until Brad explicitly authorizes. Program as sled training work only.
+- **Comp test authorized by Brad 2026-06-28.** The Aug 31 comp-distance push is timed for record (the competition baseline / opener). Otherwise program as sled training work.
 - Prescription options: timed comp-distance pushes at comp load; heavy overload (add 25 lb per side) for short 25 yd strength pushes; fast-and-light (drop one plate) for acceleration mechanics.
 - Cues: body angle ~45°, arms locked (push through the trunk — don't bend elbows to absorb), long steps with full hip extension, drive through the toes.
 

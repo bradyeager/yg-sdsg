@@ -114,7 +114,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 - **300 Yd Shuttle Run** — **Shuttle Pace Practice** · 1 × full 300 yd (6 × 50 yd)  |  **Backpedal-to-Sprint Transition** · 3 × 6 transitions  |  **Rolling-Start Sprint** · 3 × 15 yards from a walking rolling start
 - **Prowler Push** — **Comp-Distance Sled Push** · 3 × 50 yards  |  **Heavy Sled March (15 yd)** · 3 × 15 yards  |  **Tall-Kneeling Med Ball Chest Pass** · 3 × 5 reps
 
-## Week of August 31 — Peak + Taper · Week 1  ·  🎯 TEST: KB Box Squat, Dynamax OH Throw, Bench Press, Overhead Arm Hang, Standing Broad Jump
+## Week of August 31 — Peak + Taper · Week 1  ·  🎯 TEST: KB Box Squat, Dynamax OH Throw, Bench Press, Overhead Arm Hang, Standing Broad Jump, Prowler Push
 `August 31 – September 6, 2026 · Block 4 · Week 1 of 4`
 
 - **KB Box Squat** — 🎯**Comp-Pace Box Squat** · 1 max-effort AMRAP  |  **Light Goblet Squat Flush** · 2 × 12 reps  |  **Bodyweight Box Sit-to-Stand** · 2 × 10 reps
@@ -126,7 +126,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 - **Standing Broad Jump** — 🎯**Broad Jump — Distance Practice** · Best of 3 max jumps for distance  |  **Easy Glute Bridge Hold** · 3 × 20 sec holds  |  **Gentle Line Hops** · 3 × 10 hops
 - **Concept Row · 500m** — **500m Practice** · 2 × 400m  |  **Light Face-Pull** · 2 × 12 reps  |  **Easy Bike Flush** · 1 × 8 min easy
 - **300 Yd Shuttle Run** — **Shuttle Pace Practice** · 2 × 150-yd shuttle (3 × 50 yd)  |  **Tempo Stride 60s** · 3 × 60 yards  |  **Ankle Hop Primer** · 2 × 15 small hops
-- **Prowler Push** — **Comp-Distance Sled Push** · 3 × 50 yards  |  **Tempo Goblet Squat** · 2 × 8 reps  |  **Glute Bridge March** · 2 × 8 reps per side
+- **Prowler Push** — 🎯**Comp-Distance Sled Push** · 1 × 50 yards for time  |  **Tempo Goblet Squat** · 2 × 8 reps  |  **Glute Bridge March** · 2 × 8 reps per side
 
 ## Week of September 7 — Peak + Taper · Week 2  ·  🎯 TEST: Med Ball Slams, Jump Rope · 60s, Concept Row · 500m, 300 Yd Shuttle Run
 `September 7 – 13, 2026 · Block 4 · Week 2 of 4`

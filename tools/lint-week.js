@@ -24,7 +24,7 @@ const ANCHOR = {
   'Prowler Push': /Comp-Distance Sled Push/i,
 };
 const TESTABLE = new Set(['KB Box Squat','Dynamax OH Throw','Bench Press','Overhead Arm Hang',
-  'Med Ball Slams','Jump Rope · 60s','Standing Broad Jump','Concept Row · 500m','300 Yd Shuttle Run']); // Prowler excluded
+  'Med Ball Slams','Jump Rope · 60s','Standing Broad Jump','Concept Row · 500m','300 Yd Shuttle Run','Prowler Push']); // Prowler comp test authorized by Brad 2026-06-28
 const VALID_BLOCKS = new Set(['Foundation','Hypertrophy','Strength & Power','Peak + Taper']);
 
 function leadSets(rx){ const m = String(rx).match(/^\s*(\d+)\s*(?:×|x|sets?|rounds?|intervals?)/i); return m ? parseInt(m[1],10) : null; }
@@ -46,7 +46,6 @@ function lintWeek(week, file){
     const isTestEvent = tests.length > 0;
     // slot-0 contract
     if (isTestEvent) {
-      if (ev.event === 'Prowler Push') v.push(`${ev.event}: marked as a test (Prowler must never be a comp test)`);
       if (tests.length > 1) v.push(`${ev.event}: ${tests.length} test patterns, expected exactly 1`);
       if (tests[0] !== 0) v.push(`${ev.event}: test is in slot ${tests[0]+1}, must be Slot 1 on a test week`);
       // accessories on a test week must be light (no other test)
@@ -105,7 +104,6 @@ function main(){
   const testCoverage = [];
   if (peak.length === 4) {   // only assert full coverage when the whole peak block is present
     for (const ev of TESTABLE) { const c = testCount[ev]||0; if (c !== 1) testCoverage.push(`${ev}: tested ${c}× in Block 4 (expected exactly 1)`); }
-    if (testCount['Prowler Push']) testCoverage.push(`Prowler Push: tested in Block 4 (must never be tested)`);
   }
 
   if (crossWeek.length) { console.log('\n✖ cross-week accessory repeats (same event):'); crossWeek.forEach(x=>console.log('   - '+x)); total += crossWeek.length; }
