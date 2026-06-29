@@ -960,6 +960,25 @@ function _personalizePattern(eventName, p, athlete){
   if(eventName==='KB Box Squat' && /Heavy Goblet Squat/i.test(name)){
     return {load:'Same KB as last week — <b>'+esc(loads.kbsquat||'')+'</b>. The pause is the progression, not more weight.'};
   }
+  // KB Box Squat volume — per-athlete rep target = % of their best box-squat AMRAP (Brad 2026-06-28).
+  // % is read from the prescription so each week can differ. A flat rep count was meaningless
+  // across athletes ranging from ~16 to 105 reps; this scales the target to each athlete.
+  if(eventName==='KB Box Squat' && /Box Squat @ % of Max Reps/i.test(name)){
+    var sqBest=bestScore('kbsquat');
+    var sqKb=esc(loads.kbsquat||'');
+    var sqM=String(p.rx||'').match(/(\d+)\s*%/);
+    var sqPct=sqM?parseInt(sqM[1],10):70;
+    if(sqBest){
+      var sqN=parseInt(sqBest.value,10);
+      if(!isNaN(sqN)){
+        var sqTgt=Math.max(1,Math.round(sqN*sqPct/100));
+        return {load:'Your competition KB — <b>'+sqKb+'</b> · 3 sets × <b>'+sqTgt+' reps</b> per set',
+          cue:'👉 Your number: <b>'+sqTgt+' reps × 3 sets</b> at '+sqKb+' ('+sqPct+'% of your '+sqN+'-rep best on '+esc(sqBest.date)+').'};
+      }
+    }
+    return {load:'Your competition KB — <b>'+sqKb+'</b> · 3 sets to ~'+sqPct+'% of your best box-squat AMRAP',
+      cue:'👉 Log a max-rep box-squat set first so the app can compute your exact rep target.'};
+  }
   // Dynamax — strip the (women)/(men) split and show just the athlete's ball.
   if(eventName==='Dynamax OH Throw' && /Throw Technique Practice/i.test(name)){
     return {load:'Dynamax ball — <b>'+esc(loads.dynamax||'')+'</b>'};

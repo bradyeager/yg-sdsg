@@ -5,7 +5,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of July 6 — Hypertrophy · Week 5
 `July 6 – 12, 2026 · Block 2 · Week 5 of 7`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 20 reps  |  **Tempo Goblet Squat** · 3 × 15 reps  |  **Step-Up to Knee Drive** · 3 × 12 reps each leg
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **Tempo Goblet Squat** · 3 × 15 reps  |  **Step-Up to Knee Drive** · 3 × 12 reps each leg
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 5 throws  |  **Romanian Deadlift — Tempo** · 3 × 12 reps  |  **Standing DB Overhead Press** · 3 × 12 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 3 sets  |  **Incline DB Press** · 3 × 12 reps  |  **Banded Push-Up** · 3 × 15 reps
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Fat-Grip Bent-Over Row** · 3 × 15 reps  |  **Scap Pull-Up** · 3 × 12 reps
@@ -19,7 +19,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of July 13 — Hypertrophy · Week 6
 `July 13 – 19, 2026 · Block 2 · Week 6 of 7`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 25 reps  |  **Goblet Squat 1.5-Rep** · 3 × 12 reps  |  **Split-Stance KB RDL** · 3 × 12 reps each leg
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **Goblet Squat 1.5-Rep** · 3 × 12 reps  |  **Split-Stance KB RDL** · 3 × 12 reps each leg
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 5 throws  |  **Good Morning — Bodyweight to Light Bar** · 3 × 12 reps  |  **Half-Kneeling Lat Pulldown — Band** · 3 × 15 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 3 sets  |  **Flat DB Flye** · 3 × 15 reps  |  **Close-Grip DB Press** · 3 × 12 reps
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Fat-Grip Farmer Carry** · 3 × 40-yard walk  |  **Lat Pulldown** · 3 × 14 reps
@@ -33,7 +33,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of July 20 — Hypertrophy · Week 7
 `July 20 – 26, 2026 · Block 2 · Week 7 of 7`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 18 reps  |  **Heavy Goblet Hold Squat** · 3 × 10 reps  |  **KB Cossack Squat** · 3 × 8 reps each side
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **Heavy Goblet Hold Squat** · 3 × 10 reps  |  **KB Cossack Squat** · 3 × 8 reps each side
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 4 throws  |  **KB Sumo Deadlift** · 3 × 10 reps  |  **Seated DB Overhead Press** · 3 × 10 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 3 sets  |  **Floor DB Tricep Extension** · 3 × 12 reps  |  **Decline Push-Up** · 3 × 12 reps
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Fat-Grip Dumbbell Hold** · 3 × hold for time  |  **Chest-Supported Row** · 3 × 10 reps
@@ -47,7 +47,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of July 27 — Strength & Power · Week 1
 `July 27 – August 2, 2026 · Block 3 · Week 1 of 5`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 6 reps  |  **KB Goblet Box Jump-Squat** · 3 × 5 reps  |  **KB Suitcase Squat** · 3 × 8 reps
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **KB Goblet Box Jump-Squat** · 3 × 5 reps  |  **KB Suitcase Squat** · 3 × 8 reps
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 3 throws  |  **Trap-Bar Deadlift** · 3 × 6 reps  |  **Overhead Med-Ball Slam to Floor** · 3 × 6 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 3 sets  |  **Hands-Elevated Explosive Press** · 3 × 6 reps  |  **Standing Band Chest Press** · 3 × 8 reps
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Weighted Hang** · 3 × hold for time  |  **Explosive Kettlebell Swing** · 3 × 8 reps
@@ -61,7 +61,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of August 3 — Strength & Power · Week 2
 `August 3 – 9, 2026 · Block 3 · Week 2 of 5`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 5 reps  |  **Seated Box to Broad Jump** · 3 × 4 jumps  |  **KB Heartbeat Squat Pulse** · 3 × 8 reps
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **Seated Box to Broad Jump** · 3 × 4 jumps  |  **KB Heartbeat Squat Pulse** · 3 × 8 reps
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 3 throws  |  **Low Box Step-Up Jump** · 3 × 5 reps each leg  |  **Bent-Over DB Row** · 3 × 8 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 3 sets  |  **Banded Speed Bench Press** · 3 × 6 reps  |  **Spoto Press with DBs** · 3 × 6 reps
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Fat-Grip Pull-Up** · 3 × 5 reps  |  **Plate Pinch Hold** · 3 × hold for time
@@ -75,7 +75,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of August 10 — Strength & Power · Week 3
 `August 10 – 16, 2026 · Block 3 · Week 3 of 5`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 4 reps  |  **KB Squat to Press-Out** · 3 × 6 reps  |  **Pause Box Squat to Hop** · 3 × 5 reps
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **KB Squat to Press-Out** · 3 × 6 reps  |  **Pause Box Squat to Hop** · 3 × 5 reps
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 3 throws  |  **Heavy KB Goblet Squat** · 3 × 6 reps  |  **Heavy KB Hinge Pull** · 3 × 6 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 3 sets  |  **Pin Press from Rack** · 3 × 5 reps  |  **Half-Kneeling Band Punch** · 3 × 8 reps each arm
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Heavy Fat-Grip Carry** · 3 × 30-yard walk  |  **Single-Arm Hang** · 3 × hold for time each arm
@@ -89,7 +89,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of August 17 — Strength & Power · Week 4
 `August 17 – 23, 2026 · Block 3 · Week 4 of 5`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 8 reps  |  **KB Swing to Box Squat** · 3 × 6 reps  |  **Speed Box Squat to Calf Raise** · 3 × 10 reps
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **KB Swing to Box Squat** · 3 × 6 reps  |  **Speed Box Squat to Calf Raise** · 3 × 10 reps
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 4 throws  |  **KB Swing — Light and Fast** · 3 × 10 reps  |  **Vertical Jump — Countermovement** · 3 × 4 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 3 sets  |  **Speed Push-Up** · 3 × 6 reps  |  **Overhead D-Ball Slam to Press Position** · 3 × 8 reps
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Explosive Band Pulldown** · 3 × 12 reps  |  **Fat-Grip Bar Hang** · 3 × hold for time
@@ -103,7 +103,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of August 24 — Strength & Power · Week 5
 `August 24 – 30, 2026 · Block 3 · Week 5 of 5`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 10 reps  |  **Slow-Eccentric Box Squat** · 3 × 8 reps  |  **Paused Box Squat — Heavy** · 3 × 6 reps
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **Slow-Eccentric Box Squat** · 3 × 8 reps  |  **Paused Box Squat — Heavy** · 3 × 6 reps
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 3 throws  |  **Dead-Stop KB Deadlift to Tall Pull** · 3 × 5 reps  |  **Overhead D-Ball Toss for Height** · 3 × 4 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 3 sets  |  **Larsen Press with DBs** · 3 × 6 reps  |  **Single-Arm DB Floor-to-Lockout Punch** · 3 × 8 reps each arm
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Mixed-Grip Hang** · 3 × hold for time  |  **Fat-Grip Crush Hang** · 3 × hold for time
@@ -131,7 +131,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of September 7 — Peak + Taper · Week 2  ·  🎯 TEST: Med Ball Slams, Jump Rope · 60s, Concept Row · 500m, 300 Yd Shuttle Run
 `September 7 – 13, 2026 · Block 4 · Week 2 of 4`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 8 reps  |  **KB Goblet Box Squat Singles** · 3 × 3 reps  |  **Tall-Box Quick Squat** · 2 × 8 reps
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **KB Goblet Box Squat Singles** · 3 × 3 reps  |  **Tall-Box Quick Squat** · 2 × 8 reps
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 3 throws  |  **Single-Leg Glute Bridge** · 2 × 10 reps each leg  |  **Scarecrow External Rotation** · 2 × 12 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 2 sets  |  **Tempo Incline Push-Up** · 2 × 8 reps  |  **Seated DB Front Raise** · 2 × 10 reps
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Light Inverted Hold** · 2 × hold for time  |  **Light Wrist Curl** · 2 × 15 reps
@@ -145,7 +145,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of September 14 — Peak + Taper · Week 3
 `September 14 – 20, 2026 · Block 4 · Week 3 of 4`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 3 × 6 reps  |  **KB Box Squat Walkthrough** · 2 × 5 reps  |  **Bodyweight Squat Primer** · 2 × 8 reps
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **KB Box Squat Walkthrough** · 2 × 5 reps  |  **Bodyweight Squat Primer** · 2 × 8 reps
 - **Dynamax OH Throw** — **Throw Technique Practice** · 3 × 2 throws  |  **Bodyweight Hip Hinge — Dowel** · 2 × 8 reps  |  **Wall Slide Shoulder Prep** · 2 × 10 reps
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 2 sets  |  **Scapular Wall Slide** · 2 × 10 reps  |  **Standing Band Pull-Apart** · 2 × 12 reps
 - **Overhead Arm Hang** — **Max Hang Practice** · 3 × hold for time  |  **Comp-Grip Bar Touch** · 3 × 20-second hold  |  **Light Cable Row** · 3 × 10 reps
@@ -159,7 +159,7 @@ Auto-generated from `tools/week-*.json`. Each week is fresh (no movement repeats
 ## Week of September 21 — Peak + Taper · Week 4
 `September 21 – 27, 2026 · Block 4 · Week 4 of 4 · COMP WEEK (Sept 27)`
 
-- **KB Box Squat** — **Comp-Pace Box Squat** · 2 × 5 reps  |  **Bodyweight Sit-to-Stand Loosener** · 2 × 6 reps  |  **Standing Quad Activation** · 2 × 8 reps
+- **KB Box Squat** — **Box Squat @ % of Max Reps** · 3 sets  |  **Bodyweight Sit-to-Stand Loosener** · 2 × 6 reps  |  **Standing Quad Activation** · 2 × 8 reps
 - **Dynamax OH Throw** — **Throw Technique Practice** · 2 × 2 throws  |  **Walking Hip Openers** · 1 × 6 reps each side  |  **Arm Circles — Easy** · 1 × 10 reps each direction
 - **Bench Press** — **Bench Volume @ % of Max Reps** · 1 light set  |  **Empty-Bar Press** · 1 × 8 reps  |  **Arm Circles** · 1 × 20 sec each direction
 - **Overhead Arm Hang** — **Max Hang Practice** · 2 × 10-second easy hold  |  **Arm Swing Mobility** · 1 × 10 easy swings each direction  |  **Easy Band Pull-Apart** · 1 × 12 reps

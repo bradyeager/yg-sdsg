@@ -311,6 +311,23 @@ test('program: per-athlete loads replace shared copy on personalized patterns', 
   await page.context().close();
 });
 
+// ---- 8a. Box Squat volume target is computed per-athlete from their box-squat best ----
+test('box squat: rep target is computed from the athlete\'s box-squat AMRAP best', async () => {
+  // Brad 2026-06-28: a flat rep count was meaningless across athletes ranging ~16–105 reps, so the
+  // box-squat anchor now shows X% of each athlete's best (mirrors bench). Tonnie 40 @ 75% = 30.
+  const page = await newPage();
+  await mockSupabase(page, [{ id: 'sq1', event: 'kbsquat', value: '40', log_date: '2026-06-01', note: '' }]);
+  await page.goto(BASE + '/tonnie/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1100);
+  await page.click('.tab[data-view="program"]');
+  await page.waitForTimeout(800);
+  const txt = await page.evaluate(() => document.getElementById('programView').textContent);
+  if (/Box Squat @ % of Max Reps/i.test(txt)) {
+    assert.match(txt, /Your number.*30 reps/, 'box-squat target = 75% of Tonnie\'s 40-rep best = 30 reps');
+  }
+  await page.context().close();
+});
+
 // ---- 8b. Field Watch (Scouting) renders dynamax distances as ft+in, not raw inches ----
 test('field watch: incoming dynamax distances render as ft+in, not raw inches', async () => {
   // Regression (fixed a0d56f3): renderScouting() printed incoming values raw, so the

@@ -12,14 +12,13 @@
       "tag": "Hypertrophy · legs",
       "patterns": [
         {
-          "name": "Comp-Pace Box Squat",
-          "rx": "3 × 25 reps · rest 75 sec between sets · steady comp rhythm, full sit and full stand",
-          "load": "Your competition KB at competition box height",
+          "name": "Box Squat @ % of Max Reps",
+          "rx": "3 sets · each set to ~80% of your best box-squat AMRAP · rest 75 sec between sets",
+          "load": "Your competition KB",
           "cues": [
-            "Settle into a steady pace you can hold for all 25 reps without stopping.",
-            "Touch the box softly each rep and reverse without rocking backward.",
-            "Lock your hips fully at the top so every rep counts as a full rep.",
-            "Keep the bell still at your chest — do not let it pull you forward."
+            "The app shows your personal rep target — hit that number cleanly across all 3 sets and stop there.",
+            "Sit fully to the box and stand tall on every rep; the box keeps your depth honest.",
+            "Keep the KB tight to your chest with your heels down. Stop early if your form breaks."
           ]
         },
         {

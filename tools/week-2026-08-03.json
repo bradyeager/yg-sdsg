@@ -12,14 +12,13 @@
       "tag": "Strength & Power · legs",
       "patterns": [
         {
-          "name": "Comp-Pace Box Squat",
-          "rx": "3 × 5 reps · rest 2–3 min between sets · max-quality, fast stand off the box",
-          "load": "A KB 2 sizes HEAVIER than competition, at competition box height",
+          "name": "Box Squat @ % of Max Reps",
+          "rx": "3 sets · each set to ~70% of your best box-squat AMRAP · rest 2 min between sets",
+          "load": "Your competition KB",
           "cues": [
-            "Treat all 5 reps as your best, fastest standups of the day.",
-            "Pause briefly on the box, stay tight, then drive straight up.",
-            "Rest the full 2–3 minutes so power stays high every set.",
-            "Keep your core braced — stop the set the moment your back rounds."
+            "The app shows your personal rep target — hit that number cleanly across all 3 sets and stop there.",
+            "Sit fully to the box and stand tall on every rep; the box keeps your depth honest.",
+            "Keep the KB tight to your chest with your heels down. Stop early if your form breaks."
           ]
         },
         {

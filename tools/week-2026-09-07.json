@@ -12,14 +12,13 @@
       "tag": "Peak · sharpen",
       "patterns": [
         {
-          "name": "Comp-Pace Box Squat",
-          "rx": "3 × 8 reps · rest 2 min between sets · crisp and submaximal, well short of failure",
-          "load": "Your competition KB at competition box height",
+          "name": "Box Squat @ % of Max Reps",
+          "rx": "3 sets · each set to ~55% of your best box-squat AMRAP · rest 90 sec between sets",
+          "load": "Your competition KB",
           "cues": [
-            "Hit comp weight at comp box height but stop each set feeling strong.",
-            "Make every rep clean — full sit, full stand, sharp turnaround.",
-            "Leave plenty in the tank; this is staying sharp, not testing.",
-            "Rest the full 2 minutes so each short set feels easy and fast."
+            "The app shows your personal rep target — hit that number cleanly across all 3 sets and stop there.",
+            "Sit fully to the box and stand tall on every rep; the box keeps your depth honest.",
+            "Keep the KB tight to your chest with your heels down. Stop early if your form breaks."
           ]
         },
         {

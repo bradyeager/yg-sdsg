@@ -12,7 +12,7 @@ const CANON = ['KB Box Squat','Dynamax OH Throw','Bench Press','Overhead Arm Han
   'Jump Rope · 60s','Standing Broad Jump','Concept Row · 500m','300 Yd Shuttle Run','Prowler Push'];
 // comp-practice anchor per event — must sit in Slot 1 on non-test weeks
 const ANCHOR = {
-  'KB Box Squat': /Comp-Pace Box Squat/i,
+  'KB Box Squat': /Box Squat @ % of Max Reps/i,
   'Dynamax OH Throw': /Throw Technique Practice/i,
   'Bench Press': /Bench Volume/i,
   'Overhead Arm Hang': /Max Hang Practice/i,

@@ -12,14 +12,13 @@
       "tag": "Peak · taper",
       "patterns": [
         {
-          "name": "Comp-Pace Box Squat",
-          "rx": "2 × 5 reps · rest 90 sec between sets · very light, short and snappy movement prep",
-          "load": "A KB 1–2 sizes LIGHTER than competition, at competition box height",
+          "name": "Box Squat @ % of Max Reps",
+          "rx": "3 sets · each set to ~40% of your best box-squat AMRAP · rest 90 sec between sets",
+          "load": "Your competition KB",
           "cues": [
-            "Keep it short and easy — just remind your legs of the comp pattern.",
-            "Stand up snappy and tall, but stop while everything still feels fresh.",
-            "No grinding and no fatigue — you want to arrive primed for comp day.",
-            "Touch the box clean and stand fully on every easy rep."
+            "The app shows your personal rep target — hit that number cleanly across all 3 sets and stop there.",
+            "Sit fully to the box and stand tall on every rep; the box keeps your depth honest.",
+            "Keep the KB tight to your chest with your heels down. Stop early if your form breaks."
           ]
         },
         {
