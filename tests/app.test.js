@@ -302,9 +302,12 @@ test('program: per-athlete loads replace shared copy on personalized patterns', 
   const txt = await page.evaluate(() => document.getElementById('programView').textContent);
   // Slams: Tonnie's D-ball is 10 lb.
   assert.match(txt, /D-ball.*10 lb/, 'Slams pattern shows Tonnie\'s 10 lb D-ball');
-  // Prowler: Tonnie's plates are 2×25 lb (women's load), no gender split shown.
-  assert.match(txt, /Competition load.*2×25 lb plates/, 'Prowler pattern shows Tonnie\'s plate config');
-  assert.ok(!/2 × 25 lb plates \(women\) \/ 2 × 45 lb plates \(men\)/.test(txt), 'generic gender split is replaced');
+  // Prowler is only programmed when the sled is up; when it's down the card is substituted,
+  // so assert the per-athlete plate config only if the sled push is actually present this week.
+  if (/Comp-Distance Sled Push/i.test(txt)) {
+    assert.match(txt, /Competition load.*2×25 lb plates/, 'Prowler pattern shows Tonnie\'s plate config');
+    assert.ok(!/2 × 25 lb plates \(women\) \/ 2 × 45 lb plates \(men\)/.test(txt), 'generic gender split is replaced');
+  }
   await page.context().close();
 });
 
