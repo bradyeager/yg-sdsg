@@ -33,9 +33,16 @@ jobs:
           DATE=$(date -u +%Y-%m-%d)
           FILE="tools/week-$DATE.json"
           if [ -f "$FILE" ]; then
-            echo "Found $FILE — will publish."
-            echo "file=$FILE" >> "$GITHUB_OUTPUT"
-            echo "date=$DATE" >> "$GITHUB_OUTPUT"
+            WANT=$(python3 -c "import json,io; print(json.load(io.open('$FILE',encoding='utf-8'))['weekTitle'])")
+            LIVE=$(grep -oP '(?<=<h2>)Week of [^<]+' program/index.html | head -1)
+            if [ "$LIVE" = "$WANT" ]; then
+              echo "Week '$WANT' is already live (e.g. manually published early) — skipping to avoid a double-publish."
+              echo "file=" >> "$GITHUB_OUTPUT"
+            else
+              echo "Found $FILE — will publish."
+              echo "file=$FILE" >> "$GITHUB_OUTPUT"
+              echo "date=$DATE" >> "$GITHUB_OUTPUT"
+            fi
           else
             echo "No program file for $DATE — nothing to publish today."
             echo "file=" >> "$GITHUB_OUTPUT"
